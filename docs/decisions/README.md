@@ -82,6 +82,12 @@ amendments that refine a decision without reversing it are added as `## Amendmen
 
 Copy `TEMPLATE.md`, take the next free number, fill the frontmatter, add a row to the index above.
 
+## The originals
+
+The single files this ADR set was split out of are in
+[`../../archive/pre-adr-originals/`](../../archive/pre-adr-originals/README.md).
+Nothing there is current.
+
 ## Canonical location
 
 **This directory is canonical.** The claude.ai Project doc `claude/meta-model-decisions.md` is a
