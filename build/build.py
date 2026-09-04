@@ -147,6 +147,11 @@ def cmd_views():
     with open(path, 'w', encoding='utf-8') as f:
         f.write(build_views.management_report(m, F.default_scale()))
     written.append(os.path.basename(path))
+    import build_report
+    path = os.path.join(OUT, 'management-report.html')
+    with open(path, 'w', encoding='utf-8') as f:
+        f.write(build_report.report(m, F.default_scale()))
+    written.append(os.path.basename(path))
     path = os.path.join(OUT, 'agent-readiness.md')
     with open(path, 'w', encoding='utf-8') as f:
         f.write(build_views.agent_view(m))

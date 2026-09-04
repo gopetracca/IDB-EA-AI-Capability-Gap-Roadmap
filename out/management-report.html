@@ -1,0 +1,133 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Capability &mdash; Management Report</title>
+<style>
+:root{--ink:#101619;--muted:#5d6b74;--rule:#dde3e8;--page:#f4f6f8;--card:#fff;
+--accent:#12455c;--accent-soft:#e4eef3;--warn:#a33a2c;--good:#2f6f4e;--mid:#c08a2e;
+--shadow:0 1px 2px rgba(16,22,25,.05),0 8px 24px rgba(16,22,25,.06)}
+@media(prefers-color-scheme:dark){:root{--ink:#eef2f4;--muted:#9aa7b0;--rule:#2a3138;
+--page:#0d1114;--card:#151b20;--accent:#7fb8c9;--accent-soft:#16303c;
+--shadow:0 1px 2px rgba(0,0,0,.5),0 8px 24px rgba(0,0,0,.35)}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);
+font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,sans-serif;
+-webkit-font-smoothing:antialiased}
+.wrap{max-width:1000px;margin:0 auto;padding:40px 24px 72px}
+header{border-bottom:3px solid var(--accent);padding-bottom:18px;margin-bottom:30px}
+h1{font-size:30px;line-height:1.15;margin:0 0 6px;letter-spacing:-.02em}
+.sub{color:var(--muted);font-size:13.5px}
+h2{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);
+margin:0 0 4px;font-weight:700}
+h3{font-size:19px;margin:0 0 14px;letter-spacing:-.01em}
+section{background:var(--card);border:1px solid var(--rule);border-radius:10px;
+padding:26px 28px;margin-bottom:20px;box-shadow:var(--shadow)}
+p{margin:0 0 12px;max-width:76ch}
+.lede{font-size:16.5px;line-height:1.5}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:18px 0 4px}
+.kpi{background:var(--page);border:1px solid var(--rule);border-radius:8px;padding:14px 16px}
+.kpi b{display:block;font-size:27px;line-height:1.1;letter-spacing:-.02em}
+.kpi span{font-size:12px;color:var(--muted);display:block;margin-top:3px}
+.kpi.warn b{color:var(--warn)} .kpi.good b{color:var(--good)} .kpi.mid b{color:var(--mid)}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);
+padding:16px 20px;border-radius:0 8px 8px 0;margin:18px 0}
+.callout.warn{border-left-color:var(--warn);background:rgba(163,58,44,.08)}
+.callout p:last-child{margin-bottom:0}
+.callout b{font-size:16px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0 4px}
+th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+color:var(--muted);border-bottom:2px solid var(--rule);padding:8px 10px 7px}
+td{padding:9px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.c,th.c{text-align:center}
+code{font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--page);
+padding:1px 5px;border-radius:4px}
+.chart{width:100%;height:auto;overflow:visible;margin:6px 0 2px}
+.bl{font-size:12.5px;font-weight:600;fill:var(--ink)}
+.bs{font-size:10.5px;fill:var(--muted)}
+.bn{font-size:11px;font-weight:700;text-anchor:middle}
+.bt{font-size:11.5px;fill:var(--muted);font-weight:600}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0 2px;font-size:12px;color:var(--muted)}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;
+vertical-align:-1px}
+.split{display:grid;grid-template-columns:170px 1fr;gap:26px;align-items:center}
+@media(max-width:640px){.split{grid-template-columns:1fr}}
+.donut{width:150px;height:150px}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
+.p-no{background:rgba(163,58,44,.13);color:var(--warn)}
+.p-mid{background:rgba(192,138,46,.16);color:#8a6110}
+.p-yes{background:rgba(47,111,78,.14);color:var(--good)}
+footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-height:1.7}
+@media print{body{background:#fff}section{break-inside:avoid;box-shadow:none}.wrap{padding:0}}
+</style></head><body><div class="wrap">
+<header><h1>AI Capability &mdash; Management Report</h1><div class="sub">Inter-American Development Bank &nbsp;·&nbsp; 04 September 2026 &nbsp;·&nbsp; generated from the capability model</div></header>
+<section><h2>Section 1</h2><h3>What this report can and cannot say</h3>
+<p class="lede">Read this before the findings. It states how much of the assessment has actually been done, so nothing below is read as more than it is.</p>
+<div class="kpis">
+<div class="kpi good"><b>7</b><span>Platform offerings, evidenced</span></div>
+<div class="kpi good"><b>20</b><span>Assets with a location</span></div>
+<div class="kpi mid"><b>31%</b><span>Observations recorded</span></div>
+<div class="kpi warn"><b>0 of 52</b><span>Capabilities rated</span></div>
+</div>
+<div class="callout warn"><p><b>No capability is rated yet &mdash; and that is a factual statement, not a bad result.</b></p><p>A rating requires knowing whether something is actually <i>practised</i> on real AI systems. That question has not yet been put to the capability owners. What <i>has</i> been established is what the institution has <b>built</b>, and that is substantial and evidenced.</p><p>This is the difference between <i>we do not know</i> and <i>we do not have it</i>. Most maturity assessments cannot tell those apart and score an unexamined capability as if it were absent. This one refuses to.</p></div>
+<h3 style="margin-top:26px;font-size:15px">How much has been observed, by domain</h3>
+<svg viewBox="0 0 880 304" role="img" class="chart"><text x="0" y="14" class="bl">D1 · Strategy &amp; Value Management</text><text x="0" y="26" class="bs">5 capabilities</text><rect x="296.0" y="0" width="130.5" height="30" fill="#2f6f4e"><title>Yes: 5</title></rect><text x="361.2" y="19" class="bn" fill="#fff">5</text><rect x="426.5" y="0" width="391.5" height="30" fill="#dfe5ea"><title>Not observed: 15</title></rect><text x="622.2" y="19" class="bn" fill="#1a2126">15</text><text x="828" y="19" class="bt">20</text><text x="0" y="52" class="bl">D2 · Demand &amp; Solution Shaping</text><text x="0" y="64" class="bs">6 capabilities</text><rect x="296.0" y="38" width="174.0" height="30" fill="#2f6f4e"><title>Yes: 8</title></rect><text x="383.0" y="57" class="bn" fill="#fff">8</text><rect x="470.0" y="38" width="348.0" height="30" fill="#dfe5ea"><title>Not observed: 16</title></rect><text x="644.0" y="57" class="bn" fill="#1a2126">16</text><text x="828" y="57" class="bt">24</text><text x="0" y="90" class="bl">D3 · Data &amp; Knowledge Management</text><text x="0" y="102" class="bs">7 capabilities</text><rect x="296.0" y="76" width="167.8" height="30" fill="#2f6f4e"><title>Yes: 9</title></rect><text x="379.9" y="95" class="bn" fill="#fff">9</text><rect x="463.8" y="76" width="354.2" height="30" fill="#dfe5ea"><title>Not observed: 19</title></rect><text x="640.9" y="95" class="bn" fill="#1a2126">19</text><text x="828" y="95" class="bt">28</text><text x="0" y="128" class="bl">D4 · Solution Engineering</text><text x="0" y="140" class="bs">7 capabilities</text><rect x="296.0" y="114" width="186.4" height="30" fill="#2f6f4e"><title>Yes: 10</title></rect><text x="389.2" y="133" class="bn" fill="#fff">10</text><rect x="482.4" y="114" width="335.6" height="30" fill="#dfe5ea"><title>Not observed: 18</title></rect><text x="650.2" y="133" class="bn" fill="#1a2126">18</text><text x="828" y="133" class="bt">28</text><text x="0" y="166" class="bl">D5 · Platform &amp; Infrastructure</text><text x="0" y="178" class="bs">6 capabilities</text><rect x="296.0" y="152" width="261.0" height="30" fill="#2f6f4e"><title>Yes: 12</title></rect><text x="426.5" y="171" class="bn" fill="#fff">12</text><rect x="557.0" y="152" width="261.0" height="30" fill="#dfe5ea"><title>Not observed: 12</title></rect><text x="687.5" y="171" class="bn" fill="#1a2126">12</text><text x="828" y="171" class="bt">24</text><text x="0" y="204" class="bl">D6 · Operations &amp; Reliability</text><text x="0" y="216" class="bs">6 capabilities</text><rect x="296.0" y="190" width="130.5" height="30" fill="#2f6f4e"><title>Yes: 6</title></rect><text x="361.2" y="209" class="bn" fill="#fff">6</text><rect x="426.5" y="190" width="391.5" height="30" fill="#dfe5ea"><title>Not observed: 18</title></rect><text x="622.2" y="209" class="bn" fill="#1a2126">18</text><text x="828" y="209" class="bt">24</text><text x="0" y="242" class="bl">D7 · Governance, Risk &amp; Assurance</text><text x="0" y="254" class="bs">9 capabilities</text><rect x="296.0" y="228" width="130.5" height="30" fill="#2f6f4e"><title>Yes: 9</title></rect><text x="361.2" y="247" class="bn" fill="#fff">9</text><rect x="426.5" y="228" width="391.5" height="30" fill="#dfe5ea"><title>Not observed: 27</title></rect><text x="622.2" y="247" class="bn" fill="#1a2126">27</text><text x="828" y="247" class="bt">36</text><text x="0" y="280" class="bl">D8 · People, Skills &amp; Adoption</text><text x="0" y="292" class="bs">6 capabilities</text><rect x="296.0" y="266" width="130.5" height="30" fill="#2f6f4e"><title>Yes: 6</title></rect><text x="361.2" y="285" class="bn" fill="#fff">6</text><rect x="426.5" y="266" width="391.5" height="30" fill="#dfe5ea"><title>Not observed: 18</title></rect><text x="622.2" y="285" class="bn" fill="#1a2126">18</text><text x="828" y="285" class="bt">24</text></svg>
+<div class="legend"><span><i style="background:#2f6f4e"></i>Observed, with evidence</span><span><i style="background:#dfe5ea"></i>Nobody has looked yet</span></div>
+</section>
+<section><h2>Section 2</h2><h3>What the institution has built</h3>
+<p>Every row is backed by a named asset with a status and a location. This is the part of the picture that is <b>not</b> an opinion.</p>
+<svg viewBox="0 0 880 252" role="img" class="chart"><text x="0" y="13" class="bl">Foundry platform</text><text x="0" y="24" class="bs">enables 5.1, 5.3, 5.4</text><rect x="246" y="0" width="546" height="18" rx="3" fill="#e7ecf0"/><rect x="246" y="0" width="546.0" height="18" rx="3" fill="#2f6f4e"/><text x="802" y="13" class="bt">4 of 4</text><text x="0" y="49" class="bl">Foundry agents</text><text x="0" y="60" class="bs">enables 4.4, 5.1, 5.6</text><rect x="246" y="36" width="546" height="18" rx="3" fill="#e7ecf0"/><rect x="246" y="36" width="409.5" height="18" rx="3" fill="#c08a2e"/><text x="802" y="49" class="bt">6 of 8</text><text x="0" y="85" class="bl">Custom MCP servers</text><text x="0" y="96" class="bs">enables 4.5, 5.5</text><rect x="246" y="72" width="546" height="18" rx="3" fill="#e7ecf0"/><rect x="246" y="72" width="312.0" height="18" rx="3" fill="#c08a2e"/><text x="802" y="85" class="bt">4 of 7</text><text x="0" y="121" class="bl">Retrieval on AI Search</text><text x="0" y="132" class="bs">enables 3.6</text><rect x="246" y="108" width="546" height="18" rx="3" fill="#e7ecf0"/><rect x="246" y="108" width="546.0" height="18" rx="3" fill="#2f6f4e"/><text x="802" y="121" class="bt">3 of 3</text><text x="0" y="157" class="bl">Document extraction</text><text x="0" y="168" class="bs">enables 3.5</text><rect x="246" y="144" width="546" height="18" rx="3" fill="#e7ecf0"/><rect x="246" y="144" width="546.0" height="18" rx="3" fill="#2f6f4e"/><text x="802" y="157" class="bt">2 of 2</text><text x="0" y="193" class="bl">Approved AI tech stack</text><text x="0" y="204" class="bs">enables 4.1, 5.2</text><rect x="246" y="180" width="546" height="18" rx="3" fill="#e7ecf0"/><rect x="246" y="180" width="546.0" height="18" rx="3" fill="#2f6f4e"/><text x="802" y="193" class="bt">1 of 1</text><text x="0" y="229" class="bl">Agent design guidance</text><text x="0" y="240" class="bs">enables 2.2, 2.5</text><rect x="246" y="216" width="546" height="18" rx="3" fill="#e7ecf0"/><rect x="246" y="216" width="546.0" height="18" rx="3" fill="#2f6f4e"/><text x="802" y="229" class="bt">1 of 1</text></svg>
+<p style="margin-top:16px"><b>5 of 7 offerings are complete.</b> The others are waiting on named documents or modules, listed in section 4.</p>
+<h3 style="margin-top:26px;font-size:15px">Can a team get the tooling? By domain</h3>
+<svg viewBox="0 0 880 304" role="img" class="chart"><text x="0" y="14" class="bl">D1 · Strategy &amp; Value Management</text><rect x="296.0" y="0" width="104.4" height="30" fill="#a33a2c"><title>No: 1</title></rect><text x="348.2" y="19" class="bn" fill="#fff">1</text><rect x="400.4" y="0" width="417.6" height="30" fill="#9aa5ad"><title>Not applicable: 4</title></rect><text x="609.2" y="19" class="bn" fill="#1a2126">4</text><text x="828" y="19" class="bt">5</text><text x="0" y="52" class="bl">D2 · Demand &amp; Solution Shaping</text><rect x="296.0" y="38" width="174.0" height="30" fill="#2f6f4e"><title>Yes: 2</title></rect><text x="383.0" y="57" class="bn" fill="#fff">2</text><rect x="470.0" y="38" width="261.0" height="30" fill="#a33a2c"><title>No: 3</title></rect><text x="600.5" y="57" class="bn" fill="#fff">3</text><rect x="731.0" y="38" width="87.0" height="30" fill="#9aa5ad"><title>Not applicable: 1</title></rect><text x="774.5" y="57" class="bn" fill="#1a2126">1</text><text x="828" y="57" class="bt">6</text><text x="0" y="90" class="bl">D3 · Data &amp; Knowledge Management</text><rect x="296.0" y="76" width="149.1" height="30" fill="#2f6f4e"><title>Yes: 2</title></rect><text x="370.6" y="95" class="bn" fill="#fff">2</text><rect x="445.1" y="76" width="372.9" height="30" fill="#a33a2c"><title>No: 5</title></rect><text x="631.6" y="95" class="bn" fill="#fff">5</text><text x="828" y="95" class="bt">7</text><text x="0" y="128" class="bl">D4 · Solution Engineering</text><rect x="296.0" y="114" width="74.6" height="30" fill="#2f6f4e"><title>Yes: 1</title></rect><text x="333.3" y="133" class="bn" fill="#fff">1</text><rect x="370.6" y="114" width="149.1" height="30" fill="#c08a2e"><title>Partial: 2</title></rect><text x="445.1" y="133" class="bn" fill="#1a2126">2</text><rect x="519.7" y="114" width="223.7" height="30" fill="#a33a2c"><title>No: 3</title></rect><text x="631.6" y="133" class="bn" fill="#fff">3</text><rect x="743.4" y="114" width="74.6" height="30" fill="#9aa5ad"><title>Not applicable: 1</title></rect><text x="780.7" y="133" class="bn" fill="#1a2126">1</text><text x="828" y="133" class="bt">7</text><text x="0" y="166" class="bl">D5 · Platform &amp; Infrastructure</text><rect x="296.0" y="152" width="261.0" height="30" fill="#2f6f4e"><title>Yes: 3</title></rect><text x="426.5" y="171" class="bn" fill="#fff">3</text><rect x="557.0" y="152" width="261.0" height="30" fill="#c08a2e"><title>Partial: 3</title></rect><text x="687.5" y="171" class="bn" fill="#1a2126">3</text><text x="828" y="171" class="bt">6</text><text x="0" y="204" class="bl">D6 · Operations &amp; Reliability</text><rect x="296.0" y="190" width="435.0" height="30" fill="#a33a2c"><title>No: 5</title></rect><text x="513.5" y="209" class="bn" fill="#fff">5</text><rect x="731.0" y="190" width="87.0" height="30" fill="#9aa5ad"><title>Not applicable: 1</title></rect><text x="774.5" y="209" class="bn" fill="#1a2126">1</text><text x="828" y="209" class="bt">6</text><text x="0" y="242" class="bl">D7 · Governance, Risk &amp; Assurance</text><rect x="296.0" y="228" width="406.0" height="30" fill="#a33a2c"><title>No: 7</title></rect><text x="499.0" y="247" class="bn" fill="#fff">7</text><rect x="702.0" y="228" width="116.0" height="30" fill="#9aa5ad"><title>Not applicable: 2</title></rect><text x="760.0" y="247" class="bn" fill="#1a2126">2</text><text x="828" y="247" class="bt">9</text><text x="0" y="280" class="bl">D8 · People, Skills &amp; Adoption</text><rect x="296.0" y="266" width="522.0" height="30" fill="#9aa5ad"><title>Not applicable: 6</title></rect><text x="557.0" y="285" class="bn" fill="#1a2126">6</text><text x="828" y="285" class="bt">6</text></svg>
+<div class="legend"><span><i style="background:#2f6f4e"></i>Yes</span><span><i style="background:#c08a2e"></i>Partial</span><span><i style="background:#a33a2c"></i>No</span><span><i style="background:#9aa5ad"></i>Not applicable</span><span><i style="background:#dfe5ea"></i>Not observed</span></div>
+<p style="margin-top:14px"><i>Not applicable</i> is a legitimate answer, not a gap: a strategy or workforce capability is not worse for having no platform component. The shape to notice is that the platform and engineering domains carry the tooling, and the governance domains carry almost none.</p>
+</section>
+<section><h2>Section 3</h2><h3>The finding</h3>
+<div class="callout"><p><b>The institution has built its enablers ahead of its practice.</b></p></div>
+<p>The scale used here places <b>performance</b> at Level 1, <b>tooling and competent people</b> at Level 2, and <b>an approved standard, applied</b> at Level 3. Measured that way, a large part of the Level 2 and Level 3 apparatus exists &mdash; platforms, standards, reference architectures, infrastructure modules &mdash; while Level 1, whether the work is actually done, has never been examined.</p>
+<p>That is not a criticism of the build. It explains a disagreement that recurs here: one person says a capability exists, meaning the platform and the standard exist; another says it does not, meaning nothing is running on it. <b>Both are right about different things.</b> A model carrying a single number cannot show that. This one shows it as four columns.</p>
+<table><thead><tr><th>What can be evidenced today</th><th>What cannot</th></tr></thead><tbody>
+<tr><td>7 offerings and 20 assets, with locations</td><td style="color:var(--muted)">Whether any of it is used in production</td></tr>
+<tr><td>Which capabilities have an approved standard</td><td style="color:var(--muted)">Whether the work is done against it</td></tr>
+<tr><td>Which capabilities have no tooling and no reason recorded</td><td style="color:var(--muted)">Whether the people who need the skills have them</td></tr>
+</tbody></table></section>
+<section><h2>Section 4</h2><h3>What needs a decision</h3>
+<h3 style="font-size:15px;margin-top:8px">4.1 &nbsp;Capabilities nobody owns</h3>
+<div class="split"><div><svg viewBox="0 0 150 150" class="donut" role="img"><path d="M 75.00 14.00 A 61.00 61.00 0 0 1 125.20 40.35" fill="none" stroke="#a33a2c" stroke-width="22"><title>No: 8</title></path><path d="M 125.20 40.35 A 61.00 61.00 0 1 1 75.00 14.00" fill="none" stroke="#2f6f4e" stroke-width="22"><title>Yes: 44</title></path></svg><div style="text-align:center;font-size:12px;color:var(--muted);margin-top:6px">8 of 52 unowned</div></div><div>
+<p>These are claimed by no product or enabler in the institution's own catalogue. Several are governance capabilities an institution of this kind is normally expected to hold.</p>
+<table><tbody>
+<tr><td><code>1.5</code></td><td><b>AI Ecosystem &amp; Alliance Management</b></td><td style="color:var(--muted)">AI Strategy &amp; Value Management</td></tr>
+<tr><td><code>2.3</code></td><td><b>AI Product Management</b></td><td style="color:var(--muted)">AI Demand &amp; Solution Shaping</td></tr>
+<tr><td><code>4.6</code></td><td><b>AI Evaluation &amp; Testing</b></td><td style="color:var(--muted)">AI Solution Engineering</td></tr>
+<tr><td><code>6.3</code></td><td><b>Continuous Evaluation, Drift &amp; Quality Management</b></td><td style="color:var(--muted)">AI Operations &amp; Reliability</td></tr>
+<tr><td><code>7.2</code></td><td><b>Responsible &amp; Trustworthy AI Practice</b></td><td style="color:var(--muted)">AI Governance, Risk, Security &amp; Assurance</td></tr>
+<tr><td><code>7.5</code></td><td><b>Privacy &amp; Data Protection for AI</b></td><td style="color:var(--muted)">AI Governance, Risk, Security &amp; Assurance</td></tr>
+<tr><td><code>7.6</code></td><td><b>Legal, Regulatory &amp; Contractual Compliance for AI</b></td><td style="color:var(--muted)">AI Governance, Risk, Security &amp; Assurance</td></tr>
+<tr><td><code>7.9</code></td><td><b>AI Impact Assessment &amp; Risk Classification</b></td><td style="color:var(--muted)">AI Governance, Risk, Security &amp; Assurance</td></tr>
+</tbody></table></div></div>
+<p><b>Decision required:</b> assign an owner to each, or record a deliberate decision not to hold it.</p>
+<h3 style="font-size:15px;margin-top:28px">4.2 &nbsp;Finished, but not released</h3>
+<p>5 assets exist and are not yet available to delivery teams. Each is days from being usable, and each currently holds a capability below what the underlying work would support.</p>
+<table><thead><tr><th>Asset</th><th>What it is</th><th>Status</th></tr></thead><tbody>
+<tr><td><code>STD-07</code></td><td>Foundry Agents Standard</td><td><span class="pill p-mid">Pre-release</span></td></tr>
+<tr><td><code>RA-05</code></td><td>Foundry Agents Reference Architecture</td><td><span class="pill p-mid">Pre-release</span></td></tr>
+<tr><td><code>TPL-02</code></td><td>MCP Server Template v2 (C# / .NET)</td><td><span class="pill p-mid">Built, not yet distributed</span></td></tr>
+<tr><td><code>IAC-01</code></td><td>Container App Environment</td><td><span class="pill p-mid">In review by DX</span></td></tr>
+<tr><td><code>IAC-03</code></td><td>Container Registry</td><td><span class="pill p-mid">In review by DX</span></td></tr>
+</tbody></table>
+<p><b>Decision required:</b> a release date for each, with a named owner.</p>
+<h3 style="font-size:15px;margin-top:28px">4.3 &nbsp;Questions only the platform teams can answer</h3>
+<p><b>0 of 27 answered.</b> These decide whether a delivery team inherits its controls or rebuilds them. Every unanswered row is an unknown; every <i>no</i> is a roadmap item, usually a cheap one, because it means extending a module rather than building a platform.</p>
+<svg viewBox="0 0 880 144" role="img" class="chart"><text x="0" y="13" class="bl">Foundry agents</text><rect x="246" y="0" width="546" height="18" rx="3" fill="#e7ecf0"/><text x="802" y="13" class="bt">0 of 12</text><text x="0" y="49" class="bl">Custom MCP servers</text><rect x="246" y="36" width="546" height="18" rx="3" fill="#e7ecf0"/><text x="802" y="49" class="bt">0 of 6</text><text x="0" y="85" class="bl">Retrieval on AI Search</text><rect x="246" y="72" width="546" height="18" rx="3" fill="#e7ecf0"/><text x="802" y="85" class="bt">0 of 5</text><text x="0" y="121" class="bl">Document extraction</text><rect x="246" y="108" width="546" height="18" rx="3" fill="#e7ecf0"/><text x="802" y="121" class="bt">0 of 4</text></svg>
+</section>
+<section><h2>Section 5</h2><h3>What would make the next report say more</h3>
+<table><thead><tr><th>Who</th><th>What is asked of them</th><th>What it unlocks</th></tr></thead><tbody>
+<tr><td><b>Capability owners</b></td><td>For each capability they own: is this done on real AI systems, and where?</td><td style="color:var(--muted)">Every rating in the model. Nothing can be rated without it</td></tr>
+<tr><td><b>Platform teams</b></td><td>The 27 outstanding in-the-box questions</td><td style="color:var(--muted)">Whether controls are inherited or rebuilt by every team</td></tr>
+<tr><td><b>Cybersecurity · Data Management · Legal · HR</b></td><td>Does an approved standard exist in your domain?</td><td style="color:var(--muted)">39 capabilities show <i>not observed</i> only because the asset register covers platform assets</td></tr>
+<tr><td><b>Learning &amp; Development</b></td><td>Who is trained, and in what?</td><td style="color:var(--muted)">Level 2 for every capability where practice exists</td></tr>
+</tbody></table>
+<div class="callout"><p>None of this requires new tooling or new investment. It requires four questions put to people who already know the answers.</p></div>
+</section>
+<footer>Generated from the capability model &mdash; 8 domains, 52 capabilities, 258 criteria.<br>Scale: Capability level. Adapted from ISO/IEC 33020:2019 (process measurement framework). Simplified: four observations rather than five process attributes, three values rather than the standard's four-point N-P-L-F scale.<br>Every figure traces to a recorded fact with evidence and a date; nothing here is estimated.</footer>
+</div></body></html>

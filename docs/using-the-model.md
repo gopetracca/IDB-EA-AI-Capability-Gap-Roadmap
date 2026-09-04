@@ -113,7 +113,8 @@ automatically. State in `BASIS` what is adopted and what is ours.
 
 | File | For | Regenerated |
 |---|---|---|
-| `out/management-report.md` | Management. What we can say, the finding, what needs a decision | Every build |
+| `out/management-report.html` | **Management. The one to send** — charts, findings, decisions. Self-contained, opens offline, prints | Every build |
+| `out/management-report.md` | The same report as plain text, for pasting into email or a wiki | Every build |
 | `out/agent-readiness.md` | The agent question specifically | Every build |
 | `out/capability-assessment-level.md` | All 52, four observations each, default scale | Every build |
 | `out/capability-assessment-exec.md` | The same facts through the coarser executive lens | Every build |
