@@ -159,7 +159,7 @@ def cmd_workbook():
 
 # --------------------------------------------------------------- views
 def cmd_views():
-    import build_views
+    import build_views, build_report
     m = _model()
     os.makedirs(OUT, exist_ok=True)
     written = []
@@ -172,16 +172,16 @@ def cmd_views():
     with open(path, 'w', encoding='utf-8') as f:
         f.write(build_views.management_report(m, F.default_scale()))
     written.append(os.path.basename(path))
-    import build_report
     path = os.path.join(OUT, 'management-report.html')
     with open(path, 'w', encoding='utf-8') as f:
         f.write(build_report.report(m, F.default_scale()))
     written.append(os.path.basename(path))
-    import build_preview
-    path = os.path.join(OUT, 'preview-views.html')
+    # the same report, every chart populated with SAMPLE observations, for
+    # reviewing the finished shape before the assessment is run
+    path = os.path.join(OUT, 'management-report-illustrative.html')
     with open(path, 'w', encoding='utf-8') as f:
-        f.write(build_preview.preview(m, F.default_scale()))
-    written.append(os.path.basename(path) + '  (SAMPLE data)')
+        f.write(build_report.report(m, F.default_scale(), demo=True))
+    written.append(os.path.basename(path) + '  (SAMPLE observations)')
     path = os.path.join(OUT, 'agent-readiness.md')
     with open(path, 'w', encoding='utf-8') as f:
         f.write(build_views.agent_view(m))

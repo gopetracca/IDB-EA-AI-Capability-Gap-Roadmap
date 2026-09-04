@@ -9,7 +9,7 @@ than argued about.
 | | |
 |---|---|
 | **The report** | [`out/management-report.html`](out/management-report.html) — open in a browser |
-| **What it will look like** | [`out/preview-views.html`](out/preview-views.html) — ten views, **sample data**, for agreeing the approach |
+| **What it will look like** | [`out/management-report-illustrative.html`](out/management-report-illustrative.html) — the same report, every chart populated with **sample observations** |
 | **The worked example** | [`out/agent-readiness.md`](out/agent-readiness.md) — *"can we run AI agents?"* |
 | **The detail** | [`out/capability-assessment-level.md`](out/capability-assessment-level.md) — all 52 capabilities |
 | **How to work with it** | [`docs/using-the-model.md`](docs/using-the-model.md) |

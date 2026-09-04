@@ -297,13 +297,18 @@ def v_gapbars(m, obs, levels, targets):
         o.append('<text x="0" y="%d" class="bs">%s</text>'
                  % (y + 22, esc((m.owner(c['id'])[0] or "no owner")[:36])))
         unit = bw / 3.0
-        o.append('<rect x="%d" y="%d" width="%.1f" height="%d" rx="3" fill="#e7ecf0"/>'
+        # solid navy = where it is now; hatched accent = the distance to target
+        o.append('<rect x="%d" y="%d" width="%.1f" height="%d" rx="3" fill="#EDF1F4"/>'
                  % (left, y, bw, rowh - 8))
-        o.append('<rect x="%d" y="%d" width="%.1f" height="%d" rx="3" fill="%s"/>'
-                 % (left, y, unit * cur, rowh - 8, LVL[cur]))
-        o.append('<rect x="%.1f" y="%d" width="%.1f" height="%d" rx="3" '
-                 'fill="%s" fill-opacity=".3"/>'
-                 % (left + unit * cur, y, unit * g, rowh - 8, LVL[targets[c['id']]]))
+        if cur:
+            o.append('<rect x="%d" y="%d" width="%.1f" height="%d" rx="3" '
+                     'fill="#002869"/>' % (left, y, unit * cur, rowh - 8))
+        if g:
+            o.append('<rect x="%.1f" y="%d" width="%.1f" height="%d" rx="3" '
+                     'fill="#E36135" fill-opacity=".28"/>'
+                     % (left + unit * cur, y, unit * g, rowh - 8))
+            o.append('<rect x="%.1f" y="%d" width="2" height="%d" fill="#E36135"/>'
+                     % (left + unit * (cur + g) - 2, y, rowh - 8))
         o.append('<text x="%d" y="%d" class="bt">%d &#8594; %d</text>'
                  % (left + bw + 10, y + rowh / 2 - 1, cur, targets[c['id']]))
     o.append(wm(W, h))

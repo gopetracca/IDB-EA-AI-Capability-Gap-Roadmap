@@ -137,7 +137,52 @@ def legend(keys=ORDER):
 
 
 # ----------------------------------------------------------------- page
-def report(m, scale):
+class _Demo(object):
+    """The real model with SAMPLE observations layered on top.
+
+    Wraps rather than copies, so every fact that is real - capabilities,
+    offerings, assets, owners, criteria - stays real and only the observations
+    are substituted. Nothing is written to facts/.
+    """
+
+    def __init__(self, m, obs):
+        self._m = m
+        self._obs = obs
+
+    def __getattr__(self, k):
+        return getattr(self._m, k)
+
+    def values(self, cid):
+        return dict(self._obs[cid])
+
+    def rate(self, scale, cid):
+        return scale.level(self.values(cid))
+
+    def criteria_obs(self, cid, otype):
+        """Sample criterion rows, consistent with the rolled-up L2 value."""
+        rolled = self._obs[cid].get(otype, 'unknown')
+        out = []
+        for i, x in enumerate(self._m.by_id[cid]['criteria']):
+            if rolled == 'yes':
+                v = 'yes'
+            elif rolled == 'no':
+                v = 'no'
+            elif rolled == 'n/a':
+                v = 'n/a'
+            elif rolled == 'partial':
+                v = ('yes', 'no', 'yes', 'partial', 'unknown')[i % 5]
+            else:
+                v = 'unknown'
+            out.append((x, {'value': v, 'evidence': 'sample', 'basis': 'sample'}))
+        return out
+
+
+def report(m, scale, demo=False):
+    if demo:
+        import build_preview
+        m = _Demo(m, build_preview.sample_observations(m))
+    D = (lambda txt: '<span class="smp" title="Sample value, not an observation">'
+                     '%s</span>' % txt) if demo else (lambda txt: txt)
     total = len(m.capabilities)
     rated = {c['id']: m.rate(scale, c['id']) for c in m.capabilities}
     n_rated = sum(1 for v in rated.values() if v[0] is not None)
@@ -145,8 +190,23 @@ def report(m, scale):
     noowner = [c for c in m.capabilities if m.owner(c['id'])[1] == 'NO MATCH']
     box_total = sum(len(o['in_the_box']) for o in m.offerings)
     box_done = sum(1 for o in m.offerings for x in o['in_the_box'] if x['status'])
-    n_obs = len(m.observations)
-    n_known = sum(1 for r in m.observations if r.get('value') != 'unknown')
+    # count what this page actually shows: in demo mode the observations are the
+    # sample ones, so reading m.observations (which passes through to the real
+    # rows) would print a coverage figure that contradicts every chart beside it
+    if demo:
+        n_obs = n_known = 0
+        for c in m.capabilities:
+            for t in m.observation_types:
+                if t['id'] in m.criterion_types:
+                    rows_ = [r for _x, r in m.criteria_obs(c['id'], t['id'])]
+                else:
+                    rows_ = [{'value': m.values(c['id'])[t['id']]}]
+                n_obs += len(rows_)
+                n_known += sum(1 for r in rows_
+                               if r.get('value', 'unknown') != 'unknown')
+    else:
+        n_obs = len(m.observations)
+        n_known = sum(1 for r in m.observations if r.get('value') != 'unknown')
 
     o = []
     w = o.append
@@ -156,10 +216,11 @@ def report(m, scale):
 <style>
 :root{--ink:#0d1b2a;--muted:#5a798c;--rule:#e2e8ee;--page:#fff;--card:#fff;
 --accent:#002869;--accent-soft:#F1F5FA;--warn:#E36135;--good:#002869;--mid:#4C8CD2;
---band:#F7F9FB;--shadow:none}
+--band:#F7F9FB;--shadow:none;
+--q1:#F7F9FB;--q2:#F1F5FA;--q3:#FBF3EF;--q4:#F7F9FB}
 @media(prefers-color-scheme:dark){:root{--ink:#eef2f6;--muted:#93a7b8;--rule:#22303d;
 --page:#0b1219;--card:#0f1822;--accent:#7FB2E8;--accent-soft:#12202e;--band:#0d1620;
---shadow:none}}
+--q1:#0f1822;--q2:#12202e;--q3:#1c1512;--q4:#0f1822;--shadow:none}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--page);color:var(--ink);
 font:14.5px/1.6 "Segoe UI",-apple-system,BlinkMacSystemFont,Inter,Helvetica,Arial,sans-serif;
@@ -250,14 +311,47 @@ white-space:nowrap;text-transform:uppercase}
 .t-wait{background:transparent;color:var(--muted);box-shadow:inset 0 0 0 1px var(--rule)}
 .vd{font-size:13.5px;color:var(--muted);margin:0 0 10px;max-width:78ch}
 footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-height:1.7}
-@media print{body{background:#fff}section{break-inside:avoid;box-shadow:none}.wrap{padding:0}}
-</style></head><body><div class="wrap">""")
+/* chart classes shared with the illustrative views - without these the radar
+   and quadrant render as solid black, because an SVG polygon defaults to a
+   black fill and the text defaults to 16px */
+.ax{font-size:11.5px;fill:var(--muted);font-weight:700;text-anchor:middle}
+.axs{font-size:9.5px;fill:var(--muted)}
+.axl{font-size:11.5px;fill:var(--muted);font-weight:600}
+.axis{stroke:var(--rule);stroke-width:1.5}
+.grid{fill:none;stroke:var(--rule);stroke-width:1}
+.spoke{stroke:var(--rule);stroke-width:1}
+.cur{fill:rgba(0,40,105,.26);stroke:#002869;stroke-width:2}
+.tgt{fill:none;stroke:#E36135;stroke-width:2;stroke-dasharray:5 4}
+.tl-now{fill:none;stroke:#002869;stroke-width:2.5}
+.tl-then{fill:none;stroke:#E36135;stroke-width:2.5;stroke-dasharray:5 4}
+.tp-now{fill:#002869} .tp-then{fill:#E36135}
+.qq{font-size:11px;fill:var(--muted);font-weight:700;letter-spacing:.04em}
+.wm{font-size:44px;font-weight:800;fill:var(--ink);fill-opacity:.04;
+letter-spacing:.24em;pointer-events:none}
+.lvn{font-size:11px;fill:var(--muted);font-weight:700}
+.radar{max-width:470px;display:block;margin:0 auto}
+.banner{position:sticky;top:0;z-index:9;background:var(--warn);color:#fff;
+padding:10px 24px;font-size:12.5px;font-weight:600;text-align:center;
+letter-spacing:.01em}
+.smp{background:rgba(227,97,53,.12);padding:0 4px;border-radius:2px;
+box-shadow:inset 0 -1px 0 rgba(227,97,53,.4)}
+@media print{body{background:#fff}section{break-inside:avoid;box-shadow:none}
+.wrap{padding:0}.banner{position:static}}
+</style></head><body>""")
 
     # ---------------------------------------------------------- header
-    w('<header><h1>AI Capability &mdash; Management Report</h1>'
-      '<div class="sub">Inter-American Development Bank &nbsp;·&nbsp; %s '
-      '&nbsp;·&nbsp; generated from the capability model</div></header>'
-      % date.today().strftime("%d %B %Y"))
+    if demo:
+        w('<div class="banner">ILLUSTRATIVE &mdash; the capability map, offerings, '
+          'assets and owners are real. The observations behind every chart are '
+          'SAMPLE values, shown so the finished report can be reviewed before the '
+          'assessment is run. This is not an assessment.</div>')
+    w('<div class="wrap">')
+    tag = ('<br><span style="font-size:20px;font-weight:600;color:var(--warn)">'
+           'Illustrative edition</span>') if demo else ''
+    w('<header><h1>AI Capability &mdash; Management Report%s</h1>'
+      '<div class="sub">Inter-American Development Bank &nbsp;&#183;&nbsp; %s '
+      '&nbsp;&#183;&nbsp; generated from the capability model</div></header>'
+      % (tag, date.today().strftime("%d %B %Y")))
 
     # ---------------------------------------------------------- 1 coverage
     w('<section><h2>Section 1</h2><h3>What this report can and cannot say</h3>')
@@ -366,22 +460,34 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-
 
     # ---------------------------------------------------------- 3b views
     w('<section><h2>Section 4</h2><h3>The views</h3>')
-    w('<p class="lede">The ten views this model produces. Those marked '
-      '<span class="tag t-real">READY</span> are drawn from recorded facts and are '
-      'usable today. Those marked <span class="tag t-wait">AWAITING OBSERVATIONS</span> '
-      'are built and will populate as answers arrive &mdash; they are shown empty '
-      'rather than filled with an estimate.</p>')
+    if demo:
+        w('<p class="lede">The ten views this model produces, every one populated. '
+          'Views marked <span class="tag t-real">READY</span> are drawn from '
+          '<b>recorded facts</b> and look exactly like this today. Views marked '
+          '<span class="tag t-wait">SAMPLE</span> are filled with '
+          '<b>illustrative observations</b>, because the real ones have not been '
+          'collected yet.</p>')
+    else:
+        w('<p class="lede">The ten views this model produces. Those marked '
+          '<span class="tag t-real">READY</span> are drawn from recorded facts and are '
+          'usable today. Those marked <span class="tag t-wait">AWAITING OBSERVATIONS'
+          '</span> are built and will populate as answers arrive &mdash; they are '
+          'shown empty rather than filled with an estimate.</p>')
 
     def vh(title, tag, desc):
         w('<div class="viewhdr"><h4>%s</h4><span class="tag %s">%s</span></div>'
-          % (esc(title), "t-real" if tag == "READY" else "t-wait", tag))
+          % (esc(title),
+             "t-real" if tag in ("READY", "REAL DATA") else "t-wait", tag))
         w('<p class="vd">%s</p>' % desc)
 
     # 1 observation heat map - REAL and fully populated
-    vh("Observation heat map", "READY",
-       "Every capability, every observation. This is the whole assessment on one "
-       "screen: what is known is coloured, what nobody has looked at is pale. "
-       "The pale columns are the work still to do.")
+    vh("Observation heat map", "SAMPLE" if demo else "READY",
+       ("Every capability, every observation, on one screen. This is what the "
+        "assessment looks like once the questions have been answered."
+        if demo else
+        "Every capability, every observation. This is the whole assessment on one "
+        "screen: what is known is coloured, what nobody has looked at is pale. "
+        "The pale columns are the work still to do."))
     w(obs_heatmap(m))
     w(legend())
     w('<p style="margin-top:14px;font-size:13.5px;color:var(--muted)">'
@@ -392,7 +498,7 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-
       % sum(len(c['criteria']) for c in m.capabilities))
 
     # 2 enablement by domain - REAL
-    vh("Tooling by domain", "READY",
+    vh("Tooling by domain", "READY" if not demo else "REAL DATA",
        "Can a delivery team get what it needs without building it? The platform and "
        "engineering domains carry the tooling; the governance domains carry almost "
        "none; People &amp; Skills is correctly not a technical question at all.")
@@ -405,13 +511,13 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-
     w(legend())
 
     # 3 accountability - REAL
-    vh("Accountability spread", "READY",
+    vh("Accountability spread", "READY" if not demo else "REAL DATA",
        "Capabilities per unit, mapped against the institution's own product and "
        "enabler catalogue. The red bar is the finding.")
     w(owners_chart(m))
 
     # 4 control exposure - REAL
-    vh("Control exposure", "READY",
+    vh("Control exposure", "READY" if not demo else "REAL DATA",
        "For each offering, whether a delivery team inherits its controls or rebuilds "
        "them. Every unanswered row is both a risk and a roadmap item.")
     w(progress_rows([(x['name'],
@@ -420,58 +526,114 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-
                      for x in m.offerings if x['in_the_box']]))
 
     # 5 roadmap horizons - REAL
-    vh("Roadmap horizons", "READY",
+    vh("Roadmap horizons", "READY" if not demo else "REAL DATA",
        "What moves now, next and later &mdash; assembled from the facts rather than "
        "from a workshop.")
     w(waves_chart(m))
 
     # 6-10 need levels
-    vh("Capability heat map", "AWAITING OBSERVATIONS",
-       "All 52 capabilities coloured by derived level &mdash; the single picture of "
-       "the estate.")
-    w(_empty("Nothing to colour yet",
-             "A level needs to know whether a capability is practised. That has not "
-             "been asked of anyone yet, so all 52 are unrated and the map would be "
-             "one flat colour.",
-             "Capability owners, one question each"))
+    import build_preview as _bp
+    levels = {c['id']: m.rate(scale, c['id'])[0] for c in m.capabilities}
+    targets = _bp.sample_targets(m, levels) if demo else None
+    obsv = {c['id']: m.values(c['id']) for c in m.capabilities}
 
-    vh("Domain scorecard", "AWAITING OBSERVATIONS",
+    def vw(title, desc, chart, missing, who, extra=""):
+        """A view: populated in demo mode, an honest empty state otherwise."""
+        vh(title, "SAMPLE" if demo else "AWAITING OBSERVATIONS", desc)
+        if demo:
+            w(chart())
+            if extra:
+                w(extra)
+        else:
+            w(_empty(missing[0], missing[1], who))
+
+    vw("Capability heat map",
+       "All 52 capabilities by their derived level &mdash; the single picture of "
+       "the estate.",
+       lambda: _bp.v_heatmap(m, obsv, levels)
+               + _bp.legend([0, 1, 2, 3], {0: "0 Incomplete", 1: "1 Performed",
+                                            2: "2 Managed", 3: "3 Established"}, LVL),
+       ("Nothing to colour yet",
+        "A level needs to know whether a capability is practised. That has not been "
+        "asked of anyone yet, so all 52 are unrated and the map would be one flat "
+        "colour."),
+       "Capability owners, one question per L3 criterion")
+
+    vw("Domain scorecard",
        "Eight domains, current against target &mdash; the radar a steering committee "
-       "reads fastest.")
-    w(_empty("No current position, and no target",
-             "Needs a level per capability, and a target level per domain with a date. "
-             "Neither exists yet.",
-             "Capability owners, then a target-setting decision"))
+       "reads fastest.",
+       lambda: _bp.v_radar(m, obsv, levels, targets)
+               + '<div class="legend"><span><i style="background:#002869"></i>'
+                 'Current</span><span><i style="background:#E36135"></i>'
+                 'Target, 12 months</span></div>',
+       ("No current position, and no target",
+        "Needs a level per capability, and a target level per domain with a date. "
+        "Neither exists yet."),
+       "Capability owners, then a target-setting decision")
 
-    vh("Built against practised", "AWAITING OBSERVATIONS",
+    vw("Built against practised",
        "The disagreement, plotted: capabilities the platform has enabled that nobody "
-       "is yet doing.")
-    w(_empty("Half the axis exists",
-             "Enablement is recorded for all 52 capabilities. Practice is recorded "
-             "for none, so every point would sit on one line.",
-             "Capability owners"))
+       "is yet doing.",
+       lambda: _bp.v_quadrant(m, obsv, levels),
+       ("Half the axis exists",
+        "Enablement is recorded for all 52 capabilities. Practice is recorded for "
+        "none, so every point would sit on one line."),
+       "Capability owners",
+       '<p style="margin-top:12px;font-size:13px;color:var(--muted)">Each dot is a '
+       'capability. <b>Bottom-right</b> is the pattern this institution expects to '
+       'find: the platform is built, the practice has not caught up.</p>')
 
-    vh("Biggest gaps to target", "AWAITING OBSERVATIONS",
+    vw("Biggest gaps to target",
        "The capabilities furthest from where they need to be, with the accountable "
-       "unit beside each.")
-    w(_empty("No target state exists",
-             "A gap needs both a current level and a target. Setting targets is a "
-             "decision, not an observation, and it is worth taking after the first "
-             "real ratings rather than before.",
-             "The steering group, once ratings exist"))
+       "unit beside each.",
+       lambda: _bp.v_gapbars(m, obsv, levels, targets),
+       ("No target state exists",
+        "A gap needs both a current level and a target. Setting targets is a "
+        "decision, not an observation, and it is worth taking after the first real "
+        "ratings rather than before."),
+       "The steering group, once ratings exist")
 
-    vh("Level distribution and trajectory", "AWAITING OBSERVATIONS",
-       "How many capabilities sit at each level, and where the plan would move them.")
-    w(_empty("Nothing to distribute",
-             "Both views read the derived level. All 52 are currently unrated.",
-             "Capability owners"))
+    vw("Level distribution",
+       "How many capabilities sit at each level. A histogram is harder to argue with "
+       "than an average, and this model never averages.",
+       lambda: _bp.v_levels(m, levels),
+       ("Nothing to distribute",
+        "Reads the derived level. All 52 are currently unrated."),
+       "Capability owners")
 
-    w('<div class="callout"><p><b>Five of ten views are usable today.</b> The other '
-      'five are not blocked by tooling or by design &mdash; they are blocked by one '
-      'question that has never been put to the capability owners: '
-      '<i>is this actually done, and where?</i> To see the five populated with '
-      'illustrative numbers, open <code>preview-views.html</code>, which is clearly '
-      'marked as sample data.</p></div>')
+    vw("Trajectory",
+       "Where the portfolio sits today against where the targets would put it.",
+       lambda: _bp.v_trajectory(m, levels, targets)
+               + '<div class="legend"><span><i style="background:#002869"></i>'
+                 'Today</span><span><i style="background:#E36135"></i>'
+                 'If targets are met</span></div>',
+       ("Nothing to plot",
+        "Needs both a current distribution and a target distribution."),
+       "Capability owners, then a target-setting decision")
+
+    vw("Assessment profile",
+       "The four observations across all 52 capabilities. Shows which question is the "
+       "constraint &mdash; usually practice, not tooling.",
+       lambda: _bp.v_profile(m, obsv) + legend(),
+       ("Only two of four questions answered",
+        "Enabled and defined are partly recorded; practised and skilled are not "
+        "recorded at all."),
+       "Capability owners and L&D")
+
+    if demo:
+        w('<div class="callout warn"><p><b>Every chart above is illustrative.</b> '
+          'The capability map, the offerings, the assets and the owners are real; '
+          'the observations are not. Answering four questions &mdash; put to the '
+          'capability owners, the platform teams, the standard-setting functions and '
+          'Learning &amp; Development &mdash; is what turns this into an '
+          'assessment.</p></div>')
+    else:
+        w('<div class="callout"><p><b>Five of ten views are usable today.</b> The '
+          'other five are not blocked by tooling or by design &mdash; they are '
+          'blocked by one question that has never been put to the capability owners: '
+          '<i>is this actually done, and where?</i> To see the whole report populated '
+          'with illustrative numbers, open '
+          '<code>management-report-illustrative.html</code>.</p></div>')
     w('</section>')
 
     # ---------------------------------------------------------- 5 decisions

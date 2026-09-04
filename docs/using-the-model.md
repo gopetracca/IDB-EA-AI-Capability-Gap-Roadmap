@@ -121,7 +121,7 @@ automatically. State in `BASIS` what is adopted and what is ours.
 |---|---|---|
 | `out/management-report.html` | **Management. The one to send** — charts, findings, decisions. Self-contained, opens offline, prints | Every build |
 | `out/management-report.md` | The same report as plain text, for pasting into email or a wiki | Every build |
-| `out/preview-views.html` | **Sample data.** Ten views showing what the model produces once observations exist. For agreeing the approach, never for reporting | Every build |
+| `out/management-report-illustrative.html` | **Sample observations.** The identical report with every chart populated, for agreeing the approach before the assessment runs. Never for reporting | Every build |
 | `out/agent-readiness.md` | The agent question specifically | Every build |
 | `out/capability-assessment-level.md` | All 52, four observations each, default scale | Every build |
 | `out/capability-assessment-exec.md` | The same facts through the coarser executive lens | Every build |
@@ -136,9 +136,10 @@ Everything in `out/` can be deleted and rebuilt. Nothing in `facts/` can.
 **Do not type a level anywhere.** Levels are derived. If you are typing a number into
 `facts/`, you are recording a judgement where a fact belongs.
 
-**Do not present `preview-views.html` as an assessment.** Every number on it is
+**Do not present the illustrative edition as an assessment.** Its observations are
 invented. It carries a banner, a per-view badge and a watermark for that reason. Use it
-to agree the approach; use `management-report.html` to report.
+to agree the approach; use `management-report.html` to report. Note that its capability
+map, offerings, assets and owners *are* real - only the observations are sampled.
 
 **Do not fill in `unknown` to make a view look finished.** An unrated capability is a
 true statement about the assessment. Guessing to complete the picture is the one change

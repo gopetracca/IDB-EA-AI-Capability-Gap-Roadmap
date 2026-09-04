@@ -4,10 +4,11 @@
 <style>
 :root{--ink:#0d1b2a;--muted:#5a798c;--rule:#e2e8ee;--page:#fff;--card:#fff;
 --accent:#002869;--accent-soft:#F1F5FA;--warn:#E36135;--good:#002869;--mid:#4C8CD2;
---band:#F7F9FB;--shadow:none}
+--band:#F7F9FB;--shadow:none;
+--q1:#F7F9FB;--q2:#F1F5FA;--q3:#FBF3EF;--q4:#F7F9FB}
 @media(prefers-color-scheme:dark){:root{--ink:#eef2f6;--muted:#93a7b8;--rule:#22303d;
 --page:#0b1219;--card:#0f1822;--accent:#7FB2E8;--accent-soft:#12202e;--band:#0d1620;
---shadow:none}}
+--q1:#0f1822;--q2:#12202e;--q3:#1c1512;--q4:#0f1822;--shadow:none}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--page);color:var(--ink);
 font:14.5px/1.6 "Segoe UI",-apple-system,BlinkMacSystemFont,Inter,Helvetica,Arial,sans-serif;
@@ -98,9 +99,35 @@ white-space:nowrap;text-transform:uppercase}
 .t-wait{background:transparent;color:var(--muted);box-shadow:inset 0 0 0 1px var(--rule)}
 .vd{font-size:13.5px;color:var(--muted);margin:0 0 10px;max-width:78ch}
 footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-height:1.7}
-@media print{body{background:#fff}section{break-inside:avoid;box-shadow:none}.wrap{padding:0}}
-</style></head><body><div class="wrap">
-<header><h1>AI Capability &mdash; Management Report</h1><div class="sub">Inter-American Development Bank &nbsp;·&nbsp; 04 September 2026 &nbsp;·&nbsp; generated from the capability model</div></header>
+/* chart classes shared with the illustrative views - without these the radar
+   and quadrant render as solid black, because an SVG polygon defaults to a
+   black fill and the text defaults to 16px */
+.ax{font-size:11.5px;fill:var(--muted);font-weight:700;text-anchor:middle}
+.axs{font-size:9.5px;fill:var(--muted)}
+.axl{font-size:11.5px;fill:var(--muted);font-weight:600}
+.axis{stroke:var(--rule);stroke-width:1.5}
+.grid{fill:none;stroke:var(--rule);stroke-width:1}
+.spoke{stroke:var(--rule);stroke-width:1}
+.cur{fill:rgba(0,40,105,.26);stroke:#002869;stroke-width:2}
+.tgt{fill:none;stroke:#E36135;stroke-width:2;stroke-dasharray:5 4}
+.tl-now{fill:none;stroke:#002869;stroke-width:2.5}
+.tl-then{fill:none;stroke:#E36135;stroke-width:2.5;stroke-dasharray:5 4}
+.tp-now{fill:#002869} .tp-then{fill:#E36135}
+.qq{font-size:11px;fill:var(--muted);font-weight:700;letter-spacing:.04em}
+.wm{font-size:44px;font-weight:800;fill:var(--ink);fill-opacity:.04;
+letter-spacing:.24em;pointer-events:none}
+.lvn{font-size:11px;fill:var(--muted);font-weight:700}
+.radar{max-width:470px;display:block;margin:0 auto}
+.banner{position:sticky;top:0;z-index:9;background:var(--warn);color:#fff;
+padding:10px 24px;font-size:12.5px;font-weight:600;text-align:center;
+letter-spacing:.01em}
+.smp{background:rgba(227,97,53,.12);padding:0 4px;border-radius:2px;
+box-shadow:inset 0 -1px 0 rgba(227,97,53,.4)}
+@media print{body{background:#fff}section{break-inside:avoid;box-shadow:none}
+.wrap{padding:0}.banner{position:static}}
+</style></head><body>
+<div class="wrap">
+<header><h1>AI Capability &mdash; Management Report</h1><div class="sub">Inter-American Development Bank &nbsp;&#183;&nbsp; 04 September 2026 &nbsp;&#183;&nbsp; generated from the capability model</div></header>
 <section><h2>Section 1</h2><h3>What this report can and cannot say</h3>
 <p class="lede">Read this before the findings. It states how much of the assessment has actually been done, so nothing below is read as more than it is.</p>
 <div class="kpis">
@@ -153,8 +180,8 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-
 <p class="vd">What moves now, next and later &mdash; assembled from the facts rather than from a workshop.</p>
 <div class="waves"><div class="wave"><div class="wh">Now &mdash; this quarter</div><div class="ws">Release what is already built</div><ul><li>STD-07 Foundry Agents Standard</li><li>RA-05 Foundry Agents Reference Architecture</li><li>TPL-02 MCP Server Template v2 (C# / .NET)</li><li>IAC-01 Container App Environment</li><li>IAC-03 Container Registry</li></ul></div><div class="wave"><div class="wh">Next &mdash; 6 months</div><div class="ws">Answer what comes in the box, then close the gaps</div><ul><li>Foundry agents &mdash; 12 questions</li><li>Custom MCP servers &mdash; 6 questions</li><li>Retrieval on AI Search &mdash; 5 questions</li><li>Document extraction &mdash; 4 questions</li></ul></div><div class="wave"><div class="wh">Later &mdash; 12 months+</div><div class="ws">Capabilities nobody owns today</div><ul><li>1.5 AI Ecosystem & Alliance Management</li><li>2.3 AI Product Management</li><li>4.6 AI Evaluation & Testing</li><li>6.3 Continuous Evaluation, Drift & Quality Management</li><li>7.2 Responsible & Trustworthy AI Practice</li><li>7.5 Privacy & Data Protection for AI</li><li>7.6 Legal, Regulatory & Contractual Compliance for AI</li><li>7.9 AI Impact Assessment & Risk Classification</li></ul></div></div>
 <div class="viewhdr"><h4>Capability heat map</h4><span class="tag t-wait">AWAITING OBSERVATIONS</span></div>
-<p class="vd">All 52 capabilities coloured by derived level &mdash; the single picture of the estate.</p>
-<div class="empty"><div class="ei">&#9633;</div><div><b>Nothing to colour yet</b><p>A level needs to know whether a capability is practised. That has not been asked of anyone yet, so all 52 are unrated and the map would be one flat colour.</p><p class="who">Supplied by: Capability owners, one question each</p></div></div>
+<p class="vd">All 52 capabilities by their derived level &mdash; the single picture of the estate.</p>
+<div class="empty"><div class="ei">&#9633;</div><div><b>Nothing to colour yet</b><p>A level needs to know whether a capability is practised. That has not been asked of anyone yet, so all 52 are unrated and the map would be one flat colour.</p><p class="who">Supplied by: Capability owners, one question per L3 criterion</p></div></div>
 <div class="viewhdr"><h4>Domain scorecard</h4><span class="tag t-wait">AWAITING OBSERVATIONS</span></div>
 <p class="vd">Eight domains, current against target &mdash; the radar a steering committee reads fastest.</p>
 <div class="empty"><div class="ei">&#9633;</div><div><b>No current position, and no target</b><p>Needs a level per capability, and a target level per domain with a date. Neither exists yet.</p><p class="who">Supplied by: Capability owners, then a target-setting decision</p></div></div>
@@ -164,10 +191,16 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-
 <div class="viewhdr"><h4>Biggest gaps to target</h4><span class="tag t-wait">AWAITING OBSERVATIONS</span></div>
 <p class="vd">The capabilities furthest from where they need to be, with the accountable unit beside each.</p>
 <div class="empty"><div class="ei">&#9633;</div><div><b>No target state exists</b><p>A gap needs both a current level and a target. Setting targets is a decision, not an observation, and it is worth taking after the first real ratings rather than before.</p><p class="who">Supplied by: The steering group, once ratings exist</p></div></div>
-<div class="viewhdr"><h4>Level distribution and trajectory</h4><span class="tag t-wait">AWAITING OBSERVATIONS</span></div>
-<p class="vd">How many capabilities sit at each level, and where the plan would move them.</p>
-<div class="empty"><div class="ei">&#9633;</div><div><b>Nothing to distribute</b><p>Both views read the derived level. All 52 are currently unrated.</p><p class="who">Supplied by: Capability owners</p></div></div>
-<div class="callout"><p><b>Five of ten views are usable today.</b> The other five are not blocked by tooling or by design &mdash; they are blocked by one question that has never been put to the capability owners: <i>is this actually done, and where?</i> To see the five populated with illustrative numbers, open <code>preview-views.html</code>, which is clearly marked as sample data.</p></div>
+<div class="viewhdr"><h4>Level distribution</h4><span class="tag t-wait">AWAITING OBSERVATIONS</span></div>
+<p class="vd">How many capabilities sit at each level. A histogram is harder to argue with than an average, and this model never averages.</p>
+<div class="empty"><div class="ei">&#9633;</div><div><b>Nothing to distribute</b><p>Reads the derived level. All 52 are currently unrated.</p><p class="who">Supplied by: Capability owners</p></div></div>
+<div class="viewhdr"><h4>Trajectory</h4><span class="tag t-wait">AWAITING OBSERVATIONS</span></div>
+<p class="vd">Where the portfolio sits today against where the targets would put it.</p>
+<div class="empty"><div class="ei">&#9633;</div><div><b>Nothing to plot</b><p>Needs both a current distribution and a target distribution.</p><p class="who">Supplied by: Capability owners, then a target-setting decision</p></div></div>
+<div class="viewhdr"><h4>Assessment profile</h4><span class="tag t-wait">AWAITING OBSERVATIONS</span></div>
+<p class="vd">The four observations across all 52 capabilities. Shows which question is the constraint &mdash; usually practice, not tooling.</p>
+<div class="empty"><div class="ei">&#9633;</div><div><b>Only two of four questions answered</b><p>Enabled and defined are partly recorded; practised and skilled are not recorded at all.</p><p class="who">Supplied by: Capability owners and L&amp;D</p></div></div>
+<div class="callout"><p><b>Five of ten views are usable today.</b> The other five are not blocked by tooling or by design &mdash; they are blocked by one question that has never been put to the capability owners: <i>is this actually done, and where?</i> To see the whole report populated with illustrative numbers, open <code>management-report-illustrative.html</code>.</p></div>
 </section>
 <section><h2>Section 5</h2><h3>What needs a decision</h3>
 <h3 style="font-size:15px;margin-top:8px">4.1 &nbsp;Capabilities nobody owns</h3>
