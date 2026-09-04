@@ -30,6 +30,13 @@ def _short(name):
     return {"Governance, Risk, Security & Assurance": "Governance, Risk & Assurance"}.get(n, n)
 
 
+def _dl(d):
+    """Domain label, trimmed to fit a chart gutter."""
+    n = d['name'].replace("AI ", "", 1)
+    n = {"Governance, Risk, Security & Assurance": "Governance, Risk & Assurance"}.get(n, n)
+    return "%s · %s" % (d['id'], n)
+
+
 def esc(s):
     return (str(s).replace("&", "&amp;").replace("<", "&lt;")
             .replace(">", "&gt;").replace('"', "&quot;"))
@@ -195,6 +202,29 @@ vertical-align:-1px}
 .p-no{background:rgba(163,58,44,.13);color:var(--warn)}
 .p-mid{background:rgba(192,138,46,.16);color:#8a6110}
 .p-yes{background:rgba(47,111,78,.14);color:var(--good)}
+.hs{font-size:7.5px;fill:var(--muted);text-anchor:middle}
+.empty{display:flex;gap:16px;align-items:flex-start;background:var(--page);
+border:1px dashed var(--rule);border-radius:8px;padding:20px 22px;margin:12px 0}
+.empty .ei{font-size:26px;color:var(--muted);line-height:1}
+.empty b{font-size:14px}
+.empty p{margin:4px 0 0;font-size:13px;color:var(--muted);max-width:64ch}
+.empty p.who{margin-top:8px;font-size:12px;font-style:italic}
+.waves{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:16px;
+margin-top:12px}
+.wave{background:var(--page);border:1px solid var(--rule);border-radius:8px;padding:16px}
+.wh{font-weight:700;font-size:14px;margin-bottom:2px}
+.ws{font-size:11.5px;color:var(--muted);margin-bottom:10px}
+.wave ul{margin:0;padding-left:16px;font-size:12.5px;line-height:1.6}
+.wave li.more{color:var(--muted);list-style:none;margin-left:-16px}
+.viewhdr{display:flex;justify-content:space-between;align-items:baseline;
+gap:12px;margin:30px 0 6px;padding-top:22px;border-top:1px solid var(--rule)}
+.viewhdr:first-of-type{border-top:none;padding-top:0;margin-top:8px}
+.viewhdr h4{font-size:16px;margin:0;letter-spacing:-.01em}
+.tag{font-size:10px;font-weight:800;letter-spacing:.07em;padding:3px 9px;
+border-radius:20px;white-space:nowrap}
+.t-real{background:rgba(47,111,78,.14);color:var(--good)}
+.t-wait{background:rgba(93,107,116,.14);color:var(--muted)}
+.vd{font-size:13.5px;color:var(--muted);margin:0 0 10px;max-width:78ch}
 footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-height:1.7}
 @media print{body{background:#fff}section{break-inside:avoid;box-shadow:none}.wrap{padding:0}}
 </style></head><body><div class="wrap">""")
@@ -298,8 +328,112 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-
         w('<tr><td>%s</td><td style="color:var(--muted)">%s</td></tr>' % (esc(a), esc(b)))
     w('</tbody></table></section>')
 
-    # ---------------------------------------------------------- 4 decisions
-    w('<section><h2>Section 4</h2><h3>What needs a decision</h3>')
+    # ---------------------------------------------------------- 3b views
+    w('<section><h2>Section 4</h2><h3>The views</h3>')
+    w('<p class="lede">The ten views this model produces. Those marked '
+      '<span class="tag t-real">READY</span> are drawn from recorded facts and are '
+      'usable today. Those marked <span class="tag t-wait">AWAITING OBSERVATIONS</span> '
+      'are built and will populate as answers arrive &mdash; they are shown empty '
+      'rather than filled with an estimate.</p>')
+
+    def vh(title, tag, desc):
+        w('<div class="viewhdr"><h4>%s</h4><span class="tag %s">%s</span></div>'
+          % (esc(title), "t-real" if tag == "READY" else "t-wait", tag))
+        w('<p class="vd">%s</p>' % desc)
+
+    # 1 observation heat map - REAL and fully populated
+    vh("Observation heat map", "READY",
+       "Every capability, every observation. This is the whole assessment on one "
+       "screen: what is known is coloured, what nobody has looked at is pale. "
+       "The pale columns are the work still to do.")
+    w(obs_heatmap(m))
+    w(legend())
+
+    # 2 enablement by domain - REAL
+    vh("Tooling by domain", "READY",
+       "Can a delivery team get what it needs without building it? The platform and "
+       "engineering domains carry the tooling; the governance domains carry almost "
+       "none; People &amp; Skills is correctly not a technical question at all.")
+    rows = []
+    for d in m.domains:
+        caps = [c for c in m.capabilities if c['domain'] == d['id']]
+        rows.append((_dl(d), "", dict(collections.Counter(
+            m.values(c['id'])['enabled'] for c in caps))))
+    w(stacked_bar(rows))
+    w(legend())
+
+    # 3 accountability - REAL
+    vh("Accountability spread", "READY",
+       "Capabilities per unit, mapped against the institution's own product and "
+       "enabler catalogue. The red bar is the finding.")
+    w(owners_chart(m))
+
+    # 4 control exposure - REAL
+    vh("Control exposure", "READY",
+       "For each offering, whether a delivery team inherits its controls or rebuilds "
+       "them. Every unanswered row is both a risk and a roadmap item.")
+    w(progress_rows([(x['name'],
+                      sum(1 for y in x['in_the_box'] if y['status']),
+                      len(x['in_the_box']), "")
+                     for x in m.offerings if x['in_the_box']]))
+
+    # 5 roadmap horizons - REAL
+    vh("Roadmap horizons", "READY",
+       "What moves now, next and later &mdash; assembled from the facts rather than "
+       "from a workshop.")
+    w(waves_chart(m))
+
+    # 6-10 need levels
+    vh("Capability heat map", "AWAITING OBSERVATIONS",
+       "All 52 capabilities coloured by derived level &mdash; the single picture of "
+       "the estate.")
+    w(_empty("Nothing to colour yet",
+             "A level needs to know whether a capability is practised. That has not "
+             "been asked of anyone yet, so all 52 are unrated and the map would be "
+             "one flat colour.",
+             "Capability owners, one question each"))
+
+    vh("Domain scorecard", "AWAITING OBSERVATIONS",
+       "Eight domains, current against target &mdash; the radar a steering committee "
+       "reads fastest.")
+    w(_empty("No current position, and no target",
+             "Needs a level per capability, and a target level per domain with a date. "
+             "Neither exists yet.",
+             "Capability owners, then a target-setting decision"))
+
+    vh("Built against practised", "AWAITING OBSERVATIONS",
+       "The disagreement, plotted: capabilities the platform has enabled that nobody "
+       "is yet doing.")
+    w(_empty("Half the axis exists",
+             "Enablement is recorded for all 52 capabilities. Practice is recorded "
+             "for none, so every point would sit on one line.",
+             "Capability owners"))
+
+    vh("Biggest gaps to target", "AWAITING OBSERVATIONS",
+       "The capabilities furthest from where they need to be, with the accountable "
+       "unit beside each.")
+    w(_empty("No target state exists",
+             "A gap needs both a current level and a target. Setting targets is a "
+             "decision, not an observation, and it is worth taking after the first "
+             "real ratings rather than before.",
+             "The steering group, once ratings exist"))
+
+    vh("Level distribution and trajectory", "AWAITING OBSERVATIONS",
+       "How many capabilities sit at each level, and where the plan would move them.")
+    w(_empty("Nothing to distribute",
+             "Both views read the derived level. All 52 are currently unrated.",
+             "Capability owners"))
+
+    w('<div class="callout"><p><b>Five of ten views are usable today.</b> The other '
+      'five are not blocked by tooling or by design &mdash; they are blocked by one '
+      'question that has never been put to the capability owners: '
+      '<i>is this actually done, and where?</i> To see the five populated with '
+      'illustrative numbers, open <code>preview-views.html</code>, which is clearly '
+      'marked as sample data.</p></div>')
+    w('</section>')
+
+    # ---------------------------------------------------------- 5 decisions
+    w('<section><h2>Section 5</h2><h3>What needs a decision</h3>')
 
     w('<h3 style="font-size:15px;margin-top:8px">4.1 &nbsp;Capabilities nobody owns</h3>')
     w('<div class="split"><div>%s<div style="text-align:center;font-size:12px;'
@@ -343,7 +477,7 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-
     w('</section>')
 
     # ---------------------------------------------------------- 5 next
-    w('<section><h2>Section 5</h2><h3>What would make the next report say more</h3>')
+    w('<section><h2>Section 6</h2><h3>What would make the next report say more</h3>')
     w('<table><thead><tr><th>Who</th><th>What is asked of them</th>'
       '<th>What it unlocks</th></tr></thead><tbody>')
     n_undef = sum(1 for c in m.capabilities if m.values(c['id'])['defined'] == 'unknown')
@@ -373,3 +507,107 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-
          esc(scale.NAME), esc(scale.BASIS)))
     w('</div></body></html>')
     return "\n".join(o)
+
+
+# ================================================================= full views
+# The same ten views the preview shows, rendered from REAL data only.
+# Where a view needs something nobody has observed yet, it renders its own
+# empty state saying what is missing and who would supply it - never a zero,
+# never an invented number.
+
+LVL = {0: "#a33a2c", 1: "#c2683a", 2: "#c08a2e", 3: "#5b8f4e",
+       4: "#2f6f4e", 5: "#1d5138", None: "#e3e8ec"}
+
+
+def _empty(title, missing, who, h=150):
+    """Honest empty state for a view that has nothing to draw yet."""
+    return ('<div class="empty"><div class="ei">&#9633;</div>'
+            '<div><b>%s</b><p>%s</p><p class="who">Supplied by: %s</p></div></div>'
+            % (esc(title), esc(missing), esc(who)))
+
+
+def obs_heatmap(m):
+    """Every capability x every observation. FULLY POPULATED with real data:
+    what is known is coloured, what is not is visibly blank."""
+    cw, ch, gap, pad, top = 15, 30, 3, 232, 54
+    rows = []
+    for d in m.domains:
+        rows.append((d, sorted([c for c in m.capabilities if c['domain'] == d['id']],
+                               key=lambda x: m.sort_key(x['id']))))
+    ncol = max(len(c) for _, c in rows)
+    W = pad + ncol * (cw * 4 + gap * 2 + 8)
+    H = top + len(rows) * (ch + 8)
+    o = ['<svg viewBox="0 0 %d %d" class="chart">' % (W, H)]
+    o.append('<text x="0" y="18" class="bs">Each capability shows four cells: '
+             'practised &#183; enabled &#183; skilled &#183; defined</text>')
+    for i, (d, caps) in enumerate(rows):
+        y = top + i * (ch + 8)
+        o.append('<text x="0" y="%d" class="bl">%s</text>' % (y + 16, d['id']))
+        nm = d['name'].replace("AI ", "", 1)
+        nm = {"Governance, Risk, Security & Assurance":
+              "Governance, Risk & Assurance"}.get(nm, nm)
+        o.append('<text x="26" y="%d" class="bs">%s</text>' % (y + 16, esc(nm)))
+        for j, c in enumerate(caps):
+            x = pad + j * (cw * 4 + gap * 2 + 8)
+            v = m.values(c['id'])
+            for k, t in enumerate(("practised", "enabled", "skilled", "defined")):
+                o.append('<rect x="%d" y="%d" width="%d" height="%d" rx="2" fill="%s">'
+                         '<title>%s %s &#8212; %s: %s</title></rect>'
+                         % (x + k * (cw + 1), y, cw, ch - 8, C[v[t]],
+                            c['id'], esc(c['name']), t, LABEL[v[t]]))
+            o.append('<text x="%d" y="%d" class="hs">%s</text>'
+                     % (x + cw * 2, y + ch + 2, c['id']))
+    o.append("</svg>")
+    return "".join(o)
+
+
+def owners_chart(m):
+    """Accountability spread. REAL."""
+    cnt = collections.Counter(m.owner(c['id'])[0] or "NO OWNER"
+                              for c in m.capabilities)
+    rows = cnt.most_common()
+    W, rowh, gap, left, right = 880, 22, 8, 268, 58
+    bw = W - left - right
+    mx = max(cnt.values())
+    h = len(rows) * (rowh + gap)
+    o = ['<svg viewBox="0 0 %d %d" class="chart">' % (W, h)]
+    for i, (unit, n) in enumerate(rows):
+        y = i * (rowh + gap)
+        col = "#a33a2c" if unit == "NO OWNER" else "#12455c"
+        o.append('<text x="0" y="%d" class="bl" fill="%s">%s</text>'
+                 % (y + 14, col, esc(unit)))
+        o.append('<rect x="%d" y="%d" width="%.1f" height="%d" rx="3" fill="%s" '
+                 'fill-opacity="%s"/>'
+                 % (left, y, bw * n / mx, rowh - 6, col,
+                    "1" if unit == "NO OWNER" else ".8"))
+        o.append('<text x="%.1f" y="%d" class="bt">%d</text>'
+                 % (left + bw * n / mx + 8, y + rowh / 2 + 2, n))
+    o.append("</svg>")
+    return "".join(o)
+
+
+def waves_chart(m):
+    """Roadmap horizons, assembled from facts. REAL."""
+    RELEASED_ = {"Published", "Published (JFrog)", "In use"}
+    waves = [
+        ("Now &mdash; this quarter", "Release what is already built",
+         ["%s %s" % (a['id'], a['name']) for a in m.assets
+          if a['status'] not in RELEASED_]),
+        ("Next &mdash; 6 months", "Answer what comes in the box, then close the gaps",
+         ["%s &mdash; %d questions" % (o_['name'], len(o_['in_the_box']))
+          for o_ in m.offerings if o_['in_the_box']]),
+        ("Later &mdash; 12 months+", "Capabilities nobody owns today",
+         ["%s %s" % (c['id'], c['name']) for c in m.capabilities
+          if m.owner(c['id'])[1] == "NO MATCH"]),
+    ]
+    o = ['<div class="waves">']
+    for title, sub, items in waves:
+        o.append('<div class="wave"><div class="wh">%s</div><div class="ws">%s</div><ul>'
+                 % (title, esc(sub)))
+        for it in items[:8]:
+            o.append("<li>%s</li>" % it)
+        if len(items) > 8:
+            o.append('<li class="more">+ %d more</li>' % (len(items) - 8))
+        o.append("</ul></div>")
+    o.append("</div>")
+    return "".join(o)

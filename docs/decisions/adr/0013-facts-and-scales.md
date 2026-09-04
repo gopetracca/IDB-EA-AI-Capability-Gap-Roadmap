@@ -6,6 +6,7 @@ date: 2026-09-04
 amended: 2026-09-04
 supersedes: [ADR-0001, ADR-0002, ADR-0003]
 amends: [ADR-0004, ADR-0005]
+amended_by: [ADR-0014]
 depends_on: [ADR-0010]
 ---
 
@@ -18,6 +19,10 @@ depends_on: [ADR-0010]
 
 Per the standing rule, those ADRs are not edited. They stand as the record of what was
 believed, and §4 below states where each was right.
+
+> **Amended by [ADR-0014](0014-practised-is-observed-at-l3.md)** — 4 September 2026.
+> The `practised` observation is now recorded per L3 criterion and derived at L2. The
+> rubric workstream stays closed; nothing in this record is reversed.
 
 ## Context
 

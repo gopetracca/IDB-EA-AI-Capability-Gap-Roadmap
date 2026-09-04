@@ -19,7 +19,8 @@ reading resolves it. It is settled by decision and recorded here.
 > ### ⚠ Read ADR-0013 first
 >
 > **[ADR-0013 · Facts and scales are separated](adr/0013-facts-and-scales.md)** supersedes
-> ADR-0001, ADR-0002 and ADR-0003, and amends ADR-0004 and ADR-0005. The two-scale model
+> ADR-0001, ADR-0002 and ADR-0003, and amends ADR-0004 and ADR-0005.
+> It is itself amended by **[ADR-0014](adr/0014-practised-is-observed-at-l3.md)**, which moves the `practised` observation down to L3. The two-scale model
 > (maturity on a capability, readiness on a realization) is no longer how this model works.
 > Those records are kept, unedited, as the account of what was believed and why.
 
@@ -38,6 +39,7 @@ reading resolves it. It is settled by decision and recorded here.
 | [ADR-0011](adr/0011-scale-provenance.md) | Provenance of the two scales | Accepted | 2026-09-04 |
 | [ADR-0012](adr/0012-capability-ownership-model.md) | How to record who owns a capability | **Proposed** | 2026-09-04 |
 | [ADR-0013](adr/0013-facts-and-scales.md) | **Facts and scales are separated** | **Accepted** | 2026-09-04 |
+| [ADR-0014](adr/0014-practised-is-observed-at-l3.md) | **Practised is observed at L3 and derived at L2** | **Accepted** | 2026-09-04 |
 
 ⚠ **ADR-0007 must be carved out of any approval request** until ISO/IEC 42001 Annex A and NIST AI
 RMF outcomes are mapped.
