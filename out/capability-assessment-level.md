@@ -4,7 +4,7 @@
 
 > Adapted from ISO/IEC 33020:2019 (process measurement framework). Simplified: four observations rather than five process attributes, three values rather than the standard's four-point N-P-L-F scale.
 >
-> Levels 4 and 5 are defined but not derivable: this model does not yet collect threshold monitoring or improvement-cycle observations. 3 is the highest level currently reachable.
+> Level 3 is the highest this model can currently derive. Levels 4 and 5 are defined but need observations nobody collects yet - threshold monitoring and a closed improvement cycle - so a capability at 3 is at the top of what is measured here, not at the top of the scale. Level 3 also reads conformance from a standard and a practice co-existing; it is not separately evidenced.
 
 | | |
 |---|---|
@@ -20,14 +20,16 @@
 
 ## The scale
 
-| Level | Name | Meaning |
-|---|---|---|
-| **0** | Incomplete | The capability is not performed, or performance cannot be shown. |
-| **1** | Performed | It is done on real AI systems. Nothing is guaranteed to be repeatable. |
-| **2** | Managed | It is done, the tooling is provided, and the people doing it are competent. |
-| **3** | Established | A published Bank standard exists and the work is done against it. |
-| **4** | Predictable | Performance is measured against thresholds and held there. |
-| **5** | Innovating | One evidence-driven improvement cycle has closed with a verified benefit. |
+| Level | Name | Meaning | Derivable today |
+|---|---|---|:-:|
+| **0** | Incomplete | The capability is not performed, or performance cannot be shown. | yes |
+| **1** | Performed | It is done on real AI systems. Nothing is guaranteed to be repeatable. | yes |
+| **2** | Managed | It is done, the tooling is provided, and the people doing it are competent. | yes |
+| **3** | Established | An approved institutional standard exists and the work is done against it. | yes |
+| **4** | Predictable | Performance is measured against thresholds and held there. | — |
+| **5** | Innovating | One evidence-driven improvement cycle has closed with a verified benefit. | — |
+
+Levels above **3** are defined but cannot be reached from the observations this model collects. A capability at 3 is at the top of what is *measured* here, not at the top of what is *possible*.
 
 ## The four observations
 

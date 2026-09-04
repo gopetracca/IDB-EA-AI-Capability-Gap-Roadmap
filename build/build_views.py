@@ -52,11 +52,18 @@ def capability_view(m, scale):
     # ---- levels
     w("## The scale")
     w("")
-    w("| Level | Name | Meaning |")
-    w("|---|---|---|")
+    cap = getattr(scale, "DERIVABLE_MAX", None)
+    w("| Level | Name | Meaning | Derivable today |")
+    w("|---|---|---|:-:|")
     for n, k, d in scale.LEVELS:
-        w("| **%d** | %s | %s |" % (n, k, d))
+        ok = "—" if cap is not None and n > cap else "yes"
+        w("| **%d** | %s | %s | %s |" % (n, k, d, ok))
     w("")
+    if cap is not None:
+        w("Levels above **%d** are defined but cannot be reached from the observations "
+          "this model collects. A capability at %d is at the top of what is *measured* "
+          "here, not at the top of what is *possible*." % (cap, cap))
+        w("")
 
     # ---- observations
     w("## The four observations")

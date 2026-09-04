@@ -18,13 +18,13 @@
 
 ## The scale
 
-| Level | Name | Meaning |
-|---|---|---|
-| **1** | Planning | Considered. Little or nothing exists yet. |
-| **2** | Experimenting | Something exists, in pieces, not joined up. |
-| **3** | Stabilizing | It exists and is used, with gaps. |
-| **4** | Scaling | It exists, is used, and is supported across the institution. |
-| **5** | Leading | Relied upon, measured and improved. |
+| Level | Name | Meaning | Derivable today |
+|---|---|---|:-:|
+| **1** | Planning | Considered. Little or nothing exists yet. | yes |
+| **2** | Experimenting | Something exists, in pieces, not joined up. | yes |
+| **3** | Stabilizing | It exists and is used, with gaps. | yes |
+| **4** | Scaling | It exists, is used, and is supported across the institution. | yes |
+| **5** | Leading | Relied upon, measured and improved. | yes |
 
 ## The four observations
 

@@ -67,8 +67,17 @@ You never type a level. The default scale derives it, and the order is what matt
 | 1 | Performed | It is done on real systems |
 | 2 | Managed | Done, **and** tooling provided, **and** competent people |
 | 3 | Established | All of that, **and** done against an approved institutional standard |
-| 4 | Predictable | Measured against thresholds *(not yet collected)* |
-| 5 | Innovating | An improvement cycle closed *(not yet collected)* |
+| 4 | Predictable | Measured against thresholds — **not derivable today** |
+| 5 | Innovating | An improvement cycle closed — **not derivable today** |
+
+**Level 3 is the ceiling of what this model measures, not the ceiling of the scale.**
+Levels 4 and 5 need observations nobody collects — threshold monitoring and a closed
+improvement cycle. A capability at 3 is at the top of what is being asked about.
+
+**And Level 3 is read, not proved.** `defined` says a standard exists; `practised` says
+the work is done. Neither says the work *follows* the standard. Level 3 infers
+conformance from the two facts co-existing, and its reason line admits it. A fifth
+observation would fix that; whether it is worth collecting is an open question.
 
 **Performance comes first.** This is the whole design. An approved standard with nothing
 performed against it earns **no level at all** — because the question was never

@@ -24,12 +24,17 @@ LEVELS = [
     (2, "Managed",
      "It is done, the tooling is provided, and the people doing it are competent."),
     (3, "Established",
-     "A published Bank standard exists and the work is done against it."),
+     "An approved institutional standard exists and the work is done against it."),
     (4, "Predictable",
      "Performance is measured against thresholds and held there."),
     (5, "Innovating",
      "One evidence-driven improvement cycle has closed with a verified benefit."),
 ]
+
+# Levels this scale can actually derive from the observations collected today.
+# Anything above this is defined but unreachable, and the model says so rather
+# than quietly topping out and letting a reader assume 3 means "the best we do".
+DERIVABLE_MAX = 3
 
 # Observation values that count as achieved / partly achieved.
 FULL = {"yes"}
@@ -105,19 +110,30 @@ def level(obs):
         return 1, "Performed, but not managed: " + " and ".join(missing)
     lvl, why = 2, "Performed, tooled and staffed by competent people"
 
-    # ---- Level 3.  Established: a standard exists and the work is done to it.
+    # ---- Level 3.  Established: an approved standard exists AND the work is
+    # done against it.
+    #
+    # Note what this model can and cannot see.  `defined` says a standard
+    # exists.  `practised` says the work is done.  Neither says the work
+    # FOLLOWS the standard - conformance is a fifth observation nobody has
+    # collected.  Level 3 is therefore stated as a reading of two facts sitting
+    # together, and the reason line says so, rather than asserting conformance
+    # the evidence does not carry.  Adding a `conforms` observation would let
+    # this be checked instead of read; until then it must not be overstated.
     if not _has(defined):
-        return 2, ("Managed, but no published Bank standard - "
+        return 2, ("Managed, but no approved standard - "
                    + ("the standard is pre-release" if defined == "partial"
                       else "none is recorded"))
-    lvl, why = 3, "Done against a published Bank standard"
-
-    # ---- Levels 4 and 5 need observations this model does not yet collect.
-    return lvl, why
+    return 3, ("Consistently performed and an approved standard exists. "
+               "Conformance to it is not separately evidenced")
 
 
 def note():
     """Shown on every view that uses this scale."""
-    return ("Levels 4 and 5 are defined but not derivable: this model does not yet "
-            "collect threshold monitoring or improvement-cycle observations. "
-            "3 is the highest level currently reachable.")
+    return ("Level %d is the highest this model can currently derive. Levels 4 and 5 "
+            "are defined but need observations nobody collects yet - threshold "
+            "monitoring and a closed improvement cycle - so a capability at %d is at "
+            "the top of what is measured here, not at the top of the scale. Level 3 "
+            "also reads conformance from a standard and a practice co-existing; it is "
+            "not separately evidenced."
+            % (DERIVABLE_MAX, DERIVABLE_MAX))
