@@ -1,0 +1,293 @@
+<header class="mast">
+  <div class="wrap mast-in">
+    <div>
+      <div class="eyebrow">Enterprise Architecture &middot; AI capability assessment</div>
+      <h1>Capability Views Catalogue</h1>
+      <p class="sub">Ten ways to put one capability assessment in front of a management audience &mdash;
+        each showing what it answers, who it is for, and what data it needs before it can be produced.
+        Every figure on this page is invented.</p>
+    </div>
+    <div class="banner">
+      <div>
+        <b>Illustrative data only</b>
+        <p>Scores are generated to show the shape of each view. The capability names are the real
+          model (8 domains, 52 capabilities); the numbers attached to them are not an assessment
+          and must not be quoted.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="idx" aria-label="Views">
+  <div class="wrap">
+    <a href="#heatmap">Heat map</a>
+    <a href="#overlays">Coverage vs ability</a>
+    <a href="#quadrant">Readiness &times; maturity</a>
+    <a href="#gapbars">Gap to target</a>
+    <a href="#profile">Profile</a>
+    <a href="#radar">Domain scorecard</a>
+    <a href="#waves">Roadmap horizons</a>
+    <a href="#owners">Accountability</a>
+    <a href="#assurance">Control exposure</a>
+    <a href="#trajectory">Trajectory</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="toc" id="toc"></div>
+  <p class="note" style="border:0;padding-top:14px">Each view below is built from the same two numbers
+    the model carries: <b>maturity</b> (1&ndash;5, what the institution is able to do, evidence-gated) and
+    <b>readiness</b> (0&ndash;5, how well the enterprise has packaged a way of doing it). They are never
+    merged into one score. Most of these views exist precisely to show the distance between them.</p>
+
+  <!-- 1 -->
+  <section class="view" id="heatmap">
+    <div class="vhead">
+      <div>
+        <div class="lab">The one they will ask for</div>
+        <h2>Capability heat map</h2>
+        <p class="q">Every capability on one page, filled by how able we are, with how far the platform
+          has already carried it drawn along the bottom edge of each tile.</p>
+      </div>
+      <div class="meta">
+        <div class="row"><div class="lab">Audience</div><div>Executive committee, EA board, any first conversation</div></div>
+        <div class="row"><div class="lab">Data it needs</div><div>A maturity rating per capability and the best readiness among its realizations</div></div>
+        <div class="row"><div class="lab">Before it is honest</div><div>Rubrics. Until a capability has one, its fill colour is an opinion &mdash; mark those tiles provisional</div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="hm" id="hm-main"></div>
+      <div class="legends" id="hm-legend"></div>
+      <p class="note"><b>Read the mismatch, not the colour.</b> A pale tile with a long orange edge is
+        the finding worth presenting: the platform has packaged it, the institution still cannot do it
+        to standard. A dark tile with no edge is the opposite &mdash; capable people, nothing reusable behind them.</p>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="view" id="overlays">
+    <div class="vhead">
+      <div>
+        <div class="lab">The brief, answered directly</div>
+        <h2>Coverage against ability</h2>
+        <p class="q">The same 52 capabilities counted twice: what is approved and available for general
+          use today, and what we are actually able to do to the standard the institution needs.</p>
+      </div>
+      <div class="meta">
+        <div class="row"><div class="lab">Audience</div><div>Senior leadership &mdash; the &ldquo;are we behind?&rdquo; conversation</div></div>
+        <div class="row"><div class="lab">Data it needs</div><div>Readiness &ge; 2 (approved) on the left; maturity &ge; 3 on the right</div></div>
+        <div class="row"><div class="lab">Why two maps</div><div>One number would let the good news stand in for the work. Two counts side by side cannot be collapsed</div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="two" id="ov-two"></div>
+      <p class="note"><b>This is the slide that answers &ldquo;so we are not that bad&rdquo;.</b> The left
+        map is genuinely good news and should be presented as such. The right map is the work. Putting
+        them on one page in the same shape is what stops either from being quoted alone.</p>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="view" id="quadrant">
+    <div class="vhead">
+      <div>
+        <div class="lab">Diagnostic</div>
+        <h2>Readiness against maturity</h2>
+        <p class="q">One dot per capability. The quadrant a dot lands in tells you what kind of
+          intervention it needs &mdash; and they are four different kinds.</p>
+      </div>
+      <div class="meta">
+        <div class="row"><div class="lab">Audience</div><div>EA, platform owners, the AI CoE &mdash; a working session, not a board slide</div></div>
+        <div class="row"><div class="lab">Data it needs</div><div>Both scales, per capability. Nothing else</div></div>
+        <div class="row"><div class="lab">What it settles</div><div>Stops &ldquo;buy more platform&rdquo; being the answer to every gap</div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div id="qd"></div>
+      <p class="note"><b>Bottom-right is the expensive quadrant.</b> Something has been bought,
+        standardised and industrialised, and the institution still cannot use it to the standard it
+        needs. The fix is never more platform &mdash; it is enablement, ownership, or a rule nobody has
+        written yet. Top-left is the mirror image: capable people carrying it by hand, with nothing
+        reusable behind them.</p>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="view" id="gapbars">
+    <div class="vhead">
+      <div>
+        <div class="lab">Prioritisation</div>
+        <h2>Gap to target</h2>
+        <p class="q">Where we are, where we said we need to be, and the distance between &mdash; by domain,
+          largest gap first.</p>
+      </div>
+      <div class="meta">
+        <div class="row"><div class="lab">Audience</div><div>Portfolio and investment committee</div></div>
+        <div class="row"><div class="lab">Data it needs</div><div>Current maturity, and an agreed target per domain</div></div>
+        <div class="row"><div class="lab">Before it is honest</div><div>The target must be signed by someone. An unsigned target makes every gap arguable</div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div id="gb"></div>
+      <p class="note"><b>Target is a decision, not a benchmark.</b> Level 5 everywhere is neither
+        achievable nor desirable; several capabilities are correctly finished at 3. The gap bar is only
+        meaningful once leadership has agreed what &ldquo;enough&rdquo; means for each domain.</p>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="view" id="profile">
+    <div class="vhead">
+      <div>
+        <div class="lab">The single slide</div>
+        <h2>Assessment profile</h2>
+        <p class="q">If only one slide survives the deck, this is it: four numbers and the distribution
+          behind them.</p>
+      </div>
+      <div class="meta">
+        <div class="row"><div class="lab">Audience</div><div>Board, or any audience with four minutes</div></div>
+        <div class="row"><div class="lab">Data it needs</div><div>Counts only &mdash; derived from the two scales</div></div>
+        <div class="row"><div class="lab">Watch for</div><div>An average maturity is a comfortable number that hides every real finding. Show the distribution beside it or not at all</div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="stats" id="pf-stats"></div>
+      <div id="pf-dist"></div>
+      <p class="note"><b>Never present the average alone.</b> Two estates with the same mean look
+        identical and behave nothing alike &mdash; one is uniformly adequate, the other has a cluster of
+        strength and a cluster of exposure. The bars are the finding; the mean is the caption.</p>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="view" id="radar">
+    <div class="vhead">
+      <div>
+        <div class="lab">Shape at a glance</div>
+        <h2>Domain scorecard</h2>
+        <p class="q">Eight domains, current against target, in the shape management already recognises
+          from every other maturity assessment they have seen.</p>
+      </div>
+      <div class="meta">
+        <div class="row"><div class="lab">Audience</div><div>Executive, and any audience expecting a familiar format</div></div>
+        <div class="row"><div class="lab">Data it needs</div><div>Domain-level roll-up of maturity and target</div></div>
+        <div class="row"><div class="lab">Honest caveat</div><div>A radar exaggerates area and the axis order changes the shape. Use it to be recognised, then move to the bars for anything decided</div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div id="rd" class="centre"></div>
+      <p class="note"><b>Include it knowing what it is.</b> The enclosed area has no meaning and reordering
+        the axes changes the silhouette without changing a single number. It earns its place by being
+        instantly readable to an audience that has seen twenty of them &mdash; not by being precise.</p>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="view" id="waves">
+    <div class="vhead">
+      <div>
+        <div class="lab">The answer to &ldquo;so what?&rdquo;</div>
+        <h2>Roadmap horizons</h2>
+        <p class="q">The gap analysis turned into three waves, with each capability placed by the size
+          of its gap and what has to exist before it can start.</p>
+      </div>
+      <div class="meta">
+        <div class="row"><div class="lab">Audience</div><div>Everyone. This is the deliverable the assessment exists to produce</div></div>
+        <div class="row"><div class="lab">Data it needs</div><div>Gap size, effort estimate, and the enabler edges between capabilities</div></div>
+        <div class="row"><div class="lab">Before it is honest</div><div>Sequencing must follow dependencies, not enthusiasm. A capability in wave one whose enabler sits in wave two is a plan that fails quietly</div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="waves" id="wv"></div>
+      <p class="note"><b>Wave one is deliberately small.</b> A first wave that contains everything urgent
+        is not a roadmap, it is a wish list. The constraint is delivery capacity and the dependency
+        order &mdash; both of which the model already holds. <b>In this mock the ordering is gap size
+        alone</b>; the real sequencing runs the enabler edges over it, which will move several of these.</p>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="view" id="owners">
+    <div class="vhead">
+      <div>
+        <div class="lab">Operating model</div>
+        <h2>Accountability spread</h2>
+        <p class="q">Every capability grouped under the role accountable for it, stacked by maturity &mdash;
+          which makes an unowned or over-loaded role impossible to miss.</p>
+      </div>
+      <div class="meta">
+        <div class="row"><div class="lab">Audience</div><div>The operating-model discussion, and anyone being asked to accept accountability</div></div>
+        <div class="row"><div class="lab">Data it needs</div><div>Proposed accountable role per capability</div></div>
+        <div class="row"><div class="lab">What it exposes</div><div>Roles that do not exist yet, roles carrying more than one person plausibly can, and accountability spread so thin it is nobody's</div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div id="ow"></div>
+      <p class="note"><b>The tail is the finding, not the top of the list.</b> A model that spreads 52
+        capabilities across forty-odd roles has not distributed accountability, it has diluted it &mdash;
+        and most of those roles do not exist on anyone's job description yet. This view usually generates
+        more discussion than the heat map, because it is the first time anyone is asked to put their name
+        against a row.</p>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="view" id="assurance">
+    <div class="vhead">
+      <div>
+        <div class="lab">For the second and third line</div>
+        <h2>Control and evidence exposure</h2>
+        <p class="q">The governance domain on its own terms: what we claim, what evidence exists behind
+          the claim, and what an auditor would find missing.</p>
+      </div>
+      <div class="meta">
+        <div class="row"><div class="lab">Audience</div><div>Cybersecurity, Risk, Legal, Data Governance, Internal Audit</div></div>
+        <div class="row"><div class="lab">Data it needs</div><div>Maturity, evidence coverage, and the obligations register mapped to capabilities</div></div>
+        <div class="row"><div class="lab">Before it is honest</div><div>ISO/IEC 42001 Annex A and NIST AI RMF are not yet mapped. Carve this domain out of any approval request until they are</div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div id="as"></div>
+      <p class="note"><b>Evidence coverage is the column that matters.</b> A maturity rating without
+        evidence behind it is a self-assessment, and the second line will treat it as one. This view is
+        how the assessment survives contact with Internal Audit.</p>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="view" id="trajectory">
+    <div class="vhead">
+      <div>
+        <div class="lab">Reporting cadence</div>
+        <h2>Trajectory</h2>
+        <p class="q">The same map at three points in time, so the assessment becomes a tracked commitment
+          rather than a one-off exercise.</p>
+      </div>
+      <div class="meta">
+        <div class="row"><div class="lab">Audience</div><div>Quarterly governance reporting</div></div>
+        <div class="row"><div class="lab">Data it needs</div><div>The baseline, plus a re-rating on the same rubric at each checkpoint</div></div>
+        <div class="row"><div class="lab">Before it is honest</div><div>Same rubric, same evidence standard, every time. A re-rating against a softer bar is movement that did not happen</div></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div id="tj"></div>
+      <p class="note"><b>This view is what turns the assessment into an instrument.</b> Run once it is a
+        document; run quarterly against a fixed rubric it becomes the thing the roadmap is measured against.</p>
+    </div>
+  </section>
+
+  <footer>
+    <h3>Three more worth building, not mocked here</h3>
+    <ul>
+      <li><b>Dependency chain</b> &mdash; the typed enabler edges already in the model, drawn as
+        &ldquo;X cannot progress until Y exists&rdquo;. Useful in exactly one meeting: the one where
+        someone asks why a capability is in wave three.</li>
+      <li><b>Agentic cut</b> &mdash; the heat map filtered to the capabilities that only become necessary
+        once agents act without a human in the loop. Answers &ldquo;can we do agents?&rdquo; without
+        answering it with a product name.</li>
+      <li><b>Peer comparison</b> &mdash; the same domains against comparable institutions. Wait for it.
+        A benchmark against an unnamed peer set is the fastest way to lose an argument about scoring.</li>
+    </ul>
+  </footer>
+</div>
+<div class="tip" id="tip" role="status" aria-live="polite"></div>

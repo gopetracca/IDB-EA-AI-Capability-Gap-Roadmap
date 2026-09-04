@@ -1,0 +1,862 @@
+<title>AI Capability Register</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;1,400&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ground:#E9EDF0; --surface:#FDFEFE; --surface-2:#F2F6F8; --surface-3:#E4EAEE;
+  --ink:#0E1A21; --ink-2:#55666F; --ink-3:#7E8E97;
+  --rule:#CFD8DE; --rule-strong:#B4C1C9;
+  --accent:#1B4A63; --accent-2:#2C6E8E; --accent-soft:#DEE9EF;
+  --m0:#C3CCD3; --m1:#8E3226; --m2:#9E5A21; --m3:#C9AE4A; --m4:#3F6F32; --m5:#25583F;
+  --on-m3:#2A2200;
+  --shadow:0 1px 2px rgba(14,26,33,.06),0 8px 24px -12px rgba(14,26,33,.18);
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:"Public Sans",system-ui,-apple-system,Segoe UI,sans-serif;
+  --serif:"Spectral",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0C1317; --surface:#131D23; --surface-2:#18242B; --surface-3:#203038;
+    --ink:#E3ECF0; --ink-2:#8FA0AA; --ink-3:#6B7C86;
+    --rule:#243239; --rule-strong:#324450;
+    --accent:#7BBBD8; --accent-2:#9CD0E7; --accent-soft:#172C38;
+    --m0:#33434C; --m1:#E07A63; --m2:#E8A96B; --m3:#E3C563; --m4:#9FC98A; --m5:#79BC9C;
+    --on-m3:#241D00;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0C1317; --surface:#131D23; --surface-2:#18242B; --surface-3:#203038;
+  --ink:#E3ECF0; --ink-2:#8FA0AA; --ink-3:#6B7C86;
+  --rule:#243239; --rule-strong:#324450;
+  --accent:#7BBBD8; --accent-2:#9CD0E7; --accent-soft:#172C38;
+  --m0:#33434C; --m1:#E07A63; --m2:#E8A96B; --m3:#E3C563; --m4:#9FC98A; --m5:#79BC9C;
+  --on-m3:#241D00;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+  font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px;border-radius:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- shell ---------- */
+.wrap{max-width:1420px;margin:0 auto;padding:0 20px 64px}
+.masthead{padding:26px 0 0}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.eyebrow b{color:var(--accent-2);font-weight:500}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(28px,3.6vw,40px);line-height:1.08;
+  letter-spacing:-.015em;margin:10px 0 6px;text-wrap:balance}
+.dek{color:var(--ink-2);max-width:64ch;margin:0 0 18px;font-size:15px}
+
+.figures{display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);margin-bottom:18px}
+.fig{padding:11px 22px 11px 0;margin-right:22px;border-right:1px solid var(--rule);
+  display:flex;align-items:baseline;gap:8px}
+.fig:last-child{border-right:0}
+.fig .n{font-family:var(--mono);font-size:19px;font-weight:600;font-variant-numeric:tabular-nums;
+  letter-spacing:-.02em}
+.fig .l{font-size:11.5px;color:var(--ink-2);letter-spacing:.02em}
+
+/* ---------- tabs ---------- */
+.ctxbar{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--rule);border-radius:4px;
+  background:var(--surface);margin:0 0 16px;overflow:hidden}
+.ctxf{display:flex;flex-direction:column;gap:2px;padding:8px 14px;border-right:1px solid var(--rule);flex:1 1 150px}
+.ctxf:last-child{border-right:0}
+.ctxf label{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.ctxf input{border:0;background:none;padding:0;font-size:12.5px;font-weight:600;color:var(--accent);width:100%}
+.ctxf input::placeholder{color:var(--ink-3);font-weight:400}
+.state{font-family:var(--mono);font-size:9.5px;font-weight:600;padding:2px 5px;border-radius:2px;
+  background:var(--surface-3);color:var(--ink-2);letter-spacing:.05em}
+.state.NE{background:var(--surface-3);color:var(--ink-2)}
+.state.UC{background:var(--accent-soft);color:var(--accent)}
+.state.NA{background:transparent;color:var(--ink-3);border:1px solid var(--rule)}
+.hatch{background-image:repeating-linear-gradient(45deg,var(--rule) 0 2px,transparent 2px 5px)}
+.ownerline{font-size:12px;color:var(--ink-2);margin-top:6px}
+.ownerline b{color:var(--ink);font-weight:600}
+.conf{font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;
+  padding:1px 5px;border-radius:2px;background:var(--surface-3);color:var(--ink-3);margin-left:6px}
+.conf.low{background:var(--m2);color:#fff}
+.tabs{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:16px}
+.tab{background:none;border:0;border-bottom:2px solid transparent;padding:8px 14px 9px;
+  cursor:pointer;color:var(--ink-2);font-weight:500;font-size:13.5px;letter-spacing:.005em}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.tab .cnt{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);margin-left:6px}
+
+/* ---------- toolbar ---------- */
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.search{flex:1 1 240px;min-width:200px;position:relative}
+.search input{width:100%;padding:8px 11px;background:var(--surface);border:1px solid var(--rule);
+  border-radius:3px;font-size:13px}
+.search input::placeholder{color:var(--ink-3)}
+.chips{display:flex;gap:4px;flex-wrap:wrap}
+.chip{background:var(--surface);border:1px solid var(--rule);border-radius:3px;padding:7px 11px;
+  font-size:12px;cursor:pointer;color:var(--ink-2);white-space:nowrap}
+.chip:hover{border-color:var(--rule-strong);color:var(--ink)}
+.chip.ghost[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent);border-color:var(--accent)}
+
+/* ---------- workspace ---------- */
+.work{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:1000px){.work{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--rule);border-radius:4px;box-shadow:var(--shadow)}
+.register{max-height:min(74vh,900px);overflow-y:auto;overflow-x:hidden}
+.detail{position:sticky;top:16px;max-height:min(74vh,900px);overflow-y:auto}
+@media (max-width:1000px){.detail{position:static;max-height:none;overflow:visible}
+  .register{max-height:none;overflow:visible}}
+
+/* domain block */
+.dom{border-bottom:1px solid var(--rule)}
+.dom:last-child{border-bottom:0}
+.dom-hd{display:flex;align-items:center;gap:11px;padding:12px 14px;background:var(--surface-2);
+  border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:2}
+.dom-id{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--surface);
+  background:var(--accent);padding:3px 6px;border-radius:2px;letter-spacing:.02em}
+.dom-nm{font-family:var(--serif);font-size:16px;font-weight:600;letter-spacing:-.01em;flex:1;min-width:0}
+.dom-strip{display:flex;gap:1.5px;flex-shrink:0}
+.sq{width:9px;height:16px;border-radius:1px;background:var(--m0)}
+
+/* L2 row */
+.cap{display:grid;grid-template-columns:52px 1fr auto;gap:10px;align-items:center;width:100%;
+  padding:9px 14px;background:none;border:0;border-bottom:1px solid var(--rule);cursor:pointer;
+  text-align:left;transition:background .12s}
+.cap:last-child{border-bottom:0}
+.cap:hover{background:var(--surface-2)}
+.cap[aria-current="true"]{background:var(--accent-soft)}
+.cap-id{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.cap[aria-current="true"] .cap-id{color:var(--accent)}
+.cap-nm{display:block;font-size:13.5px;font-weight:500;line-height:1.35;min-width:0}
+.cap-nm .ag{color:var(--accent-2);font-size:11px;margin-left:5px;vertical-align:1px}
+.cap-sub{display:block;font-size:11px;color:var(--ink-3);font-family:var(--mono);margin-top:3px;letter-spacing:.02em}
+.cap-right{display:flex;align-items:center;gap:7px}
+.lvl{font-family:var(--mono);font-size:10.5px;font-weight:600;width:20px;height:20px;
+  display:grid;place-items:center;border-radius:2px;color:#fff}
+.lvl.l3,.tile .tlvl.l3,.scaleitem .sn.l3{color:var(--on-m3)}
+:root[data-theme="dark"] .lvl,:root[data-theme="dark"] .tile .tlvl,:root[data-theme="dark"] .scaleitem .sn{color:#10181D}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lvl,
+  :root:not([data-theme="light"]) .tile .tlvl,
+  :root:not([data-theme="light"]) .scaleitem .sn{color:#10181D}}
+.lvl.z{color:var(--ink-3);background:var(--m0)}
+.lvl.z{color:var(--ink-2)}
+:root[data-theme="dark"] .lvl.z{color:var(--ink-2)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lvl.z{color:var(--ink-2)}}
+.gaparrow{font-family:var(--mono);font-size:10px;color:var(--ink-3);min-width:26px;text-align:right;
+  font-variant-numeric:tabular-nums}
+
+/* ---------- detail ---------- */
+.d-pad{padding:18px 20px 22px}
+.d-id{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.06em;font-weight:600}
+.d-nm{font-family:var(--serif);font-size:22px;font-weight:600;letter-spacing:-.015em;margin:6px 0 8px;
+  line-height:1.15;text-wrap:balance}
+.d-def{color:var(--ink-2);font-size:14px;margin:0 0 16px;max-width:60ch}
+.d-sec{margin-top:20px}
+.d-lbl{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:9px;display:flex;align-items:center;gap:8px}
+.d-lbl::after{content:"";flex:1;height:1px;background:var(--rule)}
+.prov{display:flex;flex-wrap:wrap;gap:5px}
+.anchor{display:inline-flex;align-items:center;gap:7px;font-size:12px;padding:6px 10px;border-radius:3px;
+  background:var(--surface-2);border:1px solid var(--rule);color:var(--ink-2);margin-bottom:2px}
+.anchor b{font-family:var(--mono);font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;
+  padding:2px 6px;border-radius:2px;background:var(--accent);color:var(--surface)}
+:root[data-theme="dark"] .anchor b{color:#0C1317}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .anchor b{color:#0C1317}}
+.anchor.lens b{background:var(--m2)}
+.anchor.spec b{background:var(--ink-3)}
+.prov span{font-size:11.5px;padding:3px 8px;border:1px solid var(--rule);border-radius:11px;
+  color:var(--ink-2);background:var(--surface-2)}
+.l3{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0}
+.l3 li{display:grid;grid-template-columns:60px 1fr;gap:10px;padding:8px 0;border-bottom:1px dotted var(--rule)}
+.l3 li:last-child{border-bottom:0}
+.l3 .n3{font-family:var(--mono);font-size:11px;color:var(--ink-3);font-variant-numeric:tabular-nums;padding-top:1px}
+.l3 .t3{font-size:13px;font-weight:500}
+.l3 .d3{font-size:12.5px;color:var(--ink-2);margin-top:1px;line-height:1.45}
+.l3 .ag{color:var(--accent-2);font-size:10px;margin-left:5px}
+
+/* scoring */
+.scorer{background:var(--surface-2);border:1px solid var(--rule);border-radius:4px;padding:14px}
+.srow{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.srow:last-child{margin-bottom:0}
+.srow>.k{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-2);width:56px;flex-shrink:0}
+.seg{display:flex;gap:3px}
+.seg button{width:30px;height:28px;border:1px solid var(--rule);background:var(--surface);
+  border-radius:2px;font-family:var(--mono);font-size:12px;font-weight:500;cursor:pointer;color:var(--ink-2)}
+.seg button:hover{border-color:var(--rule-strong);color:var(--ink)}
+.seg button[aria-pressed="true"]{color:#fff;border-color:transparent;font-weight:600}
+.seg button.stbtn{width:auto;padding:0 9px;font-size:10.5px;letter-spacing:.06em}
+.seg button.stbtn[aria-pressed="true"]{background:var(--accent);color:var(--surface)}
+:root[data-theme="dark"] .seg button.stbtn[aria-pressed="true"]{color:#0C1317}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .seg button.stbtn[aria-pressed="true"]{color:#0C1317}}
+.srow{align-items:flex-start}
+.tile .bar.hatch{background-image:repeating-linear-gradient(45deg,var(--rule-strong) 0 2px,transparent 2px 5px)}
+.tile .tlvl{color:#fff}
+.tile .tlvl.l3{color:var(--on-m3)}
+.seg button.z[aria-pressed="true"]{color:var(--ink);background:var(--rule-strong)}
+.scale-note{font-size:12px;color:var(--ink-2);margin-top:11px;padding-top:11px;border-top:1px solid var(--rule)}
+.scale-note b{color:var(--ink);font-weight:600}
+.ownerin{flex:1 1 160px;min-width:140px;padding:6px 9px;background:var(--surface);
+  border:1px solid var(--rule);border-radius:2px;font-size:12.5px}
+
+/* ---------- heat ---------- */
+.heat-dom{margin-bottom:22px}
+.heat-hd{display:flex;align-items:baseline;gap:10px;padding-bottom:7px;margin-bottom:9px;
+  border-bottom:1px solid var(--rule-strong)}
+.heat-hd .hid{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--accent)}
+.heat-hd .hnm{font-family:var(--serif);font-size:17px;font-weight:600;letter-spacing:-.01em}
+.heat-hd .hmeta{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--ink-3)}
+.heat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:7px}
+.tile{border:1px solid var(--rule);border-radius:3px;background:var(--surface);padding:0;
+  cursor:pointer;text-align:left;overflow:hidden;display:flex;flex-direction:column}
+.tile:hover{border-color:var(--rule-strong)}
+.tile .bar{height:4px;background:var(--m0)}
+.tile .tb{padding:9px 10px 10px;display:flex;flex-direction:column;gap:5px;flex:1}
+.tile .tid{font-family:var(--mono);font-size:10px;color:var(--ink-3)}
+.tile .tnm{font-size:12.5px;font-weight:500;line-height:1.3}
+.tile .tfoot{margin-top:auto;display:flex;align-items:center;gap:6px;padding-top:4px}
+.tile .tlvl{font-family:var(--mono);font-size:10.5px;font-weight:600;padding:1px 5px;border-radius:2px;color:#fff}
+.tile .tgap{font-family:var(--mono);font-size:10px;color:var(--ink-3)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;padding:11px 14px;margin-bottom:18px;
+  background:var(--surface);border:1px solid var(--rule);border-radius:4px}
+.legend .li{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink-2)}
+.legend .sw{width:13px;height:13px;border-radius:2px}
+
+/* ---------- gaps table ---------- */
+.tblwrap{overflow-x:auto;background:var(--surface);border:1px solid var(--rule);border-radius:4px}
+table{border-collapse:collapse;width:100%;min-width:660px}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+  text-align:left;padding:10px 12px;border-bottom:1px solid var(--rule-strong);white-space:nowrap;
+  background:var(--surface-2)}
+td{padding:9px 12px;border-bottom:1px solid var(--rule);font-size:13px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.mono{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:center;width:60px}
+.pri{font-size:10.5px;font-family:var(--mono);letter-spacing:.06em;padding:2px 7px;border-radius:2px;
+  text-transform:uppercase;font-weight:600;white-space:nowrap}
+.pri.h{background:var(--m1);color:#fff}
+.pri.m{background:var(--m2);color:#fff}
+.pri.l{background:var(--surface-3);color:var(--ink-2)}
+
+/* ---------- method ---------- */
+.method{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);gap:22px;align-items:start}
+@media (max-width:920px){.method{grid-template-columns:1fr}}
+.prose{background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:24px 28px 28px;
+  box-shadow:var(--shadow)}
+.prose h2{font-family:var(--serif);font-size:20px;font-weight:600;margin:26px 0 8px;letter-spacing:-.01em}
+.prose h2:first-child{margin-top:0}
+.prose p{color:var(--ink-2);max-width:64ch;margin:0 0 12px}
+.prose strong{color:var(--ink);font-weight:600}
+.prose ol,.prose ul{color:var(--ink-2);max-width:64ch;padding-left:20px;margin:0 0 12px}
+.prose li{margin-bottom:6px}
+.prose code{font-family:var(--mono);font-size:12px;background:var(--surface-2);padding:1px 5px;
+  border-radius:2px;color:var(--ink)}
+.tier{display:flex;flex-direction:column;gap:0;margin:16px 0 20px}
+.tier-row{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:13px 0;border-top:1px solid var(--rule)}
+.tier-row:last-child{border-bottom:1px solid var(--rule)}
+.tier-k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);
+  font-weight:600;padding-top:2px}
+.tier-v .tv-nm{font-size:14px;font-weight:600;margin-bottom:3px}
+.tier-v .tv-d{font-size:12.5px;color:var(--ink-2)}
+.tier-v .tv-eg{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);margin-top:6px;
+  background:var(--surface-2);border-left:2px solid var(--accent);padding:5px 9px;border-radius:0 2px 2px 0}
+.aside{background:var(--surface);border:1px solid var(--rule);border-radius:4px;padding:18px 20px;
+  box-shadow:var(--shadow)}
+.aside h3{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 12px;font-weight:500}
+.aside h3+.scaleitem{border-top:1px solid var(--rule)}
+.scaleitem{display:grid;grid-template-columns:26px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid var(--rule)}
+.scaleitem:last-child{border-bottom:0}
+.scaleitem .sn{font-family:var(--mono);font-size:11px;font-weight:600;width:22px;height:22px;
+  display:grid;place-items:center;border-radius:2px;color:#fff}
+.scaleitem .st{display:block;font-size:13px;font-weight:600;margin-bottom:2px}
+.scaleitem .sd{font-size:12px;color:var(--ink-2);line-height:1.4}
+
+/* ---------- misc ---------- */
+.empty{padding:44px 24px;text-align:center;color:var(--ink-2)}
+.empty h3{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--ink);margin:0 0 6px}
+.empty p{max-width:46ch;margin:0 auto 16px;font-size:13.5px}
+.btn{background:var(--accent);color:var(--surface);border:1px solid var(--accent);border-radius:3px;
+  padding:8px 15px;font-size:13px;font-weight:500;cursor:pointer}
+.btn:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.btn.sec{background:var(--surface);color:var(--ink-2);border-color:var(--rule)}
+.btn.sec:hover{background:var(--surface-2);color:var(--ink);border-color:var(--rule-strong)}
+:root[data-theme="dark"] .btn{color:#0C1317}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#0C1317}}
+.hide{display:none!important}
+.foot{margin-top:26px;padding-top:14px;border-top:1px solid var(--rule);font-size:11.5px;
+  color:var(--ink-3);display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.foot .sp{margin-left:auto;display:flex;gap:8px}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--ink);
+  color:var(--ground);padding:9px 16px;border-radius:3px;font-size:13px;box-shadow:var(--shadow);
+  z-index:50;opacity:0;pointer-events:none;transition:opacity .18s}
+.toast.on{opacity:1}
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div class="eyebrow">
+      <span>Enterprise Architecture</span><span>·</span>
+      <b>Reference Model v0.5</b><span>·</span>
+      <span>Vendor-neutral composite</span>
+    </div>
+    <h1>Enterprise AI Capability Model</h1>
+    <p class="dek">Fifty capabilities carrying <b>maturity</b>: is the institution able to do this, to what
+      standard, with what evidence? Realizations carry <b>readiness</b>: has the enterprise packaged it well
+      enough to consume? The two scales are never merged, and the gap between them is the finding — a
+      capability can be readiness 4 and maturity 2, and that combination is invisible to any model carrying
+      only one number.</p>
+
+    <div class="figures">
+      <div class="fig"><span class="n">8</span><span class="l">L1 domains</span></div>
+      <div class="fig"><span class="n" id="f-l2">50</span><span class="l">L2 assessment subjects</span></div>
+      <div class="fig"><span class="n" id="f-l3">242</span><span class="l">L3 assessment units</span></div>
+      <div class="fig"><span class="n" id="f-ag">0</span><span class="l">agentic-tagged</span></div>
+      <div class="fig"><span class="n" id="f-done">0</span><span class="l">rated</span></div>
+    </div>
+
+    <div class="ctxbar" id="ctxbar"></div>
+
+    <nav class="tabs" role="tablist" aria-label="Views">
+      <button class="tab" role="tab" id="tb-model" aria-controls="v-model" data-view="model" aria-selected="true">Model</button>
+      <button class="tab" role="tab" id="tb-heat" aria-controls="v-heat" data-view="heat" aria-selected="false" tabindex="-1">Heat map</button>
+      <button class="tab" role="tab" id="tb-gaps" aria-controls="v-gaps" data-view="gaps" aria-selected="false" tabindex="-1">Gap analysis<span class="cnt" id="t-gaps"></span></button>
+      <button class="tab" role="tab" id="tb-method" aria-controls="v-method" data-view="method" aria-selected="false" tabindex="-1">Method</button>
+    </nav>
+  </header>
+
+  <!-- MODEL -->
+  <section id="v-model" role="tabpanel" tabindex="0" aria-labelledby="tb-model">
+    <div class="toolbar">
+      <div class="search">
+        <input id="q" type="search" placeholder="Search capabilities, definitions, sources…" aria-label="Search the capability model">
+      </div>
+      <div class="chips" role="group" aria-label="Filters">
+        <button class="chip ghost" data-filter="agentic" aria-pressed="false">⬥ Agentic scope</button>
+        <button class="chip ghost" data-filter="unassessed" aria-pressed="false">Not assessed</button>
+        <button class="chip ghost" data-filter="gap" aria-pressed="false">Gap ≥ 2</button>
+      </div>
+    </div>
+    <div class="work">
+      <div class="panel register" id="register"></div>
+      <div class="panel detail" id="detail"></div>
+    </div>
+  </section>
+
+  <!-- HEAT -->
+  <section id="v-heat" class="hide" role="tabpanel" tabindex="0" aria-labelledby="tb-heat">
+    <div class="legend" id="legend"></div>
+    <div id="heat"></div>
+  </section>
+
+  <!-- GAPS -->
+  <section id="v-gaps" class="hide" role="tabpanel" tabindex="0" aria-labelledby="tb-gaps">
+    <div id="gaps"></div>
+  </section>
+
+  <!-- METHOD -->
+  <section id="v-method" class="hide" role="tabpanel" tabindex="0" aria-labelledby="tb-method">
+    <div class="method">
+      <div class="prose">
+        <h2>Why one tree and not eight</h2>
+        <p>Every published AI framework is a <strong>different dimension</strong>, not a competing map.
+          AWS CAF-AI is an organizational perspective. IBM's model is platform realization. ISO/IEC 5338
+          is lifecycle. NIST AI RMF is risk. Merging them into one hierarchy produces a tree that mixes
+          abilities, phases, assets and products.</p>
+        <p>This model keeps a single capability spine and attaches everything else as an overlay. The
+          <strong>L1 partition follows AWS CAF-AI's perspectives</strong>, with Security named explicitly in
+          D7 and three domains inserted in the middle; that is where the shape came from, and per-capability
+          provenance records where the content came from.</p>
+
+        <h2>Single primary home, not mutual exclusivity</h2>
+        <p>An earlier version of this model claimed the eight domains were mutually exclusive. That claim is
+          withdrawn. Capabilities interact and may serve several value streams; the hierarchy exists to prevent
+          <em>duplication</em>, not to assert ontological exclusivity. Every subject has exactly one
+          <code>primary_domain</code> and may carry <code>supports</code>, <code>depends_on</code>,
+          <code>constrained_by</code> and <code>assured_by</code> links to others.</p>
+
+        <h2>Five objects, not three</h2>
+        <p>Capability, ABB, SBB, technology offering and deployed instance are five different things. A prior
+          version collapsed the last three, defining an SBB as "the product you run, with a SKU". That is wrong:
+          a TOGAF SBB may be bought <em>or built</em>, and the product is a separate record the SBB uses.</p>
+        <div class="tier">
+          <div class="tier-row"><div class="tier-k">Capability</div><div class="tier-v">
+            <div class="tv-nm">The enduring organizational ability</div>
+            <div class="tv-d">Ownership, people, process, information, governance and enabling technology together. This is the tree.</div>
+            <div class="tv-eg">3.6 Knowledge Access &amp; Retrieval</div></div></div>
+          <div class="tier-row"><div class="tier-k">ABB</div><div class="tier-v">
+            <div class="tv-nm">Logical building block</div>
+            <div class="tv-d">A vendor-neutral specification of required behavior, information or service quality. <strong>Not</strong> a competing pattern — that was the previous error.</div>
+            <div class="tv-eg">Vector Retrieval Service · Lexical Retrieval Service · Rank Fusion Service · Authorization Filtering</div></div></div>
+          <div class="tier-row"><div class="tier-k">Pattern</div><div class="tier-v">
+            <div class="tv-nm">A governed arrangement of ABBs</div>
+            <div class="tv-d">Roles, topology, constraints and quality consequences for a recurring problem. This is where the alternatives live.</div>
+            <div class="tv-eg">Authorization-aware hybrid retrieval</div></div></div>
+          <div class="tier-row"><div class="tier-k">SBB</div><div class="tier-v">
+            <div class="tv-nm">The concrete configured solution</div>
+            <div class="tv-d">Buildable, buyable or configurable. Has an institutional identity that survives changing the product underneath it.</div>
+            <div class="tv-eg">Enterprise Semantic Search on Azure v1</div></div></div>
+          <div class="tier-row"><div class="tier-k">Offering</div><div class="tier-v">
+            <div class="tv-nm">The technology the SBB uses</div>
+            <div class="tv-d">Provider, edition, version, contract, lifecycle. Changes on a procurement clock.</div>
+            <div class="tv-eg">Azure AI Search · an approved embedding model · Entra ID</div></div></div>
+          <div class="tier-row"><div class="tier-k">Instance</div><div class="tier-v">
+            <div class="tv-nm">What is actually deployed</div>
+            <div class="tv-d">Environment, region, configuration, operator.</div>
+            <div class="tv-eg">Production index in West Europe</div></div></div>
+        </div>
+        <p>Five matrices follow from this, not two: <strong>A</strong> capability × ABB, <strong>B</strong>
+          pattern × ABB, <strong>C</strong> ABB × SBB, <strong>D</strong> SBB × offering, <strong>E</strong>
+          SBB × instance. They are separate because they change on separate clocks — E continuously, D quarterly,
+          A every few years, the capability tree almost never.</p>
+
+        <h2>The object that fixes the mapping problem</h2>
+        <p>OCR realizes no capability. Speech-to-text realizes no capability. They are <strong>offerings in a
+          catalog</strong>, and an earlier version mapped them to "Platform Service Catalog Management" as if
+          they realized the ability to manage a catalog — a category error dressed as a fix.</p>
+        <p>The missing object is the <strong>AI product or use case</strong>. Capabilities are <em>enabled by</em>
+          ABBs; products <em>consume</em> ABBs and <em>exercise</em> capabilities; the service catalog
+          <em>contains</em> offerings. Matrix A edges are therefore typed —
+          <code>required-enabler</code>, <code>optional-enabler</code>, <code>control-enforcer</code>,
+          <code>evidence-provider</code>, <code>operational-support</code>, <code>catalog-offering</code> —
+          and the ambiguous verb "realizes" between a technical service and an organizational capability is
+          no longer used anywhere.</p>
+
+        <h2>How a rating is derived</h2>
+        <p>Ordinal maturity scores are not averaged, and this model no longer takes a median or a weakest link
+          of L3 scores. For each subject the rating is <strong>gated</strong>:</p>
+        <ol>
+          <li>The achieved level is the highest level for which <strong>every applicable mandatory criterion at
+            that level and all lower levels</strong> is satisfied by valid evidence.</li>
+          <li>Alternative routes are expressed as approved AND/OR gate logic. Enhancing criteria never compensate
+            for an unmet mandatory gate.</li>
+          <li>Conditional criteria enter the gate only when a pre-approved trigger is true; applicability is
+            settled before evidence is examined, and versioned with the rubric.</li>
+          <li>Only a <em>predeclared essential control</em> may cap capability maturity. Other failed controls
+            create conformance gaps and affect assurance, rather than silently lowering the organizational rating.</li>
+          <li><strong>Never score L1.</strong> Domains are reporting containers; a domain average hides the one
+            subject that is failing.</li>
+        </ol>
+
+        <h2>Not rating is a result</h2>
+        <p>Absence of evidence is not evidence of absence. <code>0</code> means a documented inquiry positively
+          established that the ability does not operate. Where that inquiry has not happened, the honest answer
+          is a state, not a number:</p>
+        <ul>
+          <li><strong>NE</strong> — applicable, but evidence is insufficient to rate. Shows in the completeness view.</li>
+          <li><strong>UC</strong> — applicability or legal status under clarification. An active decision gap with an owner.</li>
+          <li><strong>NA</strong> — formally not applicable, with approver, rationale and expiry.</li>
+        </ul>
+        <p>These are states, not levels. They never enter arithmetic. For an institution whose legal
+          applicability is itself undetermined, <code>UC</code> will be the correct answer more often than
+          any number.</p>
+
+        <h2>Assessment context</h2>
+        <p>A rating without a context is not a result. Every result belongs to an assessment context —
+          organizational boundary, as-of date, assessor, rubric version, and in a full implementation also
+          jurisdiction, use-case class, risk tier and autonomy level. <strong>Local ratings are not averaged
+          into an enterprise rating.</strong> Enterprise maturity is assessed separately against enterprise
+          coverage criteria; local results are reported as a distribution.</p>
+
+        <h2>Four views, never combined</h2>
+        <p>Maturity, evidence sufficiency, gap and repository anchor answer different questions on
+          incompatible scales, so the heat map switches between them rather than fusing them into one RAG.
+          Four more views — risk exposure, control assurance, architecture enablement, adoption and value —
+          belong in the target method but require data that will not exist at a first baseline.</p>
+        <p>Priority is a governed decision, not a subtraction. A three-level gap can be low priority. Subjects
+          fall into categorical lanes and a Priority Decision record settles each one.</p>
+
+        <h2>What this model does not yet do</h2>
+        <ul>
+          <li><strong>No per-subject rubrics.</strong> The gated method is defined; the fifty rubrics are not
+            written. Until a subject has one, its rating is provisional and should be labeled as such.</li>
+          <li><strong>L3 criteria are not typed</strong> mandatory / conditional / enhancing, so the gates
+            cannot yet be evaluated mechanically.</li>
+          <li><strong>No control mapping.</strong> ISO/IEC 42001 Annex A and NIST AI RMF outcomes are not mapped
+            onto subjects. D7 should be carved out of any approval request until they are.</li>
+          <li><strong>Anchors are hypotheses.</strong> Every New / Specialization / Lens class carries a
+            confidence and is unverified until the institution's existing capability map is crosswalked.</li>
+          <li><strong>No provenance ledger.</strong> Sources are named per subject but not pinned to edition,
+            clause, access date and archive reference. The model is reviewable, not yet reproducible.</li>
+          <li><strong>Legal applicability is undetermined.</strong> Statutory references sit in a separate
+            Legal-owned obligations register, all marked candidate.</li>
+        </ul>
+        <p>Running a provisional baseline while these are open is a deliberate choice. The alternative —
+          building the full apparatus before producing any picture — leaves the institution unable to say
+          anything about its AI maturity for as long as it takes, which is usually how the apparatus loses
+          its funding.</p>
+      </div>
+      <aside class="aside">
+        <h3>Maturity scale</h3>
+        <div id="scalelist"></div>
+        <h3 style="margin-top:22px">Rating convention</h3>
+        <div class="scaleitem" style="grid-template-columns:1fr;border-bottom:0;padding-top:0">
+          <div class="sd">Ratings are <strong>gated</strong>, never averaged: the highest level for which every
+            applicable mandatory criterion at that level and all lower levels is met by valid evidence. Only a
+            predeclared essential control may cap a rating.</div>
+        </div>
+        <div class="scaleitem" style="grid-template-columns:1fr;border-bottom:0">
+          <div class="sd"><strong>Never rate L1.</strong> Domains are reporting containers. Local ratings are
+            not averaged into an enterprise rating — enterprise maturity is assessed separately against
+            enterprise coverage criteria.</div>
+        </div>
+        <div class="scaleitem" style="grid-template-columns:1fr;border-bottom:0">
+          <div class="sd">Set <strong>target</strong> at the level the institution's risk appetite requires.
+            Not every subject needs a 5, and a subject already at its sufficient level has no gap.</div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>Scores are stored in this browser only — not shared with other viewers.</span>
+    <span class="sp">
+      <button class="btn sec" id="copycsv">Copy assessment as CSV</button>
+      <button class="btn sec" id="reset">Clear scores</button>
+    </span>
+  </footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   Enterprise AI Capability Model — reference data
+   [id, name, definition, [provenance], [L3...], agentic?]
+   L3: [id, name, definition, agentic?]
+   ============================================================ */
+const DELIVERY={"map":{"5.1":{"state":4,"svc":"Internal Foundry deployment standard + agent build standard","id":"REAL-001"},"5.6":{"state":4,"svc":"Internal Foundry deployment standard + agent build standard","id":"REAL-001"},"4.1":{"state":4,"svc":"Internal Foundry deployment standard + agent build standard","id":"REAL-001"}},"scale":[{"n":0,"k":"Not available","d":"No supported realization."},{"n":1,"k":"Available or project-proven","d":"The technology exists and can do it, or one team built it and it works. Not separable from their application, not reusable."},{"n":2,"k":"Approved","d":"Cleared for enterprise use. Each team assembles the solution itself."},{"n":3,"k":"Standardized","d":"A published standard and an architecture pattern or reference architecture exist."},{"n":4,"k":"Industrialized","d":"Reusable building blocks: IaC, security baseline, observability, CI/CD, implementation guidance, support model. Teams self-serve a compliant instance and operate it."},{"n":5,"k":"Productized","d":"An exposed endpoint with a contract. Consumers call it; the platform operates it."}]};
+const MODEL=[["D1","AI Strategy & Value Management","Able to set direction for AI and convert it into measurable institutional value.",[["1.1","AI Vision & Strategy Definition","Able to establish and maintain a stated institutional position on AI and keep it current.",["AWS CAF-AI - Business perspective","ISO/IEC 38507","MITRE AI Maturity Model"],[["1.1.1","AI Ambition & Positioning","Define what role AI plays in the institutional mandate and how far the organization intends to go."],["1.1.2","AI Strategy Formulation & Refresh","Produce and periodically revise an endorsed AI strategy with explicit scope and stated exclusions."],["1.1.3","Strategic Alignment to Institutional Priorities","Trace every AI objective to a corporate goal, sector strategy or country program."],["1.1.4","AI Principles & Ethical Positioning","Set the non-negotiable commitments that constrain all downstream AI decisions."],["1.1.5","Horizon Scanning & Technology Foresight","Track emerging AI capability and judge what it changes for the institution."]],0,"new","Chief AI Officer","medium"],["1.2","AI Portfolio & Investment Management","Able to decide which AI work is funded, in what order, and when it stops.",["AWS CAF-AI","Gartner (analyst, non-public)","TOGAF (capability-based planning)"],[["1.2.1","AI Investment Case Development","Build comparable business cases stating cost, benefit and risk on a common basis."],["1.2.2","Portfolio Prioritization & Sequencing","Rank and stage the AI portfolio against delivery capacity, risk appetite and dependency."],["1.2.3","Funding & Budget Allocation","Route funds to AI work through a mechanism that survives audit and annual planning."],["1.2.4","Portfolio Balance & Exposure Management","Keep the mix of experimental, scaling and production AI within stated tolerance."],["1.2.5","Stage-Gate & Investment Review","Decide continuation, pivot or termination at defined decision points on recorded criteria."]],0,"lens","Enterprise Portfolio Owner","high"],["1.3","Value Realization & Performance Reporting","Able to prove what AI actually delivered, to the standard a governing body accepts.",["WEF AI-First Operating System","MIT CISR","GAO AI Accountability Framework"],[["1.3.1","Benefit Definition & Baselining","State expected benefit in measurable terms before build, with a recorded pre-intervention baseline."],["1.3.2","Value Tracking & Attribution","Measure realized benefit and attribute it defensibly to the AI intervention rather than to trend."],["1.3.3","AI Performance Metrics & KPI Management","Maintain the indicator set that describes AI performance institution-wide."],["1.3.4","Executive & Board Reporting","Report AI status, risk and value to governing bodies at their cadence and in their language."],["1.3.5","Post-Implementation Review","Assess delivered outcomes against the approved case and feed findings back into prioritization."]],0,"lens","Strategy Performance Owner","high"],["1.4","AI Sourcing & Partner Strategy","Able to decide what is built, bought or partnered, and to stay able to change that decision.",["ISO/IEC 42001 - third-party control","AWS CAF-AI"],[["1.4.1","Build / Buy / Partner Decisioning","Choose the sourcing route per capability with recorded rationale and revisit triggers."],["1.4.2","AI Vendor & Model Provider Evaluation","Assess providers on capability, trustworthiness, transparency and cost of exit."],["1.4.3","Contractual Safeguards & AI Clauses","Secure rights covering data use, IP, indemnity, audit access and notification of model change."],["1.4.4","Concentration & Exit Risk Management","Limit dependence on any single provider and keep a tested, costed exit path."],["1.4.5","Supplier Performance & Assurance Monitoring","Monitor contracted providers against their obligations and assurance commitments for the life of the relationship."]],0,"specialization","Chief Procurement Officer","medium"]]],["D2","AI Demand & Solution Shaping","Able to find, qualify and shape AI opportunities into deliverable, adoptable solutions.",[["2.1","Use Case Discovery & Intake","Able to surface candidate AI work and admit it through one controlled front door.",["AWS CAF-AI","Google AI Adoption Framework"],[["2.1.1","Opportunity Identification & Ideation","Actively generate candidate use cases from business need rather than waiting for requests."],["2.1.2","Demand Intake & Triage","Operate a single intake route that classifies and routes every AI request."],["2.1.3","Use Case Registration & Classification","Record each candidate against a common taxonomy before any build effort begins."],["2.1.4","Duplicate & Reuse Screening","Detect that a request is already solved, in flight, or satisfiable by an existing asset."]],0,"lens","Demand Management Owner","high"],["2.2","AI Use-Case Feasibility & Qualification","Able to judge, before build, whether a use case is technically and operationally deliverable and worth doing.",["IBM Generative AI Capability Model","AWS CAF-AI - Business perspective","The Open Group TOGAF"],[["2.2.1","Technical & Data Feasibility Assessment","Judge whether the data, models and integration required actually exist and are obtainable."],["2.2.2","Cost, Effort & Capacity Feasibility","Estimate build and run cost, effort and the specialist capacity a use case would consume."],["2.2.3","Operational & Adoption Feasibility","Judge whether the receiving business area can absorb, operate and sustain the change."],["2.2.4","Go / No-Go Determination","Make and record a proceed decision with named accountability and stated conditions."]],0,"new","AI Product Owner","medium"],["2.3","AI Product Management","Able to own an AI capability as a product across its life, not as a project that ends.",["WEF AI-First Operating System","The Open Group IT4IT","The Open Group Open Agile Architecture"],[["2.3.1","AI Product Definition & Roadmapping","Define the product, its users, its boundary and its forward path."],["2.3.2","Requirements & Acceptance Criteria Management","Express what good looks like precisely enough to be tested against."],["2.3.3","User Research & Feedback Integration","Learn from actual use and feed it back into the product."],["2.3.4","Backlog & Release Planning","Sequence work and commit to releases against capacity."],["2.3.5","Product Performance Ownership","Hold a named owner accountable for the product's outcomes in production."]],0,"specialization","AI Product Owner","medium"],["2.4","Business Process & Service Redesign","Able to change how work is actually done, not merely to add a model to an unchanged process.",["WEF AI-First Operating System","Consultancy transformation patterns (non-public)","The Open Group Open Agile Architecture"],[["2.4.1","Process Analysis & AI Fit Assessment","Understand the current process well enough to know where AI changes it."],["2.4.2","Target Process & Task Redesign","Design the intended process, including what stops being done."],["2.4.3","Human / Machine Task Allocation","Decide explicitly which tasks move, which stay, and which become supervisory."],["2.4.4","Control Point Redesign","Relocate or rebuild the controls that the old process embedded in human steps."],["2.4.5","Service Model & Service Level Redefinition","Restate the service promise once AI changes what is deliverable."],["2.4.6","Language Coverage & Service Equity","Determine which languages an AI-delivered service must support, and at what measured quality, across the institution's countries."]],0,"specialization","Business Process Owner","medium"],["2.5","Human-AI Interaction & Oversight Design","Able to design the human's role in the system, rather than assert oversight in policy alone.",["IMDA Model AI Governance Framework","ISO/IEC 42001"],[["2.5.1","Autonomy & Interaction Pattern Determination","Set and record, per system, the interaction pattern and how much an AI system or agent may do without human confirmation.",1],["2.5.2","Human Oversight & Intervention Design","Design the specific point, information and control through which a human can intervene.",1],["2.5.3","Explanation & Disclosure Design","Design what the system tells its user about what it is and how it reached an output."],["2.5.4","Escalation & Handover Design","Design the path by which work returns to a human, with sufficient context to act.",1],["2.5.5","Oversight Competence & Workload Design","Ensure the person assigned oversight has the time, information, training and authority to actually exercise it.",1],["2.5.6","Accessible & Inclusive Interaction Design","Design AI-delivered interaction to be usable with assistive technology and across literacy and channel constraints."]],1,"new","Product Design Owner","low"]]],["D3","Data & Knowledge Management","Able to supply trusted, governed data and knowledge to AI systems.",[["3.1","Data Governance & Stewardship for AI","Able to say who owns each data asset, who may use it, and under what conditions.",["EDM Council DCAM/ADAC","ISO/IEC 42001"],[["3.1.1","Data Ownership & Stewardship Assignment","Name an accountable owner and an operating steward for each data asset used by AI."],["3.1.2","Data Classification & Sensitivity Labeling","Apply a consistent sensitivity classification that downstream controls can act on."],["3.1.3","Data Access Policy & Entitlement Management","Define and enforce who may access which data, for which purpose."],["3.1.4","Data Retention & Records Management","Apply retention and disposal rules to AI inputs, outputs and interaction records."],["3.1.5","Cross-Border Data Transfer Control","Determine and enforce which jurisdictions the institution's data may be transferred to and processed in."]],0,"specialization","Chief Data Officer","high"],["3.2","Data Sourcing, Licensing & Provenance","Able to demonstrate lawful, documented origin for every dataset an AI system uses.",["NIST AI RMF - Map","EDM Council DCAM/ADAC"],[["3.2.1","Data Acquisition & Onboarding","Bring external and internal data into the estate through a controlled route."],["3.2.2","Licensing & Permitted-Use Verification","Confirm and record that intended AI use is permitted by the source's terms."],["3.2.3","Provenance & Chain-of-Custody Recording","Record where data came from and every transformation applied to it."],["3.2.4","Consent & Purpose Limitation Management","Track the basis on which data was collected and confine use to it."],["3.2.5","Synthetic Data Generation & Control","Produce and govern synthetic data, including disclosure of its synthetic nature."]],0,"specialization","Chief Data Officer","high"],["3.3","Data Quality & Preparation for AI","Able to make data fit for the specific AI purpose and to prove it was fit.",["ISO/IEC 5338","EDM Council DCAM/ADAC"],[["3.3.1","Data Profiling & Quality Assessment","Measure completeness, accuracy, timeliness and consistency against stated thresholds."],["3.3.2","Data Cleansing & Remediation","Correct defects at source where possible, and record what was corrected downstream."],["3.3.3","Representativeness & Bias Screening","Test datasets for gaps and skews relative to the affected population."],["3.3.4","Labeling & Annotation Management","Produce, quality-check and version human and machine labels."],["3.3.5","Dataset Versioning & Snapshotting","Freeze and identify the exact dataset a model or evaluation used."]],0,"specialization","Data Product Owner","medium"],["3.4","Metadata, Lineage & Cataloging for AI","Able to find data, understand what it means, and trace where it went.",["EDM Council DCAM/ADAC","ISO/IEC 5338"],[["3.4.1","Data Catalog Management","Maintain a searchable inventory of data assets with their attributes."],["3.4.2","Business Glossary & Semantic Definition","Hold one agreed definition per business term that data assets bind to."],["3.4.3","Lineage Capture & Traceability","Trace a model output back through transformations to source records."],["3.4.4","Data Product Publication","Publish curated, contracted datasets that consumers can depend on."]],0,"specialization","Data Governance Owner","high"],["3.5","Knowledge Corpus & Content Management","Able to curate the document and content estate that grounded AI depends on.",["IBM GenAI Capability Model"],[["3.5.1","Corpus Definition & Curation","Decide what belongs in a knowledge corpus and what is deliberately excluded."],["3.5.2","Content Ingestion & Normalization","Bring heterogeneous content into a consistent, machine-usable form."],["3.5.3","Content Segmentation Design","Choose and apply segmentation that preserves meaning and citability."],["3.5.4","Corpus Freshness & Refresh Management","Keep the corpus current and know how stale any part of it is."],["3.5.5","Authoritative Source Designation","Declare which source wins when two documents disagree."]],0,"new","Knowledge Management Owner","medium"],["3.6","Knowledge Access & Retrieval","Able to return the right knowledge to the right requester, with its provenance intact.",["IBM GenAI Capability Model","NIST AI 600-1 Generative AI Profile"],[["3.6.1","Retrieval Service Provision","Provide governed retrieval over institutional content — by meaning, by term, or both — as a reusable service."],["3.6.2","Access-Trimmed Retrieval Enforcement","Enforce, at retrieval time, the entitlements determined in 3.1.3, so a requester sees only what they may see."],["3.6.3","Retrieval Quality Evaluation & Tuning","Measure and improve retrieval precision and recall against a known set."],["3.6.4","Multi-Source Federation & Ranking","Retrieve across several repositories and rank the combined result coherently."],["3.6.5","Citation, Grounding & Traceability","Return every answer with the source it rests on, resolvable by the reader."]],0,"new","Knowledge Platform Owner","low"],["3.7","Derived Representation Management","Able to manage derived representations of data as governed assets in their own right.",["IBM GenAI Capability Model","ISO/IEC 5338"],[["3.7.1","Feature Engineering & Store Management","Produce, share and reuse engineered features under version control."],["3.7.2","Embedding Model Selection & Versioning","Choose embedding models deliberately and record which version produced which index."],["3.7.3","Index Lifecycle & Re-embedding","Rebuild and migrate indexes when content or embedding models change."],["3.7.4","Derived Representation Governance","Apply access, retention and residency controls to vector representations."]],0,"new","Data/ML Platform Owner","low"]]],["D4","AI Solution Engineering","Able to design, build, customize and validate AI solutions to a defined standard.",[["4.1","AI Architecture Management & Solution Governance","Able to set, steward and enforce the architecture that AI solutions are built to.",["The Open Group TOGAF","SAP AI-native North Star architecture","NVIDIA Enterprise AI Factory"],[["4.1.1","Solution Pattern Selection","Choose the architecture building block that realizes the required capability."],["4.1.2","Reference Architecture Compliance","Build to published reference architectures and detect deviation."],["4.1.3","Architecture Decision Recording","Record significant decisions with alternatives and consequences."],["4.1.4","Non-Functional Requirement Design","Design explicitly for latency, cost, availability, and degradation behavior."],["4.1.5","Architecture Review & Dispensation","Review designs and grant time-boxed exceptions with recorded conditions."],["4.1.6","ABB & Pattern Stewardship","Define, version and retire the institution's logical building blocks and the patterns that compose them."],["4.1.7","Solution Conformance Certification","Certify that a concrete solution conforms to the building blocks and controls it claims, and record the deviations."]],0,"lens","Chief Enterprise Architect","medium"],["4.2","Model Selection, Customization & Tuning","Able to choose and adapt models on evidence, and to record what was done.",["IBM GenAI Capability Model","ISO/IEC 5338","NIST AI 600-1 Generative AI Profile"],[["4.2.1","Model Selection for Use Case","Select a model from within the cleared set against task-specific criteria and evidence."],["4.2.2","Fine-Tuning & Adaptation","Adapt models to institutional context under controlled, repeatable procedure."],["4.2.3","Model Training & Experimentation","Run and track experiments so results are reproducible."],["4.2.4","Model Documentation & Disclosure Production","Produce model cards covering intended use, limits, data and evaluation results."],["4.2.5","Model Versioning & Registration","Register every model version as an identifiable, ownable asset."]],0,"new","AI Engineering Owner","medium"],["4.3","Prompt & Context Engineering","Able to treat prompts and context assembly as versioned, tested engineering artifacts.",["IBM GenAI Capability Model","NIST AI 600-1 Generative AI Profile","OWASP GenAI Security Project"],[["4.3.1","Prompt Design & Templating","Design prompts as reusable, parameterized templates rather than embedded strings."],["4.3.2","Prompt Versioning & Registry","Version, review and register prompts as controlled artifacts."],["4.3.3","Context Assembly & Window Management","Assemble context deliberately and manage what is included, ordered and dropped."],["4.3.4","Grounding Strategy Design","Decide what the model is permitted to answer from, and enforce it."],["4.3.5","Prompt & Context Boundary Design","Construct prompt and context boundaries that constrain what untrusted content can instruct.",1]],0,"new","AI Engineering Owner","medium"],["4.4","Agent & Workflow Orchestration Design","Able to design what an agent may pursue, how it plans, and where it must stop.",["Salesforce Agent Development Lifecycle","SAP AI-native North Star architecture","IBM Generative AI Capability Model","IMDA Model AI Governance Framework"],[["4.4.1","Agent Specification & Goal Definition","State an agent's objective, scope and prohibited actions before it is built.",1],["4.4.2","Task Decomposition & Planning Design","Design how an agent breaks work down and selects its next step.",1],["4.4.3","Multi-Agent Coordination Design","Design how agents delegate, communicate and resolve conflict.",1],["4.4.4","Agent Memory & State Design","Design what an agent retains, for how long, and who else can see it.",1],["4.4.5","Guardrail & Constraint Design","Encode hard limits an agent cannot argue its way past.",1],["4.4.6","Termination & Loop Control Design","Design stopping conditions, budgets and loop detection.",1]],1,"new","AI Engineering Owner","low"],["4.5","Integration & Tool Enablement","Able to give AI systems safe, governed reach into institutional systems.",["IBM Generative AI Capability Model","Model Context Protocol specification","SAP AI-native North Star architecture","IMDA Model AI Governance Framework"],[["4.5.1","API & System Integration Design","Design integration to institutional systems with contracts and error semantics."],["4.5.2","Tool & Function Definition","Define the callable actions exposed to a model, with typed inputs and stated effects.",1],["4.5.3","Capability Exposure to AI Clients","Expose institutional capability to AI clients through the prevailing open tool-interface standard.",1],["4.5.4","Identity Propagation & Delegated Access","Carry the acting user's identity through to the system of record.",1],["4.5.5","Legacy & Core System Adaptation","Reach systems that were never designed to be called by an AI client."]],1,"new","Integration Architecture Owner","medium"],["4.6","AI Evaluation & Testing","Able to state, before release, what the system does and does not do reliably.",["NIST AI 600-1 Generative AI Profile","ISO/IEC 5338"],[["4.6.1","Evaluation Criteria & Metric Definition","Define the metrics that constitute acceptable performance for this use case."],["4.6.2","Golden Dataset & Test Set Management","Build and maintain representative evaluation sets with known-correct answers."],["4.6.3","Automated Evaluation Harness Operation","Run evaluations repeatably as part of the delivery pipeline."],["4.6.4","Human Review & Expert Evaluation","Obtain qualified human judgement where automated metrics are insufficient."],["4.6.5","Pre-Deployment Acceptance Testing","Test against acceptance criteria and record the result as release evidence."]],0,"new","Quality Engineering Owner","medium"],["4.7","AI Release & Change Management","Able to move AI change into production under control and to reverse it.",["ITIL 4","The Open Group IT4IT","ISO/IEC 5338"],[["4.7.1","Build & Continuous Integration","Build AI artifacts through an automated, auditable pipeline."],["4.7.2","Promotion & Environment Progression","Move artifacts through environments under defined entry and exit criteria."],["4.7.3","Change Approval & Release Authorization","Authorise AI change through a route proportionate to its risk tier."],["4.7.4","Rollback & Release Reversal","Return a deployed AI system to a previously accepted release."],["4.7.5","Release Documentation & Evidence Capture","Capture at release the evidence that later assurance work will need."]],0,"lens","DevSecOps Owner","high"]]],["D5","AI Platform & Infrastructure","Able to provide and sustain the technical means to build and run AI.",[["5.1","AI Platform Service Provisioning","Able to offer AI platform services as a governed, supported institutional service.",["AWS CAF-AI - Platform perspective","Microsoft Cloud Adoption Framework for AI","NVIDIA Enterprise AI Factory"],[["5.1.1","Platform Service Catalog Management","Publish what AI platform services exist, their terms and how to obtain them."],["5.1.2","Landing Zone & Baseline Provisioning","Provision AI environments from a compliant baseline rather than by hand."],["5.1.3","Platform Configuration & Policy Enforcement","Enforce configuration standards technically, not by instruction."],["5.1.4","Platform Service Level Commitment","Commit to and meet service levels for the shared AI platform services the institution offers."],["5.1.5","Platform Upgrade & Deprecation Management","Move consumers across platform versions without stranding them."]],0,"specialization","AI Platform Owner","medium"],["5.2","Model Access & Traffic Management","Able to control which models the institution may call, through one governed path.",["IBM Generative AI Capability Model","Microsoft Cloud Adoption Framework for AI","ISO/IEC 42001"],[["5.2.1","Model Clearance & Approved Model List","Assess candidate models against institutional criteria, record the clearance decision and its conditions, and maintain the approved list."],["5.2.2","Model Traffic Control & Routing","Route all model traffic through a controlled point that can observe and enforce."],["5.2.3","Quota, Throttling & Rate Management","Allocate and enforce consumption limits per consumer."],["5.2.4","Model Provider Credential Management","Issue, rotate and revoke the credentials used to reach model providers and platform services. Agent identity is 7.4.4."],["5.2.5","Model Version Availability & Provider Change Control","Control which model versions remain reachable and absorb provider-side version change without breaking consumers."]],0,"new","AI Platform Owner","low"],["5.3","AI Environment & Workspace Management","Able to give teams isolated places to work without weakening controls.",["Microsoft Cloud Adoption Framework for AI","ISO/IEC 27001"],[["5.3.1","Experimentation Environment Provision","Provide safe environments for experimentation with clear data rules."],["5.3.2","Workspace Tenancy & Isolation","Define and enforce the tenancy and isolation topology between team workspaces."],["5.3.3","Network & Private Connectivity Control","Control network reachability of AI services and keep traffic private where required."],["5.3.4","Environment Data Segregation","Prevent production data from reaching environments not cleared for it."]],0,"lens","Cloud Platform Owner","medium"],["5.4","AI Compute & Capacity Management","Able to secure and allocate the compute that AI work requires.",["NVIDIA Enterprise AI Factory","Microsoft Cloud Adoption Framework for AI","FinOps Foundation"],[["5.4.1","Compute Provisioning & Scheduling","Make compute available to workloads on a predictable basis."],["5.4.2","Capacity Planning & Forecasting","Forecast demand far enough ahead to secure supply."],["5.4.3","Accelerator & Quota Allocation","Allocate scarce accelerator capacity against portfolio priority."],["5.4.4","Workload Placement & Residency Enforcement","Place workloads in locations that enforce the transfer and residency decisions taken in 3.1.5."],["5.4.5","Edge & Disconnected Operation","Run AI where connectivity, latency or residency prevents central serving, including fully offline."]],0,"specialization","Infrastructure Platform Owner","medium"],["5.5","Tool & Connector Catalog Management","Able to control what actions AI systems can reach, as a governed inventory.",["SAP AI-native North Star architecture","IMDA Model AI Governance Framework","Model Context Protocol specification"],[["5.5.1","Tool & Connector Catalog Management","Maintain the inventory of actions and connectors available to AI systems.",1],["5.5.2","Tool Source Registration & Approval","Register and approve any source of callable tools before an AI client may reach it.",1],["5.5.3","Tool Permission & Scope Governance","Set and enforce the scope each tool grants, at least privilege.",1],["5.5.4","Third-Party Tool Vetting","Assess externally supplied tools and connectors before admission.",1],["5.5.5","Tool Version & Deprecation Control","Manage tool change so agent behavior does not silently shift.",1]],1,"new","Integration Platform Owner","low"],["5.6","AI Developer Experience & Reuse Assets","Able to make the compliant path the easiest path for delivery teams.",["The Open Group IT4IT","The Open Group Open Agile Architecture","AWS CAF-AI"],[["5.6.1","Reference Implementation & Template Provision","Publish working templates that already embed required controls."],["5.6.2","SDK, Library & Component Curation","Curate the approved libraries and shared components teams should build on."],["5.6.3","Self-Service Onboarding","Let a team start correctly without a bespoke engagement."],["5.6.4","Inner-Source & Asset Reuse","Make internally built assets discoverable and reusable across the institution."],["5.6.5","Developer Documentation & Support","Document the platform to the standard its users actually need."]],0,"specialization","Developer Platform Owner","medium"]]],["D6","AI Operations & Reliability","Able to run AI in production dependably, observably and affordably.",[["6.1","AI Deployment & Serving Operations","Able to place AI systems into production and keep them serving.",["IBM Generative AI Capability Model","ITIL 4","ISO/IEC 5338"],[["6.1.1","Model & Agent Deployment","Deploy models and agents into production through a controlled mechanism.",1],["6.1.2","Inference Serving & Scaling","Serve inference at required throughput and scale it with demand."],["6.1.3","Configuration & Feature Flag Control","Change runtime behavior safely without redeployment."],["6.1.4","System Availability & Continuity Management","Meet availability and continuity commitments for individual AI systems in production."],["6.1.5","Operational Readiness & Handover","Hand over to operations with documented procedures before go-live."]],0,"specialization","AI Operations Owner","medium"],["6.2","AI Monitoring & Observability","Able to see what an AI system did, in enough detail to explain it afterwards.",["IBM Generative AI Capability Model","NVIDIA Enterprise AI Factory","NIST AI RMF - Measure"],[["6.2.1","Telemetry Instrumentation & Collection","Instrument AI systems to emit the signals operations and assurance need."],["6.2.2","Trace & Interaction Logging","Record prompts, context, outputs and decisions to a defined retention standard.",1],["6.2.3","Agent Action & Tool-Call Observability","See every action an agent took, with what arguments and to what effect.",1],["6.2.4","Alerting & Threshold Management","Detect abnormal behavior and raise it to someone who can act."],["6.2.5","Operational Dashboarding","Present operational state to the people accountable for it."]],0,"specialization","AI SRE Owner","medium"],["6.3","Continuous Evaluation, Drift & Quality Management","Able to know that a system still performs as it did at release.",["NIST AI RMF - Measure","ISO/IEC 5338"],[["6.3.1","Production Output Quality Monitoring","Measure output quality on live traffic, not only on test sets."],["6.3.2","Data & Concept Drift Detection","Detect when inputs or the world have moved away from training conditions."],["6.3.3","Bias & Fairness Monitoring in Production","Monitor outcome disparities on live populations over time."],["6.3.4","Feedback Capture & Ground-Truth Collection","Capture corrections and outcomes to build evolving ground truth."],["6.3.5","Retraining & Refresh Triggering","Trigger retraining or refresh on defined conditions rather than on schedule alone."]],0,"new","AI Product Operations Owner","medium"],["6.4","AI Incident & Problem Management","Able to stop AI harm quickly and account for it afterwards.",["ISO/IEC 42001","NIST AI RMF - Manage","ITIL 4"],[["6.4.1","AI Incident Detection & Classification","Recognise an AI incident as distinct from a conventional IT incident."],["6.4.2","Containment & Kill-Switch Execution","Stop a model or agent immediately, at any hour, with a tested mechanism.",1],["6.4.3","Root Cause Analysis","Establish why an AI system behaved as it did, including at the data and prompt level."],["6.4.4","Regulatory & Stakeholder Notification","Notify the parties an incident obliges the institution to notify, within the deadline."],["6.4.5","Corrective Action & Lessons Learned","Close findings and feed them back into design and control."]],0,"lens","Service Operations Owner","high"],["6.5","AI Cost Management","Able to know what AI costs, per unit of value, and to control it.",["FinOps Foundation","Microsoft Cloud Adoption Framework for AI","Gartner (analyst, non-public)"],[["6.5.1","Consumption Metering & Attribution","Attribute token, compute and storage consumption to an owner."],["6.5.2","Cost Forecasting & Budget Control","Forecast AI spend and stop it exceeding authorization."],["6.5.3","Unit Economics & Cost-per-Outcome","Express cost per transaction, per document or per outcome, not per month."],["6.5.4","Optimization & Rightsizing","Reduce cost through model, caching and routing choices without losing quality."]],0,"lens","FinOps Owner","high"],["6.6","AI Asset Retirement & Evidence Preservation","Able to retire AI systems deliberately, with their evidence preserved.",["ISO/IEC 5338 - retirement processes","ISO/IEC 42001","GAO AI Accountability Framework"],[["6.6.1","Periodic Recertification & Review","Re-confirm at defined intervals that a system should remain in service."],["6.6.2","Deprecation & Sunset Planning","Plan and communicate withdrawal before it happens."],["6.6.3","Decommissioning & Data Disposition","Remove the system and dispose of its data under retention rules."],["6.6.4","Archive & Evidence Preservation","Preserve the records that assurance and legal obligations require after retirement."]],0,"lens","Asset Management Owner","high"]]],["D7","AI Governance, Risk, Security & Assurance","Able to direct, control, protect and evidence the trustworthy use of AI.",[["7.1","AI Policy, Standards & Management System","Able to operate a functioning management system for AI, not a policy document.",["ISO/IEC 42001 - AI management system","ISO/IEC 38507","GAO AI Accountability Framework"],[["7.1.1","AI Management System Operation","Operate the AIMS itself — scope, objectives, reviews, continual improvement."],["7.1.2","AI Policy Development & Maintenance","Issue and maintain the institutional AI policy set."],["7.1.3","Standards & Technical Guideline Issuance","Translate policy into standards a delivery team can actually build to."],["7.1.4","Governance Body & Decision Rights Operation","Run the forums that decide AI matters, with defined authority."],["7.1.5","Exception & Dispensation Management","Grant, time-box and track departures from standard."],["7.1.6","Conformance Monitoring","Detect where practice has diverged from policy without waiting for audit."]],0,"specialization","AI Management System Owner","medium"],["7.2","Responsible & Trustworthy AI Practice","Able to make the institution's stated AI principles operative in delivered systems.",["NIST AI RMF - Govern","OECD AI Principles","ISO/IEC 42001"],[["7.2.1","Fairness Standard Setting & Adjudication","Set the fairness standard per use case, adjudicate measured disparity against it, and mandate remediation. Measurement is 6.3.3."],["7.2.2","Transparency & Explainability Provision","Provide explanation proportionate to the decision's consequence."],["7.2.3","Human Agency & Oversight Enforcement","Verify that designed oversight is actually exercised in operation.",1],["7.2.4","Contestability & Redress Handling","Give affected people a route to challenge an AI-influenced outcome."],["7.2.5","Environmental & Social Responsibility","Account for the environmental and social footprint of AI use."]],0,"new","Responsible AI Owner","medium"],["7.3","AI Risk Management","Able to identify, treat and monitor AI risk within a stated appetite.",["NIST AI RMF","ISO/IEC 23894","ISO/IEC 42005"],[["7.3.1","AI Risk Identification & Taxonomy","Maintain a common taxonomy of AI risks the institution recognizes."],["7.3.2","Risk Assessment & Scoring","Assess AI risks consistently enough to compare them across the portfolio."],["7.3.3","Control Design & Treatment Planning","Design proportionate controls and record accepted residual risk."],["7.3.4","Risk Appetite & Tolerance Setting","State how much AI risk the institution will carry, by category."],["7.3.5","Risk Monitoring & Reporting","Track risk position over time and report it to accountable bodies."],["7.3.6","Independent Model Risk Validation","Validate consequential models independently of the team that built them."]],0,"specialization","Enterprise Risk Owner","high"],["7.4","AI Security & Resilience","Able to defend AI systems against attack, including attacks that use the AI itself.",["OWASP GenAI Security Project","ISO/IEC 27001","IMDA Model AI Governance Framework","NIST AI RMF"],[["7.4.1","AI Threat Modeling","Model threats specific to AI systems, not only to their hosting infrastructure."],["7.4.2","Model & Supply Chain Integrity","Verify the provenance and integrity of models, weights and dependencies."],["7.4.3","Injection & Jailbreak Detection and Response","Detect subversion attempts in live traffic and respond to them.",1],["7.4.4","Agent Identity & Credential Lifecycle","Issue, sponsor, rotate and revoke a distinct identity per agent, rather than a shared service account.",1],["7.4.5","Runtime Authorization & Action Control","Authorise each consequential action at the moment it is attempted.",1],["7.4.6","Output Filtering & Content Safety","Prevent unsafe or disclosing output from reaching its recipient."],["7.4.7","Adversarial & Red-Team Testing","Actively attempt to make AI systems fail or misbehave, before release and on a recurring basis thereafter."]],1,"new","Chief Information Security Officer","medium"],["7.5","Privacy & Data Protection for AI","Able to use personal data in AI without breaching the institution's obligations.",["ISO/IEC 27701","ISO/IEC 42001","Institutional data protection framework"],[["7.5.1","Privacy Impact Assessment for AI","Assess privacy impact where AI processing introduces new exposure."],["7.5.2","Personal Data Minimization & Masking","Reduce personal data to what the purpose requires before it reaches a model."],["7.5.3","Data Subject Rights Handling","Answer access, correction and objection requests where AI is involved."],["7.5.4","Confidentiality & Non-Disclosure Control","Prevent confidential material leaving through model providers or outputs."],["7.5.5","Training-Data Privacy Controls","Control whether institutional data may be used to train provider models."]],0,"specialization","Privacy Officer","high"],["7.6","Legal, Regulatory & Contractual Compliance for AI","Able to know which obligations bind the institution and to demonstrate compliance.",["ISO/IEC 42001","Institutional legal framework"],[["7.6.1","Regulatory Horizon Monitoring","Track AI regulation across the jurisdictions the institution operates in."],["7.6.2","Applicability & Obligation Mapping","Determine which obligations apply to which AI system, and record why."],["7.6.3","Intellectual Property & Copyright Control","Manage IP exposure in both training inputs and generated outputs."],["7.6.4","Records, Disclosure & Registration Obligations","Meet registration, logging and disclosure duties on time."],["7.6.5","Institutional Legal Status Determination","Determine, as a prerequisite to any obligation mapping, how the institution's international legal status affects which AI regimes apply. Not a maturity dimension — a legal determination that exists or does not."],["7.6.6","Regulatory Role Determination","Establish whether the institution acts as provider, deployer or distributor for each AI system, as the prerequisite to obligation mapping."]],0,"specialization","General Counsel","medium"],["7.7","AI System & Agent Inventory Management","Able to state, at any moment, every AI system and agent in operation and who owns it.",["ISO/IEC 42001","GAO AI Accountability Framework"],[["7.7.1","AI System Registration","Register every AI system before it reaches production, with mandatory attributes.",1],["7.7.2","Agent Registration & Attribute Recording","Record each agent in the inventory with its owner, purpose, scope and identity reference.",1],["7.7.3","Ownership & Accountability Recording","Record a named accountable individual for every registered AI system and keep it current as people and teams change."],["7.7.4","Shadow AI Discovery","Find AI in use that was never registered."],["7.7.5","Inventory Completeness Assurance","Test that the inventory is actually complete rather than assumed to be."]],1,"new","AI Governance Owner","low"],["7.8","AI Assurance & Evidence Management","Able to produce and retain evidence about AI that an independent reviewer can rely on. Independent assessment of that evidence is Internal Audit's, not this capability's.",["GAO AI Accountability Framework","ISO/IEC 42001","Institutional internal audit standards"],[["7.8.1","Control Testing & Assurance Planning","Plan and perform first- and second-line testing of AI controls on a risk basis."],["7.8.2","Evidence Management & Audit Trail","Retain evidence in a form an auditor can rely on, without reconstruction."],["7.8.3","External Certification & Attestation","Obtain and maintain external certification where it is required or valuable."],["7.8.4","Finding Remediation Tracking","Close audit and assurance findings and evidence the closure."]],0,"specialization","Second-Line Assurance Owner","medium"],["7.9","AI Impact Assessment & Risk Classification","Able to determine, independently of the team proposing a use case, what impact it may have and what risk tier it belongs to.",["ISO/IEC 42005","ISO/IEC 23894","NIST AI RMF - Map","IIA Three Lines Model"],[["7.9.1","AI System Impact Assessment","Conduct the structured impact assessment on affected individuals and groups per ISO/IEC 42005."],["7.9.2","Rights Impact Assessment Determination","Determine whether a fundamental-rights impact assessment is required for a use case, and conduct it where it is."],["7.9.3","Risk Classification & Tiering","Assign each use case to a risk tier that determines the controls it must carry."],["7.9.4","Classification Review & Reclassification","Re-examine impact and risk tier when purpose, data, autonomy or affected population materially change."],["7.9.5","Independent Challenge of First-Line Classification","Challenge and, where warranted, overturn a proposing team's own assessment of impact or risk tier.",1]],1,"specialization","AI Risk & Governance Owner","low"]]],["D8","AI People, Skills & Adoption","Able to build and sustain the human side of AI: who does it, who can, and who will.",[["8.1","AI Operating Model & Decision Rights","Able to say who decides what about AI, and who does the work.",["WEF AI-First Operating System","MITRE AI Maturity Model","ISO/IEC 38507"],[["8.1.1","Operating Model Design","Choose and maintain the centralized, federated or hybrid model for AI work."],["8.1.2","Role & Responsibility Definition","Define the AI roles the institution needs and what each is accountable for."],["8.1.3","Decision Rights & Escalation Paths","State who may decide what, and where a disagreement goes."],["8.1.4","Capacity & Resourcing Management","Match available skilled capacity to the committed portfolio."]],0,"lens","Chief AI Officer","high"],["8.2","AI Skills & Specialist Capability Building","Able to grow and retain the specialist skill the portfolio depends on.",["AWS CAF-AI - People perspective","WEF AI-First Operating System","Google AI Adoption Framework"],[["8.2.1","Skills Taxonomy & Assessment","Define the AI skills required and assess where the institution stands."],["8.2.2","Training & Certification Delivery","Deliver structured learning against identified gaps."],["8.2.3","Recruitment & Talent Acquisition","Acquire skills the institution cannot build in time."],["8.2.4","Career Pathways & Retention","Give AI practitioners a reason to stay."]],0,"lens","Chief Human Resources Officer","high"],["8.3","AI Literacy & Awareness","Able to ensure everyone who uses or is affected by AI understands enough to act safely.",["ISO/IEC 42001","OECD AI Principles"],[["8.3.1","Baseline AI Literacy Delivery","Deliver a common minimum level of AI understanding across the institution."],["8.3.2","Role-Specific Awareness","Give each role the specific understanding its AI exposure requires."],["8.3.3","Acceptable Use Communication","Make clear, in practical terms, what staff may and may not do with AI."],["8.3.4","Literacy Coverage Evidence","Evidence who has received what AI training, to the standard the institution's own policy sets."]],0,"new","Learning & Development Owner","medium"],["8.4","AI Adoption, Enablement & Support","Able to convert delivered AI capability into actual, sustained use.",["Google AI Adoption Framework","AWS CAF-AI","WEF AI-First Operating System"],[["8.4.1","Adoption Planning & Targeting","Plan adoption deliberately rather than assuming availability creates use."],["8.4.2","User Onboarding & Enablement","Bring new users to competent use quickly."],["8.4.3","User Support Provision","Answer users when AI behaves unexpectedly."],["8.4.4","Adoption Measurement","Measure real usage and depth of use, not licenses issued."],["8.4.5","Champion Network Operation","Sustain distributed advocates who carry adoption locally."]],0,"lens","Change Enablement Owner","high"],["8.5","AI Change Management & Workforce Transition","Able to carry the workforce through the change AI causes.",["WEF AI-First Operating System","Consultancy transformation patterns (non-public)","OECD AI Principles"],[["8.5.1","Change Impact Assessment","Assess what AI changes for specific roles and teams before it lands."],["8.5.2","Stakeholder Engagement & Communication","Engage those affected early enough to influence the design."],["8.5.3","Workforce Transition & Redeployment","Move people whose work changes into work that is needed."],["8.5.4","Staff Consultation & Representation","Consult staff representation where AI changes conditions of work."],["8.5.5","Trust & Resistance Management","Address well-founded concern rather than treating it as an obstacle."]],0,"lens","Chief Human Resources Officer","high"],["8.6","AI Community & Reuse Culture","Able to make institutional learning about AI compound rather than repeat.",["The Open Group Open Agile Architecture","AWS CAF-AI","Institutional practice"],[["8.6.1","Practitioner Community Operation","Sustain a working community across organizational boundaries."],["8.6.2","Knowledge Sharing & Documentation","Capture what was learned in a form others can find and use."],["8.6.3","Reuse Incentives & Recognition","Make reuse and contribution visibly worth doing."],["8.6.4","Experimentation & Learning Culture","Permit controlled failure and extract learning from it."]],0,"lens","AI CoE Owner","high"]]]];
+
+/* ============================================================
+   Assessment model — v0.3
+   Capability | Assessment Profile | dated Assessment Result | Evidence
+   ============================================================ */
+const SCALE=[
+ {n:0,t:"Absent",d:"Applicability confirmed and a documented inquiry finds no operating instance of the ability.",
+  e:"A positive absence finding — not simply the lack of a search."},
+ {n:1,t:"Initial",d:"Verified isolated execution that relies on individuals and is not repeatable.",
+  e:"Evidence of isolated execution; no common method."},
+ {n:2,t:"Repeatable",d:"Repeatable within named local scopes over a defined period.",
+  e:"Repeated execution, local ownership, specified coverage."},
+ {n:3,t:"Defined",d:"An approved common method and roles are applied across the required scope.",
+  e:"A published standard, a coverage rule, and sampled conformance."},
+ {n:4,t:"Managed",d:"Thresholds, exceptions and corrective actions operate over a defined period.",
+  e:"Monitoring with thresholds, control tests, retained evidence."},
+ {n:5,t:"Adaptive",d:"At least one completed evidence-driven improvement cycle produced a verified outcome.",
+  e:"Trend, action, verified benefit, and a relevant external comparison."}
+];
+const STATES={NE:"Applicable, but evidence is insufficient to rate",
+              UC:"Applicability or legal status under clarification",
+              NA:"Formally not applicable, with approver and expiry"};
+const KEY="eacm-v3";
+let S={ctx:{boundary:"",asof:"",assessor:"",rubric:"v0.3-draft"},scores:{},illustrative:false};
+try{const r=localStorage.getItem(KEY);if(r)S=Object.assign(S,JSON.parse(r));}catch(e){}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+
+const L2=[];const DOMOF={};
+MODEL.forEach(d=>d[3].forEach(c=>{L2.push(c);DOMOF[c[0]]=d;}));
+const L3COUNT=L2.reduce((a,c)=>a+c[4].length,0);
+const isAgentic=c=>!!c[5]||c[4].some(x=>x[3]);
+const AGCOUNT=L2.filter(isAgentic).length;
+const ANCHOR={new:["New","No existing enterprise capability covers this. Create a new node with a new owner."],
+  specialization:["Specialization","An AI-specific specialization of an existing capability. Create a child node only when distinct AI output, accountability, evidence and investment justify it."],
+  lens:["Lens","Do NOT create a node. Keep the existing enterprise capability and attach a separately identified AI assessment profile, scored apart from the base capability."]};
+const clampN=n=>Math.max(0,Math.min(5,parseInt(n,10)));
+function sc(id){const r=S.scores[id]||{};
+  const c=(typeof r.c==="string"&&STATES[r.c])?r.c:(r.c===undefined||r.c===null||r.c===""?"":clampN(r.c));
+  const t=(r.t==="NA")?"NA":(r.t===undefined||r.t===null||r.t===""?"":clampN(r.t));
+  return {c:isNaN(c)?"":c,t:isNaN(t)?"":t,owner:typeof r.owner==="string"?r.owner:"",
+          ev:typeof r.ev==="string"?r.ev:"",note:typeof r.note==="string"?r.note:""};}
+const rated=id=>typeof sc(id).c==="number";
+const gapOf=id=>{const s=sc(id);return (typeof s.c==="number"&&typeof s.t==="number"&&s.t>s.c)?s.t-s.c:0;};
+const esc=s=>String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+let sel="3.6",view="model",q="",filters={agentic:false,unassessed:false,gap:false};
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("on");
+  clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("on"),1900);}
+
+/* ---------- assessment context ---------- */
+function renderCtx(){
+  const F=[["boundary","Organizational boundary","e.g. Headquarters + country offices"],
+           ["asof","As of","YYYY-MM-DD"],["assessor","Assessor","Name or function"],
+           ["rubric","Rubric version","v0.3-draft"]];
+  document.getElementById("ctxbar").innerHTML=F.map(([k,l,p])=>
+    `<div class="ctxf"><label for="ctx-${k}">${esc(l)}</label>
+     <input id="ctx-${k}" data-k="${k}" value="${esc(S.ctx[k]||"")}" placeholder="${esc(p)}"></div>`).join("")
+    +`<div class="ctxf"><label>Result records</label><span style="font-size:12.5px;font-weight:600;color:var(--accent)">${Object.keys(S.scores).length}</span></div>`;
+  document.querySelectorAll(".ctxf input").forEach(i=>i.onchange=()=>{
+    S.ctx[i.dataset.k]=i.value.trim();persist();});
+}
+
+/* ---------- filters ---------- */
+function match(c){
+  if(filters.agentic&&!isAgentic(c))return false;
+  if(filters.unassessed&&sc(c[0]).c!=="")return false;
+  if(filters.gap&&gapOf(c[0])<2)return false;
+  if(!q)return true;
+  return (c[0]+" "+c[1]+" "+c[2]+" "+c[3].join(" ")+" "+c[7]+" "+
+    c[4].map(x=>x[0]+" "+x[1]+" "+x[2]).join(" ")).toLowerCase().includes(q);
+}
+const cellBg=v=>typeof v==="number"?`background:var(--m${v})`:"";
+const cellCls=v=>typeof v==="number"?(v===3?" l3":""):" z";
+
+/* ---------- register ---------- */
+function renderRegister(){
+  const host=document.getElementById("register");let html="",any=false;
+  MODEL.forEach(d=>{
+    const caps=d[3].filter(match);if(!caps.length)return;any=true;
+    const strip=d[3].map(c=>{const v=sc(c[0]).c;
+      return `<span class="sq${typeof v==="number"?"":" hatch"}" style="${cellBg(v)}"></span>`;}).join("");
+    html+=`<section class="dom"><div class="dom-hd"><span class="dom-id">${esc(d[0])}</span>
+      <span class="dom-nm">${esc(d[1])}</span><span class="dom-strip" aria-hidden="true">${strip}</span></div>`;
+    caps.forEach(c=>{const s=sc(c[0]),g=gapOf(c[0]);
+      const badge=typeof s.c==="number"
+        ? `<span class="lvl${cellCls(s.c)}" style="${cellBg(s.c)}">${s.c}</span>`
+        : `<span class="state ${s.c||""}">${s.c||"–"}</span>`;
+      html+=`<button class="cap" data-id="${esc(c[0])}" aria-current="${c[0]===sel}">
+        <span class="cap-id">${esc(c[0])}</span>
+        <span><span class="cap-nm">${esc(c[1])}${isAgentic(c)?'<span class="ag" title="Agentic scope present">⬥</span>':""}</span>
+        <span class="cap-sub">${esc(c[7])} · ${c[4].length} criteria${c[6]==="lens"?" · lens":""}</span></span>
+        <span class="cap-right"><span class="gaparrow">${g?"+"+g:""}</span>${badge}</span></button>`;});
+    html+="</section>";});
+  host.innerHTML=any?html:`<div class="empty"><h3>No subjects match</h3>
+    <p>Clear the search or the active filters to see the full register.</p></div>`;
+  host.querySelectorAll(".cap").forEach(b=>b.onclick=()=>{sel=b.dataset.id;renderRegister();renderDetail();});
+}
+
+/* ---------- detail ---------- */
+function renderDetail(){
+  const c=L2.find(x=>x[0]===sel);const host=document.getElementById("detail");
+  if(!c){host.innerHTML="";return;}
+  const d=DOMOF[c[0]],s=sc(c[0]),an=ANCHOR[c[6]];
+  const num=(kind,val)=>[0,1,2,3,4,5].map(n=>
+    `<button data-k="${kind}" data-v="${n}" aria-pressed="${n===val}" class="${cellCls(n)}"
+      style="${n===val&&n>0?`background:var(--m${n})`:""}" title="${esc(SCALE[n].t)}">${n}</button>`).join("");
+  const st=(kind,val,keys)=>keys.map(k=>
+    `<button data-k="${kind}" data-v="${k}" aria-pressed="${k===val}" class="stbtn" title="${esc(STATES[k])}">${k}</button>`).join("");
+  host.innerHTML=`<div class="d-pad">
+    <div class="d-id">${esc(d[0])} · ${esc(d[1].toUpperCase())}</div>
+    <h2 class="d-nm">${esc(c[0])} ${esc(c[1])}${isAgentic(c)?' <span style="color:var(--accent-2);font-size:16px">⬥</span>':""}</h2>
+    <p class="d-def">${esc(c[2])}</p>
+    <p class="ownerline">Proposed accountable owner: <b>${esc(c[7])}</b> — exactly one. Operating, control and service owners are held separately.</p>
+
+    <div class="d-sec"><div class="d-lbl">Assessment result</div>
+      <div class="scorer">
+        <div class="srow"><span class="k" id="lb-cur">Current</span>
+          <div class="seg" id="seg-c" role="group" aria-labelledby="lb-cur">${num("c",s.c)}</div>
+          <div class="seg">${st("c",s.c,["NE","UC","NA"])}</div></div>
+        <div class="srow"><span class="k" id="lb-tgt">Target</span>
+          <div class="seg" id="seg-t" role="group" aria-labelledby="lb-tgt">${num("t",s.t)}</div>
+          <div class="seg">${st("t",s.t,["NA"])}</div></div>
+        <div class="srow"><label class="k" for="ev">Evidence</label>
+          <input class="ownerin" id="ev" value="${esc(s.ev)}" placeholder="Evidence record reference — required for levels 3 and above"></div>
+        <div class="srow"><label class="k" for="note">Note</label>
+          <input class="ownerin" id="note" value="${esc(s.note)}" placeholder="Rubric gate not met, scope caveat, dissent…"></div>
+        <div class="scale-note">${typeof s.c==="number"
+          ? `<b>${esc(SCALE[s.c].t)}</b> — ${esc(SCALE[s.c].d)}<br><span style="color:var(--ink-3)">Expected evidence: ${esc(SCALE[s.c].e)}</span>`
+          : (s.c?`<b>${esc(s.c)}</b> — ${esc(STATES[s.c])}. This is a state, not a maturity level.`
+               :"Not yet rated. Use <b>NE</b> when applicable but unevidenced, <b>UC</b> when applicability is unresolved, <b>NA</b> when formally out of scope. Absence of evidence is not evidence of absence.")}
+          ${gapOf(c[0])?` <b style="color:var(--m1)">Gap of ${gapOf(c[0])}.</b>`:""}</div>
+      </div></div>
+
+    <div class="d-sec"><div class="d-lbl">Best readiness — from the realization catalog</div>
+      ${(()=>{const d=DELIVERY.map[c[0]];
+        return d?`<div class="anchor"><b>${d.state} \u00b7 ${esc(DELIVERY.scale[d.state].k)}</b>
+          <span>${esc(DELIVERY.scale[d.state].d)} Via <b>${esc(d.svc)}</b> (${esc(d.id)}).
+          This is a fact about <i>supply</i>. It does not establish the capability, and it never replaces the maturity rating.</span></div>`
+        :`<div class="anchor lens"><b>not confirmed</b><span>No confirmed realization yet. That is an unanswered
+          question, not a zero \u2014 confirm it in the realization catalog before reading it as a gap.</span></div>`;})()}</div>
+
+    <div class="d-sec"><div class="d-lbl">Repository anchor — provisional</div>
+      <div class="anchor ${c[6]==="lens"?"lens":c[6]==="specialization"?"spec":""}">
+        <b>${esc(an[0])}</b><span>${esc(an[1])}</span></div>
+      <div style="font-size:11.5px;color:var(--ink-3);margin-top:6px">Confidence
+        <span class="conf ${c[8]}">${esc(c[8])}</span> — a hypothesis until the institution's existing capability map is crosswalked.</div></div>
+
+    <div class="d-sec"><div class="d-lbl">Primary provenance</div>
+      <div class="prov">${c[3].map(p=>`<span>${esc(p)}</span>`).join("")}</div></div>
+
+    <div class="d-sec"><div class="d-lbl">L3 · assessment criteria (${c[4].length})</div>
+      <ul class="l3">${c[4].map(x=>`<li><span class="n3">${esc(x[0])}</span>
+        <span><span class="t3">${esc(x[1])}${x[3]?'<span class="ag">⬥</span>':""}</span>
+        <span class="d3">${esc(x[2])}</span></span></li>`).join("")}</ul>
+      <div style="font-size:11.5px;color:var(--ink-3);margin-top:10px">Criteria are not yet flagged
+        mandatory / conditional / enhancing. Until they are, a rating here is provisional.</div></div>
+  </div>`;
+  host.querySelectorAll(".seg button").forEach(b=>b.onclick=()=>{
+    const k=b.dataset.k;let v=b.dataset.v;if(!STATES[v])v=parseInt(v,10);
+    const cur=sc(c[0]);const next=Object.assign({},cur);
+    next[k]=(cur[k]===v)?"":v;
+    S.scores[c[0]]=next;S.illustrative=false;persist();renderAll();});
+  ["ev","note"].forEach(f=>{const el=host.querySelector("#"+f);
+    el.onchange=()=>{S.scores[c[0]]=Object.assign({},sc(c[0]),{[f]:el.value.trim()});persist();};});
+}
+
+/* ---------- heat map — four coordinated views, never combined ---------- */
+const VIEWS=[
+ {k:"delivery",n:"Best readiness",q:"How far has the enterprise packaged this? Read from the realization catalog — structural, not a rating. Never merged with maturity."},
+ {k:"maturity",n:"Maturity",q:"How consistently and evidentially can the institution perform this?"},
+ {k:"evidence",n:"Evidence sufficiency",q:"How much of the required scope has valid evidence?"},
+ {k:"gap",n:"Gap to target",q:"How far is current from the approved target level?"},
+ {k:"anchor",n:"Repository anchor",q:"Which node does the enterprise repository keep?"}];
+let heatView="delivery";
+const DCOL=["var(--m0)","var(--m1)","var(--m2)","var(--m3)","var(--m4)","var(--m5)"];
+function heatCell(c){
+  const s=sc(c[0]);
+  if(heatView==="delivery"){const d=DELIVERY.map[c[0]];
+    return d?{bg:DCOL[d.state],lab:d.state+" \u00b7 "+DELIVERY.scale[d.state].k,cls:d.state===3?"l3":""}
+            :{bg:"var(--m0)",lab:"not confirmed",hatch:true};}
+  if(heatView==="maturity")
+    return typeof s.c==="number"?{bg:`var(--m${s.c})`,lab:"L"+s.c,cls:s.c===3?"l3":""}
+                                :{bg:"var(--m0)",lab:s.c||"–",hatch:!!s.c};
+  if(heatView==="evidence"){
+    const ok=s.ev?2:(typeof s.c==="number"?1:0);
+    return {bg:["var(--m0)","var(--m2)","var(--m4)"][ok],lab:["none","claimed","referenced"][ok]};}
+  if(heatView==="gap"){const g=gapOf(c[0]);
+    return {bg:g>=3?"var(--m1)":g===2?"var(--m2)":g===1?"var(--m3)":typeof s.c==="number"?"var(--m4)":"var(--m0)",
+            lab:g?"+"+g:(typeof s.c==="number"?"at target":"–")};}
+  return {bg:c[6]==="lens"?"var(--m2)":c[6]==="specialization"?"var(--m3)":"var(--m4)",
+          lab:c[6]==="lens"?"lens":c[6]==="specialization"?"spec":"new"};
+}
+function renderHeat(){
+  document.getElementById("legend").innerHTML=
+    `<span class="li" style="font-weight:600;color:var(--ink)">View</span>`+
+    VIEWS.map(v=>`<button class="chip ghost" data-hv="${v.k}" aria-pressed="${v.k===heatView}">${esc(v.n)}</button>`).join("")
+    +`<span class="li" style="margin-left:auto;color:var(--ink-3);max-width:46ch">${esc(VIEWS.find(v=>v.k===heatView).q)}</span>`;
+  const anyRated=L2.some(c=>rated(c[0]));
+  let banner="";
+  if(!anyRated&&heatView!=="anchor"){banner=`<div class="empty" style="background:var(--surface);border:1px solid var(--rule);border-radius:4px;margin-bottom:18px;padding:26px">
+    <h3>Nothing rated yet</h3><p>Rate subjects in the Model view, or load an illustrative assessment to see how
+      the views behave. Illustrative figures are invented and clearly marked.</p>
+    <button class="btn" id="demo">Load illustrative assessment</button></div>`;}
+  else if(S.illustrative){banner=`<div class="legend" style="background:var(--accent-soft);border-color:var(--accent)">
+    <span class="li" style="color:var(--accent);font-weight:600">Illustrative figures — not a real assessment</span>
+    <button class="btn sec" id="clearill" style="margin-left:auto;padding:4px 10px;font-size:12px">Clear</button></div>`;}
+  document.getElementById("heat").innerHTML=banner+MODEL.map(d=>{
+    const caps=d[3].filter(match);if(!caps.length)return "";
+    const done=d[3].filter(c=>rated(c[0])).length;
+    return `<div class="heat-dom"><div class="heat-hd"><span class="hid">${esc(d[0])}</span>
+      <span class="hnm">${esc(d[1])}</span><span class="hmeta">${done}/${d[3].length} rated</span></div>
+      <div class="heat-grid">${caps.map(c=>{const h=heatCell(c);
+        return `<button class="tile" data-id="${esc(c[0])}">
+          <span class="bar${h.hatch?" hatch":""}" style="background:${h.bg}"></span>
+          <span class="tb"><span class="tid">${esc(c[0])}${isAgentic(c)?" ⬥":""}</span>
+          <span class="tnm">${esc(c[1])}</span>
+          <span class="tfoot"><span class="tlvl ${h.cls||""}" style="background:${h.bg}">${esc(h.lab)}</span>
+          <span class="tgap">${esc(c[7])}</span></span></span></button>`;}).join("")}</div></div>`;}).join("")
+    +`<p style="font-size:12px;color:var(--ink-3);max-width:74ch;margin-top:18px">These views answer different
+      questions on different scales and are never combined mathematically. L1 domains are reporting containers:
+      no domain score is computed, because averaging ordinal ratings hides the subject that is failing.</p>`;
+  const demo=document.getElementById("demo");if(demo)demo.onclick=loadIllustrative;
+  const cl=document.getElementById("clearill");if(cl)cl.onclick=()=>{S.scores={};S.illustrative=false;persist();renderAll();};
+  document.querySelectorAll("[data-hv]").forEach(b=>b.onclick=()=>{heatView=b.dataset.hv;renderHeat();});
+  document.querySelectorAll(".tile").forEach(b=>b.onclick=()=>{sel=b.dataset.id;setView("model");});
+}
+
+/* ---------- gap analysis — categorical lanes, not gap arithmetic ---------- */
+const LANE=c=>{const s=sc(c[0]),g=gapOf(c[0]);
+  if(s.c==="UC")return["uc","Blocked — applicability"];
+  if(s.c==="NE")return["ne","Blocked — no evidence"];
+  if(s.c==="NA")return["na","Out of scope"];
+  const d=DOMOF[c[0]][0];
+  if(g>=2&&(d==="D7"||c[6]!=="lens"&&d==="D3"))return["mand","Mandatory / urgent"];
+  if(g>=2)return["found","Foundational / enabling"];
+  if(g===1)return["val","Value-led"];
+  return["def","Deferred / monitor"];};
+function renderGaps(){
+  const host=document.getElementById("gaps");
+  const rows=L2.filter(c=>{const s=sc(c[0]);return (s.c!==""||s.t!=="")&&match(c);});
+  if(!rows.length){host.innerHTML=`<div class="empty" style="background:var(--surface);border:1px solid var(--rule);border-radius:4px">
+    <h3>No rated subjects</h3><p>Lanes appear once current and target are set. Set them in the Model view,
+    or load an illustrative assessment from the Heat map.</p></div>`;return;}
+  const ORDER=["mand","found","val","uc","ne","def","na"];
+  const byLane={};rows.forEach(c=>{const[k,n]=LANE(c);(byLane[k]=byLane[k]||{n:n,rows:[]}).rows.push(c);});
+  host.innerHTML=(S.illustrative?`<div class="legend" style="background:var(--accent-soft);border-color:var(--accent);margin-bottom:14px">
+    <span class="li" style="color:var(--accent);font-weight:600">Illustrative figures — not a real assessment</span></div>`:"")
+   +`<p style="font-size:13px;color:var(--ink-2);max-width:76ch;margin:0 0 16px">Priority is a governed decision,
+     not a subtraction. A three-level gap can be low priority and a one-level gap can be urgent. Lanes below are
+     a starting proposal; a Priority Decision record — outcome contribution, deadline, residual risk, dependency,
+     capacity, sponsor — settles each one.</p>`
+   +ORDER.filter(k=>byLane[k]).map(k=>{const L=byLane[k];
+     return `<div class="heat-dom"><div class="heat-hd"><span class="hnm">${esc(L.n)}</span>
+       <span class="hmeta">${L.rows.length} subject${L.rows.length>1?"s":""}</span></div>
+       <div class="tblwrap"><table><thead><tr><th>ID</th><th>Subject</th><th>Owner</th>
+       <th class="num">Now</th><th class="num">Target</th><th class="num">Gap</th><th>Evidence</th></tr></thead><tbody>
+       ${L.rows.map(c=>{const s=sc(c[0]),g=gapOf(c[0]);
+         return `<tr><td class="mono">${esc(c[0])}</td>
+         <td><strong style="font-weight:600">${esc(c[1])}</strong></td>
+         <td style="color:var(--ink-2);font-size:12.5px">${esc(c[7])}</td>
+         <td class="num" style="${typeof s.c==="number"?`color:var(--m${s.c});font-weight:600`:""}">${esc(s.c===""?"–":s.c)}</td>
+         <td class="num">${esc(s.t===""?"–":s.t)}</td><td class="num" style="font-weight:600">${g||"–"}</td>
+         <td style="color:var(--ink-2);font-size:12.5px">${esc(s.ev||"—")}</td></tr>`;}).join("")}
+       </tbody></table></div></div>`;}).join("");
+}
+function loadIllustrative(){
+  const seedT={D1:4,D2:4,D3:4,D4:4,D5:4,D6:4,D7:5,D8:3};let i=0;
+  L2.forEach(c=>{const t=seedT[DOMOF[c[0]][0]];
+    let cur=[3,2,1,4,2,3,1,2,4,3][i%10]-(isAgentic(c)?1:0);
+    const r=i%11;i++;
+    const next=Object.assign({},sc(c[0]),{t:t});
+    if(r===3)next.c="NE"; else if(r===7)next.c="UC"; else next.c=Math.max(1,Math.min(t,cur));
+    if(typeof next.c==="number"&&next.c>=3)next.ev="EV-"+c[0].replace(".","-")+"-01";
+    S.scores[c[0]]=next;});
+  S.illustrative=true;persist();renderAll();
+  toast("Illustrative assessment loaded — figures are invented");
+}
+
+/* ---------- chrome ---------- */
+function renderScale(){
+  document.getElementById("scalelist").innerHTML=SCALE.map(x=>
+    `<div class="scaleitem"><span class="sn${x.n===3?" l3":""}" style="background:var(--m${x.n});${x.n?"":"color:var(--ink-2)"}">${x.n}</span>
+     <span><span class="st">${esc(x.t)}</span><span class="sd">${esc(x.d)}</span>
+     <span class="sd" style="color:var(--ink-3);margin-top:3px;display:block">Evidence: ${esc(x.e)}</span></span></div>`).join("")
+   +Object.entries(STATES).map(([k,v])=>
+    `<div class="scaleitem"><span class="state ${k}" style="justify-self:start">${k}</span>
+     <span><span class="sd">${esc(v)}</span></span></div>`).join("");
+}
+function renderFigures(){
+  document.getElementById("f-l2").textContent=L2.length;
+  document.getElementById("f-l3").textContent=L3COUNT;
+  document.getElementById("f-ag").textContent=AGCOUNT;
+  document.getElementById("f-done").textContent=L2.filter(c=>rated(c[0])).length+" / "+L2.length;
+  const g=L2.filter(c=>gapOf(c[0])>=2).length;
+  document.getElementById("t-gaps").textContent=g?"("+g+" ≥2)":"";
+}
+function setView(v){
+  view=v;
+  if(v!=="model"){q="";document.getElementById("q").value="";
+    Object.keys(filters).forEach(k=>filters[k]=false);
+    document.querySelectorAll(".chip[data-filter]").forEach(b=>b.setAttribute("aria-pressed","false"));}
+  document.querySelectorAll(".tab").forEach(t=>{const on=t.dataset.view===v;
+    t.setAttribute("aria-selected",on);t.tabIndex=on?0:-1;});
+  ["model","heat","gaps","method"].forEach(k=>
+    document.getElementById("v-"+k).classList.toggle("hide",k!==v));
+  renderAll();window.scrollTo({top:0,behavior:"smooth"});
+}
+function renderAll(){
+  renderFigures();renderCtx();
+  if(view==="model"){renderRegister();renderDetail();}
+  if(view==="heat")renderHeat();
+  if(view==="gaps")renderGaps();
+}
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>setView(t.dataset.view));
+document.querySelectorAll(".chip[data-filter]").forEach(b=>b.onclick=()=>{
+  const k=b.dataset.filter;filters[k]=!filters[k];b.setAttribute("aria-pressed",filters[k]);renderAll();});
+document.getElementById("q").oninput=e=>{q=e.target.value.trim().toLowerCase();renderAll();};
+document.getElementById("reset").onclick=()=>{S.scores={};S.illustrative=false;persist();renderAll();toast("Assessment results cleared");};
+document.getElementById("copycsv").onclick=()=>{
+  const h=["l2_id","subject","domain_id","domain","proposed_owner","anchor","anchor_confidence",
+           "current","target","gap","evidence_ref","note","agentic","criteria",
+           "ctx_boundary","ctx_asof","ctx_assessor","rubric"];
+  const rows=[h];
+  L2.forEach(c=>{const s=sc(c[0]);rows.push([c[0],c[1],DOMOF[c[0]][0],DOMOF[c[0]][1],c[7],c[6],c[8],
+    s.c,s.t,gapOf(c[0])||"",s.ev,s.note,isAgentic(c)?"yes":"no",c[4].length,
+    S.ctx.boundary,S.ctx.asof,S.ctx.assessor,S.ctx.rubric]);});
+  const csv=rows.map(r=>r.map(v=>/[",\n]/.test(String(v))?'"'+String(v).replace(/"/g,'""')+'"':v).join(",")).join("\n");
+  if(!navigator.clipboard){toast("Clipboard unavailable in this view");return;}
+  navigator.clipboard.writeText(csv).then(()=>toast((rows.length-1)+" result records copied"),
+    ()=>toast("Could not access the clipboard"));
+};
+renderScale();setView("model");
+
+</script>

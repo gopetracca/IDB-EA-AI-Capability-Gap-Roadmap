@@ -1,0 +1,340 @@
+{
+ "assets": [
+  [
+   "Standard",
+   "STD-01",
+   "Tech Stack - AI",
+   "Published",
+   "https://ezws.iadb.org/getdocument.aspx?docnum=EZIDB0000557-1067528196-22",
+   "Defines the approved AI technology stack."
+  ],
+  [
+   "Standard",
+   "STD-02",
+   "Custom MCP Server Standard",
+   "Published",
+   "https://ezws.iadb.org/getdocument.aspx?docnum=EZIDB0000557-1067528196-18",
+   ""
+  ],
+  [
+   "Standard",
+   "STD-03",
+   "Microsoft Foundry Standard",
+   "Published",
+   "https://ezws.iadb.org/getdocument.aspx?docnum=EZIDB0000557-1067528196-957",
+   "Covers platform deployment."
+  ],
+  [
+   "Standard",
+   "STD-04",
+   "Azure AI Search Standard",
+   "Published",
+   "https://ezws.iadb.org/getdocument.aspx?docnum=EZIDB0000557-1067528196-726",
+   ""
+  ],
+  [
+   "Standard",
+   "STD-05",
+   "Azure Document Intelligence Standard",
+   "Published",
+   "https://ezws.iadb.org/getdocument.aspx?docnum=EZIDB0000557-1067528196-105",
+   ""
+  ],
+  [
+   "Standard",
+   "STD-06",
+   "AI Agent Decision Tree",
+   "Published",
+   "https://ezws.iadb.org/getdocument.aspx?docnum=EZIDB0000557-1067528196-110",
+   "Decision aid for whether and what kind of agent is appropriate."
+  ],
+  [
+   "Standard",
+   "STD-07",
+   "Foundry Agents Standard",
+   "Pre-release",
+   "",
+   "PRE-RELEASE. Releasing this is one of two steps that move agent provisioning from readiness 3 to 4."
+  ],
+  [
+   "Reference architecture",
+   "RA-01",
+   "Custom MCP Server Reference Architecture",
+   "Published",
+   "https://iadb.leanix.net/IADBProduction/diagrams/dataflow/e1b8ef3c-f669-45ec-8f0e-aeee58780f8a",
+   ""
+  ],
+  [
+   "Reference architecture",
+   "RA-02",
+   "Microsoft Foundry Reference Architecture",
+   "Published",
+   "https://iadb.leanix.net/IADBProduction/diagrams/freedraw/27c7c109-7da7-4c2f-b248-eeab47f07238",
+   ""
+  ],
+  [
+   "Reference architecture",
+   "RA-03",
+   "Azure AI Search Reference Architecture",
+   "Published",
+   "https://iadb.leanix.net/IADBProduction/diagrams/freedraw/be67338a-33a5-49cb-95ed-13360102ff0e",
+   ""
+  ],
+  [
+   "Reference architecture",
+   "RA-04",
+   "Azure Document Intelligence Reference Architecture",
+   "Published",
+   "https://iadb.leanix.net/IADBProduction/diagrams/dataflow/6379d8b3-20c7-421e-a555-8ba35e9e2b6e",
+   ""
+  ],
+  [
+   "Reference architecture",
+   "RA-05",
+   "Foundry Agents Reference Architecture",
+   "Pre-release",
+   "",
+   "PRE-RELEASE. The second of the two steps to readiness 4 for agent provisioning."
+  ],
+  [
+   "Template",
+   "TPL-01",
+   "MCP Server Template v1 (C# / .NET)",
+   "In use",
+   "",
+   "Built by EA, shared with the AI MVP team. Used to build all custom MCP servers on that project and serves as the blueprint for other teams. Implements the SUPERSEDED MCP specification."
+  ],
+  [
+   "Template",
+   "TPL-02",
+   "MCP Server Template v2 (C# / .NET)",
+   "Built, not yet distributed",
+   "",
+   "Implements the MCP specification released July 2026. To be shared across the organization. Every server built from v1 needs a migration plan inside the deprecation window."
+  ],
+  [
+   "IaC module",
+   "IAC-01",
+   "Container App Environment",
+   "In review by DX",
+   "https://github.com/dx-developer-platform/terraform.az-iac-core-modules/pull/16",
+   "PR open. Not yet published by DX."
+  ],
+  [
+   "IaC module",
+   "IAC-02",
+   "Container Apps",
+   "Published (JFrog)",
+   "https://github.com/dx-developer-platform/terraform.az-iac-core-modules/pull/17",
+   ""
+  ],
+  [
+   "IaC module",
+   "IAC-03",
+   "Container Registry",
+   "In review by DX",
+   "https://github.com/dx-developer-platform/terraform.az-iac-core-modules/pull/15",
+   "PR open. Not yet published by DX."
+  ],
+  [
+   "IaC module",
+   "IAC-04",
+   "Foundry Account",
+   "Published (JFrog)",
+   "https://github.com/dx-developer-platform/terraform.az-iac-core-modules/pull/18",
+   ""
+  ],
+  [
+   "IaC module",
+   "IAC-05",
+   "Foundry Project",
+   "Published (JFrog)",
+   "https://github.com/dx-developer-platform/terraform.az-iac-core-modules/pull/19",
+   ""
+  ],
+  [
+   "IaC module",
+   "IAC-06",
+   "AI Search (fix)",
+   "Published (JFrog)",
+   "https://github.com/dx-developer-platform/terraform.az-iac-core-modules/pull/20",
+   ""
+  ]
+ ],
+ "asset_link": {
+  "REAL-001": [
+   "STD-03",
+   "RA-02",
+   "IAC-04",
+   "IAC-05"
+  ],
+  "REAL-002": [
+   "STD-03",
+   "STD-07",
+   "RA-02",
+   "RA-05",
+   "IAC-04",
+   "IAC-05",
+   "IAC-02",
+   "STD-06"
+  ],
+  "REAL-003": [
+   "STD-02",
+   "RA-01",
+   "TPL-01",
+   "TPL-02",
+   "IAC-02",
+   "IAC-01",
+   "IAC-03"
+  ],
+  "REAL-004": [
+   "STD-04",
+   "RA-03",
+   "IAC-06"
+  ],
+  "REAL-005": [
+   "STD-04",
+   "RA-03"
+  ],
+  "REAL-006": [
+   "STD-05",
+   "RA-04"
+  ],
+  "REAL-007": [
+   "STD-01"
+  ],
+  "REAL-008": [
+   "STD-06"
+  ]
+ },
+ "realizations": [
+  {
+   "id": "REAL-001",
+   "conf": true,
+   "cap": "5.1",
+   "also": "5.3, 5.4",
+   "pattern": "Microsoft Foundry Reference Architecture (RA-02)",
+   "tech": "Microsoft Foundry",
+   "support": "IAC-04 Foundry Account; IAC-05 Foundry Project",
+   "readiness": 4,
+   "consumption": "Building blocks",
+   "status": "Approved",
+   "preferred": "Y",
+   "operated": "Consumer - each team deploys and runs its own instance",
+   "note": "Standard published, reference architecture published, both Terraform modules published in JFrog. This is the strongest realization in the estate.",
+   "notprov": ""
+  },
+  {
+   "id": "REAL-002",
+   "conf": true,
+   "cap": "5.1",
+   "also": "5.6, 4.4",
+   "pattern": "Foundry Agents Reference Architecture (RA-05, PRE-RELEASE)",
+   "tech": "Microsoft Foundry",
+   "support": "IAC-04; IAC-05; IAC-02 Container Apps; STD-06 AI Agent Decision Tree",
+   "readiness": 3,
+   "consumption": "Building blocks",
+   "status": "Approved",
+   "preferred": "Y",
+   "operated": "Consumer - each team deploys and runs its own instance",
+   "note": "READINESS 3, NOT 4 - and only because the documentation trails the engineering. The Terraform modules are published and in use; the Foundry Agents Standard (STD-07) and its Reference Architecture (RA-05) are both PRE-RELEASE. Releasing those two documents is the whole distance to 4. Confirm this reading.",
+   "notprov": "The agent itself: business rules, grounding data, evaluation criteria, human oversight design. Those remain with the delivery team."
+  },
+  {
+   "id": "REAL-003",
+   "conf": true,
+   "cap": "4.5",
+   "also": "5.5",
+   "pattern": "Custom MCP Server Reference Architecture (RA-01)",
+   "tech": "C# / .NET on Azure Container Apps",
+   "support": "TPL-01 template v1 (in use); TPL-02 template v2 (built, not distributed); IAC-02 published; IAC-01 and IAC-03 in review",
+   "readiness": 4,
+   "consumption": "Reference implementation",
+   "status": "Approved",
+   "preferred": "Y",
+   "operated": "Consumer - each team deploys and runs its own server",
+   "note": "Standard, reference architecture and a working template that built every custom MCP server on the AI MVP project. TEMPLATE v1 IMPLEMENTS THE SUPERSEDED MCP SPECIFICATION - the July 2026 revision deprecated Roots, Sampling, Logging, RFC 7591 dynamic client registration and the legacy HTTP+SSE transport on defined timelines. Every server built from v1 needs a migration plan inside that window, and v2 is built but not yet distributed. That is a dated roadmap item, not a maturity opinion.",
+   "notprov": ""
+  },
+  {
+   "id": "REAL-004",
+   "conf": true,
+   "cap": "3.6",
+   "also": "",
+   "pattern": "Azure AI Search Reference Architecture (RA-03) - hybrid / semantic retrieval",
+   "tech": "Azure AI Search",
+   "support": "IAC-06 AI Search module (published)",
+   "readiness": 4,
+   "consumption": "Building blocks",
+   "status": "Approved",
+   "preferred": "Y",
+   "operated": "Consumer",
+   "note": "Standard, reference architecture and a published Terraform module. Supply is well packaged - which is exactly why the maturity of capability 3.6 must be argued separately. See REAL-005.",
+   "notprov": ""
+  },
+  {
+   "id": "REAL-005",
+   "conf": false,
+   "cap": "3.6",
+   "also": "",
+   "pattern": "S3.10 Access-Trimmed Retrieval",
+   "tech": "",
+   "support": "",
+   "readiness": null,
+   "consumption": "",
+   "status": "",
+   "preferred": "",
+   "operated": "",
+   "note": "CONFIRM THIS ROW - it decides the headline finding for D3. Does the Azure AI Search Standard (STD-04) mandate that source ACL metadata is extracted, indexed and applied as a pre-ranking filter? If it does, readiness follows REAL-004. If it does not, this sits at 0 and it is the reason capability 3.6 can carry readiness 4 and a much lower maturity. Filtering a ranked list after the fact both leaks and distorts relevance.",
+   "notprov": ""
+  },
+  {
+   "id": "REAL-006",
+   "conf": true,
+   "cap": "3.5",
+   "also": "",
+   "pattern": "Azure Document Intelligence Reference Architecture (RA-04)",
+   "tech": "Azure AI Document Intelligence",
+   "support": "",
+   "readiness": 3,
+   "consumption": "Guidance",
+   "status": "Approved",
+   "preferred": "Y",
+   "operated": "Consumer",
+   "note": "Standard and reference architecture published; no Terraform module in the inventory. Publishing one is the step to 4.",
+   "notprov": ""
+  },
+  {
+   "id": "REAL-007",
+   "conf": true,
+   "cap": "4.1",
+   "also": "5.2",
+   "pattern": "Tech Stack - AI standard (STD-01)",
+   "tech": "",
+   "support": "",
+   "readiness": 3,
+   "consumption": "Guidance",
+   "status": "Approved",
+   "preferred": "Y",
+   "operated": "-",
+   "note": "The approved AI technology stack. This is the asset that answers 'what is already approved for general use' at the technology level - it is evidence toward capability maturity, not a substitute for it.",
+   "notprov": ""
+  },
+  {
+   "id": "REAL-008",
+   "conf": true,
+   "cap": "2.5",
+   "also": "2.2",
+   "pattern": "AI Agent Decision Tree (STD-06)",
+   "tech": "",
+   "support": "",
+   "readiness": 3,
+   "consumption": "Guidance",
+   "status": "Approved",
+   "preferred": "Y",
+   "operated": "-",
+   "note": "A published decision aid for whether and what kind of agent is appropriate. This is the only realization currently touching domain D2, and it maps to the autonomy and interaction-pattern determination.",
+   "notprov": ""
+  }
+ ]
+}

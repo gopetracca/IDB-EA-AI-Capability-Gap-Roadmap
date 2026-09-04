@@ -1,0 +1,2197 @@
+[
+ [
+  "D1",
+  "AI Strategy & Value Management",
+  "Able to set direction for AI and convert it into measurable institutional value.",
+  [
+   [
+    "1.1",
+    "AI Vision & Strategy Definition",
+    "Able to establish and maintain a stated institutional position on AI and keep it current.",
+    [
+     "AWS CAF-AI - Business perspective",
+     "ISO/IEC 38507",
+     "MITRE AI Maturity Model"
+    ],
+    [
+     [
+      "1.1.1",
+      "AI Ambition & Positioning",
+      "Define what role AI plays in the institutional mandate and how far the organization intends to go."
+     ],
+     [
+      "1.1.2",
+      "AI Strategy Formulation & Refresh",
+      "Produce and periodically revise an endorsed AI strategy with explicit scope and stated exclusions."
+     ],
+     [
+      "1.1.3",
+      "Strategic Alignment to Institutional Priorities",
+      "Trace every AI objective to a corporate goal, sector strategy or country program."
+     ],
+     [
+      "1.1.4",
+      "AI Principles & Ethical Positioning",
+      "Set the non-negotiable commitments that constrain all downstream AI decisions."
+     ],
+     [
+      "1.1.5",
+      "Horizon Scanning & Technology Foresight",
+      "Track emerging AI capability and judge what it changes for the institution."
+     ]
+    ],
+    0,
+    "new",
+    "Chief AI Officer",
+    "medium"
+   ],
+   [
+    "1.2",
+    "AI Portfolio & Investment Management",
+    "Able to decide which AI work is funded, in what order, and when it stops.",
+    [
+     "AWS CAF-AI",
+     "Gartner (analyst, non-public)",
+     "TOGAF (capability-based planning)"
+    ],
+    [
+     [
+      "1.2.1",
+      "AI Investment Case Development",
+      "Build comparable business cases stating cost, benefit and risk on a common basis."
+     ],
+     [
+      "1.2.2",
+      "Portfolio Prioritization & Sequencing",
+      "Rank and stage the AI portfolio against delivery capacity, risk appetite and dependency."
+     ],
+     [
+      "1.2.3",
+      "Funding & Budget Allocation",
+      "Route funds to AI work through a mechanism that survives audit and annual planning."
+     ],
+     [
+      "1.2.4",
+      "Portfolio Balance & Exposure Management",
+      "Keep the mix of experimental, scaling and production AI within stated tolerance."
+     ],
+     [
+      "1.2.5",
+      "Stage-Gate & Investment Review",
+      "Decide continuation, pivot or termination at defined decision points on recorded criteria."
+     ]
+    ],
+    0,
+    "lens",
+    "Enterprise Portfolio Owner",
+    "high"
+   ],
+   [
+    "1.3",
+    "Value Realization & Performance Reporting",
+    "Able to prove what AI actually delivered, to the standard a governing body accepts.",
+    [
+     "WEF AI-First Operating System",
+     "MIT CISR",
+     "GAO AI Accountability Framework"
+    ],
+    [
+     [
+      "1.3.1",
+      "Benefit Definition & Baselining",
+      "State expected benefit in measurable terms before build, with a recorded pre-intervention baseline."
+     ],
+     [
+      "1.3.2",
+      "Value Tracking & Attribution",
+      "Measure realized benefit and attribute it defensibly to the AI intervention rather than to trend."
+     ],
+     [
+      "1.3.3",
+      "AI Performance Metrics & KPI Management",
+      "Maintain the indicator set that describes AI performance institution-wide."
+     ],
+     [
+      "1.3.4",
+      "Executive & Board Reporting",
+      "Report AI status, risk and value to governing bodies at their cadence and in their language."
+     ],
+     [
+      "1.3.5",
+      "Post-Implementation Review",
+      "Assess delivered outcomes against the approved case and feed findings back into prioritization."
+     ]
+    ],
+    0,
+    "lens",
+    "Strategy Performance Owner",
+    "high"
+   ],
+   [
+    "1.4",
+    "AI Sourcing & Partner Strategy",
+    "Able to decide what is built, bought or partnered, and to stay able to change that decision.",
+    [
+     "ISO/IEC 42001 - third-party control",
+     "AWS CAF-AI"
+    ],
+    [
+     [
+      "1.4.1",
+      "Build / Buy / Partner Decisioning",
+      "Choose the sourcing route per capability with recorded rationale and revisit triggers."
+     ],
+     [
+      "1.4.2",
+      "AI Vendor & Model Provider Evaluation",
+      "Assess providers on capability, trustworthiness, transparency and cost of exit."
+     ],
+     [
+      "1.4.3",
+      "Contractual Safeguards & AI Clauses",
+      "Secure rights covering data use, IP, indemnity, audit access and notification of model change."
+     ],
+     [
+      "1.4.4",
+      "Concentration & Exit Risk Management",
+      "Limit dependence on any single provider and keep a tested, costed exit path."
+     ],
+     [
+      "1.4.5",
+      "Supplier Performance & Assurance Monitoring",
+      "Monitor contracted providers against their obligations and assurance commitments for the life of the relationship."
+     ]
+    ],
+    0,
+    "specialization",
+    "Chief Procurement Officer",
+    "medium"
+   ],
+   [
+    "1.5",
+    "AI Ecosystem & Alliance Management",
+    "Able to hold external AI relationships that are not supplier contracts, and to stay operable when the ecosystem around them changes.",
+    [
+     "ISO/IEC 42001 - context and interested parties",
+     "The Open Group Open Agile Architecture",
+     "Institutional practice"
+    ],
+    [
+     [
+      "1.5.1",
+      "Partnership Portfolio Definition",
+      "Decide which external relationships the institution needs in order to hold AI capability it will not build itself."
+     ],
+     [
+      "1.5.2",
+      "Research & Academic Collaboration",
+      "Operate collaborations whose output is knowledge, method or evidence rather than a delivered system."
+     ],
+     [
+      "1.5.3",
+      "Peer & Multilateral Cooperation",
+      "Exchange AI practice, assets and evidence with counterpart institutions under agreed terms."
+     ],
+     [
+      "1.5.4",
+      "Insourcing / Outsourcing Posture Management",
+      "Set and periodically revisit which AI work is held internally and which is placed outside."
+     ],
+     [
+      "1.5.5",
+      "Ecosystem Dependency & Continuity Management",
+      "Track aggregate dependency across the external AI ecosystem and stay able to operate when a member changes, merges or exits."
+     ],
+     [
+      "1.5.6",
+      "Partnership Value & Obligation Tracking",
+      "Monitor what each relationship returns against what it obliges the institution to do."
+     ]
+    ],
+    0,
+    "new",
+    "Chief AI Officer",
+    "low"
+   ]
+  ]
+ ],
+ [
+  "D2",
+  "AI Demand & Solution Shaping",
+  "Able to find, qualify and shape AI opportunities into deliverable, adoptable solutions.",
+  [
+   [
+    "2.1",
+    "Use Case Discovery & Intake",
+    "Able to surface candidate AI work and admit it through one controlled front door.",
+    [
+     "AWS CAF-AI",
+     "Google AI Adoption Framework"
+    ],
+    [
+     [
+      "2.1.1",
+      "Opportunity Identification & Ideation",
+      "Actively generate candidate use cases from business need rather than waiting for requests."
+     ],
+     [
+      "2.1.2",
+      "Demand Intake & Triage",
+      "Operate a single intake route that classifies and routes every AI request."
+     ],
+     [
+      "2.1.3",
+      "Use Case Registration & Classification",
+      "Record each candidate against a common taxonomy before any build effort begins."
+     ],
+     [
+      "2.1.4",
+      "Duplicate & Reuse Screening",
+      "Detect that a request is already solved, in flight, or satisfiable by an existing asset."
+     ]
+    ],
+    0,
+    "lens",
+    "Demand Management Owner",
+    "high"
+   ],
+   [
+    "2.2",
+    "AI Use-Case Feasibility & Qualification",
+    "Able to judge, before build, whether a use case is technically and operationally deliverable and worth doing.",
+    [
+     "IBM Generative AI Capability Model",
+     "AWS CAF-AI - Business perspective",
+     "The Open Group TOGAF"
+    ],
+    [
+     [
+      "2.2.1",
+      "Technical & Data Feasibility Assessment",
+      "Judge whether the data, models and integration required actually exist and are obtainable."
+     ],
+     [
+      "2.2.2",
+      "Cost, Effort & Capacity Feasibility",
+      "Estimate build and run cost, effort and the specialist capacity a use case would consume."
+     ],
+     [
+      "2.2.3",
+      "Operational & Adoption Feasibility",
+      "Judge whether the receiving business area can absorb, operate and sustain the change."
+     ],
+     [
+      "2.2.4",
+      "Go / No-Go Determination",
+      "Make and record a proceed decision with named accountability and stated conditions."
+     ]
+    ],
+    0,
+    "new",
+    "AI Product Owner",
+    "medium"
+   ],
+   [
+    "2.3",
+    "AI Product Management",
+    "Able to own an AI capability as a product across its life, not as a project that ends.",
+    [
+     "WEF AI-First Operating System",
+     "The Open Group IT4IT",
+     "The Open Group Open Agile Architecture"
+    ],
+    [
+     [
+      "2.3.1",
+      "AI Product Definition & Roadmapping",
+      "Define the product, its users, its boundary and its forward path."
+     ],
+     [
+      "2.3.2",
+      "Requirements & Acceptance Criteria Management",
+      "Express what good looks like precisely enough to be tested against."
+     ],
+     [
+      "2.3.3",
+      "User Research & Feedback Integration",
+      "Learn from actual use and feed it back into the product."
+     ],
+     [
+      "2.3.4",
+      "Backlog & Release Planning",
+      "Sequence work and commit to releases against capacity."
+     ],
+     [
+      "2.3.5",
+      "Product Performance Ownership",
+      "Hold a named owner accountable for the product's outcomes in production."
+     ]
+    ],
+    0,
+    "specialization",
+    "AI Product Owner",
+    "medium"
+   ],
+   [
+    "2.4",
+    "Business Process & Service Redesign",
+    "Able to change how work is actually done, not merely to add a model to an unchanged process.",
+    [
+     "WEF AI-First Operating System",
+     "Consultancy transformation patterns (non-public)",
+     "The Open Group Open Agile Architecture"
+    ],
+    [
+     [
+      "2.4.1",
+      "Process Analysis & AI Fit Assessment",
+      "Understand the current process well enough to know where AI changes it."
+     ],
+     [
+      "2.4.2",
+      "Target Process & Task Redesign",
+      "Design the intended process, including what stops being done."
+     ],
+     [
+      "2.4.3",
+      "Human / Machine Task Allocation",
+      "Decide explicitly which tasks move, which stay, and which become supervisory."
+     ],
+     [
+      "2.4.4",
+      "Control Point Redesign",
+      "Relocate or rebuild the controls that the old process embedded in human steps."
+     ],
+     [
+      "2.4.5",
+      "Service Model & Service Level Redefinition",
+      "Restate the service promise once AI changes what is deliverable."
+     ],
+     [
+      "2.4.6",
+      "Language Coverage & Service Equity",
+      "Determine which languages an AI-delivered service must support, and at what measured quality, across the institution's countries."
+     ]
+    ],
+    0,
+    "specialization",
+    "Business Process Owner",
+    "medium"
+   ],
+   [
+    "2.5",
+    "Human-AI Interaction & Oversight Design",
+    "Able to design the human's role in the system, rather than assert oversight in policy alone.",
+    [
+     "IMDA Model AI Governance Framework",
+     "ISO/IEC 42001"
+    ],
+    [
+     [
+      "2.5.1",
+      "Autonomy & Interaction Pattern Determination",
+      "Set and record, per system, the interaction pattern and how much an AI system or agent may do without human confirmation.",
+      1
+     ],
+     [
+      "2.5.2",
+      "Human Oversight & Intervention Design",
+      "Design the specific point, information and control through which a human can intervene.",
+      1
+     ],
+     [
+      "2.5.3",
+      "Explanation & Disclosure Design",
+      "Design what the system tells its user about what it is and how it reached an output."
+     ],
+     [
+      "2.5.4",
+      "Escalation & Handover Design",
+      "Design the path by which work returns to a human, with sufficient context to act.",
+      1
+     ],
+     [
+      "2.5.5",
+      "Oversight Competence & Workload Design",
+      "Ensure the person assigned oversight has the time, information, training and authority to actually exercise it.",
+      1
+     ],
+     [
+      "2.5.6",
+      "Accessible & Inclusive Interaction Design",
+      "Design AI-delivered interaction to be usable with assistive technology and across literacy and channel constraints."
+     ]
+    ],
+    1,
+    "new",
+    "Product Design Owner",
+    "low"
+   ],
+   [
+    "2.6",
+    "AI Innovation & Incubation",
+    "Able to turn an untested AI idea into evidence, and evidence into either a funded product or a cheap, recorded stop.",
+    [
+     "Google AI Adoption Framework",
+     "AWS CAF-AI",
+     "Institutional practice"
+    ],
+    [
+     [
+      "2.6.1",
+      "Idea Capture & Innovation Sourcing",
+      "Collect candidate AI ideas from staff, partners and technology watch outside the formal demand route."
+     ],
+     [
+      "2.6.2",
+      "Sandboxed Experimentation",
+      "Run time-boxed experiments in an environment where failure is contained and permitted."
+     ],
+     [
+      "2.6.3",
+      "Innovation Portfolio & Scaling Decisions",
+      "Hold the set of live experiments within capacity and decide which of them scale."
+     ],
+     [
+      "2.6.4",
+      "Experiment-to-Product Transition",
+      "Move a proven experiment onto the funded delivery route, or record why it stops."
+     ],
+     [
+      "2.6.5",
+      "Controlled Failure & Learning Capture",
+      "Permit experiments to fail and extract reusable learning from the failure."
+     ]
+    ],
+    0,
+    "new",
+    "AI CoE Owner",
+    "low"
+   ]
+  ]
+ ],
+ [
+  "D3",
+  "Data & Knowledge Management",
+  "Able to supply trusted, governed data and knowledge to AI systems.",
+  [
+   [
+    "3.1",
+    "Data Governance & Stewardship for AI",
+    "Able to say who owns each data asset, who may use it, and under what conditions.",
+    [
+     "EDM Council DCAM/ADAC",
+     "ISO/IEC 42001"
+    ],
+    [
+     [
+      "3.1.1",
+      "Data Ownership & Stewardship Assignment",
+      "Name an accountable owner and an operating steward for each data asset used by AI."
+     ],
+     [
+      "3.1.2",
+      "Data Classification & Sensitivity Labeling",
+      "Apply a consistent sensitivity classification that downstream controls can act on."
+     ],
+     [
+      "3.1.3",
+      "Data Access Policy & Entitlement Management",
+      "Define and enforce who may access which data, for which purpose."
+     ],
+     [
+      "3.1.4",
+      "Data Retention & Records Management",
+      "Apply retention and disposal rules to AI inputs, outputs and interaction records."
+     ],
+     [
+      "3.1.5",
+      "Cross-Border Data Transfer Control",
+      "Determine and enforce which jurisdictions the institution's data may be transferred to and processed in."
+     ]
+    ],
+    0,
+    "specialization",
+    "Chief Data Officer",
+    "high"
+   ],
+   [
+    "3.2",
+    "Data Sourcing, Licensing & Provenance",
+    "Able to demonstrate lawful, documented origin for every dataset an AI system uses.",
+    [
+     "NIST AI RMF - Map",
+     "EDM Council DCAM/ADAC"
+    ],
+    [
+     [
+      "3.2.1",
+      "Data Acquisition & Onboarding",
+      "Bring external and internal data into the estate through a controlled route."
+     ],
+     [
+      "3.2.2",
+      "Licensing & Permitted-Use Verification",
+      "Confirm and record that intended AI use is permitted by the source's terms."
+     ],
+     [
+      "3.2.3",
+      "Provenance & Chain-of-Custody Recording",
+      "Record where data came from and every transformation applied to it."
+     ],
+     [
+      "3.2.4",
+      "Consent & Purpose Limitation Management",
+      "Track the basis on which data was collected and confine use to it."
+     ],
+     [
+      "3.2.5",
+      "Synthetic Data Generation & Control",
+      "Produce and govern synthetic data, including disclosure of its synthetic nature."
+     ]
+    ],
+    0,
+    "specialization",
+    "Chief Data Officer",
+    "high"
+   ],
+   [
+    "3.3",
+    "Data Quality & Preparation for AI",
+    "Able to make data fit for the specific AI purpose and to prove it was fit.",
+    [
+     "ISO/IEC 5338",
+     "EDM Council DCAM/ADAC"
+    ],
+    [
+     [
+      "3.3.1",
+      "Data Profiling & Quality Assessment",
+      "Measure completeness, accuracy, timeliness and consistency against stated thresholds."
+     ],
+     [
+      "3.3.2",
+      "Data Cleansing & Remediation",
+      "Correct defects at source where possible, and record what was corrected downstream."
+     ],
+     [
+      "3.3.3",
+      "Representativeness & Bias Screening",
+      "Test datasets for gaps and skews relative to the affected population."
+     ],
+     [
+      "3.3.4",
+      "Labeling & Annotation Management",
+      "Produce, quality-check and version human and machine labels."
+     ],
+     [
+      "3.3.5",
+      "Dataset Versioning & Snapshotting",
+      "Freeze and identify the exact dataset a model or evaluation used."
+     ]
+    ],
+    0,
+    "specialization",
+    "Data Product Owner",
+    "medium"
+   ],
+   [
+    "3.4",
+    "Metadata, Lineage & Cataloging for AI",
+    "Able to find data, understand what it means, and trace where it went.",
+    [
+     "EDM Council DCAM/ADAC",
+     "ISO/IEC 5338"
+    ],
+    [
+     [
+      "3.4.1",
+      "Data Catalog Management",
+      "Maintain a searchable inventory of data assets with their attributes."
+     ],
+     [
+      "3.4.2",
+      "Business Glossary & Semantic Definition",
+      "Hold one agreed definition per business term that data assets bind to."
+     ],
+     [
+      "3.4.3",
+      "Lineage Capture & Traceability",
+      "Trace a model output back through transformations to source records."
+     ],
+     [
+      "3.4.4",
+      "Data Product Publication",
+      "Publish curated, contracted datasets that consumers can depend on."
+     ]
+    ],
+    0,
+    "specialization",
+    "Data Governance Owner",
+    "high"
+   ],
+   [
+    "3.5",
+    "Knowledge Corpus & Content Management",
+    "Able to curate the document and content estate that grounded AI depends on.",
+    [
+     "IBM GenAI Capability Model"
+    ],
+    [
+     [
+      "3.5.1",
+      "Corpus Definition & Curation",
+      "Decide what belongs in a knowledge corpus and what is deliberately excluded."
+     ],
+     [
+      "3.5.2",
+      "Content Ingestion & Normalization",
+      "Bring heterogeneous content into a consistent, machine-usable form."
+     ],
+     [
+      "3.5.3",
+      "Content Segmentation Design",
+      "Choose and apply segmentation that preserves meaning and citability."
+     ],
+     [
+      "3.5.4",
+      "Corpus Freshness & Refresh Management",
+      "Keep the corpus current and know how stale any part of it is."
+     ],
+     [
+      "3.5.5",
+      "Authoritative Source Designation",
+      "Declare which source wins when two documents disagree."
+     ]
+    ],
+    0,
+    "new",
+    "Knowledge Management Owner",
+    "medium"
+   ],
+   [
+    "3.6",
+    "Knowledge Access & Retrieval",
+    "Able to return the right knowledge to the right requester, with its provenance intact.",
+    [
+     "IBM GenAI Capability Model",
+     "NIST AI 600-1 Generative AI Profile"
+    ],
+    [
+     [
+      "3.6.1",
+      "Retrieval Service Provision",
+      "Provide governed retrieval over institutional content — by meaning, by term, or both — as a reusable service."
+     ],
+     [
+      "3.6.2",
+      "Access-Trimmed Retrieval Enforcement",
+      "Enforce, at retrieval time, the entitlements determined in 3.1.3, so a requester sees only what they may see."
+     ],
+     [
+      "3.6.3",
+      "Retrieval Quality Evaluation & Tuning",
+      "Measure and improve retrieval precision and recall against a known set."
+     ],
+     [
+      "3.6.4",
+      "Multi-Source Federation & Ranking",
+      "Retrieve across several repositories and rank the combined result coherently."
+     ],
+     [
+      "3.6.5",
+      "Citation, Grounding & Traceability",
+      "Return every answer with the source it rests on, resolvable by the reader."
+     ]
+    ],
+    0,
+    "new",
+    "Knowledge Platform Owner",
+    "low"
+   ],
+   [
+    "3.7",
+    "Derived Representation Management",
+    "Able to manage derived representations of data as governed assets in their own right.",
+    [
+     "IBM GenAI Capability Model",
+     "ISO/IEC 5338"
+    ],
+    [
+     [
+      "3.7.1",
+      "Feature Engineering & Store Management",
+      "Produce, share and reuse engineered features under version control."
+     ],
+     [
+      "3.7.2",
+      "Embedding Model Selection & Versioning",
+      "Choose embedding models deliberately and record which version produced which index."
+     ],
+     [
+      "3.7.3",
+      "Index Lifecycle & Re-embedding",
+      "Rebuild and migrate indexes when content or embedding models change."
+     ],
+     [
+      "3.7.4",
+      "Derived Representation Governance",
+      "Apply access, retention and residency controls to vector representations."
+     ]
+    ],
+    0,
+    "new",
+    "Data/ML Platform Owner",
+    "low"
+   ]
+  ]
+ ],
+ [
+  "D4",
+  "AI Solution Engineering",
+  "Able to design, build, customize and validate AI solutions to a defined standard.",
+  [
+   [
+    "4.1",
+    "AI Architecture Management & Solution Governance",
+    "Able to set, steward and enforce the architecture that AI solutions are built to.",
+    [
+     "The Open Group TOGAF",
+     "SAP AI-native North Star architecture",
+     "NVIDIA Enterprise AI Factory"
+    ],
+    [
+     [
+      "4.1.1",
+      "Solution Pattern Selection",
+      "Choose the architecture building block that realizes the required capability."
+     ],
+     [
+      "4.1.2",
+      "Reference Architecture Compliance",
+      "Build to published reference architectures and detect deviation."
+     ],
+     [
+      "4.1.3",
+      "Architecture Decision Recording",
+      "Record significant decisions with alternatives and consequences."
+     ],
+     [
+      "4.1.4",
+      "Non-Functional Requirement Design",
+      "Design explicitly for latency, cost, availability, and degradation behavior."
+     ],
+     [
+      "4.1.5",
+      "Architecture Review & Dispensation",
+      "Review designs and grant time-boxed exceptions with recorded conditions."
+     ],
+     [
+      "4.1.6",
+      "ABB & Pattern Stewardship",
+      "Define, version and retire the institution's logical building blocks and the patterns that compose them."
+     ],
+     [
+      "4.1.7",
+      "Solution Conformance Certification",
+      "Certify that a concrete solution conforms to the building blocks and controls it claims, and record the deviations."
+     ]
+    ],
+    0,
+    "lens",
+    "Chief Enterprise Architect",
+    "medium"
+   ],
+   [
+    "4.2",
+    "Model Selection, Customization & Tuning",
+    "Able to choose and adapt models on evidence, and to record what was done.",
+    [
+     "IBM GenAI Capability Model",
+     "ISO/IEC 5338",
+     "NIST AI 600-1 Generative AI Profile"
+    ],
+    [
+     [
+      "4.2.1",
+      "Model Selection for Use Case",
+      "Select a model from within the cleared set against task-specific criteria and evidence."
+     ],
+     [
+      "4.2.2",
+      "Fine-Tuning & Adaptation",
+      "Adapt models to institutional context under controlled, repeatable procedure."
+     ],
+     [
+      "4.2.3",
+      "Model Training & Experimentation",
+      "Run and track experiments so results are reproducible."
+     ],
+     [
+      "4.2.4",
+      "Model Documentation & Disclosure Production",
+      "Produce model cards covering intended use, limits, data and evaluation results."
+     ],
+     [
+      "4.2.5",
+      "Model Versioning & Registration",
+      "Register every model version as an identifiable, ownable asset."
+     ]
+    ],
+    0,
+    "new",
+    "AI Engineering Owner",
+    "medium"
+   ],
+   [
+    "4.3",
+    "Prompt & Context Engineering",
+    "Able to treat prompts and context assembly as versioned, tested engineering artifacts.",
+    [
+     "IBM GenAI Capability Model",
+     "NIST AI 600-1 Generative AI Profile",
+     "OWASP GenAI Security Project"
+    ],
+    [
+     [
+      "4.3.1",
+      "Prompt Design & Templating",
+      "Design prompts as reusable, parameterized templates rather than embedded strings."
+     ],
+     [
+      "4.3.2",
+      "Prompt Versioning & Registry",
+      "Version, review and register prompts as controlled artifacts."
+     ],
+     [
+      "4.3.3",
+      "Context Assembly & Window Management",
+      "Assemble context deliberately and manage what is included, ordered and dropped."
+     ],
+     [
+      "4.3.4",
+      "Grounding Strategy Design",
+      "Decide what the model is permitted to answer from, and enforce it."
+     ],
+     [
+      "4.3.5",
+      "Prompt & Context Boundary Design",
+      "Construct prompt and context boundaries that constrain what untrusted content can instruct.",
+      1
+     ]
+    ],
+    0,
+    "new",
+    "AI Engineering Owner",
+    "medium"
+   ],
+   [
+    "4.4",
+    "Agent & Workflow Orchestration Design",
+    "Able to design what an agent may pursue, how it plans, and where it must stop.",
+    [
+     "Salesforce Agent Development Lifecycle",
+     "SAP AI-native North Star architecture",
+     "IBM Generative AI Capability Model",
+     "IMDA Model AI Governance Framework"
+    ],
+    [
+     [
+      "4.4.1",
+      "Agent Specification & Goal Definition",
+      "State an agent's objective, scope and prohibited actions before it is built.",
+      1
+     ],
+     [
+      "4.4.2",
+      "Task Decomposition & Planning Design",
+      "Design how an agent breaks work down and selects its next step.",
+      1
+     ],
+     [
+      "4.4.3",
+      "Multi-Agent Coordination Design",
+      "Design how agents delegate, communicate and resolve conflict.",
+      1
+     ],
+     [
+      "4.4.4",
+      "Agent Memory & State Design",
+      "Design what an agent retains, for how long, and who else can see it.",
+      1
+     ],
+     [
+      "4.4.5",
+      "Guardrail & Constraint Design",
+      "Encode hard limits an agent cannot argue its way past.",
+      1
+     ],
+     [
+      "4.4.6",
+      "Termination & Loop Control Design",
+      "Design stopping conditions, budgets and loop detection.",
+      1
+     ]
+    ],
+    1,
+    "new",
+    "AI Engineering Owner",
+    "low"
+   ],
+   [
+    "4.5",
+    "Integration & Tool Enablement",
+    "Able to give AI systems safe, governed reach into institutional systems.",
+    [
+     "IBM Generative AI Capability Model",
+     "Model Context Protocol specification",
+     "SAP AI-native North Star architecture",
+     "IMDA Model AI Governance Framework"
+    ],
+    [
+     [
+      "4.5.1",
+      "API & System Integration Design",
+      "Design integration to institutional systems with contracts and error semantics."
+     ],
+     [
+      "4.5.2",
+      "Tool & Function Definition",
+      "Define the callable actions exposed to a model, with typed inputs and stated effects.",
+      1
+     ],
+     [
+      "4.5.3",
+      "Capability Exposure to AI Clients",
+      "Expose institutional capability to AI clients through the prevailing open tool-interface standard.",
+      1
+     ],
+     [
+      "4.5.4",
+      "Identity Propagation & Delegated Access",
+      "Carry the acting user's identity through to the system of record.",
+      1
+     ],
+     [
+      "4.5.5",
+      "Legacy & Core System Adaptation",
+      "Reach systems that were never designed to be called by an AI client."
+     ]
+    ],
+    1,
+    "new",
+    "Integration Architecture Owner",
+    "medium"
+   ],
+   [
+    "4.6",
+    "AI Evaluation & Testing",
+    "Able to state, before release, what the system does and does not do reliably.",
+    [
+     "NIST AI 600-1 Generative AI Profile",
+     "ISO/IEC 5338"
+    ],
+    [
+     [
+      "4.6.1",
+      "Evaluation Criteria & Metric Definition",
+      "Define the metrics that constitute acceptable performance for this use case."
+     ],
+     [
+      "4.6.2",
+      "Golden Dataset & Test Set Management",
+      "Build and maintain representative evaluation sets with known-correct answers."
+     ],
+     [
+      "4.6.3",
+      "Automated Evaluation Harness Operation",
+      "Run evaluations repeatably as part of the delivery pipeline."
+     ],
+     [
+      "4.6.4",
+      "Human Review & Expert Evaluation",
+      "Obtain qualified human judgement where automated metrics are insufficient."
+     ],
+     [
+      "4.6.5",
+      "Pre-Deployment Acceptance Testing",
+      "Test against acceptance criteria and record the result as release evidence."
+     ]
+    ],
+    0,
+    "new",
+    "Quality Engineering Owner",
+    "medium"
+   ],
+   [
+    "4.7",
+    "AI Release & Change Management",
+    "Able to move AI change into production under control and to reverse it.",
+    [
+     "ITIL 4",
+     "The Open Group IT4IT",
+     "ISO/IEC 5338"
+    ],
+    [
+     [
+      "4.7.1",
+      "Build & Continuous Integration",
+      "Build AI artifacts through an automated, auditable pipeline."
+     ],
+     [
+      "4.7.2",
+      "Promotion & Environment Progression",
+      "Move artifacts through environments under defined entry and exit criteria."
+     ],
+     [
+      "4.7.3",
+      "Change Approval & Release Authorization",
+      "Authorise AI change through a route proportionate to its risk tier."
+     ],
+     [
+      "4.7.4",
+      "Rollback & Release Reversal",
+      "Return a deployed AI system to a previously accepted release."
+     ],
+     [
+      "4.7.5",
+      "Release Documentation & Evidence Capture",
+      "Capture at release the evidence that later assurance work will need."
+     ]
+    ],
+    0,
+    "lens",
+    "DevSecOps Owner",
+    "high"
+   ]
+  ]
+ ],
+ [
+  "D5",
+  "AI Platform & Infrastructure",
+  "Able to provide and sustain the technical means to build and run AI.",
+  [
+   [
+    "5.1",
+    "AI Platform Service Provisioning",
+    "Able to offer AI platform services as a governed, supported institutional service.",
+    [
+     "AWS CAF-AI - Platform perspective",
+     "Microsoft Cloud Adoption Framework for AI",
+     "NVIDIA Enterprise AI Factory"
+    ],
+    [
+     [
+      "5.1.1",
+      "Platform Service Catalog Management",
+      "Publish what AI platform services exist, their terms and how to obtain them."
+     ],
+     [
+      "5.1.2",
+      "Landing Zone & Baseline Provisioning",
+      "Provision AI environments from a compliant baseline rather than by hand."
+     ],
+     [
+      "5.1.3",
+      "Platform Configuration & Policy Enforcement",
+      "Enforce configuration standards technically, not by instruction."
+     ],
+     [
+      "5.1.4",
+      "Platform Service Level Commitment",
+      "Commit to and meet service levels for the shared AI platform services the institution offers."
+     ],
+     [
+      "5.1.5",
+      "Platform Upgrade & Deprecation Management",
+      "Move consumers across platform versions without stranding them."
+     ]
+    ],
+    0,
+    "specialization",
+    "AI Platform Owner",
+    "medium"
+   ],
+   [
+    "5.2",
+    "Model Access & Traffic Management",
+    "Able to control which models the institution may call, through one governed path.",
+    [
+     "IBM Generative AI Capability Model",
+     "Microsoft Cloud Adoption Framework for AI",
+     "ISO/IEC 42001"
+    ],
+    [
+     [
+      "5.2.1",
+      "Model Clearance & Approved Model List",
+      "Assess candidate models against institutional criteria, record the clearance decision and its conditions, and maintain the approved list."
+     ],
+     [
+      "5.2.2",
+      "Model Traffic Control & Routing",
+      "Route all model traffic through a controlled point that can observe and enforce."
+     ],
+     [
+      "5.2.3",
+      "Quota, Throttling & Rate Management",
+      "Allocate and enforce consumption limits per consumer."
+     ],
+     [
+      "5.2.4",
+      "Model Provider Credential Management",
+      "Issue, rotate and revoke the credentials used to reach model providers and platform services. Agent identity is 7.4.4."
+     ],
+     [
+      "5.2.5",
+      "Model Version Availability & Provider Change Control",
+      "Control which model versions remain reachable and absorb provider-side version change without breaking consumers."
+     ]
+    ],
+    0,
+    "new",
+    "AI Platform Owner",
+    "low"
+   ],
+   [
+    "5.3",
+    "AI Environment & Workspace Management",
+    "Able to give teams isolated places to work without weakening controls.",
+    [
+     "Microsoft Cloud Adoption Framework for AI",
+     "ISO/IEC 27001"
+    ],
+    [
+     [
+      "5.3.1",
+      "Experimentation Environment Provision",
+      "Provide safe environments for experimentation with clear data rules."
+     ],
+     [
+      "5.3.2",
+      "Workspace Tenancy & Isolation",
+      "Define and enforce the tenancy and isolation topology between team workspaces."
+     ],
+     [
+      "5.3.3",
+      "Network & Private Connectivity Control",
+      "Control network reachability of AI services and keep traffic private where required."
+     ],
+     [
+      "5.3.4",
+      "Environment Data Segregation",
+      "Prevent production data from reaching environments not cleared for it."
+     ]
+    ],
+    0,
+    "lens",
+    "Cloud Platform Owner",
+    "medium"
+   ],
+   [
+    "5.4",
+    "AI Compute & Capacity Management",
+    "Able to secure and allocate the compute that AI work requires.",
+    [
+     "NVIDIA Enterprise AI Factory",
+     "Microsoft Cloud Adoption Framework for AI",
+     "FinOps Foundation"
+    ],
+    [
+     [
+      "5.4.1",
+      "Compute Provisioning & Scheduling",
+      "Make compute available to workloads on a predictable basis."
+     ],
+     [
+      "5.4.2",
+      "Capacity Planning & Forecasting",
+      "Forecast demand far enough ahead to secure supply."
+     ],
+     [
+      "5.4.3",
+      "Accelerator & Quota Allocation",
+      "Allocate scarce accelerator capacity against portfolio priority."
+     ],
+     [
+      "5.4.4",
+      "Workload Placement & Residency Enforcement",
+      "Place workloads in locations that enforce the transfer and residency decisions taken in 3.1.5."
+     ],
+     [
+      "5.4.5",
+      "Edge & Disconnected Operation",
+      "Run AI where connectivity, latency or residency prevents central serving, including fully offline."
+     ]
+    ],
+    0,
+    "specialization",
+    "Infrastructure Platform Owner",
+    "medium"
+   ],
+   [
+    "5.5",
+    "Tool & Connector Catalog Management",
+    "Able to control what actions AI systems can reach, as a governed inventory.",
+    [
+     "SAP AI-native North Star architecture",
+     "IMDA Model AI Governance Framework",
+     "Model Context Protocol specification"
+    ],
+    [
+     [
+      "5.5.1",
+      "Tool & Connector Catalog Management",
+      "Maintain the inventory of actions and connectors available to AI systems.",
+      1
+     ],
+     [
+      "5.5.2",
+      "Tool Source Registration & Approval",
+      "Register and approve any source of callable tools before an AI client may reach it.",
+      1
+     ],
+     [
+      "5.5.3",
+      "Tool Permission & Scope Governance",
+      "Set and enforce the scope each tool grants, at least privilege.",
+      1
+     ],
+     [
+      "5.5.4",
+      "Third-Party Tool Vetting",
+      "Assess externally supplied tools and connectors before admission.",
+      1
+     ],
+     [
+      "5.5.5",
+      "Tool Version & Deprecation Control",
+      "Manage tool change so agent behavior does not silently shift.",
+      1
+     ]
+    ],
+    1,
+    "new",
+    "Integration Platform Owner",
+    "low"
+   ],
+   [
+    "5.6",
+    "AI Developer Experience & Reuse Assets",
+    "Able to make the compliant path the easiest path for delivery teams.",
+    [
+     "The Open Group IT4IT",
+     "The Open Group Open Agile Architecture",
+     "AWS CAF-AI"
+    ],
+    [
+     [
+      "5.6.1",
+      "Reference Implementation & Template Provision",
+      "Publish working templates that already embed required controls."
+     ],
+     [
+      "5.6.2",
+      "SDK, Library & Component Curation",
+      "Curate the approved libraries and shared components teams should build on."
+     ],
+     [
+      "5.6.3",
+      "Self-Service Onboarding",
+      "Let a team start correctly without a bespoke engagement."
+     ],
+     [
+      "5.6.4",
+      "Inner-Source & Asset Reuse",
+      "Make internally built assets discoverable and reusable across the institution."
+     ],
+     [
+      "5.6.5",
+      "Developer Documentation & Support",
+      "Document the platform to the standard its users actually need."
+     ]
+    ],
+    0,
+    "specialization",
+    "Developer Platform Owner",
+    "medium"
+   ]
+  ]
+ ],
+ [
+  "D6",
+  "AI Operations & Reliability",
+  "Able to run AI in production dependably, observably and affordably.",
+  [
+   [
+    "6.1",
+    "AI Deployment & Serving Operations",
+    "Able to place AI systems into production and keep them serving.",
+    [
+     "IBM Generative AI Capability Model",
+     "ITIL 4",
+     "ISO/IEC 5338"
+    ],
+    [
+     [
+      "6.1.1",
+      "Model & Agent Deployment",
+      "Deploy models and agents into production through a controlled mechanism.",
+      1
+     ],
+     [
+      "6.1.2",
+      "Inference Serving & Scaling",
+      "Serve inference at required throughput and scale it with demand."
+     ],
+     [
+      "6.1.3",
+      "Configuration & Feature Flag Control",
+      "Change runtime behavior safely without redeployment."
+     ],
+     [
+      "6.1.4",
+      "System Availability & Continuity Management",
+      "Meet availability and continuity commitments for individual AI systems in production."
+     ],
+     [
+      "6.1.5",
+      "Operational Readiness & Handover",
+      "Hand over to operations with documented procedures before go-live."
+     ]
+    ],
+    0,
+    "specialization",
+    "AI Operations Owner",
+    "medium"
+   ],
+   [
+    "6.2",
+    "AI Monitoring & Observability",
+    "Able to see what an AI system did, in enough detail to explain it afterwards.",
+    [
+     "IBM Generative AI Capability Model",
+     "NVIDIA Enterprise AI Factory",
+     "NIST AI RMF - Measure"
+    ],
+    [
+     [
+      "6.2.1",
+      "Telemetry Instrumentation & Collection",
+      "Instrument AI systems to emit the signals operations and assurance need."
+     ],
+     [
+      "6.2.2",
+      "Trace & Interaction Logging",
+      "Record prompts, context, outputs and decisions to a defined retention standard.",
+      1
+     ],
+     [
+      "6.2.3",
+      "Agent Action & Tool-Call Observability",
+      "See every action an agent took, with what arguments and to what effect.",
+      1
+     ],
+     [
+      "6.2.4",
+      "Alerting & Threshold Management",
+      "Detect abnormal behavior and raise it to someone who can act."
+     ],
+     [
+      "6.2.5",
+      "Operational Dashboarding",
+      "Present operational state to the people accountable for it."
+     ]
+    ],
+    0,
+    "specialization",
+    "AI SRE Owner",
+    "medium"
+   ],
+   [
+    "6.3",
+    "Continuous Evaluation, Drift & Quality Management",
+    "Able to know that a system still performs as it did at release.",
+    [
+     "NIST AI RMF - Measure",
+     "ISO/IEC 5338"
+    ],
+    [
+     [
+      "6.3.1",
+      "Production Output Quality Monitoring",
+      "Measure output quality on live traffic, not only on test sets."
+     ],
+     [
+      "6.3.2",
+      "Data & Concept Drift Detection",
+      "Detect when inputs or the world have moved away from training conditions."
+     ],
+     [
+      "6.3.3",
+      "Bias & Fairness Monitoring in Production",
+      "Monitor outcome disparities on live populations over time."
+     ],
+     [
+      "6.3.4",
+      "Feedback Capture & Ground-Truth Collection",
+      "Capture corrections and outcomes to build evolving ground truth."
+     ],
+     [
+      "6.3.5",
+      "Retraining & Refresh Triggering",
+      "Trigger retraining or refresh on defined conditions rather than on schedule alone."
+     ]
+    ],
+    0,
+    "new",
+    "AI Product Operations Owner",
+    "medium"
+   ],
+   [
+    "6.4",
+    "AI Incident & Problem Management",
+    "Able to stop AI harm quickly and account for it afterwards.",
+    [
+     "ISO/IEC 42001",
+     "NIST AI RMF - Manage",
+     "ITIL 4"
+    ],
+    [
+     [
+      "6.4.1",
+      "AI Incident Detection & Classification",
+      "Recognise an AI incident as distinct from a conventional IT incident."
+     ],
+     [
+      "6.4.2",
+      "Containment & Kill-Switch Execution",
+      "Stop a model or agent immediately, at any hour, with a tested mechanism.",
+      1
+     ],
+     [
+      "6.4.3",
+      "Root Cause Analysis",
+      "Establish why an AI system behaved as it did, including at the data and prompt level."
+     ],
+     [
+      "6.4.4",
+      "Regulatory & Stakeholder Notification",
+      "Notify the parties an incident obliges the institution to notify, within the deadline."
+     ],
+     [
+      "6.4.5",
+      "Corrective Action & Lessons Learned",
+      "Close findings and feed them back into design and control."
+     ]
+    ],
+    0,
+    "lens",
+    "Service Operations Owner",
+    "high"
+   ],
+   [
+    "6.5",
+    "AI Cost Management",
+    "Able to know what AI costs, per unit of value, and to control it.",
+    [
+     "FinOps Foundation",
+     "Microsoft Cloud Adoption Framework for AI",
+     "Gartner (analyst, non-public)"
+    ],
+    [
+     [
+      "6.5.1",
+      "Consumption Metering & Attribution",
+      "Attribute token, compute and storage consumption to an owner."
+     ],
+     [
+      "6.5.2",
+      "Cost Forecasting & Budget Control",
+      "Forecast AI spend and stop it exceeding authorization."
+     ],
+     [
+      "6.5.3",
+      "Unit Economics & Cost-per-Outcome",
+      "Express cost per transaction, per document or per outcome, not per month."
+     ],
+     [
+      "6.5.4",
+      "Optimization & Rightsizing",
+      "Reduce cost through model, caching and routing choices without losing quality."
+     ]
+    ],
+    0,
+    "lens",
+    "FinOps Owner",
+    "high"
+   ],
+   [
+    "6.6",
+    "AI Asset Retirement & Evidence Preservation",
+    "Able to retire AI systems deliberately, with their evidence preserved.",
+    [
+     "ISO/IEC 5338 - retirement processes",
+     "ISO/IEC 42001",
+     "GAO AI Accountability Framework"
+    ],
+    [
+     [
+      "6.6.1",
+      "Periodic Recertification & Review",
+      "Re-confirm at defined intervals that a system should remain in service."
+     ],
+     [
+      "6.6.2",
+      "Deprecation & Sunset Planning",
+      "Plan and communicate withdrawal before it happens."
+     ],
+     [
+      "6.6.3",
+      "Decommissioning & Data Disposition",
+      "Remove the system and dispose of its data under retention rules."
+     ],
+     [
+      "6.6.4",
+      "Archive & Evidence Preservation",
+      "Preserve the records that assurance and legal obligations require after retirement."
+     ]
+    ],
+    0,
+    "lens",
+    "Asset Management Owner",
+    "high"
+   ]
+  ]
+ ],
+ [
+  "D7",
+  "AI Governance, Risk, Security & Assurance",
+  "Able to direct, control, protect and evidence the trustworthy use of AI.",
+  [
+   [
+    "7.1",
+    "AI Policy, Standards & Management System",
+    "Able to operate a functioning management system for AI, not a policy document.",
+    [
+     "ISO/IEC 42001 - AI management system",
+     "ISO/IEC 38507",
+     "GAO AI Accountability Framework"
+    ],
+    [
+     [
+      "7.1.1",
+      "AI Management System Operation",
+      "Operate the AIMS itself — scope, objectives, reviews, continual improvement."
+     ],
+     [
+      "7.1.2",
+      "AI Policy Development & Maintenance",
+      "Issue and maintain the institutional AI policy set."
+     ],
+     [
+      "7.1.3",
+      "Standards & Technical Guideline Issuance",
+      "Translate policy into standards a delivery team can actually build to."
+     ],
+     [
+      "7.1.4",
+      "Governance Body & Decision Rights Operation",
+      "Run the forums that decide AI matters, with defined authority."
+     ],
+     [
+      "7.1.5",
+      "Exception & Dispensation Management",
+      "Grant, time-box and track departures from standard."
+     ],
+     [
+      "7.1.6",
+      "Conformance Monitoring",
+      "Detect where practice has diverged from policy without waiting for audit."
+     ]
+    ],
+    0,
+    "specialization",
+    "AI Management System Owner",
+    "medium"
+   ],
+   [
+    "7.2",
+    "Responsible & Trustworthy AI Practice",
+    "Able to make the institution's stated AI principles operative in delivered systems.",
+    [
+     "NIST AI RMF - Govern",
+     "OECD AI Principles",
+     "ISO/IEC 42001"
+    ],
+    [
+     [
+      "7.2.1",
+      "Fairness Standard Setting & Adjudication",
+      "Set the fairness standard per use case, adjudicate measured disparity against it, and mandate remediation. Measurement is 6.3.3."
+     ],
+     [
+      "7.2.2",
+      "Transparency & Explainability Provision",
+      "Provide explanation proportionate to the decision's consequence."
+     ],
+     [
+      "7.2.3",
+      "Human Agency & Oversight Enforcement",
+      "Verify that designed oversight is actually exercised in operation.",
+      1
+     ],
+     [
+      "7.2.4",
+      "Contestability & Redress Handling",
+      "Give affected people a route to challenge an AI-influenced outcome."
+     ],
+     [
+      "7.2.5",
+      "Environmental & Social Responsibility",
+      "Account for the environmental and social footprint of AI use."
+     ]
+    ],
+    0,
+    "new",
+    "Responsible AI Owner",
+    "medium"
+   ],
+   [
+    "7.3",
+    "AI Risk Management",
+    "Able to identify, treat and monitor AI risk within a stated appetite.",
+    [
+     "NIST AI RMF",
+     "ISO/IEC 23894",
+     "ISO/IEC 42005"
+    ],
+    [
+     [
+      "7.3.1",
+      "AI Risk Identification & Taxonomy",
+      "Maintain a common taxonomy of AI risks the institution recognizes."
+     ],
+     [
+      "7.3.2",
+      "Risk Assessment & Scoring",
+      "Assess AI risks consistently enough to compare them across the portfolio."
+     ],
+     [
+      "7.3.3",
+      "Control Design & Treatment Planning",
+      "Design proportionate controls and record accepted residual risk."
+     ],
+     [
+      "7.3.4",
+      "Risk Appetite & Tolerance Setting",
+      "State how much AI risk the institution will carry, by category."
+     ],
+     [
+      "7.3.5",
+      "Risk Monitoring & Reporting",
+      "Track risk position over time and report it to accountable bodies."
+     ],
+     [
+      "7.3.6",
+      "Independent Model Risk Validation",
+      "Validate consequential models independently of the team that built them."
+     ]
+    ],
+    0,
+    "specialization",
+    "Enterprise Risk Owner",
+    "high"
+   ],
+   [
+    "7.4",
+    "AI Security & Resilience",
+    "Able to defend AI systems against attack, including attacks that use the AI itself.",
+    [
+     "OWASP GenAI Security Project",
+     "ISO/IEC 27001",
+     "IMDA Model AI Governance Framework",
+     "NIST AI RMF"
+    ],
+    [
+     [
+      "7.4.1",
+      "AI Threat Modeling",
+      "Model threats specific to AI systems, not only to their hosting infrastructure."
+     ],
+     [
+      "7.4.2",
+      "Model & Supply Chain Integrity",
+      "Verify the provenance and integrity of models, weights and dependencies."
+     ],
+     [
+      "7.4.3",
+      "Injection & Jailbreak Detection and Response",
+      "Detect subversion attempts in live traffic and respond to them.",
+      1
+     ],
+     [
+      "7.4.4",
+      "Agent Identity & Credential Lifecycle",
+      "Issue, sponsor, rotate and revoke a distinct identity per agent, rather than a shared service account.",
+      1
+     ],
+     [
+      "7.4.5",
+      "Runtime Authorization & Action Control",
+      "Authorise each consequential action at the moment it is attempted.",
+      1
+     ],
+     [
+      "7.4.6",
+      "Output Filtering & Content Safety",
+      "Prevent unsafe or disclosing output from reaching its recipient."
+     ],
+     [
+      "7.4.7",
+      "Adversarial & Red-Team Testing",
+      "Actively attempt to make AI systems fail or misbehave, before release and on a recurring basis thereafter."
+     ]
+    ],
+    1,
+    "new",
+    "Chief Information Security Officer",
+    "medium"
+   ],
+   [
+    "7.5",
+    "Privacy & Data Protection for AI",
+    "Able to use personal data in AI without breaching the institution's obligations.",
+    [
+     "ISO/IEC 27701",
+     "ISO/IEC 42001",
+     "Institutional data protection framework"
+    ],
+    [
+     [
+      "7.5.1",
+      "Privacy Impact Assessment for AI",
+      "Assess privacy impact where AI processing introduces new exposure."
+     ],
+     [
+      "7.5.2",
+      "Personal Data Minimization & Masking",
+      "Reduce personal data to what the purpose requires before it reaches a model."
+     ],
+     [
+      "7.5.3",
+      "Data Subject Rights Handling",
+      "Answer access, correction and objection requests where AI is involved."
+     ],
+     [
+      "7.5.4",
+      "Confidentiality & Non-Disclosure Control",
+      "Prevent confidential material leaving through model providers or outputs."
+     ],
+     [
+      "7.5.5",
+      "Training-Data Privacy Controls",
+      "Control whether institutional data may be used to train provider models."
+     ]
+    ],
+    0,
+    "specialization",
+    "Privacy Officer",
+    "high"
+   ],
+   [
+    "7.6",
+    "Legal, Regulatory & Contractual Compliance for AI",
+    "Able to know which obligations bind the institution and to demonstrate compliance.",
+    [
+     "ISO/IEC 42001",
+     "Institutional legal framework"
+    ],
+    [
+     [
+      "7.6.1",
+      "Regulatory Horizon Monitoring",
+      "Track AI regulation across the jurisdictions the institution operates in."
+     ],
+     [
+      "7.6.2",
+      "Applicability & Obligation Mapping",
+      "Determine which obligations apply to which AI system, and record why."
+     ],
+     [
+      "7.6.3",
+      "Intellectual Property & Copyright Control",
+      "Manage IP exposure in both training inputs and generated outputs."
+     ],
+     [
+      "7.6.4",
+      "Records, Disclosure & Registration Obligations",
+      "Meet registration, logging and disclosure duties on time."
+     ],
+     [
+      "7.6.5",
+      "Institutional Legal Status Determination",
+      "Determine, as a prerequisite to any obligation mapping, how the institution's international legal status affects which AI regimes apply. Not a maturity dimension — a legal determination that exists or does not."
+     ],
+     [
+      "7.6.6",
+      "Regulatory Role Determination",
+      "Establish whether the institution acts as provider, deployer or distributor for each AI system, as the prerequisite to obligation mapping."
+     ]
+    ],
+    0,
+    "specialization",
+    "General Counsel",
+    "medium"
+   ],
+   [
+    "7.7",
+    "AI System & Agent Inventory Management",
+    "Able to state, at any moment, every AI system and agent in operation and who owns it.",
+    [
+     "ISO/IEC 42001",
+     "GAO AI Accountability Framework"
+    ],
+    [
+     [
+      "7.7.1",
+      "AI System Registration",
+      "Register every AI system before it reaches production, with mandatory attributes.",
+      1
+     ],
+     [
+      "7.7.2",
+      "Agent Registration & Attribute Recording",
+      "Record each agent in the inventory with its owner, purpose, scope and identity reference.",
+      1
+     ],
+     [
+      "7.7.3",
+      "Ownership & Accountability Recording",
+      "Record a named accountable individual for every registered AI system and keep it current as people and teams change."
+     ],
+     [
+      "7.7.4",
+      "Shadow AI Discovery",
+      "Find AI in use that was never registered."
+     ],
+     [
+      "7.7.5",
+      "Inventory Completeness Assurance",
+      "Test that the inventory is actually complete rather than assumed to be."
+     ]
+    ],
+    1,
+    "new",
+    "AI Governance Owner",
+    "low"
+   ],
+   [
+    "7.8",
+    "AI Assurance & Evidence Management",
+    "Able to produce and retain evidence about AI that an independent reviewer can rely on. Independent assessment of that evidence is Internal Audit's, not this capability's.",
+    [
+     "GAO AI Accountability Framework",
+     "ISO/IEC 42001",
+     "Institutional internal audit standards"
+    ],
+    [
+     [
+      "7.8.1",
+      "Control Testing & Assurance Planning",
+      "Plan and perform first- and second-line testing of AI controls on a risk basis."
+     ],
+     [
+      "7.8.2",
+      "Evidence Management & Audit Trail",
+      "Retain evidence in a form an auditor can rely on, without reconstruction."
+     ],
+     [
+      "7.8.3",
+      "External Certification & Attestation",
+      "Obtain and maintain external certification where it is required or valuable."
+     ],
+     [
+      "7.8.4",
+      "Finding Remediation Tracking",
+      "Close audit and assurance findings and evidence the closure."
+     ]
+    ],
+    0,
+    "specialization",
+    "Second-Line Assurance Owner",
+    "medium"
+   ],
+   [
+    "7.9",
+    "AI Impact Assessment & Risk Classification",
+    "Able to determine, independently of the team proposing a use case, what impact it may have and what risk tier it belongs to.",
+    [
+     "ISO/IEC 42005",
+     "ISO/IEC 23894",
+     "NIST AI RMF - Map",
+     "IIA Three Lines Model"
+    ],
+    [
+     [
+      "7.9.1",
+      "AI System Impact Assessment",
+      "Conduct the structured impact assessment on affected individuals and groups per ISO/IEC 42005."
+     ],
+     [
+      "7.9.2",
+      "Rights Impact Assessment Determination",
+      "Determine whether a fundamental-rights impact assessment is required for a use case, and conduct it where it is."
+     ],
+     [
+      "7.9.3",
+      "Risk Classification & Tiering",
+      "Assign each use case to a risk tier that determines the controls it must carry."
+     ],
+     [
+      "7.9.4",
+      "Classification Review & Reclassification",
+      "Re-examine impact and risk tier when purpose, data, autonomy or affected population materially change."
+     ],
+     [
+      "7.9.5",
+      "Independent Challenge of First-Line Classification",
+      "Challenge and, where warranted, overturn a proposing team's own assessment of impact or risk tier.",
+      1
+     ]
+    ],
+    1,
+    "specialization",
+    "AI Risk & Governance Owner",
+    "low"
+   ]
+  ]
+ ],
+ [
+  "D8",
+  "AI People, Skills & Adoption",
+  "Able to build and sustain the human side of AI: who does it, who can, and who will.",
+  [
+   [
+    "8.1",
+    "AI Operating Model & Decision Rights",
+    "Able to say who decides what about AI, and who does the work.",
+    [
+     "WEF AI-First Operating System",
+     "MITRE AI Maturity Model",
+     "ISO/IEC 38507"
+    ],
+    [
+     [
+      "8.1.1",
+      "Operating Model Design",
+      "Choose and maintain the centralized, federated or hybrid model for AI work."
+     ],
+     [
+      "8.1.2",
+      "Role & Responsibility Definition",
+      "Define the AI roles the institution needs and what each is accountable for."
+     ],
+     [
+      "8.1.3",
+      "Decision Rights & Escalation Paths",
+      "State who may decide what, and where a disagreement goes."
+     ],
+     [
+      "8.1.4",
+      "Capacity & Resourcing Management",
+      "Match available skilled capacity to the committed portfolio."
+     ]
+    ],
+    0,
+    "lens",
+    "Chief AI Officer",
+    "high"
+   ],
+   [
+    "8.2",
+    "AI Skills & Specialist Capability Building",
+    "Able to grow and retain the specialist skill the portfolio depends on.",
+    [
+     "AWS CAF-AI - People perspective",
+     "WEF AI-First Operating System",
+     "Google AI Adoption Framework"
+    ],
+    [
+     [
+      "8.2.1",
+      "Skills Taxonomy & Assessment",
+      "Define the AI skills required and assess where the institution stands."
+     ],
+     [
+      "8.2.2",
+      "Training & Certification Delivery",
+      "Deliver structured learning against identified gaps."
+     ],
+     [
+      "8.2.3",
+      "Recruitment & Talent Acquisition",
+      "Acquire skills the institution cannot build in time."
+     ],
+     [
+      "8.2.4",
+      "Career Pathways & Retention",
+      "Give AI practitioners a reason to stay."
+     ]
+    ],
+    0,
+    "lens",
+    "Chief Human Resources Officer",
+    "high"
+   ],
+   [
+    "8.3",
+    "AI Literacy & Awareness",
+    "Able to ensure everyone who uses or is affected by AI understands enough to act safely.",
+    [
+     "ISO/IEC 42001",
+     "OECD AI Principles"
+    ],
+    [
+     [
+      "8.3.1",
+      "Baseline AI Literacy Delivery",
+      "Deliver a common minimum level of AI understanding across the institution."
+     ],
+     [
+      "8.3.2",
+      "Role-Specific Awareness",
+      "Give each role the specific understanding its AI exposure requires."
+     ],
+     [
+      "8.3.3",
+      "Acceptable Use Communication",
+      "Make clear, in practical terms, what staff may and may not do with AI."
+     ],
+     [
+      "8.3.4",
+      "Literacy Coverage Evidence",
+      "Evidence who has received what AI training, to the standard the institution's own policy sets."
+     ]
+    ],
+    0,
+    "new",
+    "Learning & Development Owner",
+    "medium"
+   ],
+   [
+    "8.4",
+    "AI Adoption, Enablement & Support",
+    "Able to convert delivered AI capability into actual, sustained use.",
+    [
+     "Google AI Adoption Framework",
+     "AWS CAF-AI",
+     "WEF AI-First Operating System"
+    ],
+    [
+     [
+      "8.4.1",
+      "Adoption Planning & Targeting",
+      "Plan adoption deliberately rather than assuming availability creates use."
+     ],
+     [
+      "8.4.2",
+      "User Onboarding & Enablement",
+      "Bring new users to competent use quickly."
+     ],
+     [
+      "8.4.3",
+      "User Support Provision",
+      "Answer users when AI behaves unexpectedly."
+     ],
+     [
+      "8.4.4",
+      "Adoption Measurement",
+      "Measure real usage and depth of use, not licenses issued."
+     ],
+     [
+      "8.4.5",
+      "Champion Network Operation",
+      "Sustain distributed advocates who carry adoption locally."
+     ]
+    ],
+    0,
+    "lens",
+    "Change Enablement Owner",
+    "high"
+   ],
+   [
+    "8.5",
+    "AI Change Management & Workforce Transition",
+    "Able to carry the workforce through the change AI causes.",
+    [
+     "WEF AI-First Operating System",
+     "Consultancy transformation patterns (non-public)",
+     "OECD AI Principles"
+    ],
+    [
+     [
+      "8.5.1",
+      "Change Impact Assessment",
+      "Assess what AI changes for specific roles and teams before it lands."
+     ],
+     [
+      "8.5.2",
+      "Stakeholder Engagement & Communication",
+      "Engage those affected early enough to influence the design."
+     ],
+     [
+      "8.5.3",
+      "Workforce Transition & Redeployment",
+      "Move people whose work changes into work that is needed."
+     ],
+     [
+      "8.5.4",
+      "Staff Consultation & Representation",
+      "Consult staff representation where AI changes conditions of work."
+     ],
+     [
+      "8.5.5",
+      "Trust & Resistance Management",
+      "Address well-founded concern rather than treating it as an obstacle."
+     ]
+    ],
+    0,
+    "lens",
+    "Chief Human Resources Officer",
+    "high"
+   ],
+   [
+    "8.6",
+    "AI Community & Reuse Culture",
+    "Able to make institutional learning about AI compound rather than repeat.",
+    [
+     "The Open Group Open Agile Architecture",
+     "AWS CAF-AI",
+     "Institutional practice"
+    ],
+    [
+     [
+      "8.6.1",
+      "Practitioner Community Operation",
+      "Sustain a working community across organizational boundaries."
+     ],
+     [
+      "8.6.2",
+      "Knowledge Sharing & Documentation",
+      "Capture what was learned in a form others can find and use."
+     ],
+     [
+      "8.6.3",
+      "Reuse Incentives & Recognition",
+      "Make reuse and contribution visibly worth doing."
+     ]
+    ],
+    0,
+    "lens",
+    "AI CoE Owner",
+    "high"
+   ]
+  ]
+ ]
+]

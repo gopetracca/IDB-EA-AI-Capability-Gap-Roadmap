@@ -1,0 +1,820 @@
+{
+ "_comment": "Verified source register for the AI capability model. Governed by ADR-0010. Edited here; build/prov_data.py only loads it.",
+ "access_date": "3 September 2026",
+ "grades": {
+  "A": "openly available, dated, versioned, standards body or public authority",
+  "B": "openly available and dated, but vendor-published or non-normative",
+  "C": "available but undated / superseded / flagged historical / paywalled",
+  "D": "non-public, or not a publication at all - unusable as evidence externally"
+ },
+ "sources": [
+  {
+   "id": "S01",
+   "short": "ISO/IEC 42001",
+   "title": "Information technology — Artificial intelligence — Management system",
+   "publisher": "ISO / IEC (JTC 1/SC 42)",
+   "edition": "First edition",
+   "date": "2023-12",
+   "url": "https://www.iso.org/standard/42001",
+   "access": "Paid — CHF 225; free contents preview",
+   "type": "Management system standard",
+   "locus_form": "Clause number (e.g. 8.2) or Annex A control (e.g. A.5)",
+   "grade": "C",
+   "status": "Current",
+   "caution": "Paywalled: a reviewer without a licence cannot open it. EN ISO/IEC 42001:2026 is an identical European adoption, not a new edition."
+  },
+  {
+   "id": "S02",
+   "short": "ISO/IEC 5338",
+   "title": "Information technology — Artificial intelligence — AI system life cycle processes",
+   "publisher": "ISO / IEC (JTC 1/SC 42)",
+   "edition": "First edition",
+   "date": "2023-12",
+   "url": "https://www.iso.org/standard/81118.html",
+   "access": "Paid",
+   "type": "Process standard",
+   "locus_form": "Clause 6 process id (e.g. 6.4.8 AI data engineering)",
+   "grade": "C",
+   "status": "Current",
+   "caution": "Paywalled. 6.4.7 Knowledge acquisition, 6.4.8 AI data engineering and 6.4.14 Continuous validation are the AI-specific additions over ISO/IEC/IEEE 15288."
+  },
+  {
+   "id": "S03",
+   "short": "ISO/IEC 38507",
+   "title": "Information technology — Governance of IT — Governance implications of the use of artificial intelligence by organizations",
+   "publisher": "ISO / IEC (JTC 1/SC 40)",
+   "edition": "First edition",
+   "date": "2022-04",
+   "url": "https://www.iso.org/standard/56641.html",
+   "access": "Paid",
+   "type": "Governance standard",
+   "locus_form": "Clause number (e.g. 6.3 Governance of decision-making)",
+   "grade": "C",
+   "status": "Current",
+   "caution": "Paywalled. Our earlier short title paraphrased it — the canonical wording is 'by organizations', not 'for organizations'."
+  },
+  {
+   "id": "S04",
+   "short": "ISO/IEC 23894",
+   "title": "Information technology — Artificial intelligence — Guidance on risk management",
+   "publisher": "ISO / IEC (JTC 1/SC 42)",
+   "edition": "First edition",
+   "date": "2023-02",
+   "url": "https://www.iso.org/standard/77304.html",
+   "access": "Paid — CHF 155",
+   "type": "Guidance standard",
+   "locus_form": "Clause number (e.g. 6.4 Risk assessment)",
+   "grade": "C",
+   "status": "Current",
+   "caution": "Paywalled. Structure mirrors ISO 31000."
+  },
+  {
+   "id": "S05",
+   "short": "ISO/IEC 42005",
+   "title": "Information technology — Artificial intelligence (AI) — AI system impact assessment",
+   "publisher": "ISO / IEC (JTC 1/SC 42)",
+   "edition": "First edition",
+   "date": "2025-05",
+   "url": "https://www.iso.org/standard/42005",
+   "access": "Paid — CHF 181",
+   "type": "Guidance standard",
+   "locus_form": "Clause number (e.g. 5.7 Establishing thresholds for sensitive uses)",
+   "grade": "C",
+   "status": "Current",
+   "caution": "Paywalled. Annex A gives the bridge to ISO/IEC 42001."
+  },
+  {
+   "id": "S06",
+   "short": "ISO/IEC 27001",
+   "title": "Information security, cybersecurity and privacy protection — Information security management systems — Requirements",
+   "publisher": "ISO / IEC (JTC 1/SC 27)",
+   "edition": "Third edition + Amd 1:2024",
+   "date": "2022-10 / 2024",
+   "url": "https://www.iso.org/standard/27001",
+   "access": "Paid — CHF 155; the 2024 climate amendment is free",
+   "type": "Management system standard",
+   "locus_form": "Clause number or Annex A control (A.5 / A.6 / A.7 / A.8)",
+   "grade": "C",
+   "status": "Current",
+   "caution": "Paywalled. The 2022 edition renamed Annex A to 'Information security controls reference' — the 2013 wording no longer applies."
+  },
+  {
+   "id": "S07",
+   "short": "ISO/IEC 27701",
+   "title": "Information security, cybersecurity and privacy protection — Privacy information management systems — Requirements and guidance",
+   "publisher": "ISO / IEC (JTC 1/SC 27)",
+   "edition": "Second edition",
+   "date": "2025-10",
+   "url": "https://www.iso.org/standard/27701",
+   "access": "Paid — CHF 225",
+   "type": "Management system standard",
+   "locus_form": "Clause number (e.g. 8.2 Privacy risk assessment) or Annex A control",
+   "grade": "C",
+   "status": "Restructured — old loci invalid",
+   "caution": "The 2025 second edition is a standalone management system standard; ISO/IEC 27701:2019 is withdrawn and its clause references no longer resolve. Annex F carries the correspondence."
+  },
+  {
+   "id": "S08",
+   "short": "NIST AI RMF",
+   "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+   "publisher": "NIST, U.S. Department of Commerce",
+   "edition": "NIST AI 100-1, Version 1.0",
+   "date": "2023-01-26",
+   "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf",
+   "access": "Free — no registration",
+   "type": "Risk management framework",
+   "locus_form": "Function, space, category.subcategory — e.g. GOVERN 1.1. NOT hyphenated",
+   "grade": "A",
+   "status": "Current",
+   "caution": "The hyphenated form GOVERN-1.1 is wrong; that convention belongs to AI 600-1 action ids (GV-1.1-001). Do not mix the two."
+  },
+  {
+   "id": "S09",
+   "short": "NIST AI 600-1",
+   "title": "Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile",
+   "publisher": "NIST, U.S. Department of Commerce",
+   "edition": "NIST AI 600-1",
+   "date": "2024-07-26",
+   "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+   "access": "Free — no registration",
+   "type": "Profile of S08",
+   "locus_form": "Named risk from clause 2 (e.g. Confabulation) or action id (e.g. GV-1.1-001)",
+   "grade": "A",
+   "status": "Current",
+   "caution": "A cross-sectoral profile of the AI RMF, not a standalone framework — always cite alongside S08."
+  },
+  {
+   "id": "S10",
+   "short": "OECD AI Principles",
+   "title": "Recommendation of the Council on Artificial Intelligence (OECD/LEGAL/0449)",
+   "publisher": "OECD",
+   "edition": "Adopted 2019; amended 2023-11 and 2024-05",
+   "date": "2024-05-03",
+   "url": "https://legalinstruments.oecd.org/en/instruments/OECD-LEGAL-0449",
+   "access": "Free",
+   "type": "Intergovernmental recommendation",
+   "locus_form": "Section.Principle with trailing period — e.g. 1.3.",
+   "grade": "A",
+   "status": "Current",
+   "caution": "Cite the amended text. Principle 1.2 was retitled in 2024 — the 2019 name 'Human-centred values and fairness' is stale. Section 2 items are recommendations to adherents, not principles."
+  },
+  {
+   "id": "S11",
+   "short": "GAO AI Accountability Framework",
+   "title": "Artificial Intelligence: An Accountability Framework for Federal Agencies and Other Entities",
+   "publisher": "U.S. Government Accountability Office",
+   "edition": "GAO-21-519SP",
+   "date": "2021-06-30",
+   "url": "https://www.gao.gov/assets/gao-21-519sp.pdf",
+   "access": "Free",
+   "type": "Accountability framework",
+   "locus_form": "Principle name (Governance / Data / Performance / Monitoring) plus the key practice wording",
+   "grade": "A",
+   "status": "Current",
+   "caution": "GAO uses no numbered clause identifiers, so a locus is a principle name plus practice text. GAO-23-106811 is testimony summarising this, not a replacement."
+  },
+  {
+   "id": "S12",
+   "short": "AWS CAF-AI",
+   "title": "AWS Cloud Adoption Framework for Artificial Intelligence, Machine Learning, and Generative AI",
+   "publisher": "Amazon Web Services",
+   "edition": "Whitepaper",
+   "date": "2024-02-13",
+   "url": "https://docs.aws.amazon.com/whitepapers/latest/aws-caf-for-ai/aws-caf-for-ai.html",
+   "access": "Free",
+   "type": "Capability model + adoption playbook",
+   "locus_form": "Perspective name (Business / People / Governance / Platform / Security / Operations) plus capability name",
+   "grade": "C",
+   "status": "Flagged historical by AWS",
+   "caution": "AWS now displays 'This whitepaper is for historical reference only.' Cite it as a February 2024 artifact and say so. It is our most-used vendor capability source."
+  },
+  {
+   "id": "S13",
+   "short": "Microsoft CAF for AI",
+   "title": "Cloud Adoption Framework for Azure — AI adoption",
+   "publisher": "Microsoft",
+   "edition": "Living document — no version number",
+   "date": "Accessed 3 September 2026",
+   "url": "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ai/",
+   "access": "Free",
+   "type": "Adoption playbook — phases and checklists",
+   "locus_form": "Phase name (Strategy / Plan / Ready / Govern / Secure / Manage)",
+   "grade": "B",
+   "status": "Current",
+   "caution": "Not a capability model and not a maturity model — there are no maturity levels and no capability taxonomy. Product-steering by design. Cite as a phase model only."
+  },
+  {
+   "id": "S14",
+   "short": "Google AI Adoption Framework",
+   "title": "Google Cloud's AI Adoption Framework",
+   "publisher": "Google Cloud",
+   "edition": "Undated whitepaper",
+   "date": "UNDATED",
+   "url": "https://services.google.com/fh/files/misc/ai_adoption_framework_whitepaper.pdf",
+   "access": "Free",
+   "type": "Maturity model (6 themes x 3 epochs)",
+   "locus_form": "Theme name (Learn / Lead / Access / Scale / Secure / Automate) and epoch (Tactical / Strategic / Transformational)",
+   "grade": "C",
+   "status": "Undated, pre-GenAI",
+   "caution": "Carries no date or version and says nothing about generative AI or agents. Genuinely a maturity grid, but do not present it as current."
+  },
+  {
+   "id": "S15",
+   "short": "IBM GenAI Capability Model",
+   "title": "Generative AI Capability Model",
+   "publisher": "IBM (Think — Architecture patterns)",
+   "edition": "Living page",
+   "date": "Last updated 2025-04-30",
+   "url": "https://www.ibm.com/architectures/patterns/genai-capability-model",
+   "access": "Free",
+   "type": "Technical capability model",
+   "locus_form": "Capability category name (e.g. GenAI Governance)",
+   "grade": "B",
+   "status": "Current",
+   "caution": "A solution/platform capability model, not an organizational one — not interchangeable with AWS CAF-AI. Category count renders as 6 or 7 across IBM's own paths; confirm on the citation date."
+  },
+  {
+   "id": "S16",
+   "short": "NVIDIA Enterprise AI Factory",
+   "title": "NVIDIA Enterprise AI Factory Design Guide",
+   "publisher": "NVIDIA Corporation",
+   "edition": "White paper",
+   "date": "Last updated 2026-05-27",
+   "url": "https://docs.nvidia.com/ai-enterprise/planning-resource/ai-factory-white-paper/latest/",
+   "access": "Free",
+   "type": "Reference architecture / validated design",
+   "locus_form": "Named section (e.g. Agentic AI in the Factory)",
+   "grade": "B",
+   "status": "Current",
+   "caution": "Cite the design guide on docs.nvidia.com, never the nvidia.com validated-design landing page, which is marketing collateral. Infrastructure layer only; hardware-prescriptive."
+  },
+  {
+   "id": "S17",
+   "short": "SAP AI-native North Star",
+   "title": "SAP AI-native North Star architecture",
+   "publisher": "SAP (SAP Architecture Center)",
+   "edition": "Living document",
+   "date": "Last updated 2026-05-13",
+   "url": "https://architecture.learning.sap.com/docs/ai-native-north-star-architecture",
+   "access": "Free",
+   "type": "Aspirational reference architecture",
+   "locus_form": "Layer name (User Experience / Process / Foundation / Platform)",
+   "grade": "B",
+   "status": "Current",
+   "caution": "SAP's own disclaimer: 'This is not a specification, roadmap, or promise of delivery. It is a direction of travel.' Quote that if cited. SAP-product-scoped."
+  },
+  {
+   "id": "S18",
+   "short": "Salesforce ADLC",
+   "title": "The Agent Development Lifecycle: From Conception to Production",
+   "publisher": "Salesforce (Salesforce Architects)",
+   "edition": "Living document — undated",
+   "date": "UNDATED, accessed 3 September 2026",
+   "url": "https://architect.salesforce.com/docs/architect/fundamentals/guide/agent-development-lifecycle.html",
+   "access": "Free",
+   "type": "Lifecycle / process model",
+   "locus_form": "Phase name (Ideation and Design / Development / Testing and Validation / Deployment / Monitoring and Tuning)",
+   "grade": "C",
+   "status": "Undated",
+   "caution": "No publication date exists — cite as undated, accessed on a stated day. Agentforce-scoped, so vendor-specific rather than an industry lifecycle."
+  },
+  {
+   "id": "S19",
+   "short": "WEF AI-First Operating System",
+   "title": "The AI-First Operating System: A Blueprint for Operating and Business Model Innovation",
+   "publisher": "World Economic Forum, in collaboration with Kearney",
+   "edition": "Report",
+   "date": "2026-06",
+   "url": "https://www.weforum.org/publications/the-ai-first-operating-system-a-blueprint-for-operating-and-business-model-innovation/",
+   "access": "Free",
+   "type": "Thought-leadership blueprint",
+   "locus_form": "Building block name (Intelligence engines / Adaptive technology stacks / Operations redesign / Human-AI teaming / New value creation)",
+   "grade": "B",
+   "status": "Current",
+   "caution": "The only vendor-neutral source in the vendor group, which makes it useful for framing. Its five building blocks are conceptual groupings, not assessable capabilities — do not rest a gap assessment on it."
+  },
+  {
+   "id": "S20",
+   "short": "TOGAF Standard",
+   "title": "The TOGAF Standard, 10th Edition",
+   "publisher": "The Open Group",
+   "edition": "10th Edition",
+   "date": "2022-04-25",
+   "url": "https://pubs.opengroup.org/togaf-standard/",
+   "access": "Free for non-commercial after registration; paid for commercial",
+   "type": "Architecture framework",
+   "locus_form": "Named Fundamental Content document plus section (e.g. Architecture Content, §33.2.4)",
+   "grade": "B",
+   "status": "Current",
+   "caution": "The 10th Edition is six Fundamental Content documents plus a Library of Series Guides, not one book with Parts I-VI. Open Group publication URLs increasingly sit behind SSO — check the link resolves on the day you publish."
+  },
+  {
+   "id": "S21",
+   "short": "TOGAF G193 Capability-Based Planning",
+   "title": "Capability-Based Planning: Supporting Project/Portfolio and Digital Capabilities Mapping Using the TOGAF and ArchiMate Standards",
+   "publisher": "The Open Group",
+   "edition": "Series Guide G193",
+   "date": "Current",
+   "url": "https://publications.opengroup.org/g193",
+   "access": "Free for non-commercial after registration",
+   "type": "Series Guide",
+   "locus_form": "Series Guide reference - G193 for capability-based planning, G211 for business capabilities",
+   "grade": "B",
+   "status": "Current",
+   "caution": "REPLACES our earlier citation of 'TOGAF (capability-based planning)'. Chapter 28 of TOGAF 9.2 was deliberately REMOVED in the 10th Edition; capability-based planning is not a section of the current Standard. For business capabilities themselves cite G211 (Business Capabilities, Version 2, April 2022), which supersedes G189 - NOT G190, which is Information Mapping."
+  },
+  {
+   "id": "S22",
+   "short": "Open Agile Architecture",
+   "title": "The Open Group Open Agile Architecture Standard, Version 2.0",
+   "publisher": "The Open Group",
+   "edition": "Version 2.0",
+   "date": "2026-04 (confirm from cover)",
+   "url": "https://www.opengroup.org/AgileArchitecture",
+   "access": "Free perpetual non-commercial licence; paid commercial",
+   "type": "Architecture standard",
+   "locus_form": "Part name (The Agile Way of Thinking / The Agile Enterprise / The Agile Architecture Capability / The Ways of Supporting)",
+   "grade": "B",
+   "status": "Current",
+   "caution": "v2.0 restructured the Parts — v1.0 (C208, 2020) part names do not apply. The publication year is not rendered on The Open Group's announcement page; confirm from the document cover."
+  },
+  {
+   "id": "S23",
+   "short": "IT4IT Standard",
+   "title": "The Open Group IT4IT Standard, Version 3.0.1",
+   "publisher": "The Open Group",
+   "edition": "Version 3.0.1",
+   "date": "2024-10",
+   "url": "https://pubs.opengroup.org/it4it/3.0.1/standard/",
+   "access": "Free to read",
+   "type": "Reference architecture / operating model",
+   "locus_form": "Value stream name (Evaluate / Explore / Integrate / Deploy / Release / Consume / Operate)",
+   "grade": "B",
+   "status": "Current",
+   "caution": "v3.0 replaced the four v2.x value streams (Strategy to Portfolio, Requirement to Deploy, Request to Fulfill, Detect to Correct). Those names are superseded — do not use them."
+  },
+  {
+   "id": "S24",
+   "short": "ITIL 4",
+   "title": "ITIL 4",
+   "publisher": "PeopleCert International Ltd (acquired AXELOS 2021)",
+   "edition": "ITIL 4; practice guidance refreshed from 2023",
+   "date": "2019 onward",
+   "url": "https://www.peoplecert.org/",
+   "access": "Paid — publications or certification/membership",
+   "type": "Practice guide",
+   "locus_form": "Practice name, or Service Value Chain activity",
+   "grade": "C",
+   "status": "Superseded in part",
+   "caution": "ITIL Version 5 was announced January 2026 and is rolling out; ITIL 4 remains valid in parallel through a transition period. A 2026 deliverable citing ITIL 4 as THE current ITIL needs that qualifier. Not freely readable."
+  },
+  {
+   "id": "S25",
+   "short": "EDM Council DCAM",
+   "title": "Data Management Capability Assessment Model (DCAM)",
+   "publisher": "EDM Council",
+   "edition": "Version 3",
+   "date": "2025-06-30",
+   "url": "https://edmcouncil.org/frameworks/dcam/",
+   "access": "Members only",
+   "type": "Capability / maturity assessment model",
+   "locus_form": "Component name plus capability number",
+   "grade": "C",
+   "status": "Current but members-only",
+   "caution": "Available exclusively to member firms, so a reviewer outside the membership cannot verify a citation. 8 components / 34 capabilities / 101 sub-capabilities."
+  },
+  {
+   "id": "S26",
+   "short": "EDM Council ADAC",
+   "title": "AI, Data & Analytics Controls (ADAC)",
+   "publisher": "EDM Council",
+   "edition": "NOT A PUBLICATION",
+   "date": "n/a",
+   "url": "https://edmcouncil.org/forums-workgroups/adac-workgroup/",
+   "access": "n/a",
+   "type": "Workgroup, not a framework",
+   "locus_form": "None — nothing citable exists",
+   "grade": "D",
+   "status": "Not a publication",
+   "caution": "REMOVE. ADAC is a workgroup, absent from EDM Council's own Frameworks page; evidence of activity is webinars and a 2024 SIG deck. If an EDM Council AI/data-controls reference is needed, cite CDMC, which is openly available."
+  },
+  {
+   "id": "S27",
+   "short": "FinOps Framework",
+   "title": "The FinOps Framework",
+   "publisher": "FinOps Foundation (a Linux Foundation project)",
+   "edition": "FinOps Framework 2026",
+   "date": "2026-03-19",
+   "url": "https://www.finops.org/framework/",
+   "access": "Free",
+   "type": "Capability / practice framework",
+   "locus_form": "Domain name plus capability name (e.g. Optimize Usage & Cost — Rate Optimization)",
+   "grade": "A",
+   "status": "Current",
+   "caution": "'FinOps for AI' is a named Technology Category with nine AI-specific KPIs; 'AI for FinOps' is a different topic. Do not conflate the two in a citation."
+  },
+  {
+   "id": "S28",
+   "short": "IIA Three Lines Model",
+   "title": "Assurance and Advice in Support of Effective Governance: Three Lines Model Statement of Position",
+   "publisher": "The Institute of Internal Auditors",
+   "edition": "Statement of Position",
+   "date": "2026-07-08",
+   "url": "https://www.theiia.org/globalassets/site/resources/statements-of-position/tlm_assurance_advice_support_effective_gov_en.pdf",
+   "access": "Free",
+   "type": "Governance model / Statement of Position",
+   "locus_form": "Principle number (1-5), or Part I / Part II",
+   "grade": "A",
+   "status": "Current",
+   "caution": "REPLACES the 2020 position paper, which The IIA marks superseded. The 2026 Statement has FIVE principles, not six. 'Three Lines of Defense' is doubly retired — do not use it."
+  },
+  {
+   "id": "S29",
+   "short": "MITRE AI Maturity Model",
+   "title": "The MITRE AI Maturity Model and Organizational Assessment Tool Guide",
+   "publisher": "The MITRE Corporation",
+   "edition": "Guide",
+   "date": "2022-11-17",
+   "url": "https://aimaturitymodel.mitre.org/",
+   "access": "Free — guide only; assessment tool on request",
+   "type": "Maturity model",
+   "locus_form": "Pillar name (Ethical, Equitable, and Responsible Use / Strategy and Resources / Organization / Technology Enablers / Data / Performance and Application)",
+   "grade": "B",
+   "status": "Ageing",
+   "caution": "Six pillars, 20 dimensions, five levels (Initial / Adopted / Defined / Managed / Optimized). Pre-dates the generative-AI wave — defensible as a maturity reference, not as current AI guidance."
+  },
+  {
+   "id": "S30",
+   "short": "MIT CISR",
+   "title": "Grow Enterprise AI Maturity for Bottom-Line Impact (MIT CISR Research Briefing, Vol. XXV, No. 8)",
+   "publisher": "MIT Sloan Center for Information Systems Research",
+   "edition": "Research Briefing Vol. XXV No. 8",
+   "date": "2025-08-21",
+   "url": "https://cisr.mit.edu/publication/2025_0801_EnterpriseAIMaturityUpdate_WoernerSebastianWeillKaganer",
+   "access": "Readable on site; PDF requires login",
+   "type": "Research briefing",
+   "locus_form": "Briefing volume and number, plus stage name",
+   "grade": "B",
+   "status": "Current",
+   "caution": "'MIT CISR' is a research centre, not a document — our earlier citation named no artifact. This briefing is the correct substitute: four stages (Experiment and Prepare / Build Pilots and Capabilities / Develop AI Ways of Working / Become AI Future Ready)."
+  },
+  {
+   "id": "S31",
+   "short": "IMDA Model AI Governance Framework",
+   "title": "Model AI Governance Framework for Generative AI",
+   "publisher": "IMDA Singapore and AI Verify Foundation",
+   "edition": "Final",
+   "date": "2024-05-30",
+   "url": "https://aiverifyfoundation.sg/wp-content/uploads/2024/05/Model-AI-Governance-Framework-for-Generative-AI-May-2024-1-1.pdf",
+   "access": "Free",
+   "type": "Voluntary governance framework",
+   "locus_form": "Dimension name (one of nine, e.g. Content Provenance)",
+   "grade": "A",
+   "status": "Current — but our citation was ambiguous",
+   "caution": "THREE documents share this name: the original (2nd ed. 2020), the Generative AI framework (May 2024, nine dimensions) and the Agentic AI framework (v1.0, January 2026, four dimensions). Our model cited it unqualified. Pick one per capability."
+  },
+  {
+   "id": "S31b",
+   "short": "IMDA Agentic AI Framework",
+   "title": "Model AI Governance Framework for Agentic AI",
+   "publisher": "IMDA Singapore",
+   "edition": "Version 1.0",
+   "date": "2026-01-22",
+   "url": "https://www.imda.gov.sg/-/media/imda/files/about/emerging-tech-and-research/artificial-intelligence/mgf-for-agentic-ai.pdf",
+   "access": "Free",
+   "type": "Voluntary governance framework",
+   "locus_form": "Dimension name (one of four)",
+   "grade": "A",
+   "status": "Current",
+   "caution": "Added during this review as the correct source for agentic capabilities previously attributed to the generative-AI framework."
+  },
+  {
+   "id": "S32",
+   "short": "OWASP GenAI Security Project",
+   "title": "OWASP Top 10 for LLM Applications 2026 (OWASP GenAI Security Project)",
+   "publisher": "OWASP Foundation",
+   "edition": "2026, Version 1.0",
+   "date": "2026-08 / launch 2026-09-02",
+   "url": "https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/",
+   "access": "Free, open source",
+   "type": "Awareness document / risk list",
+   "locus_form": "Entry NAME, never the number (e.g. Excessive Agency)",
+   "grade": "A",
+   "status": "Current",
+   "caution": "Item numbers change between editions — cite by name only. The owasp.org/www-project-top-10-for-large-language-model-applications page was still serving the 2025 list; do not cite that URL. Also under this project: Agent Control Standard, Top 10 for Agentic Applications."
+  },
+  {
+   "id": "S33",
+   "short": "MCP specification",
+   "title": "Model Context Protocol Specification",
+   "publisher": "Agentic AI Foundation (Linux Foundation); originated at Anthropic",
+   "edition": "Revision 2026-07-28",
+   "date": "2026-07-28",
+   "url": "https://modelcontextprotocol.io/specification/2026-07-28",
+   "access": "Free, open source",
+   "type": "Protocol specification",
+   "locus_form": "Dated revision plus section (e.g. 2026-07-28, Server Features)",
+   "grade": "A",
+   "status": "Current",
+   "caution": "Breaking revision: sessions and the initialize handshake removed, server/discover added, Roots, Sampling and Logging deprecated. Architecture text written against 2025-11-25 or earlier is out of date. Governance moved to the Linux Foundation in December 2025 — cite AAIF, not Anthropic."
+  },
+  {
+   "id": "S34",
+   "short": "Gartner",
+   "title": "Gartner research (various)",
+   "publisher": "Gartner, Inc.",
+   "edition": "Subscription research",
+   "date": "Various",
+   "url": "https://www.gartner.com/",
+   "access": "Subscription — non-public",
+   "type": "Analyst research",
+   "locus_form": "Document number only, in internal documents only",
+   "grade": "D",
+   "status": "Non-public",
+   "caution": "Licensed material. Usable internally under the Bank's subscription; must not appear in deliverables that circulate externally, and a reviewer without a seat cannot open it. Cannot serve as evidence."
+  },
+  {
+   "id": "S35",
+   "short": "Consultancy transformation patterns",
+   "title": "Consultancy transformation patterns (unattributed)",
+   "publisher": "Various consultancies",
+   "edition": "n/a",
+   "date": "n/a",
+   "url": "n/a",
+   "access": "Non-public",
+   "type": "Practitioner patterns",
+   "locus_form": "None — nothing citable exists",
+   "grade": "D",
+   "status": "Not a publication",
+   "caution": "REMOVE or replace. An unattributed pattern is not evidence; it cannot be opened, dated or verified by anyone."
+  },
+  {
+   "id": "S36",
+   "short": "IDB institutional practice",
+   "title": "IDB internal practice (undocumented)",
+   "publisher": "Inter-American Development Bank",
+   "edition": "n/a",
+   "date": "n/a",
+   "url": "Internal",
+   "access": "Internal",
+   "type": "Institutional practice",
+   "locus_form": "Name the internal document, owner and date",
+   "grade": "D",
+   "status": "Needs a named internal document",
+   "caution": "Legitimate as an origin, but 'institutional practice' names nothing a reviewer can open. Each use must be replaced with a named internal policy, standard or procedure with an owner and a date."
+  },
+  {
+   "id": "S37",
+   "short": "IDB data protection framework",
+   "title": "IDB data protection framework",
+   "publisher": "Inter-American Development Bank",
+   "edition": "n/a",
+   "date": "n/a",
+   "url": "Internal",
+   "access": "Internal",
+   "type": "Institutional policy",
+   "locus_form": "Name the instrument and clause",
+   "grade": "D",
+   "status": "Needs pinning",
+   "caution": "Data Governance to confirm the instrument name, version and the specific provision relied on."
+  },
+  {
+   "id": "S38",
+   "short": "IDB legal framework",
+   "title": "IDB legal framework",
+   "publisher": "Inter-American Development Bank",
+   "edition": "n/a",
+   "date": "n/a",
+   "url": "Internal",
+   "access": "Internal",
+   "type": "Institutional policy",
+   "locus_form": "Name the instrument and clause",
+   "grade": "D",
+   "status": "Needs pinning",
+   "caution": "Legal to confirm which instrument is relied on. Related: the obligations register (18 statutory references, all still marked candidate)."
+  },
+  {
+   "id": "S39",
+   "short": "IDB internal audit standards",
+   "title": "IDB internal audit standards",
+   "publisher": "Inter-American Development Bank",
+   "edition": "n/a",
+   "date": "n/a",
+   "url": "Internal",
+   "access": "Internal",
+   "type": "Institutional policy",
+   "locus_form": "Name the instrument and clause",
+   "grade": "D",
+   "status": "Needs pinning",
+   "caution": "Internal Audit to confirm which standards are relied on and whether the IIA Global Internal Audit Standards (2024) are adopted directly."
+  }
+ ],
+ "normalize": {
+  "ISO/IEC 42001": {
+   "source": "S01",
+   "locus": ""
+  },
+  "ISO/IEC 42001 - third-party control": {
+   "source": "S01",
+   "locus": "A.10 Third-party and customer relationships"
+  },
+  "ISO/IEC 42001 - context and interested parties": {
+   "source": "S01",
+   "locus": "Clause 4 Context of the organization"
+  },
+  "ISO/IEC 42001 - AI management system": {
+   "source": "S01",
+   "locus": "Clauses 4-10 (the management system)"
+  },
+  "ISO/IEC 5338": {
+   "source": "S02",
+   "locus": ""
+  },
+  "ISO/IEC 5338 - retirement processes": {
+   "source": "S02",
+   "locus": "6.4.17 Disposal"
+  },
+  "ISO/IEC 38507": {
+   "source": "S03",
+   "locus": ""
+  },
+  "ISO/IEC 23894": {
+   "source": "S04",
+   "locus": ""
+  },
+  "ISO/IEC 42005": {
+   "source": "S05",
+   "locus": ""
+  },
+  "ISO/IEC 27001": {
+   "source": "S06",
+   "locus": ""
+  },
+  "ISO/IEC 27701": {
+   "source": "S07",
+   "locus": ""
+  },
+  "NIST AI RMF": {
+   "source": "S08",
+   "locus": ""
+  },
+  "NIST AI RMF - Govern": {
+   "source": "S08",
+   "locus": "GOVERN"
+  },
+  "NIST AI RMF - Map": {
+   "source": "S08",
+   "locus": "MAP"
+  },
+  "NIST AI RMF - Measure": {
+   "source": "S08",
+   "locus": "MEASURE"
+  },
+  "NIST AI RMF - Manage": {
+   "source": "S08",
+   "locus": "MANAGE"
+  },
+  "NIST AI 600-1 Generative AI Profile": {
+   "source": "S09",
+   "locus": ""
+  },
+  "OECD AI Principles": {
+   "source": "S10",
+   "locus": ""
+  },
+  "GAO AI Accountability Framework": {
+   "source": "S11",
+   "locus": ""
+  },
+  "AWS CAF-AI": {
+   "source": "S12",
+   "locus": ""
+  },
+  "AWS CAF-AI - Business perspective": {
+   "source": "S12",
+   "locus": "Business perspective"
+  },
+  "AWS CAF-AI - Platform perspective": {
+   "source": "S12",
+   "locus": "Platform perspective"
+  },
+  "AWS CAF-AI - People perspective": {
+   "source": "S12",
+   "locus": "People perspective"
+  },
+  "Microsoft Cloud Adoption Framework for AI": {
+   "source": "S13",
+   "locus": ""
+  },
+  "Google AI Adoption Framework": {
+   "source": "S14",
+   "locus": ""
+  },
+  "IBM Generative AI Capability Model": {
+   "source": "S15",
+   "locus": ""
+  },
+  "IBM GenAI Capability Model": {
+   "source": "S15",
+   "locus": ""
+  },
+  "NVIDIA Enterprise AI Factory": {
+   "source": "S16",
+   "locus": ""
+  },
+  "SAP AI-native North Star architecture": {
+   "source": "S17",
+   "locus": ""
+  },
+  "Salesforce Agent Development Lifecycle": {
+   "source": "S18",
+   "locus": ""
+  },
+  "WEF AI-First Operating System": {
+   "source": "S19",
+   "locus": ""
+  },
+  "The Open Group TOGAF": {
+   "source": "S20",
+   "locus": ""
+  },
+  "TOGAF (capability-based planning)": {
+   "source": "S21",
+   "locus": ""
+  },
+  "The Open Group Open Agile Architecture": {
+   "source": "S22",
+   "locus": ""
+  },
+  "The Open Group IT4IT": {
+   "source": "S23",
+   "locus": ""
+  },
+  "ITIL 4": {
+   "source": "S24",
+   "locus": ""
+  },
+  "EDM Council DCAM/ADAC": {
+   "source": "S25",
+   "locus": ""
+  },
+  "FinOps Foundation": {
+   "source": "S27",
+   "locus": ""
+  },
+  "IIA Three Lines Model": {
+   "source": "S28",
+   "locus": ""
+  },
+  "MITRE AI Maturity Model": {
+   "source": "S29",
+   "locus": ""
+  },
+  "MIT CISR": {
+   "source": "S30",
+   "locus": ""
+  },
+  "IMDA Model AI Governance Framework": {
+   "source": "S31",
+   "locus": ""
+  },
+  "OWASP GenAI Security Project": {
+   "source": "S32",
+   "locus": ""
+  },
+  "Model Context Protocol specification": {
+   "source": "S33",
+   "locus": ""
+  },
+  "Gartner (analyst, non-public)": {
+   "source": "S34",
+   "locus": ""
+  },
+  "Consultancy transformation patterns (non-public)": {
+   "source": "S35",
+   "locus": ""
+  },
+  "Institutional practice": {
+   "source": "S36",
+   "locus": ""
+  },
+  "Institutional data protection framework": {
+   "source": "S37",
+   "locus": ""
+  },
+  "Institutional legal framework": {
+   "source": "S38",
+   "locus": ""
+  },
+  "Institutional internal audit standards": {
+   "source": "S39",
+   "locus": ""
+  }
+ },
+ "extra_from": {
+  "EDM Council DCAM/ADAC": {
+   "source": "S26",
+   "locus": ""
+  }
+ }
+}

@@ -1,0 +1,403 @@
+<script>
+const DATA = /*DATA*/;
+const D = DATA.domains, C = DATA.caps;
+const MC = ['var(--m1)','var(--m2)','var(--m3)','var(--m4)','var(--m5)'];
+const RC = ['var(--r1)','var(--r2)','var(--r3)','var(--r4)','var(--r5)'];
+const MLAB = {1:'Initial',2:'Repeatable',3:'Defined',4:'Managed',5:'Optimising'};
+const RLAB = {0:'Not available',1:'Available',2:'Approved',3:'Standardised',4:'Industrialised',5:'Productised'};
+const NS = 'http://www.w3.org/2000/svg';
+const el = (t,a,p) => { const n = document.createElement(t);
+  if(a) for(const k in a){ k==='html'?n.innerHTML=a[k]:k==='text'?n.textContent=a[k]:n.setAttribute(k,a[k]); }
+  if(p) p.appendChild(n); return n; };
+const sv = (t,a,p) => { const n = document.createElementNS(NS,t);
+  if(a) for(const k in a){ k==='text'?n.textContent=a[k]:n.setAttribute(k,a[k]); }
+  if(p) p.appendChild(n); return n; };
+const dName = id => D.find(x => x.id === id).short;
+const byDom = id => C.filter(c => c.d === id);
+const mcol = m => MC[Math.max(1,m)-1];
+const CSS = getComputedStyle(document.documentElement);
+const tok = n => CSS.getPropertyValue(n).trim() || '#888';
+
+/* ---------- shared tooltip ---------- */
+const TIP = document.getElementById('tip');
+function bindTip(node, title, rows){
+  const show = e => { TIP.innerHTML = '<span class="tt">'+title+'</span><span class="tr">'+rows+'</span>';
+    TIP.classList.add('on'); move(e); };
+  const move = e => { const x = (e.clientX||0), y = (e.clientY||0);
+    const w = TIP.offsetWidth, h = TIP.offsetHeight;
+    TIP.style.left = Math.min(window.innerWidth - w - 10, Math.max(8, x + 14)) + 'px';
+    TIP.style.top  = Math.max(8, y - h - 12) + 'px'; };
+  const hide = () => TIP.classList.remove('on');
+  node.addEventListener('mouseenter', show); node.addEventListener('mousemove', move);
+  node.addEventListener('mouseleave', hide);
+}
+const capTip = c => 'Maturity ' + c.m + ' &middot; ' + MLAB[c.m] + '<br>Readiness ' + c.r + ' &middot; ' + RLAB[c.r]
+  + '<br>Target ' + c.t + ' &middot; gap ' + (c.t - c.m) + '<br>' + c.own;
+
+/* ---------- contents ---------- */
+const TOC = [
+ ['heatmap','Capability heat map','Where are we able, and where has the platform already done the work?'],
+ ['overlays','Coverage against ability','Are we as far behind as it feels?'],
+ ['quadrant','Readiness against maturity','Which capabilities are packaged but still unusable?'],
+ ['gapbars','Gap to target','Where is the distance greatest?'],
+ ['profile','Assessment profile','If one slide survives, which one?'],
+ ['radar','Domain scorecard','What shape is the estate?'],
+ ['waves','Roadmap horizons','What do we do first, and why that?'],
+ ['owners','Accountability spread','Who owns this, and is anything unowned?'],
+ ['assurance','Control and evidence exposure','What would we fail an audit on?'],
+ ['trajectory','Trajectory','Is any of this moving?'],
+];
+{ const t = document.getElementById('toc');
+  TOC.forEach(([id,h,q]) => { const a = el('a',{href:'#'+id},t);
+    el('div',{class:'lab',text:id.toUpperCase()},a);
+    el('div',{class:'h',text:h},a); el('div',{class:'q',text:q},a); }); }
+
+/* ---------- 1. heat map ---------- */
+function heatmap(host, key, small){
+  host.innerHTML = '';
+  D.forEach(d => {
+    const row = el('div',{class:'hmrow'},host);
+    const nm = el('div',{class:'dname'},row);
+    el('span',{text:d.id},nm); nm.appendChild(document.createTextNode(d.short));
+    const tw = el('div',{class:'tiles'},row);
+    byDom(d.id).forEach(c => {
+      const m = c[key];
+      const t = el('div',{class:'tile ' + (m >= 3 ? 'dk' : 'lt')},tw);
+      t.style.background = mcol(m);
+      if(small){ t.style.width = '58px'; t.style.height = '26px'; t.style.padding = '3px 4px'; }
+      else {
+        el('div',{class:'tid',text:c.id},t);
+        el('div',{class:'tn',text:c.n},t);
+        const rb = el('div',{class:'rbar'},t);
+        rb.style.width = (c.r/5*100) + '%';
+        rb.style.background = c.r === 0 ? 'transparent' : RC[c.r-1];
+      }
+      bindTip(t, c.id + ' ' + c.n, capTip(c));
+    });
+  });
+}
+heatmap(document.getElementById('hm-main'), 'm', false);
+{ const L = document.getElementById('hm-legend');
+  const g1 = el('div',{class:'leg'},L);
+  el('small',{text:'MATURITY 1→5'},g1);
+  const s1 = el('div',{class:'sw'},g1);
+  MC.forEach((c,i) => { const b = el('i',{},s1); b.style.background = c;
+    bindTip(b, 'Maturity ' + (i+1), MLAB[i+1]); });
+  el('small',{text:'able → able to standard'},g1);
+  const g2 = el('div',{class:'leg'},L);
+  el('small',{text:'READINESS 0→5'},g2);
+  const s2 = el('div',{class:'sw'},g2);
+  RC.forEach((c,i) => { const b = el('i',{},s2); b.style.background = c; b.style.height = '5px';
+    bindTip(b, 'Readiness ' + (i+1), RLAB[i+1]); });
+  el('small',{text:'edge length on each tile'},g2); }
+
+/* ---------- 2. two overlays ---------- */
+{ const host = document.getElementById('ov-two');
+  const panes = [
+   ['on','Approved and available today','readiness 2 or better — a technology or building block anyone may use', c => c.r >= 2],
+   ['on2','Able to the standard we need','maturity 3 or better — defined, owned, and evidenced', c => c.m >= 3],
+  ];
+  panes.forEach(([cls,title,sub,test]) => {
+    const p = el('div',{},host);
+    const n = C.filter(test).length;
+    const cap = el('div',{class:'cap'},p);
+    el('div',{class:'big',text:n + ' of ' + C.length},cap);
+    el('div',{class:'h',html:'<b style="font-size:14px">' + title + '</b>'},cap);
+    el('div',{class:'t',text:sub},cap);
+    D.forEach(d => {
+      const g = el('div',{class:'grp'},p);
+      const cs = byDom(d.id);
+      el('div',{class:'lab',text:d.id + ' · ' + d.short + ' · ' + cs.filter(test).length + '/' + cs.length},g);
+      const dd = el('div',{class:'dots'},g);
+      cs.forEach(c => { const o = el('div',{class:'dot' + (test(c) ? ' ' + cls : '')},dd);
+        bindTip(o, c.id + ' ' + c.n, capTip(c)); });
+    });
+  });
+}
+
+/* ---------- 3. quadrant ---------- */
+{ const W = 900, H = 470, P = {l:62,r:150,t:26,b:52};
+  const s = sv('svg',{viewBox:'0 0 '+W+' '+H,width:W,height:H},document.getElementById('qd'));
+  const x = v => P.l + v/5 * (W-P.l-P.r), y = v => H-P.b - (v-1)/4 * (H-P.t-P.b);
+  const mx = x(2.5), my = y(2.75);
+  const bands = [[P.l,P.t,mx-P.l,my-P.t,'Craft, not capability','var(--warning)'],
+                 [mx,P.t,W-P.r-mx,my-P.t,'Ready to scale','var(--good)'],
+                 [P.l,my,mx-P.l,H-P.b-my,'Not started','var(--muted)'],
+                 [mx,my,W-P.r-mx,H-P.b-my,'Packaged, not adopted','var(--critical)']];
+  bands.forEach(([bx,by,bw,bh,lab,col]) => {
+    sv('rect',{x:bx,y:by,width:bw,height:bh,fill:col,opacity:.07},s);
+    const t = sv('text',{x:bx+10,y:by+18,'font-size':10.5,'letter-spacing':1.2,fill:'var(--muted)'},s);
+    t.textContent = lab.toUpperCase();
+  });
+  sv('line',{x1:mx,y1:P.t,x2:mx,y2:H-P.b,stroke:'var(--muted)','stroke-width':1,'stroke-dasharray':'4 4',opacity:.6},s);
+  sv('line',{x1:P.l,y1:my,x2:W-P.r,y2:my,stroke:'var(--muted)','stroke-width':1,'stroke-dasharray':'4 4',opacity:.6},s);
+  for(let v=0; v<=5; v++){ sv('line',{x1:x(v),y1:P.t,x2:x(v),y2:H-P.b,stroke:'var(--grid)','stroke-width':1},s);
+    const t = sv('text',{x:x(v),y:H-P.b+18,'font-size':11,fill:'var(--muted)','text-anchor':'middle'},s); t.textContent = v; }
+  for(let v=1; v<=5; v++){ sv('line',{x1:P.l,y1:y(v),x2:W-P.r,y2:y(v),stroke:'var(--grid)','stroke-width':1},s);
+    const t = sv('text',{x:P.l-10,y:y(v)+4,'font-size':11,fill:'var(--muted)','text-anchor':'end'},s); t.textContent = v; }
+  let ax = sv('text',{x:(P.l+W-P.r)/2,y:H-14,'font-size':11,'letter-spacing':1.1,fill:'var(--ink-2)','text-anchor':'middle'},s);
+  ax.textContent = 'READINESS — HOW WELL PACKAGED';
+  ax = sv('text',{x:16,y:(P.t+H-P.b)/2,'font-size':11,'letter-spacing':1.1,fill:'var(--ink-2)','text-anchor':'middle',
+    transform:'rotate(-90 16 '+((P.t+H-P.b)/2)+')'},s);
+  ax.textContent = 'MATURITY — HOW ABLE';
+  const jit = {}; 
+  C.forEach(c => { const k = c.r + ':' + c.m; jit[k] = (jit[k]||0) + 1;
+    const n = jit[k], ang = n * 2.2, rad = n === 1 ? 0 : 7 + n*1.4;
+    const cx = x(c.r) + Math.cos(ang)*rad, cy = y(c.m) + Math.sin(ang)*rad;
+    const g = sv('g',{},s);
+    sv('circle',{cx:cx,cy:cy,r:6.5,fill:'var(--surface)'},g);
+    sv('circle',{cx:cx,cy:cy,r:5,fill:'var(--s1)','fill-opacity':.85,stroke:'var(--surface)','stroke-width':1.5},g);
+    bindTip(g, c.id + ' ' + c.n, capTip(c));
+  });
+  [['5.1',11,-13],['7.7',13,-11],['3.1',13,-12],['2.3',-11,-13,'end']].forEach(([id,dx,dy,an]) => {
+    const c = C.find(z => z.id === id); if(!c) return;
+    const t = sv('text',{x:x(c.r)+dx,y:y(c.m)+dy,'font-size':10.5,fill:'var(--ink-2)',
+      'text-anchor':an||'start'},s);
+    t.textContent = c.id + ' ' + (c.n.length > 26 ? c.n.slice(0,25) + '…' : c.n);
+  });
+}
+
+/* ---------- 4. gap bars ---------- */
+{ const rows = D.map(d => { const cs = byDom(d.id);
+    const m = cs.reduce((a,c) => a + c.m, 0)/cs.length, t = DATA.target[d.id];
+    return {id:d.id, n:dName(d.id), m:m, t:t, g:t - m, k:cs.length}; })
+    .sort((a,b) => b.g - a.g);
+  const W = 900, RH = 40, P = {l:250,r:80,t:26,b:34}, H = P.t + rows.length*RH + P.b;
+  const s = sv('svg',{viewBox:'0 0 '+W+' '+H,width:W,height:H},document.getElementById('gb'));
+  const x = v => P.l + (v-1)/4 * (W-P.l-P.r);
+  for(let v=1; v<=5; v++){ sv('line',{x1:x(v),y1:P.t-8,x2:x(v),y2:H-P.b+2,stroke:'var(--grid)'},s);
+    const t = sv('text',{x:x(v),y:H-P.b+18,'font-size':11,fill:'var(--muted)','text-anchor':'middle'},s); t.textContent = v; }
+  rows.forEach((r,i) => { const cy = P.t + i*RH + RH/2;
+    const lt = sv('text',{x:P.l-16,y:cy+4,'font-size':12,fill:'var(--ink)','text-anchor':'end',
+      'font-family':'"IBM Plex Sans",sans-serif'},s); lt.textContent = r.n;
+    const idt = sv('text',{x:12,y:cy+4,'font-size':11,fill:'var(--muted)'},s); idt.textContent = r.id;
+    sv('rect',{x:x(1),y:cy-7,width:x(5)-x(1),height:14,fill:'var(--empty)',rx:1},s);
+    sv('rect',{x:x(1),y:cy-7,width:Math.max(2,x(r.m)-x(1)),height:14,fill:'var(--m3)',rx:1},s);
+    sv('line',{x1:x(r.t),y1:cy-13,x2:x(r.t),y2:cy+13,stroke:'var(--ink)','stroke-width':2.5},s);
+    const g = sv('text',{x:W-P.r+14,y:cy+4,'font-size':12,fill:r.g >= 1.5 ? 'var(--critical)' : 'var(--ink-2)'},s);
+    g.textContent = '+' + r.g.toFixed(1);
+    const hit = sv('rect',{x:0,y:cy-RH/2,width:W,height:RH,fill:'transparent'},s);
+    bindTip(hit, r.id + ' ' + r.n, 'Mean maturity ' + r.m.toFixed(1) + '<br>Target ' + r.t
+      + '<br>Gap ' + r.g.toFixed(1) + '<br>' + r.k + ' capabilities');
+  });
+  const k = sv('text',{x:P.l,y:16,'font-size':10.5,'letter-spacing':1.1,fill:'var(--muted)'},s);
+  k.textContent = 'BAR = MEAN MATURITY   │ = AGREED TARGET   RIGHT = GAP';
+}
+
+/* ---------- 5. profile ---------- */
+{ const st = document.getElementById('pf-stats');
+  const mean = (C.reduce((a,c) => a + c.m, 0)/C.length).toFixed(1);
+  const at3 = C.filter(c => c.m >= 3).length;
+  const appr = C.filter(c => c.r >= 2).length;
+  const none = C.filter(c => c.r === 0).length;
+  [[mean,'Mean maturity across 52 capabilities'],
+   [at3 + '/' + C.length,'Defined or better — able to the standard we need'],
+   [appr + '/' + C.length,'Approved and available for general use today'],
+   [none,'Capabilities with nothing behind them at all']]
+  .forEach(([v,k]) => { const b = el('div',{class:'stat'},st);
+    el('div',{class:'v',text:v},b); el('div',{class:'k',text:k},b); });
+
+  const counts = [1,2,3,4,5].map(l => C.filter(c => c.m === l).length);
+  const W = 900, H = 210, P = {l:12,r:12,t:20,b:56};
+  const s = sv('svg',{viewBox:'0 0 '+W+' '+H,width:W,height:H},document.getElementById('pf-dist'));
+  const bw = (W-P.l-P.r)/5, mx = Math.max(...counts);
+  counts.forEach((n,i) => { const h = n/mx * (H-P.t-P.b);
+    const bx = P.l + i*bw + 6, by = H-P.b-h;
+    sv('rect',{x:bx,y:by,width:bw-12,height:Math.max(2,h),fill:MC[i],rx:3},s);
+    const t = sv('text',{x:bx+(bw-12)/2,y:by-8,'font-size':17,fill:'var(--ink)','text-anchor':'middle',
+      'font-family':'"Source Serif 4",serif','font-weight':600},s); t.textContent = n;
+    const l1 = sv('text',{x:bx+(bw-12)/2,y:H-P.b+19,'font-size':11.5,fill:'var(--ink-2)','text-anchor':'middle'},s);
+    l1.textContent = (i+1) + ' · ' + MLAB[i+1];
+    const l2 = sv('text',{x:bx+(bw-12)/2,y:H-P.b+35,'font-size':10.5,fill:'var(--muted)','text-anchor':'middle'},s);
+    l2.textContent = Math.round(n/C.length*100) + '% of the estate';
+    const hit = sv('rect',{x:bx,y:P.t,width:bw-12,height:H-P.t-P.b,fill:'transparent'},s);
+    bindTip(hit, 'Maturity ' + (i+1) + ' · ' + MLAB[i+1], n + ' capabilities');
+  });
+  sv('line',{x1:P.l,y1:H-P.b,x2:W-P.r,y2:H-P.b,stroke:'var(--rule)'},s);
+}
+
+/* ---------- 6. radar ---------- */
+{ const W = 760, H = 470, cx = W/2, cy = H/2 + 6, R = 150;
+  const s = sv('svg',{viewBox:'0 0 '+W+' '+H,width:W,height:H},document.getElementById('rd'));
+  const pts = D.map((d,i) => { const cs = byDom(d.id);
+    return {d:d, a:-Math.PI/2 + i*2*Math.PI/D.length,
+      m:cs.reduce((x,c) => x + c.m, 0)/cs.length, t:DATA.target[d.id]}; });
+  const P = (a,v) => [cx + Math.cos(a)*R*(v/5), cy + Math.sin(a)*R*(v/5)];
+  for(let v=1; v<=5; v++){
+    const p = pts.map(o => P(o.a,v).join(',')).join(' ');
+    sv('polygon',{points:p,fill:'none',stroke:'var(--grid)','stroke-width':1},s);
+  }
+  pts.forEach(o => { const [ex,ey] = P(o.a,5);
+    sv('line',{x1:cx,y1:cy,x2:ex,y2:ey,stroke:'var(--grid)'},s); });
+  const poly = (key,col,dash,fill) => {
+    const p = pts.map(o => P(o.a, o[key]).join(',')).join(' ');
+    sv('polygon',{points:p,fill:col,'fill-opacity':fill,stroke:col,'stroke-width':2,
+      'stroke-dasharray':dash,'stroke-linejoin':'round'},s);
+  };
+  poly('t','var(--ink-2)','5 4',0);
+  poly('m','var(--m3)','',.18);
+  pts.forEach(o => { const [px,py] = P(o.a,o.m);
+    sv('circle',{cx:px,cy:py,r:4.5,fill:'var(--m3)',stroke:'var(--surface)','stroke-width':2},s);
+    const [lx,ly] = P(o.a, 6.05);
+    const anchor = Math.abs(lx-cx) < 12 ? 'middle' : (lx > cx ? 'start' : 'end');
+    const words = o.d.short.split(' ');
+    const lines = words.length > 2 ? [words.slice(0,2).join(' '), words.slice(2).join(' ')] : [o.d.short];
+    lines.forEach((w,j) => { const t = sv('text',{x:lx,y:ly + j*13 - (lines.length-1)*6,'font-size':11,
+      fill:'var(--ink-2)','text-anchor':anchor,'font-family':'"IBM Plex Sans",sans-serif'},s);
+      t.textContent = w; });
+    const hit = sv('circle',{cx:px,cy:py,r:13,fill:'transparent'},s);
+    bindTip(hit, o.d.id + ' ' + o.d.short, 'Mean maturity ' + o.m.toFixed(1) + '<br>Target ' + o.t);
+  });
+  const lg = sv('g',{},s);
+  sv('rect',{x:16,y:H-42,width:24,height:3,fill:'var(--m3)'},lg);
+  let t = sv('text',{x:48,y:H-36,'font-size':11,fill:'var(--ink-2)'},lg); t.textContent = 'CURRENT';
+  sv('line',{x1:120,y1:H-40,x2:144,y2:H-40,stroke:'var(--ink-2)','stroke-width':2,'stroke-dasharray':'5 4'},lg);
+  t = sv('text',{x:152,y:H-36,'font-size':11,fill:'var(--ink-2)'},lg); t.textContent = 'TARGET';
+}
+
+/* ---------- 7. waves ---------- */
+{ const host = document.getElementById('wv');
+  const ranked = C.map(c => ({...c, gap:c.t - c.m}))
+    .filter(c => c.gap > 0)
+    .sort((a,b) => b.gap - a.gap || a.id.localeCompare(b.id));
+  const waves = [
+   ['Now','Next two quarters — capped by delivery capacity, not by appetite', ranked.slice(0,7)],
+   ['Next','Quarters three to six — unblocked by wave one', ranked.slice(7,17)],
+   ['Later','Beyond — re-rated before it is committed', ranked.slice(17,29)],
+  ];
+  const stripe = g => g >= 3 ? 'var(--critical)' : g === 2 ? 'var(--serious)' : 'var(--warning)';
+  waves.forEach(([h,when,items]) => {
+    const w = el('div',{class:'wave'},host);
+    el('h3',{text:h},w);
+    el('div',{class:'when',text:when},w);
+    el('div',{class:'lab',text:items.length + ' capabilities'},w);
+    const list = el('div',{style:'margin-top:8px'},w);
+    items.forEach(c => { const ch = el('div',{class:'chip'},list);
+      ch.style.borderLeftColor = stripe(c.gap);
+      el('div',{class:'cid',text:c.id},ch);
+      el('div',{class:'cn',text:c.n},ch);
+      el('div',{class:'ce',text:'+' + c.gap + ' ' + c.eff},ch);
+      bindTip(ch, c.id + ' ' + c.n, capTip(c) + '<br>Effort ' + c.eff); });
+  });
+}
+
+/* ---------- 8. owners ---------- */
+{ const host = document.getElementById('ow');
+  const map = {};
+  C.forEach(c => { (map[c.own] = map[c.own] || []).push(c); });
+  const all = Object.entries(map).map(([k,v]) => ({own:k, cs:v}))
+    .sort((a,b) => b.cs.length - a.cs.length || a.own.localeCompare(b.own));
+  const multi = all.filter(r => r.cs.length > 1);
+  const singles = all.filter(r => r.cs.length === 1);
+
+  const st = el('div',{class:'stats'},host);
+  [[String(all.length),'Distinct accountable roles for 52 capabilities'],
+   [String(multi.length),'Roles carrying more than one capability'],
+   [singles.length + ' / ' + all.length,'Roles carrying exactly one — accountability spread thin'],
+   [String(all.filter(r => r.own.startsWith('AI ') || r.own.startsWith('Chief AI')).length),
+    'Roles that are AI-specific, and so may not exist yet']]
+  .forEach(([v,k]) => { const b = el('div',{class:'stat'},st);
+    el('div',{class:'v',text:v},b); el('div',{class:'k',text:k},b); });
+
+  const W = 900, RH = 30, P = {l:270,r:110,t:30,b:16};
+  const H = P.t + (multi.length + 2)*RH + P.b;
+  const mx = Math.max(...multi.map(r => r.cs.length));
+  const s = sv('svg',{viewBox:'0 0 '+W+' '+H,width:W,height:H},host);
+  const uw = (W-P.l-P.r)/mx;
+  const drawRow = (i, label, cs, muted) => {
+    const cy = P.t + i*RH;
+    const lt = sv('text',{x:P.l-14,y:cy+17,'font-size':12.5,
+      fill: muted ? 'var(--muted)' : 'var(--ink)','text-anchor':'end',
+      'font-family':'"IBM Plex Sans",sans-serif'},s);
+    lt.textContent = label;
+    let ox = P.l;
+    const unit = muted ? (W-P.l-P.r)/cs.length : uw;
+    [1,2,3,4,5].forEach(lv => { const n = cs.filter(c => c.m === lv).length;
+      if(!n) return;
+      const bw = n*unit;
+      sv('rect',{x:ox,y:cy+5,width:Math.max(1,bw-2),height:17,fill:MC[lv-1],rx:1,
+        opacity: muted ? .55 : 1},s);
+      if(bw > 24){ const t = sv('text',{x:ox+bw/2-1,y:cy+17.5,'font-size':10.5,'text-anchor':'middle',
+        fill: lv >= 3 ? 'var(--on-dark)' : 'var(--on-light)'},s); t.textContent = n; }
+      ox += bw; });
+    const tot = sv('text',{x:W-P.r+12,y:cy+17,'font-size':11.5,fill:'var(--ink-2)'},s);
+    tot.textContent = cs.length;
+    const hit = sv('rect',{x:0,y:cy,width:W,height:RH,fill:'transparent'},s);
+    bindTip(hit, label, cs.length + ' capabilities<br>' + cs.map(c => c.id).join(', ')
+      + '<br>Mean maturity ' + (cs.reduce((a,c) => a + c.m, 0)/cs.length).toFixed(1));
+  };
+  multi.forEach((r,i) => drawRow(i, r.own, r.cs, false));
+  const tail = singles.flatMap(r => r.cs);
+  const div = sv('line',{x1:P.l-250,y1:P.t+multi.length*RH+7,x2:W-P.r+40,
+    y2:P.t+multi.length*RH+7,stroke:'var(--rule)'},s);
+  drawRow(multi.length + 0.55, singles.length + ' roles, one capability each', tail, true);
+  const k = sv('text',{x:P.l,y:18,'font-size':10.5,'letter-spacing':1.1,fill:'var(--muted)'},s);
+  k.textContent = 'STACKED BY MATURITY LEVEL   ·   BOTTOM ROW IS THE LONG TAIL, DRAWN TO ITS OWN SCALE';
+}
+
+/* ---------- 9. assurance ---------- */
+{ const host = document.getElementById('as');
+  const cs = byDom('D7').concat(C.filter(c => ['3.1','3.2','7.0'].includes(c.id)))
+    .filter((v,i,a) => a.indexOf(v) === i);
+  const tb = el('table',{},host);
+  const hd = el('thead',{},tb), hr = el('tr',{},hd);
+  ['','Capability','Maturity','Evidence coverage','Obligations mapped','Auditor would ask']
+    .forEach(h => el('th',{text:h},hr));
+  const bd = el('tbody',{},tb);
+  const ASK = {
+   '7.1':'Show the approved policy and its review date',
+   '7.2':'Show a fairness assessment for a live system',
+   '7.3':'Show the AI risk register and last review',
+   '7.4':'Show prompt-injection and model-abuse testing results',
+   '7.5':'Show the DPIA for a system processing personal data',
+   '7.6':'Show the determination of our regulatory role',
+   '7.7':'Show the complete list of AI systems and agents in use',
+   '7.8':'Show the evidence pack for one system, end to end',
+   '7.9':'Show how a system was classified, and by whom',
+   '3.1':'Show who owns the data behind a production model',
+   '3.2':'Show the licence permitting training on that corpus',
+  };
+  cs.forEach(c => { const tr = el('tr',{},bd);
+    el('td',{html:'<span class="mono" style="font-size:11px;color:var(--muted)">' + c.id + '</span>'},tr);
+    el('td',{html:'<b style="font-weight:500">' + c.n + '</b>'},tr);
+    const md = el('td',{class:'num'},tr); md.textContent = c.m;
+    md.style.color = c.m <= 2 ? 'var(--critical)' : 'var(--ink)';
+    const ev = el('td',{},tr);
+    const bar = el('div',{class:'minibar'},ev);
+    const fill = el('i',{},bar);
+    fill.style.width = Math.round(c.ev*100) + '%';
+    fill.style.background = c.ev < .3 ? 'var(--critical)' : c.ev < .6 ? 'var(--serious)' : 'var(--good)';
+    el('span',{class:'mono',text:' ' + Math.round(c.ev*100) + '%',
+      style:'font-size:11px;color:var(--muted);margin-left:6px'},ev);
+    ev.style.display = 'flex'; ev.style.alignItems = 'center'; ev.style.gap = '2px';
+    const ob = el('td',{class:'num'},tr);
+    ob.textContent = c.d === 'D7' ? (c.id === '7.6' ? '18' : String(1 + (c.id.charCodeAt(2) % 4))) : '—';
+    el('td',{html:'<span style="color:var(--ink-2);font-size:12.5px">' + (ASK[c.id] || '—') + '</span>'},tr);
+    bindTip(tr, c.id + ' ' + c.n, capTip(c) + '<br>Evidence coverage ' + Math.round(c.ev*100) + '%');
+  });
+}
+
+/* ---------- 10. trajectory ---------- */
+{ const host = document.getElementById('tj');
+  const grid = el('div',{style:'display:grid;grid-template-columns:repeat(3,1fr);gap:22px;min-width:820px'},host);
+  [['m','Baseline — today'],['m6','+6 months — if wave one lands'],['m12','+12 months — if waves one and two land']]
+   .forEach(([key,title]) => {
+    const col = el('div',{},grid);
+    el('div',{class:'lab',text:title},col);
+    const at3 = C.filter(c => c[key] >= 3).length;
+    const big = el('div',{style:'font-family:\'Source Serif 4\',Georgia,serif;font-size:26px;font-weight:600;margin:6px 0 12px;line-height:1'},col);
+    big.textContent = at3 + '/' + C.length;
+    el('div',{class:'q',style:'font-size:12px;color:var(--ink-2);margin:-8px 0 12px',
+      text:'defined or better'},col);
+    const hm = el('div',{class:'hm',style:'min-width:0;gap:5px'},col);
+    D.forEach(d => { const row = el('div',{style:'display:grid;grid-template-columns:26px 1fr;gap:7px;align-items:center'},hm);
+      el('div',{class:'lab',style:'font-size:9.5px',text:d.id},row);
+      const tw = el('div',{style:'display:flex;flex-wrap:wrap;gap:3px'},row);
+      byDom(d.id).forEach(c => { const t = el('div',{},tw);
+        t.style.cssText = 'width:15px;height:15px;border-radius:2px';
+        t.style.background = mcol(c[key]);
+        bindTip(t, c.id + ' ' + c.n, 'Maturity here: ' + c[key] + '<br>Baseline: ' + c.m); });
+    });
+   });
+}
+</script>
