@@ -1,134 +1,194 @@
 # Enterprise AI Capability Model
 
-**IDB Enterprise Architecture** · what the Bank must be able to do with AI, what it has
-built, and the distance between them.
+**Inter-American Development Bank**
 
----
+A model of what the institution must be able to do with AI, what it has actually built,
+and the distance between the two — expressed so that the answer can be checked rather
+than argued about.
 
-## Four questions, four answers
-
-| If you want to know… | Open |
+| | |
 |---|---|
-| **What must the Bank be able to do?** | [`out/capability-assessment-level.md`](out/capability-assessment-level.md) — 8 domains, 52 capabilities |
-| **What has the Bank actually built?** | Sheet 3 of the workbook, or [`facts/offerings.json`](facts/offerings.json) — 7 offerings, 20 assets |
-| **Can we run AI agents?** | [`out/agent-readiness.md`](out/agent-readiness.md) — the one-pager |
-| **How does any of this work?** | [`docs/how-it-works.md`](docs/how-it-works.md) — ten minutes, no jargon |
+| **The report** | [`out/management-report.md`](out/management-report.md) |
+| **The worked example** | [`out/agent-readiness.md`](out/agent-readiness.md) — *"can we run AI agents?"* |
+| **The detail** | [`out/capability-assessment-level.md`](out/capability-assessment-level.md) — all 52 capabilities |
+| **How to work with it** | [`docs/using-the-model.md`](docs/using-the-model.md) |
+| **How it works inside** | [`docs/how-it-works.md`](docs/how-it-works.md) |
 
 ---
 
-## The idea in one picture
+## 1 · The problem this exists to solve
 
-```
-facts/            what is TRUE about the Bank        ← you edit this
-  capabilities      the map: 8 domains, 52 capabilities, 258 criteria
-  offerings         what a delivery team can actually get today
-  assets            the 20 standards, architectures, templates and modules
-  observations      four observations per capability, each with evidence
-  owners            which Bank unit owns what
+Inside the institution, two people say opposite things about the same capability.
 
-scales/           rules that turn facts into a LEVEL  ← rarely changes
-  capability_level  the default. Adapted from ISO/IEC 33020
-  executive         a coarser lens for a steering committee
+> *"We cannot run AI agents."*
+>
+> *"Of course we can — the platform, the standards, the reference architectures and the
+> infrastructure modules are all published."*
 
-out/              VIEWS, one per scale                ← never edit, always generated
-```
+Both are telling the truth, about different things. One is describing whether the work is
+**done**; the other is describing whether the means to do it **exist**. A model that
+answers with a single number has to pick one of those meanings, and whichever it picks,
+the other conversation loses its evidence.
 
-**An observation is a fact, not a score.** *"The Foundry Agents Standard is pre-release"*
-is true whichever framework reads it. Because the facts are separate from the scales,
-you can measure the same evidence two ways without reassessing anything — and two scales
-can never disagree about the evidence, only about what to make of it.
+That disagreement is not unique to agents, and it is not unique to this institution. It
+is the standard failure of AI capability assessment: **supply gets reported as ability**,
+because supply is the easier thing to establish and the more pleasant thing to report.
 
----
+This model is built so that both statements can be true at once, visibly, with the
+evidence attached to each.
 
-## The four observations
+## 2 · What it is
 
-You never type a level. You record four things per capability, each with evidence, and
-the level is computed.
+Three things, and the separation between them is the whole design.
 
-| | The question |
-|---|---|
-| **Practised** | Is this done on real AI systems in production, repeatedly? |
-| **Enabled** | Can a team get the tooling for this without building it themselves? |
-| **Skilled** | Do the people who must do this know how? |
-| **Defined** | Is there a published Bank standard or method for this? |
+**A capability map.** 8 domains, 52 capabilities, 258 criteria. What the institution must
+be able to do with AI, stated so that each capability has one accountable owner. It is
+vendor-neutral and survives replacing every product.
 
-Values: `yes` · `partial` · `no` · `n/a` (needs a reason) · `unknown` (nobody has
-looked — **never** a zero).
+**A register of what exists.** 7 platform offerings and 20 named assets — standards,
+reference architectures, templates, infrastructure modules — each with a status and a
+location a reader can open. This is the part that is not an opinion.
 
-> **Performance comes first.** A published standard with nothing performed against it
-> earns **no level at all**. That ordering is ISO/IEC 33020's, not ours, and it is what
-> stops *"we approved the technology"* from reading as *"we have the capability"*.
+**Four observations per capability**, each recorded as a fact with evidence and a date:
 
----
-
-## Working with it
-
-Everything runs through one command. Requires Python 3 and `openpyxl`.
-
-```bash
-python3 build/build.py            # what the model currently says
-python3 build/build.py check      # validate facts/, report problems
-python3 build/build.py all        # rebuild the workbook and every view
-python3 build/build.py ingest     # read reviewer edits back into facts/
-```
-
-### The review loop
-
-1. `python3 build/build.py workbook` → `out/AI-Capability-Model.xlsx`
-2. Send it. **One reviewer at a time** — Excel does not merge.
-3. They fill the yellow cells on sheet **2. Observations**.
-4. `python3 build/build.py ingest path/to/returned.xlsx`
-5. `python3 build/build.py all`, then commit.
-
-The workbook has **no formulas**. Every derived number is computed in Python and written
-as a value, so it opens identically in Excel, LibreOffice and a browser, and there is no
-recalculation step to get wrong.
-
----
-
-## The one rule
-
-> **`facts/` is edited. `out/` is generated.**
-
-Never fix a finding by editing a workbook or a view. Fix the fact and rebuild. `ingest`
-is the only path that writes to `facts/`, and it only ever writes observations.
-
----
-
-## Layout
-
-| Directory | What it is | Edited? |
+| | The question | Typically answered by |
 |---|---|---|
-| [`facts/`](facts/) | **The model.** Five registers, plain keyed JSON | ✏️ |
-| [`scales/`](scales/README.md) | Rules that turn observations into a level | ✏️ rarely |
-| [`build/`](build/) | Four files. `build.py` is the only entry point | ✏️ |
-| [`docs/`](docs/) | Everything a human reads — explainer, ADRs, analysis | ✏️ |
-| [`sources/`](sources/) · [`review/`](review/) | Documents obtained · reviewer returns | 📥 |
-| `out/` | **Generated.** Never edit | 🚫 |
-| [`archive/`](archive/README.md) | Superseded. Kept, never deleted | 🗄️ |
+| **Practised** | Is this done on real AI systems in production, repeatedly? | The capability owner |
+| **Enabled** | Can a team get the tooling without building it themselves? | The platform team providing it |
+| **Skilled** | Do the people who must do this know how? | The owner, or Learning & Development |
+| **Defined** | Is there an approved institutional standard, policy or method? | Whoever owns the subject |
 
----
+**Nobody types a level.** A level is derived from the four observations by a rule that is
+written down and can be argued with separately from the facts it reads.
 
-## Where the work stands
+### Who this is a model of
 
-**Nothing is rated yet, and the model says so.** Every capability is `not rated` under
-the default scale, because `practised` has never been observed for any of them. What
-*is* recorded is real: 20 named assets with status and location, 7 offerings, 27
-in-the-box control questions, and an owner mapping against the Bank's own catalogue that
-finds **8 capabilities nobody claims**.
+Every function that touches AI, not one of them. Of the 52 capabilities, the AI platform
+team owns 14, Data Management 4, Cloud and Infrastructure 4, Core Platforms 4, Strategic
+Portfolio Management 3, Enterprise Architecture 2, and Cybersecurity, Legal, HR, Risk,
+Audit and others hold the rest. **Eight are owned by nobody**, which is itself one of the
+findings.
 
-That is the honest state, and it is the point of the design: what exists is evidenced,
-what does not is visibly absent rather than silently scored.
+The same distribution applies to the observations. A standard for AI security is set by
+Cybersecurity, one for AI data governance by Data Management, one for AI literacy by
+Learning & Development. Architecture sets some and not most.
 
-See [`OPEN-ITEMS.md`](OPEN-ITEMS.md) for what is unresolved and what it blocks.
+## 3 · What it is for
 
----
+| Question | Where it is answered |
+|---|---|
+| Are we ready to do *X* with AI? | The four observations for the capabilities *X* touches |
+| Why do people disagree about whether we have a capability? | The columns separate *built* from *done* |
+| What should we fund next? | Capabilities with no tooling and no reason recorded; assets finished but unreleased |
+| Who owns this? | The owner mapping, against the institution's own catalogue |
+| What do we tell an auditor? | Every observation carries evidence, a source and a date |
+| Are we behind? | Only where an observation says so. Elsewhere the model says *unknown* rather than guessing |
 
-## Handling rules
+## 4 · How it relates to what exists in the market
 
-- **Grade D sources cannot support a claim that leaves the Bank.** Licensed analyst
-  material stays internal and is never listed as a source.
-- **Cite by name, never by number**, for any list that renumbers between editions.
-- **Do not invent a clause number.** Mark it unverified or say it is ours.
-- **Do not quote ISO/IEC 33020's percentage bands** until someone opens the standard —
-  see [`scales/README.md`](scales/README.md).
+Three families of instrument exist, and this model is deliberately none of them.
+
+**Analyst maturity assessments** (the major research firms) are self-assessed
+questionnaires producing a current and target score per capability, benchmarked against
+peers. They are excellent at executive framing and peer comparison, and they are
+licensed, coarse — typically around 25 capabilities — and thin underneath: the score
+rests on a judgement made in twenty minutes, with no evidence recorded and nothing an
+auditor can follow.
+
+**Cloud provider adoption frameworks** (the hyperscalers) are structured to sell and
+sequence adoption of a particular platform. Useful checklists, not neutral, and they
+cannot describe a capability that no product realises.
+
+**Process assessment standards** (the ISO/IEC 330xx family, and CMMI before it) are the
+opposite: rigorous, evidence-gated, ordered so that performance precedes definition — and
+built for software *processes*, with no AI content at all.
+
+**This model takes the measurement discipline from the third and applies it to a
+capability map built for AI.** Its default scale is adapted from ISO/IEC 33020, which is
+where the ordering comes from: a published standard with nothing performed against it
+earns no level, because the question was never *did we write it down*.
+
+What it adds that none of them has: **the facts are separate from the judgement.** An
+observation such as *"the agents standard is pre-release"* is true whichever framework
+reads it. So the same evidence can be reported through a different frame — including an
+analyst frame, if that is what a committee already knows — without reassessing anything
+and without the two versions being able to contradict each other on the facts.
+
+What it does not do: benchmark against peers. No comparable dataset exists, and inventing
+one would undo the point.
+
+## 5 · What the model says today
+
+**No capability is rated**, and the report says so on its first page. A rating requires
+knowing whether something is *practised*, and that question has not yet been put to the
+capability owners.
+
+What is established is substantial and evidenced:
+
+| | |
+|---|---|
+| Platform offerings with named assets behind them | 7 |
+| Assets recorded with status and location | 20 |
+| Assets finished but not yet released to teams | 5 |
+| Capabilities nobody in the institution's catalogue claims | 8 |
+| Questions outstanding for the platform teams | 27 |
+
+The finding those support: **the institution has built its enablers ahead of its
+practice.** That is the explanation for the disagreement in section 1, and it names its
+own fix.
+
+The distinction the model refuses to blur is between *we do not know* and *we do not have
+it*. Most assessments cannot tell those apart and score an unexamined capability as if it
+were absent.
+
+## 6 · How a report is produced
+
+There is no writing step. The report is generated from the recorded facts, so it cannot
+drift from them, and re-running it after new observations produces a new report rather
+than a new draft.
+
+```
+facts          →   scale          →   report
+what is true       how we judge       what we tell people
+```
+
+1. Someone answers a question — a capability owner, a platform team, Cybersecurity.
+2. The answer is recorded as an observation, with evidence, a name and a date.
+3. `python3 build/build.py all` regenerates the workbook and every view.
+
+Recording happens in a workbook: send it, the reviewer fills in the yellow cells, it comes
+back, and one command reads it in. Full instructions in
+[`docs/using-the-model.md`](docs/using-the-model.md).
+
+**Four questions would change what the next report can say**, and none requires new
+tooling or new investment:
+
+| Who | What is asked |
+|---|---|
+| Capability owners | Is this done on real AI systems, and where? |
+| Platform teams | The 27 in-the-box control questions |
+| Cybersecurity, Data Management, Legal, HR | Does an approved standard exist in your domain? |
+| Learning & Development | Who is trained, and in what? |
+
+## 7 · Layout
+
+| Directory | What it is |
+|---|---|
+| [`facts/`](facts/) | The model. What is true, with evidence and dates |
+| [`scales/`](scales/README.md) | Rules that turn observations into a level |
+| [`out/`](out/) | Generated reports and the workbook. Never edited |
+| [`docs/`](docs/) | Explanations, decisions, analysis |
+| [`build/`](build/) | Four files. One command |
+| [`archive/`](archive/README.md) | Superseded work, kept and explained |
+
+**The one rule:** `facts/` is edited, `out/` is generated. A finding is never fixed by
+editing a report.
+
+## 8 · Handling
+
+- Licensed analyst material is usable internally, never reproduced externally, and never
+  cited as a source here.
+- Sources are graded by whether a reviewer can open them. The lowest grade cannot support
+  a claim that leaves the institution.
+- Where something is our own construction rather than an adopted standard, it says so.
+  See [`scales/README.md`](scales/README.md).

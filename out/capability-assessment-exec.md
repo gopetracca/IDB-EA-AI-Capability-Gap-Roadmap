@@ -1,6 +1,6 @@
 # Capability assessment — Executive readiness
 
-**IDB Enterprise Architecture** · generated 2026-09-04 · scale `exec`
+**Inter-American Development Bank** · generated 2026-09-04 · scale `exec`
 
 > Our own coarse roll-up for executive reporting. Reads the same observations as the default scale. Not adopted from any published model.
 >
@@ -30,10 +30,10 @@
 
 | Observation | The question | Evidence expected |
 |---|---|---|
-| **Practised** | Is this done on real AI systems in production, repeatedly? | Named systems or agents where it was done, and by whom |
-| **Enabled** | Can a team get the tooling for this without building it themselves? | An offering in the offerings register |
+| **Practised** | Is this done on real AI systems in production, repeatedly? | Named AI systems or agents where it was done, and by whom |
+| **Enabled** | Can a team get the tooling for this without building it themselves? | An offering in the offerings register, or the enterprise service that provides it |
 | **Skilled** | Do the people who must do this know how? | Named practitioners, training records, or a competency statement |
-| **Defined** | Is there a published Bank standard or method for this? | The document, with a location and a date |
+| **Defined** | Is there an approved institutional standard, policy or method for this? Set by whoever owns the subject - the platform team, Cybersecurity, Data Management, Legal, HR or EA. | The document, its owner, its location and a date |
 
 Values: `yes` · `partial` · `no` · `n/a` (with a reason) · `unknown` (nobody has looked — never a zero).
 

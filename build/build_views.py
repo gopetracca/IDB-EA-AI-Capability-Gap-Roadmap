@@ -21,7 +21,7 @@ def capability_view(m, scale):
     w = o.append
     w("# Capability assessment — %s" % scale.NAME)
     w("")
-    w("**IDB Enterprise Architecture** · generated %s · scale `%s`"
+    w("**Inter-American Development Bank** · generated %s · scale `%s`"
       % (date.today().isoformat(), scale.SHORT))
     w("")
     w("> %s" % scale.BASIS)
@@ -117,7 +117,7 @@ def agent_view(m):
     w = o.append
     w("# Can the Bank run AI agents?")
     w("")
-    w("**IDB Enterprise Architecture** · generated %s" % date.today().isoformat())
+    w("**Inter-American Development Bank** · generated %s" % date.today().isoformat())
     w("")
     w("Short answer: **the Bank can provision and build agents to a published standard "
       "today. What it cannot yet do is operate them as an institution.** Both halves of "
@@ -195,7 +195,188 @@ def agent_view(m):
     w("| Platform team | Answer the twelve in-the-box questions. Release the two "
       "pre-release documents. Distribute template v2. |")
     w("| Product teams | Build against the standard, so there is practice to observe. |")
-    w("| EA | Observe it. Record `practised` with named systems. |")
+    w("| Capability owners | Confirm what is actually practised, with named systems. |")
+    w("| Cybersecurity, Data Mgmt, Legal | Confirm whether a standard exists in their own domain. |")
     w("| People | 8.3 literacy and 8.2 skills: no observation exists yet. |")
     w("")
+    return "\n".join(o) + "\n"
+
+
+def management_report(m, scale):
+    """The management report: what we can say today, and what we cannot.
+
+    Deliberately leads with what is evidenced, states the coverage of the
+    assessment honestly, and never presents an unobserved capability as a zero.
+    """
+    RELEASED = {"Published", "Published (JFrog)", "In use"}
+    o = []
+    w = o.append
+    total = len(m.capabilities)
+    rated = {c['id']: m.rate(scale, c['id']) for c in m.capabilities}
+    n_rated = sum(1 for v in rated.values() if v[0] is not None)
+    pending = [a for a in m.assets if a['status'] not in RELEASED]
+    noowner = [c for c in m.capabilities if m.owner(c['id'])[1] == 'NO MATCH']
+    box_total = sum(len(x['in_the_box']) for x in m.offerings)
+    box_done = sum(1 for x in m.offerings for y in x['in_the_box'] if y['status'])
+
+    w("# AI capability — management report")
+    w("")
+    w("**Inter-American Development Bank** · %s" % date.today().isoformat())
+    w("")
+    w("---")
+    w("")
+    w("## 1 · What this report can and cannot say")
+    w("")
+    w("Read this section before the findings. It states the coverage of the assessment "
+      "so that nothing below is read as more than it is.")
+    w("")
+    w("| | |")
+    w("|---|---|")
+    w("| Capabilities in the map | %d |" % total)
+    w("| **Rated** | **%d** |" % n_rated)
+    w("| Not yet rated | %d |" % (total - n_rated))
+    w("| Platform offerings with evidence | %d |" % len(m.offerings))
+    w("| Assets recorded, with status and location | %d |" % len(m.assets))
+    w("")
+    if n_rated == 0:
+        w("> **No capability is rated yet, and that is a factual statement rather than a "
+          "bad result.** A rating requires knowing whether something is actually "
+          "*practised* on real AI systems. That question has not yet been put to the "
+          "capability owners. What has been established is what the institution has "
+          "*built* — and that is substantial, evidenced, and set out in section 2.")
+        w("")
+        w("This is the difference between *we do not know* and *we do not have it*. Most "
+          "maturity assessments cannot tell those apart, and score an unexamined "
+          "capability as if it were absent. This one refuses to.")
+    else:
+        w("> %d of %d capabilities carry a rating. The remainder are not zero — they are "
+          "unobserved, and are shown as such throughout." % (n_rated, total))
+    w("")
+    w("---")
+    w("")
+
+    # ---------------------------------------------- 2. what exists
+    w("## 2 · What the institution has built")
+    w("")
+    w("Every row below is backed by a named asset with a location and a status. This is "
+      "the part of the picture that is **not** an opinion.")
+    w("")
+    w("| Offering | What a delivery team gets | Assets released | Capabilities it enables |")
+    w("|---|---|:-:|---|")
+    for off in m.offerings:
+        flag = "" if off['assets_released'] == off['assets_total'] else " ⚠"
+        w("| **%s** | %s | %d of %d%s | %s |"
+          % (off['name'], off['consumption'] or "—",
+             off['assets_released'], off['assets_total'], flag,
+             ", ".join("`%s`" % x for x in off['enables'])))
+    w("")
+    ready = [x for x in m.offerings if x['assets_released'] == x['assets_total']]
+    w("**%d of %d offerings are complete.** The other %d are each waiting on named "
+      "documents or modules, listed in section 4."
+      % (len(ready), len(m.offerings), len(m.offerings) - len(ready)))
+    w("")
+
+    # ---------------------------------------------- 3. the finding
+    w("---")
+    w("")
+    w("## 3 · The finding")
+    w("")
+    w("> **The institution has built its enablers ahead of its practice.**")
+    w("")
+    w("The scale used here places *performance* at Level 1, *tooling and competent "
+      "people* at Level 2, and *an approved standard, applied* at Level 3. Measured "
+      "that way, the institution has assembled a large part of its Level 2 and Level 3 "
+      "apparatus — platforms, standards, reference architectures, infrastructure "
+      "modules — while Level 1, whether the work is actually done, has never been "
+      "examined.")
+    w("")
+    w("That is not a criticism of the build. It is the explanation for a disagreement "
+      "that recurs in this institution: one person says the capability exists, meaning "
+      "the platform and the standard exist, and another says it does not, meaning "
+      "nothing is running on it. **Both are right about different things**, and a model "
+      "carrying a single number cannot show that. This one shows it as four columns.")
+    w("")
+    w("| What we can evidence today | What we cannot |")
+    w("|---|---|")
+    w("| %d offerings, %d assets, with locations | Whether any of it is used in production |"
+      % (len(m.offerings), len(m.assets)))
+    w("| Which capabilities have approved standards | Whether work is done against them |")
+    w("| Which capabilities have no tooling and no reason recorded | Whether the people who need the skills have them |")
+    w("")
+
+    # ---------------------------------------------- 4. decisions
+    w("---")
+    w("")
+    w("## 4 · What needs a decision")
+    w("")
+    w("### 4.1 · Capabilities nobody owns")
+    w("")
+    w("%d of %d capabilities are claimed by no product or enabler in the institution's "
+      "own catalogue. This is a finding about the operating model, not a gap in the "
+      "model. Several are governance capabilities that an institution of this kind is "
+      "normally expected to hold." % (len(noowner), total))
+    w("")
+    w("| ID | Capability | Domain |")
+    w("|---|---|---|")
+    for c in sorted(noowner, key=lambda x: m.sort_key(x['id'])):
+        w("| `%s` | **%s** | %s |" % (c['id'], c['name'],
+                                      m.domain_by_id[c['domain']]['name']))
+    w("")
+    w("**Decision required:** assign an owner to each, or record a deliberate decision "
+      "not to hold it.")
+    w("")
+
+    w("### 4.2 · Work that is finished but not released")
+    w("")
+    w("%d assets exist and are not yet available to delivery teams. Each is days of "
+      "work from being usable, and each currently holds a capability below the level "
+      "the underlying work would support." % len(pending))
+    w("")
+    w("| Asset | What it is | Status |")
+    w("|---|---|---|")
+    for a in pending:
+        w("| `%s` | %s | **%s** |" % (a['id'], a['name'], a['status']))
+    w("")
+    w("**Decision required:** a release date for each, with a named owner.")
+    w("")
+
+    w("### 4.3 · Questions only the platform teams can answer")
+    w("")
+    w("**%d of %d answered.** These decide whether a delivery team inherits its controls "
+      "or rebuilds them. Every unanswered row is both an unknown and, once answered "
+      "with a *no*, a roadmap item — usually a cheap one, because it means extending a "
+      "module rather than building a platform." % (box_done, box_total))
+    w("")
+    w("| Offering | Questions outstanding |")
+    w("|---|:-:|")
+    for off in m.offerings:
+        if off['in_the_box']:
+            miss = sum(1 for x in off['in_the_box'] if not x['status'])
+            w("| %s | %d of %d |" % (off['name'], miss, len(off['in_the_box'])))
+    w("")
+
+    # ---------------------------------------------- 5. next
+    w("---")
+    w("")
+    w("## 5 · What would make the next report say more")
+    w("")
+    w("| Who | What is being asked of them | What it unlocks |")
+    w("|---|---|---|")
+    w("| Capability owners | For each capability they own: is this done on real AI "
+      "systems, and where? | Every rating in the model. Nothing can be rated without it |")
+    w("| Platform teams | The %d in-the-box questions | Whether controls are inherited "
+      "or rebuilt per team |" % (box_total - box_done))
+    w("| Cybersecurity · Data Management · Legal · HR | Does an approved standard exist "
+      "in your domain? | %d capabilities currently show *unknown* because the asset "
+      "register covers platform assets only |"
+      % sum(1 for c in m.capabilities if m.values(c['id'])['defined'] == 'unknown'))
+    w("| Learning & Development | Who is trained, and in what? | Level 2 for every "
+      "capability where practice exists |")
+    w("")
+    w("None of this requires new tooling or new investment. It requires four questions "
+      "put to the people who already know the answers.")
+    w("")
+    w("---")
+    w("")
+    w("*Generated from the capability model. Scale: %s. %s*" % (scale.NAME, scale.BASIS))
     return "\n".join(o) + "\n"

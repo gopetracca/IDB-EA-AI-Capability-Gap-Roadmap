@@ -1,6 +1,6 @@
 # Can the Bank run AI agents?
 
-**IDB Enterprise Architecture** · generated 2026-09-04
+**Inter-American Development Bank** · generated 2026-09-04
 
 Short answer: **the Bank can provision and build agents to a published standard today. What it cannot yet do is operate them as an institution.** Both halves of that sentence are evidenced below.
 
@@ -63,6 +63,7 @@ The enablers were built before the practice. In the terms of the scale this mode
 |---|---|
 | Platform team | Answer the twelve in-the-box questions. Release the two pre-release documents. Distribute template v2. |
 | Product teams | Build against the standard, so there is practice to observe. |
-| EA | Observe it. Record `practised` with named systems. |
+| Capability owners | Confirm what is actually practised, with named systems. |
+| Cybersecurity, Data Mgmt, Legal | Confirm whether a standard exists in their own domain. |
 | People | 8.3 literacy and 8.2 skills: no observation exists yet. |
 

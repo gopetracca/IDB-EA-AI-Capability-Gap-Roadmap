@@ -3,6 +3,7 @@ id: ADR-0013
 title: Facts and scales are separated; one derived level replaces the two scales
 status: Accepted
 date: 2026-09-04
+amended: 2026-09-04
 supersedes: [ADR-0001, ADR-0002, ADR-0003]
 amends: [ADR-0004, ADR-0005]
 depends_on: [ADR-0010]
@@ -134,3 +135,28 @@ Under ADR-0010:
 - **Not verified** — the N-P-L-F percentage bands and the exact level rule. The published
   preview stops before clause 5.3. **Do not quote them** until the standard is opened
   through the Bank's ISO subscription. See `scales/README.md`.
+
+---
+
+## Amendment 1 — 4 September 2026
+
+**Wording only; no decision reversed.** The `defined` observation was written as *"Is
+there a published Bank standard or method for this?"*, which several readers took to mean
+*did Enterprise Architecture write one*. That was never the intent and it is not what the
+model records.
+
+`defined` asks whether **an approved institutional standard, policy or method exists**,
+set by whoever owns the subject. Across the 52 capabilities that is Cybersecurity for AI
+security, Data Management for AI data governance, Legal for regulatory obligations,
+Learning & Development for literacy, the platform teams for their own platforms, and
+Architecture for architecture — which is the accountable owner of **2 of 52**.
+
+Two consequences worth recording:
+
+- The 39 capabilities showing `defined: unknown` are **not** evidence that no standard
+  exists. The asset register covers AI platform assets only, so a standard owned by
+  another function may exist and simply not be recorded. Their basis text now says so.
+- A model that reads as one function's account of its own contribution loses its
+  authority, including for the parts that are sound. This is the same failure mode
+  ADR-0012 warns about for the ownership columns: *if it only ever says EA, it is a
+  credit column, not a model.*

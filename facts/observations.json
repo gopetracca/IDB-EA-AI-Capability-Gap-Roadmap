@@ -3,12 +3,12 @@
   {
    "id": "practised",
    "question": "Is this done on real AI systems in production, repeatedly?",
-   "evidence_expected": "Named systems or agents where it was done, and by whom"
+   "evidence_expected": "Named AI systems or agents where it was done, and by whom"
   },
   {
    "id": "enabled",
    "question": "Can a team get the tooling for this without building it themselves?",
-   "evidence_expected": "An offering in the offerings register"
+   "evidence_expected": "An offering in the offerings register, or the enterprise service that provides it"
   },
   {
    "id": "skilled",
@@ -17,8 +17,8 @@
   },
   {
    "id": "defined",
-   "question": "Is there a published Bank standard or method for this?",
-   "evidence_expected": "The document, with a location and a date"
+   "question": "Is there an approved institutional standard, policy or method for this? Set by whoever owns the subject - the platform team, Cybersecurity, Data Management, Legal, HR or EA.",
+   "evidence_expected": "The document, its owner, its location and a date"
   }
  ],
  "values": [
@@ -61,7 +61,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -97,7 +97,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -133,7 +133,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -169,7 +169,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -205,7 +205,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -241,7 +241,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -277,7 +277,7 @@
    "observation": "defined",
    "value": "yes",
    "evidence": "STD-06 AI Agent Decision Tree (Published)",
-   "basis": "Published standard and reference architecture",
+   "basis": "Approved standard and reference architecture published",
    "observed_on": "2026-09-04",
    "observed_by": "EA, from the asset register"
   },
@@ -313,7 +313,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -349,7 +349,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -385,7 +385,7 @@
    "observation": "defined",
    "value": "yes",
    "evidence": "STD-06 AI Agent Decision Tree (Published)",
-   "basis": "Published standard and reference architecture",
+   "basis": "Approved standard and reference architecture published",
    "observed_on": "2026-09-04",
    "observed_by": "EA, from the asset register"
   },
@@ -421,7 +421,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -457,7 +457,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -493,7 +493,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -529,7 +529,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -565,7 +565,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -601,7 +601,7 @@
    "observation": "defined",
    "value": "yes",
    "evidence": "STD-05 Azure Document Intelligence Standard (Published); RA-04 Azure Document Intelligence Reference Architecture (Published)",
-   "basis": "Published standard and reference architecture",
+   "basis": "Approved standard and reference architecture published",
    "observed_on": "2026-09-04",
    "observed_by": "EA, from the asset register"
   },
@@ -637,7 +637,7 @@
    "observation": "defined",
    "value": "yes",
    "evidence": "STD-04 Azure AI Search Standard (Published); RA-03 Azure AI Search Reference Architecture (Published)",
-   "basis": "Published standard and reference architecture",
+   "basis": "Approved standard and reference architecture published",
    "observed_on": "2026-09-04",
    "observed_by": "EA, from the asset register"
   },
@@ -673,7 +673,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -709,7 +709,7 @@
    "observation": "defined",
    "value": "yes",
    "evidence": "STD-01 Tech Stack - AI (Published)",
-   "basis": "Published standard and reference architecture",
+   "basis": "Approved standard and reference architecture published",
    "observed_on": "2026-09-04",
    "observed_by": "EA, from the asset register"
   },
@@ -745,7 +745,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -781,7 +781,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -853,7 +853,7 @@
    "observation": "defined",
    "value": "yes",
    "evidence": "STD-02 Custom MCP Server Standard (Published); RA-01 Custom MCP Server Reference Architecture (Published)",
-   "basis": "Published standard and reference architecture",
+   "basis": "Approved standard and reference architecture published",
    "observed_on": "2026-09-04",
    "observed_by": "EA, from the asset register"
   },
@@ -889,7 +889,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -925,7 +925,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -997,7 +997,7 @@
    "observation": "defined",
    "value": "yes",
    "evidence": "STD-01 Tech Stack - AI (Published)",
-   "basis": "Published standard and reference architecture",
+   "basis": "Approved standard and reference architecture published",
    "observed_on": "2026-09-04",
    "observed_by": "EA, from the asset register"
   },
@@ -1033,7 +1033,7 @@
    "observation": "defined",
    "value": "yes",
    "evidence": "STD-03 Microsoft Foundry Standard (Published); RA-02 Microsoft Foundry Reference Architecture (Published)",
-   "basis": "Published standard and reference architecture",
+   "basis": "Approved standard and reference architecture published",
    "observed_on": "2026-09-04",
    "observed_by": "EA, from the asset register"
   },
@@ -1069,7 +1069,7 @@
    "observation": "defined",
    "value": "yes",
    "evidence": "STD-03 Microsoft Foundry Standard (Published); RA-02 Microsoft Foundry Reference Architecture (Published)",
-   "basis": "Published standard and reference architecture",
+   "basis": "Approved standard and reference architecture published",
    "observed_on": "2026-09-04",
    "observed_by": "EA, from the asset register"
   },
@@ -1105,7 +1105,7 @@
    "observation": "defined",
    "value": "yes",
    "evidence": "STD-02 Custom MCP Server Standard (Published); RA-01 Custom MCP Server Reference Architecture (Published)",
-   "basis": "Published standard and reference architecture",
+   "basis": "Approved standard and reference architecture published",
    "observed_on": "2026-09-04",
    "observed_by": "EA, from the asset register"
   },
@@ -1177,7 +1177,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1213,7 +1213,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1249,7 +1249,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1285,7 +1285,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1321,7 +1321,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1357,7 +1357,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1393,7 +1393,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1429,7 +1429,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1465,7 +1465,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1501,7 +1501,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1537,7 +1537,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1573,7 +1573,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1609,7 +1609,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1645,7 +1645,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1681,7 +1681,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1717,7 +1717,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1753,7 +1753,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1789,7 +1789,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1825,7 +1825,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1861,7 +1861,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -1897,7 +1897,7 @@
    "observation": "defined",
    "value": "unknown",
    "evidence": "",
-   "basis": "No Bank standard found in the asset register - confirm none exists",
+   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
    "observed_on": "",
    "observed_by": ""
   }

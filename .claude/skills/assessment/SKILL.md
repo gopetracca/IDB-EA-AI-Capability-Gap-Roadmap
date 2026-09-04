@@ -33,6 +33,10 @@ python3.13 build/build.py check      # validate facts/, must pass
    no evidence is an opinion.
 6. **Performance gates everything.** Without `practised`, no level is derived,
    however good the tooling and standards are. That is deliberate (ADR-0013).
+7. **`defined` is not "did EA write it".** The standard-setter is whoever owns the
+   subject: Cybersecurity, Data Management, Legal, HR, a platform team, or EA.
+   Architecture is the accountable owner of 2 of 52 capabilities. Do not write the
+   model as though it were the centre of it.
 
 ## Recording what you learned
 

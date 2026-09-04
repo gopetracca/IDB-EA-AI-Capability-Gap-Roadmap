@@ -10,10 +10,14 @@ Ten minutes. No jargon. If you read one thing, read this.
 
 Someone says: **"we don't have the capability to run AI agents."**
 
-Someone else says: **"yes we do, EA published the standards and the Terraform modules."**
+Someone else says: **"yes we do — the standards, the reference architectures and the
+infrastructure modules are all published."**
 
 Both are telling the truth about different things, and no single number can hold both.
 A model that answers with one score has to pick which truth to tell.
+
+The same argument recurs about retrieval, about data governance, about AI security. It is
+never really about agents.
 
 ## 2. The move: separate facts from judgement
 
@@ -42,7 +46,7 @@ each with evidence and a name attached.
 | **Practised** | Is this done on real AI systems in production, repeatedly? | The capability owner |
 | **Enabled** | Can a team get the tooling without building it themselves? | The platform team |
 | **Skilled** | Do the people who must do this know how? | The owner, or L&D |
-| **Defined** | Is there a published Bank standard or method? | EA |
+| **Defined** | Is there an approved institutional standard, policy or method? | Whoever owns the subject: the platform team, Cybersecurity, Data Management, Legal, HR, EA |
 
 Two values carry weight people usually miss:
 
@@ -62,11 +66,11 @@ You never type a level. The default scale derives it, and the order is what matt
 | 0 | Incomplete | Not performed |
 | 1 | Performed | It is done on real systems |
 | 2 | Managed | Done, **and** tooling provided, **and** competent people |
-| 3 | Established | All of that, **and** done against a published Bank standard |
+| 3 | Established | All of that, **and** done against an approved institutional standard |
 | 4 | Predictable | Measured against thresholds *(not yet collected)* |
 | 5 | Innovating | An improvement cycle closed *(not yet collected)* |
 
-**Performance comes first.** This is the whole design. A published standard with nothing
+**Performance comes first.** This is the whole design. An approved standard with nothing
 performed against it earns **no level at all** — because the question was never
 *"did we write it down?"*, it was *"can the institution do this?"*
 
@@ -92,6 +96,19 @@ pursue, how it plans, and where it must stop.*
 And the sentence that lands in the room: *the platform is strong, the standard is nearly
 there, and the practice is thin. The fix is not to buy anything — it is to release two
 documents and build the next agent against them.*
+
+### Standards are not one function's job
+
+`defined` asks whether an approved standard exists — not whether Architecture wrote it.
+Across the 52 capabilities the standard-setter is Cybersecurity for AI security, Data
+Management for AI data governance, Legal for regulatory obligations, HR and Learning &
+Development for literacy and skills, the platform teams for their own platforms, and
+Architecture for architecture. Of 52 capabilities, Architecture is the accountable owner
+of two.
+
+Where `defined` currently reads `unknown` — 39 of 52 — it means the asset register covers
+AI platform assets only, so a standard owned by another function may well exist and simply
+not be recorded here. Those are questions to ask, not gaps to assume.
 
 ## 5. What a capability is, and what it is not
 

@@ -65,7 +65,7 @@ def build(m, scale, path):
         ws.column_dimensions[get_column_letter(i)].width = w
     rows = [
         ("T", "Enterprise AI Capability Model", ""),
-        ("S", "Facts, one scale, generated views  ·  IDB Enterprise Architecture", ""),
+        ("S", "A capability model for AI  ·  Inter-American Development Bank", ""),
         ("", "", ""),
         ("H", "What this workbook is", ""),
         ("P", "It is the model", "Not a report generated from somewhere else. This file is where the facts live. Edit the yellow cells, save, and the views are rebuilt from it."),
@@ -75,7 +75,7 @@ def build(m, scale, path):
         ("P", "Practised", "Is this done on real AI systems in production, repeatedly?"),
         ("P", "Enabled", "Can a team get the tooling for this without building it themselves?"),
         ("P", "Skilled", "Do the people who must do this know how?"),
-        ("P", "Defined", "Is there a published Bank standard or method for this?"),
+        ("P", "Defined", "Is there an approved institutional standard, policy or method? Whoever owns the subject sets it - the platform team, Cybersecurity, Data Management, Legal, HR or EA. Not one function's job."),
         ("P", "Values", "yes / partial / no / n-a / unknown.  n-a needs a reason. unknown means nobody has looked - it is not a zero."),
         ("", "", ""),
         ("H", "The order matters", ""),
