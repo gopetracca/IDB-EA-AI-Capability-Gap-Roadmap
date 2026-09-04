@@ -33,6 +33,9 @@ python3.13 build/build.py check      # validate facts/, must pass
    no evidence is an opinion.
 6. **Performance gates everything.** Without `practised`, no level is derived,
    however good the tooling and standards are. That is deliberate (ADR-0013).
+   **`practised` is observed per L3 criterion, never at L2** (ADR-0014). The
+   capability value is rolled up by `Model.roll_up` and must never be typed.
+   The other three observations stay at L2.
 7. **`defined` is not "did EA write it".** The standard-setter is whoever owns the
    subject: Cybersecurity, Data Management, Legal, HR, a platform team, or EA.
    Architecture is the accountable owner of 2 of 52 capabilities. Do not write the
@@ -89,5 +92,7 @@ and `level(obs)`. Nothing else changes; views are generated per scale. State in
 ## What not to rebuild
 
 The rubric and criteria-typing workstreams are closed (ADR-0013). The 258 L3
-criteria are the checklist behind a `practised` judgement, never gates. If a
-task seems to need 52 rubrics, re-read ADR-0013 before starting.
+criteria carry a `practised` observation each (ADR-0014), but they are still
+not gates: no rubric, no mandatory/conditional/enhancing typing. Recording an
+observation against a criterion is not reopening the rubric workstream. If a
+task seems to need 52 rubrics, re-read ADR-0013 and ADR-0014 before starting.

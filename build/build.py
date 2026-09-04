@@ -45,12 +45,21 @@ def cmd_status():
     print("  %-22s %d rows" % ("observations.json", len(m.observations)))
 
     import collections
-    print("\nobservations")
+    print("\nobservations, by capability")
+    vals = {c['id']: m.values(c['id']) for c in m.capabilities}
     for t in m.observation_types:
+        c = collections.Counter(vals[x['id']][t['id']] for x in m.capabilities)
+        derived = "  (derived from L3)" if t['id'] in m.criterion_types else ""
+        print("  %-10s %s%s" % (t['id'], dict(sorted(c.items())), derived))
+
+    for t in m.criterion_types:
         c = collections.Counter(
-            m.obs_by_cap.get(x['id'], {}).get(t['id'], {}).get('value', 'unknown')
-            for x in m.capabilities)
-        print("  %-10s %s" % (t['id'], dict(sorted(c.items()))))
+            r.get('value', 'unknown')
+            for x in m.capabilities for _, r in m.criteria_obs(x['id'], t))
+        n = sum(len(x['criteria']) for x in m.capabilities)
+        print("\n%s, by L3 criterion (%d rows - this is what reviewers answer)"
+              % (t, n))
+        print("  %-10s %s" % (t, dict(sorted(c.items()))))
 
     print("\nscales")
     for s in scales:
@@ -87,24 +96,40 @@ def cmd_check():
                 problems.append("%s in-the-box control points at unknown subject %s"
                                 % (o['id'], x['capability']))
 
+    crit_of = {x['id']: c['id'] for c in m.capabilities for x in c['criteria']}
     for r in m.observations:
+        where = "%s/%s" % (r.get('criterion') or r['capability'], r['observation'])
         if r['capability'] not in ids:
             problems.append("observation for unknown capability %s" % r['capability'])
+        if r.get('criterion'):
+            if r['criterion'] not in crit:
+                problems.append("observation for unknown criterion %s" % r['criterion'])
+            elif crit_of[r['criterion']] != r['capability']:
+                problems.append("%s is recorded under %s but belongs to %s"
+                                % (r['criterion'], r['capability'],
+                                   crit_of[r['criterion']]))
         if r['value'] not in m.observation_values:
-            problems.append("%s/%s has invalid value %r"
-                            % (r['capability'], r['observation'], r['value']))
+            problems.append("%s has invalid value %r" % (where, r['value']))
         if r['value'] == 'n/a' and not r['basis']:
-            problems.append("%s/%s is n/a with no reason"
-                            % (r['capability'], r['observation']))
+            problems.append("%s is n/a with no reason" % where)
         if r['value'] in ('yes', 'partial') and not r['evidence']:
-            problems.append("%s/%s claims %s with no evidence"
-                            % (r['capability'], r['observation'], r['value']))
+            problems.append("%s claims %s with no evidence" % (where, r['value']))
 
-    types = {t['id'] for t in m.observation_types}
+    # Capability-level observations: one row per capability per type.
+    # Criterion-level observations (ADR-0014): one row per criterion.
+    cap_types = {t['id'] for t in m.observation_types
+                 if t['id'] not in m.criterion_types}
     for c in m.capabilities:
         got = set(m.obs_by_cap.get(c['id'], {}))
-        for t in types - got:
+        for t in cap_types - got:
             problems.append("%s has no %s observation" % (c['id'], t))
+        for t in m.criterion_types:
+            rows = m.obs_by_crit.get(c['id'], {}).get(t, {})
+            missing = [x['id'] for x in c['criteria'] if x['id'] not in rows]
+            if missing:
+                problems.append("%s has no %s observation for %d criteria (%s%s)"
+                                % (c['id'], t, len(missing), ", ".join(missing[:3]),
+                                   ", ..." if len(missing) > 3 else ""))
 
     for cid in ids:
         if cid not in m.owner_map:
@@ -183,18 +208,25 @@ def cmd_ingest(path=None):
     ws = wb["2. Observations"]
 
     doc = json.load(open(os.path.join(F.FACTS, 'observations.json'), encoding='utf-8'))
-    index = {(r['capability'], r['observation']): r for r in doc['observations']}
+    # key: (capability, observation, criterion or '') - criterion-level rows
+    # (ADR-0014) are addressed by their criterion id
+    index = {(r['capability'], r['observation'], r.get('criterion') or ''): r
+             for r in doc['observations']}
     changed, unknown = 0, []
     for row in ws.iter_rows(min_row=2, values_only=True):
         if not row or not row[0]:
             continue
-        cid, _, typ, _, value, evidence, by, when = (list(row) + [None] * 8)[:8]
+        # sheet 2 columns: capability, name, observation, criterion, subject,
+        # question, VALUE, evidence, observed_by, date, basis
+        (cid, _nm, typ, crit, _subj, _q,
+         value, evidence, by, when) = (list(row) + [None] * 10)[:10]
         if typ is None:
-            continue          # merged footer note, not a data row
-        key = (str(cid).strip(), str(typ).strip())
+            continue          # capability banner row, or the footer note
+        key = (str(cid).strip(), str(typ).strip(),
+               str(crit).strip() if crit else '')
         rec = index.get(key)
         if rec is None:
-            unknown.append("%s/%s" % key)
+            unknown.append("/".join(x for x in key if x))
             continue
         v = (str(value).strip().lower().replace('n-a', 'n/a')
              if value is not None else 'unknown')

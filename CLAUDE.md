@@ -14,7 +14,8 @@ A capability model for AI at the Bank, and the assessment built on it.
 
 - **8 domains · 52 L2 capabilities · 258 L3 criteria** — `facts/capabilities.json`
 - **7 offerings · 20 assets · 27 in-the-box questions** — `facts/offerings.json`, `facts/assets.json`
-- **208 observations** — `facts/observations.json`
+- **414 observations** — `facts/observations.json` (258 criterion-level `practised`
+  plus 3 × 52 capability-level)
 - **52 capabilities mapped to the Bank's own catalogue**, 8 with no owner — `facts/owners.json`
 - **40 graded sources · 18 candidate obligations** — `facts/sources.json`, `facts/obligations.json`
 
@@ -39,8 +40,9 @@ one body of evidence without reassessing anything.
 Four observations per capability, each `yes` / `partial` / `no` / `n/a` / `unknown`,
 each with evidence:
 
-**Practised** (done on real systems?) · **Enabled** (tooling provided?) ·
-**Skilled** (people competent?) · **Defined** (published Bank standard?)
+**Practised** (done on real systems? — **asked per L3 criterion**, ADR-0014) ·
+**Enabled** (tooling provided?) · **Skilled** (people competent?) ·
+**Defined** (approved institutional standard?)
 
 **A level is never typed. It is always derived.** The default scale
 (`scales/capability_level.py`) is adapted from ISO/IEC 33020:2019:
@@ -81,6 +83,9 @@ technology"* from reading as *"we have the capability"*.
 ## 5. Settled decisions
 
 `docs/decisions/`, indexed in `docs/decisions/README.md`.
+
+**ADR-0014** — `practised` is observed at L3 and derived at L2. Never type a
+capability-level `practised` value; `Model.roll_up` computes it.
 
 **ADR-0013 is the one that governs the model.** It supersedes ADR-0001 (two scales),
 ADR-0002 (readiness levels) and ADR-0003 (consumption model), and amends ADR-0004 and

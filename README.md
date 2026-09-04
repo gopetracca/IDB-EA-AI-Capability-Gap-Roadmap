@@ -50,11 +50,14 @@ vendor-neutral and survives replacing every product.
 reference architectures, templates, infrastructure modules — each with a status and a
 location a reader can open. This is the part that is not an opinion.
 
-**Four observations per capability**, each recorded as a fact with evidence and a date:
+**Four observations**, each recorded as a fact with evidence and a date. Three are asked
+once per capability; **practised is asked once per L3 criterion**, because that is the
+level at which work is actually witnessed, and the capability value is derived from
+those answers rather than typed:
 
 | | The question | Typically answered by |
 |---|---|---|
-| **Practised** | Is this done on real AI systems in production, repeatedly? | The capability owner |
+| **Practised** *(per criterion)* | Is this specific practice done on real AI systems, repeatedly? | The capability owner |
 | **Enabled** | Can a team get the tooling without building it themselves? | The platform team providing it |
 | **Skilled** | Do the people who must do this know how? | The owner, or Learning & Development |
 | **Defined** | Is there an approved institutional standard, policy or method? | Whoever owns the subject |

@@ -43,7 +43,7 @@ each with evidence and a name attached.
 
 | | The question | Who usually answers |
 |---|---|---|
-| **Practised** | Is this done on real AI systems in production, repeatedly? | The capability owner |
+| **Practised** | Is this done on real AI systems in production, repeatedly? **Asked once per L3 criterion** (ADR-0014) | The capability owner |
 | **Enabled** | Can a team get the tooling without building it themselves? | The platform team |
 | **Skilled** | Do the people who must do this know how? | The owner, or L&D |
 | **Defined** | Is there an approved institutional standard, policy or method? | Whoever owns the subject: the platform team, Cybersecurity, Data Management, Legal, HR, EA |
@@ -118,6 +118,23 @@ of two.
 Where `defined` currently reads `unknown` — 39 of 52 — it means the asset register covers
 AI platform assets only, so a standard owned by another function may well exist and simply
 not be recorded here. Those are questions to ask, not gaps to assume.
+
+### Practised is asked at L3, and derived at L2
+
+The other three observations are properties of tooling, people and standards, and are
+answered once per capability. `practised` is different: *"is 4.4 Agent & Workflow
+Orchestration Design practised?"* covers six distinct practices, and the Bank plausibly
+does some and not others. So it is asked once per **criterion** — a named practice with
+a definition, answerable by looking — and the capability value is rolled up from those
+answers.
+
+The rule is strict: every applicable criterion `yes` gives `yes`; any weak link gives
+`partial`; `unknown` criteria drop out rather than un-rating the whole capability. One
+weak link stops the claim, which is the same asymmetry the level ladder enforces.
+
+That turns *"4.4 is partial"* into *"4.4.1 and 4.4.6 yes, 4.4.5 no, three unexamined"* —
+and the roadmap item becomes a named practice rather than a vague improvement.
+See [ADR-0014](decisions/adr/0014-practised-is-observed-at-l3.md).
 
 ## 5. What a capability is, and what it is not
 

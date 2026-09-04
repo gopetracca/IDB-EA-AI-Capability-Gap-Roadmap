@@ -6,7 +6,7 @@
 >
 > Level 3 is the highest this model can currently derive. Levels 4 and 5 are defined but need observations nobody collects yet - threshold monitoring and a closed improvement cycle - so a capability at 3 is at the top of what is measured here, not at the top of the scale. Level 3 also reads conformance from a standard and a practice co-existing; it is not separately evidenced.
 
-The taxonomy has three levels: **8 domains (L1)**, **52 capabilities (L2)** — the unit that carries a level and an accountable owner — and **258 criteria (L3)**, which are what you look for when judging whether a capability is genuinely practised. L3 criteria carry no score of their own; they are listed per capability in section *By domain* below and on sheet 6 of the workbook.
+The taxonomy has three levels: **8 domains (L1)**, a reporting cluster that is never scored; **52 capabilities (L2)** — the unit that carries a level and an accountable owner; and **258 criteria (L3)** — the specific practices that can actually be witnessed. *Practised* is observed once per criterion and the capability value is **derived** from those observations, never typed: it reads `yes` only when every criterion was examined and every one passed (ADR-0014). Criteria carry no level of their own. They are listed per capability in section *By domain* below, and each has a row on sheet 2 of the workbook.
 
 | | |
 |---|---|
@@ -39,7 +39,7 @@ Levels above **3** are defined but cannot be reached from the observations this 
 
 | Observation | The question | Evidence expected |
 |---|---|---|
-| **Practised** | Is this done on real AI systems in production, repeatedly? | Named AI systems or agents where it was done, and by whom |
+| **Practised** | Is this specific practice done on real AI systems in production, repeatedly? | Named AI systems or agents where this criterion was done, and by whom |
 | **Enabled** | Can a team get the tooling for this without building it themselves? | An offering in the offerings register, or the enterprise service that provides it |
 | **Skilled** | Do the people who must do this know how? | Named practitioners, training records, or a competency statement |
 | **Defined** | Is there an approved institutional standard, policy or method for this? Set by whoever owns the subject - the platform team, Cybersecurity, Data Management, Legal, HR or EA. | The document, its owner, its location and a date |

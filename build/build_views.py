@@ -33,11 +33,14 @@ def capability_view(m, scale):
     rated = {c['id']: m.rate(scale, c['id']) for c in m.capabilities}
     n_rated = sum(1 for v in rated.values() if v[0] is not None)
     n_crit = sum(len(c['criteria']) for c in m.capabilities)
-    w("The taxonomy has three levels: **%d domains (L1)**, **%d capabilities (L2)** — the "
-      "unit that carries a level and an accountable owner — and **%d criteria (L3)**, "
-      "which are what you look for when judging whether a capability is genuinely "
-      "practised. L3 criteria carry no score of their own; they are listed per "
-      "capability in section *By domain* below and on sheet 6 of the workbook."
+    w("The taxonomy has three levels: **%d domains (L1)**, a reporting cluster that is "
+      "never scored; **%d capabilities (L2)** — the unit that carries a level and an "
+      "accountable owner; and **%d criteria (L3)** — the specific practices that can "
+      "actually be witnessed. *Practised* is observed once per criterion and the "
+      "capability value is **derived** from those observations, never typed: it reads "
+      "`yes` only when every criterion was examined and every one passed (ADR-0014). "
+      "Criteria carry no level of their own. They are listed per capability in section "
+      "*By domain* below, and each has a row on sheet 2 of the workbook."
       % (len(m.domains), len(m.capabilities), n_crit))
     w("")
     w("| | |")

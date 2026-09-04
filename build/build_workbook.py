@@ -72,26 +72,28 @@ def build(m, scale, path):
         ("P", "It is the model", "Not a report generated from somewhere else. This file is where the facts live. Edit the yellow cells, save, and the views are rebuilt from it."),
         ("P", "Facts, not scores", "You never type a level. You record four observations per capability, each with evidence. The level is computed."),
         ("", "", ""),
-        ("H", "The taxonomy has three levels", ""),
-        ("P", "L1 - Domain", "8 of them. A reporting cluster, never scored. Sheet 1, column A."),
-        ("P", "L2 - Capability", "52 of them. THE UNIT THAT CARRIES A LEVEL - one accountable owner each. One row per capability on sheet 1."),
-        ("P", "L3 - Criterion", "258 of them, on sheet 6. What you look for when deciding whether an L2 is genuinely practised. They carry no score of their own. Click the last column of sheet 1 to jump to a capability's criteria."),
+        ("H", "Three levels, and what you DO with each", ""),
+        ("P", "L1 - Domain  (8)", "A reporting cluster. You read it. Never scored, never assessed. Sheet 1, column A."),
+        ("P", "L2 - Capability  (52)", "THE UNIT YOU MANAGE. One accountable owner, one derived level. This is what you report, assign and fund. You never fill anything in here - every value on sheet 1 is computed. One row each on sheet 1."),
+        ("P", "L3 - Criterion  (258)", "THE UNIT YOU JUDGE. A specific practice you can actually witness. This is where you answer PRACTISED, because 'is the capability practised?' has no single honest answer when the capability covers six different things. Sheet 2. Definitions on sheet 6."),
+        ("W", "How they connect", "You judge at L3. The model derives L2 from it. Nobody types a capability's Practised value or its level - that is the whole design, and it is why two people cannot argue about a number without arguing about a criterion first."),
         ("", "", ""),
         ("H", "The four observations", ""),
-        ("P", "Practised", "Is this done on real AI systems in production, repeatedly?"),
-        ("P", "Enabled", "Can a team get the tooling for this without building it themselves?"),
-        ("P", "Skilled", "Do the people who must do this know how?"),
-        ("P", "Defined", "Is there an approved institutional standard, policy or method? Whoever owns the subject sets it - the platform team, Cybersecurity, Data Management, Legal, HR or EA. Not one function's job."),
+        ("P", "Practised  (per L3)", "Is this specific practice done on real AI systems in production, repeatedly?  Asked once per criterion. The capability value is DERIVED: 'yes' only if every criterion was examined and every one passed."),
+        ("P", "Enabled  (per L2)", "Can a team get the tooling for this without building it themselves?"),
+        ("P", "Skilled  (per L2)", "Do the people who must do this know how?"),
+        ("P", "Defined  (per L2)", "Is there an approved institutional standard, policy or method? Whoever owns the subject sets it - the platform team, Cybersecurity, Data Management, Legal, HR or EA. Not one function's job."),
         ("P", "Values", "yes / partial / no / n-a / unknown.  n-a needs a reason. unknown means nobody has looked - it is not a zero."),
         ("", "", ""),
         ("H", "The order matters", ""),
         ("W", "Performance comes first", "A published standard with nothing performed against it earns NO LEVEL. That is the ISO/IEC 33020 ordering and it is deliberate: it is what stops 'we approved the technology' from reading as 'we have the capability'."),
         ("", "", ""),
         ("H", "How to use it", ""),
-        ("P", "1 - Read", "Sheet 1 for the capability map. Sheet 3 for what the platform actually offers today."),
-        ("P", "2 - Complete", "Sheet 2. One row per capability per observation. Fill value, evidence, who said so, when."),
-        ("P", "3 - Send", "Send this file. One reviewer at a time - Excel does not merge."),
-        ("P", "4 - Rebuild", "python3 build/build.py ingest   then   python3 build/build.py views"),
+        ("P", "1 - Read", "Sheet 1 for the capability map. Find the capabilities you own. Sheet 3 for what the platform actually offers today."),
+        ("P", "2 - Jump", "Click the last column of sheet 1 - 'Assess it' - to land on that capability's block on sheet 2."),
+        ("P", "3 - Complete", "Sheet 2. For each of your capabilities: judge every L3 criterion for Practised, then answer Enabled, Skilled and Defined once. Fill value, evidence, who said so, when. Answer only for the capabilities you own - leave the rest 'unknown'."),
+        ("P", "4 - Send", "Send this file back. One reviewer at a time - Excel does not merge."),
+        ("P", "5 - Rebuild", "python3 build/build.py ingest   then   python3 build/build.py all"),
         ("", "", ""),
         ("H", "Cell conventions", ""),
         ("Y", "Yellow, blue bold", "Your input. The only cells to edit."),
@@ -127,12 +129,20 @@ def build(m, scale, path):
               ("Owner (Bank unit)", 26), ("Match", 11), ("Practised", 10),
               ("Enabled", 10), ("Skilled", 10), ("Defined", 10),
               ("LEVEL", 8), ("Level name", 14), ("Why", 62),
-              ("L3 criteria (click)", 17)])
+              ("Assess it (click)", 18)])
     # row each capability's block starts on, on sheet 6, so sheet 1 can link to it
     critrow, _rr = {}, 2
     for c in sorted(m.capabilities, key=lambda x: m.sort_key(x['id'])):
         critrow[c['id']] = _rr
         _rr += 1 + len(c['criteria'])
+
+    # and the row its block starts on, on sheet 2, where the work is actually done
+    n_cap_types = len([t for t in m.observation_types
+                       if t['id'] not in m.criterion_types])
+    obsrow, _or = {}, 2
+    for c in sorted(m.capabilities, key=lambda x: m.sort_key(x['id'])):
+        obsrow[c['id']] = _or
+        _or += 1 + n_cap_types + len(c['criteria']) * len(m.criterion_types)
     r = 2
     for c in sorted(m.capabilities, key=lambda x: m.sort_key(x['id'])):
         vals = m.values(c['id'])
@@ -142,7 +152,7 @@ def build(m, scale, path):
         row = [c['domain'], c['id'], c['name'], c['definition'], unit or "NO OWNER",
                match, vals['practised'], vals['enabled'], vals['skilled'],
                vals['defined'], lvl if lvl is not None else "-", lname, why,
-               ("%s - %s" % (c['criteria'][0]['id'], c['criteria'][-1]['id']))
+               ("%d criteria to judge" % len(c['criteria']))
                if c['criteria'] else ""]
         for j, v in enumerate(row, 1):
             cell = ws.cell(row=r, column=j, value=v)
@@ -165,57 +175,93 @@ def build(m, scale, path):
                 cell.font = Font(name=F, size=9, color="0000EE", underline="single")
                 cell.hyperlink = Hyperlink(
                     ref="N%d" % r,
-                    location="'6. Criteria (L3)'!B%d" % critrow[c['id']],
-                    tooltip="Jump to the %d L3 criteria for %s"
+                    location="'2. Observations'!A%d" % obsrow[c['id']],
+                    tooltip="Go to sheet 2 and judge the %d criteria behind %s"
                             % (len(c['criteria']), c['id']))
         ws.row_dimensions[r].height = 28
         r += 1
     ws.freeze_panes = "D2"; ws.auto_filter.ref = "A1:N%d" % (r - 1)
     note(ws, r + 1, 14,
          "READ ONLY - every column is computed. Observations are edited on sheet 2. "
+         "PRACTISED is rolled up from the L3 criteria: it reads 'yes' only when every "
+         "criterion was examined and every one passed, so one unexamined criterion "
+         "holds it at 'partial'. "
          "Scale: %s. %s  %s" % (scale.NAME, scale.BASIS,
                                 scale.note() if hasattr(scale, 'note') else ""), 46)
 
     # =============================================== 2. Observations
     ws = wb.create_sheet("2. Observations")
-    head(ws, [("Capability", 11), ("Name", 32), ("Observation", 12),
-              ("The question", 54), ("VALUE", 11), ("Evidence", 46),
-              ("Observed by", 22), ("Date", 12), ("Basis / why", 56)])
+    head(ws, [("Capability", 11), ("Name", 26), ("Observation", 12),
+              ("L3 criterion", 11), ("What you are judging", 30),
+              ("The question", 46), ("VALUE", 11), ("Evidence", 42),
+              ("Observed by", 20), ("Date", 12), ("Basis / why", 46)])
     q = {t['id']: t['question'] for t in m.observation_types}
+    SUBHDR = PatternFill("solid", fgColor="DEE9EF")
     r = 2
+    obsrow = {}                       # capability -> first row, for sheet 1 links
     for c in sorted(m.capabilities, key=lambda x: m.sort_key(x['id'])):
+        obsrow[c['id']] = r
+        # a banner per capability, so 414 rows read as 52 blocks
+        hdr = [c['id'], c['name'], "", "", "", c['definition'], "", "", "", "", ""]
+        for j, v in enumerate(hdr, 1):
+            cell = ws.cell(row=r, column=j, value=v)
+            cell.border = BOX; cell.fill = SUBHDR
+            cell.font = Font(name=F, size=10, bold=True,
+                             color=ACC if j in (1, 2) else INK)
+            cell.alignment = WRAP if j in (2, 6) else TOP
+        ws.row_dimensions[r].height = 20
+        r += 1
         for t in m.observation_types:
-            o = m.obs_by_cap.get(c['id'], {}).get(t['id'], {})
-            v = o.get('value', 'unknown')
-            row = [c['id'], c['name'], t['id'], q[t['id']], v, o.get('evidence', ''),
-                   o.get('observed_by', ''), o.get('observed_on', ''), o.get('basis', '')]
-            for j, val in enumerate(row, 1):
-                cell = ws.cell(row=r, column=j, value=val)
-                cell.border = BOX; cell.font = T
-                cell.alignment = WRAP if j in (2, 4, 6, 9) else (
-                    CTR if j == 5 else TOP)
-                if j == 1: cell.font = Font(name=F, size=10, bold=True, color=ACC)
-                if j == 3: cell.font = Font(name=F, size=9, bold=True, color=ACC)
-                if j == 4: cell.font = TS
-                if j == 5:
-                    cell.fill = PatternFill("solid", fgColor=VAL_FILL[v])
-                    cell.font = Font(name=F, size=10, bold=True, color=VAL_FONT[v])
-                if j in (6, 7, 8):
-                    cell.fill = INPUT; cell.font = T
-                if j == 9: cell.font = TS
-            ws.row_dimensions[r].height = 26
-            r += 1
+            crit_level = t['id'] in m.criterion_types
+            # one row per criterion for practised; one row for the rest
+            items = (m.criteria_obs(c['id'], t['id']) if crit_level
+                     else [(None, m.obs_by_cap.get(c['id'], {}).get(t['id'], {}))])
+            for x, o in items:
+                v = o.get('value', 'unknown')
+                row = [c['id'], c['name'], t['id'],
+                       x['id'] if x else "",
+                       x['name'] if x else "the capability as a whole",
+                       (x['definition'] if x else q[t['id']]),
+                       v, o.get('evidence', ''), o.get('observed_by', ''),
+                       o.get('observed_on', ''), o.get('basis', '')]
+                for j, val in enumerate(row, 1):
+                    cell = ws.cell(row=r, column=j, value=val)
+                    cell.border = BOX; cell.font = T
+                    cell.alignment = WRAP if j in (2, 5, 6, 8, 11) else (
+                        CTR if j in (1, 4, 7) else TOP)
+                    if j == 1: cell.font = Font(name=F, size=10, bold=True, color=ACC)
+                    if j == 3: cell.font = Font(name=F, size=9, bold=True, color=ACC)
+                    if j == 4: cell.font = Font(name=F, size=10, bold=True, color=ACC)
+                    if j == 5: cell.font = B
+                    if j == 6: cell.font = TS
+                    if j == 7:
+                        cell.fill = PatternFill("solid", fgColor=VAL_FILL[v])
+                        cell.font = Font(name=F, size=10, bold=True,
+                                         color=VAL_FONT[v])
+                    if j in (8, 9, 10):
+                        cell.fill = INPUT
+                        cell.font = T
+                    if j == 11: cell.font = TS
+                if crit_level:
+                    ws.row_dimensions[r].outlineLevel = 1
+                ws.row_dimensions[r].height = 26
+                r += 1
     dv = DataValidation(type="list", formula1='"yes,partial,no,n-a,unknown"',
                         allow_blank=False, showErrorMessage=True,
                         errorTitle="Observation value",
                         error="yes / partial / no / n-a (needs a reason) / unknown (nobody has looked)")
-    ws.add_data_validation(dv); dv.add("E2:E%d" % (r - 1))
-    ws.freeze_panes = "C2"; ws.auto_filter.ref = "A1:I%d" % (r - 1)
-    note(ws, r + 1, 9,
-         "THIS IS THE SHEET YOU FILL IN. Column E is the value; columns F, G and H are "
-         "yours. An observation with no evidence is an opinion - write what you saw and "
-         "who says so. 'unknown' is an honest answer and is never treated as a zero. "
-         "Use 'n-a' only with a reason in column I.", 46)
+    ws.add_data_validation(dv); dv.add("G2:G%d" % (r - 1))
+    ws.freeze_panes = "E2"; ws.auto_filter.ref = "A1:K%d" % (r - 1)
+    note(ws, r + 1, 11,
+         "THIS IS THE SHEET YOU FILL IN. Column G is the value; H, I and J are yours. "
+         "PRACTISED is asked once per L3 criterion - the specific practice you can "
+         "actually witness - because 'is this capability practised?' has no single "
+         "honest answer when the capability covers six different things. The "
+         "capability-level Practised value is DERIVED from those rows and appears on "
+         "sheet 1; you never type it. ENABLED, SKILLED and DEFINED are asked once for "
+         "the capability. An observation with no evidence is an opinion - write what "
+         "you saw and who says so. 'unknown' is an honest answer and is never a zero. "
+         "Use 'n-a' only with a reason in column K.", 62)
 
     # =============================================== 3. Offerings
     ws = wb.create_sheet("3. Offerings")
@@ -359,13 +405,13 @@ def build(m, scale, path):
             r += 1
     ws.freeze_panes = "E2"; ws.auto_filter.ref = "A1:G%d" % (r - 1)
     note(ws, r + 1, 7,
-         "ALL %d L3 CRITERIA, the third level of the taxonomy, grouped under their L2 "
-         "capability. Use the +/- outline handles in the left margin to collapse a "
-         "capability, or filter column B to one capability ID. Reached from the last "
-         "column of sheet 1. "
-         "These are the checklist behind a Practised judgement - what to look for when "
-         "deciding whether a capability is genuinely performed. They are NOT gates and "
-         "carry no scores of their own."
+         "ALL %d L3 CRITERIA with their full definitions, grouped under their L2 "
+         "capability. This sheet is the REFERENCE - read it to understand what a "
+         "criterion means. You JUDGE them on sheet 2, which carries one Practised row "
+         "for each of them. Use the +/- outline handles to collapse a capability, or "
+         "filter column B to one capability ID. "
+         "Criteria carry no level of their own: they carry an observation, and the "
+         "capability's Practised value is derived from them (ADR-0014)."
          % sum(len(c['criteria']) for c in m.capabilities), 46)
 
     # =============================================== 7. Owners

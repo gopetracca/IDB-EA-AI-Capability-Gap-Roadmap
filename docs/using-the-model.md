@@ -53,6 +53,11 @@ means one of them loses.
 Sheet 2, four columns: the value, the evidence, who observed it, and when. Everything
 else on that sheet is reference and is regenerated.
 
+Sheet 2 has **414 rows, not 52**, grouped into a block per capability. `practised` is
+asked once per L3 criterion (ADR-0014), which is why there are more rows and why each
+one names a specific practice with its definition. `enabled`, `skilled` and `defined`
+are asked once per capability. A reviewer answers only for the capabilities they own.
+
 The values, and what they mean:
 
 | Value | Means |
@@ -90,7 +95,8 @@ directly, then `check` and `all`. The workbook is for review rounds, not for eve
 ## Adding to the model
 
 **A capability** → [`../facts/capabilities.json`](../facts/capabilities.json). It also
-needs four observation rows and an owner mapping. New capabilities carry
+needs an owner mapping and observation rows: three at capability level, plus one
+`practised` row per L3 criterion (ADR-0014). New capabilities carry
 `confidence: low` until their owner validates them (ADR-0009).
 
 **An offering** → [`../facts/offerings.json`](../facts/offerings.json). It needs

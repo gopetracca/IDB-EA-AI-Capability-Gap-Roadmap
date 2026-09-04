@@ -138,9 +138,8 @@ def report(m, scale):
     noowner = [c for c in m.capabilities if m.owner(c['id'])[1] == 'NO MATCH']
     box_total = sum(len(o['in_the_box']) for o in m.offerings)
     box_done = sum(1 for o in m.offerings for x in o['in_the_box'] if x['status'])
-    n_obs = total * len(m.observation_types)
-    n_known = sum(1 for c in m.capabilities
-                  for v in m.values(c['id']).values() if v != 'unknown')
+    n_obs = len(m.observations)
+    n_known = sum(1 for r in m.observations if r.get('value') != 'unknown')
 
     o = []
     w = o.append
@@ -256,16 +255,26 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-
           '<p>This is the difference between <i>we do not know</i> and <i>we do not have '
           'it</i>. Most maturity assessments cannot tell those apart and score an '
           'unexamined capability as if it were absent. This one refuses to.</p></div>')
-    # coverage by domain
+    # coverage by domain - counted over the rows a reviewer actually fills in,
+    # which after ADR-0014 is one per L3 criterion for `practised`
     rows = []
     for d in m.domains:
         caps = [c for c in m.capabilities if c['domain'] == d['id']]
         cnt = collections.Counter()
+        ncrit = 0
         for c in caps:
-            for v in m.values(c['id']).values():
-                cnt["unknown" if v == "unknown" else "yes"] += 1
+            for t in m.observation_types:
+                if t['id'] in m.criterion_types:
+                    for _x, r_ in m.criteria_obs(c['id'], t['id']):
+                        cnt["unknown" if r_.get('value', 'unknown') == 'unknown'
+                            else "yes"] += 1
+                        ncrit += 1
+                else:
+                    v = m.obs_by_cap.get(c['id'], {}).get(t['id'], {}).get(
+                        'value', 'unknown')
+                    cnt["unknown" if v == "unknown" else "yes"] += 1
         rows.append(("%s · %s" % (d['id'], _short(d['name'])),
-                     "%d capabilities" % len(caps),
+                     "%d capabilities · %d criteria" % (len(caps), ncrit),
                      {"yes": cnt["yes"], "unknown": cnt["unknown"]}))
     w('<h3 style="margin-top:26px;font-size:15px">How much has been observed, by domain</h3>')
     w(stacked_bar(rows, keys=["yes", "unknown"]))
@@ -348,6 +357,12 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-
        "The pale columns are the work still to do.")
     w(obs_heatmap(m))
     w(legend())
+    w('<p style="margin-top:14px;font-size:13.5px;color:var(--muted)">'
+      'The <b>practised</b> cell is a roll-up: it is observed once per L3 criterion '
+      '(%d in total) and derived here, so one weak practice inside a capability shows '
+      'as <i>partial</i> rather than disappearing into an average. The other three are '
+      'observed once per capability.</p>'
+      % sum(len(c['criteria']) for c in m.capabilities))
 
     # 2 enablement by domain - REAL
     vh("Tooling by domain", "READY",
@@ -483,7 +498,8 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-
     n_undef = sum(1 for c in m.capabilities if m.values(c['id'])['defined'] == 'unknown')
     for who, what, why in [
         ("Capability owners",
-         "For each capability they own: is this done on real AI systems, and where?",
+         "For each L3 criterion under a capability they own: is this specific "
+         "practice done on real AI systems, and where?",
          "Every rating in the model. Nothing can be rated without it"),
         ("Platform teams", "The %d outstanding in-the-box questions" % (box_total - box_done),
          "Whether controls are inherited or rebuilt by every team"),

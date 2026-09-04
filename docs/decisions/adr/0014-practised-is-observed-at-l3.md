@@ -68,11 +68,11 @@ Strict, all-or-nothing, with `unknown` excluded from the denominator:
 
 | L3 criterion observations | L2 `practised` |
 |---|---|
-| Every applicable criterion `yes` | `yes` |
-| At least one `yes`, and any criterion `partial` or `no` | `partial` |
-| No criterion `yes`, at least one `no` | `no` |
-| Every applicable criterion `unknown` | `unknown` — nobody has looked |
-| Every applicable criterion `n/a` | `n/a` — needs a reason, per ADR-0013 |
+| Every criterion `yes` (or `n/a`), none unexamined | `yes` |
+| Any `yes` or `partial`, but not all of them | `partial` |
+| No criterion `yes` or `partial`, at least one `no` | `no` |
+| Every criterion `unknown` | `unknown` — nobody has looked |
+| Every criterion `n/a`, none unexamined | `n/a` — needs a reason, per ADR-0013 |
 
 Two properties this rule was chosen for:
 
@@ -80,11 +80,16 @@ Two properties this rule was chosen for:
   already enforces: it is what stops a capability reading as fully performed when a
   third of it has never been done. A majority rule would let `4.4` read `yes` with
   loop control absent, which is the over-claiming ADR-0013 exists to prevent.
-- **A partly-examined capability is still ratable.** `unknown` criteria drop out
-  rather than un-rating the whole L2. A reviewer who has looked at four of six
-  criteria has produced real information, and the model records it. The alternative —
-  any `unknown` blocks the L2 — makes the instrument unusable in a first round, where
-  most criteria are unexamined by definition.
+- **A partly-examined capability is still ratable.** `unknown` criteria drop out of
+  the denominator rather than un-rating the whole L2. A reviewer who has looked at four
+  of six criteria has produced real information, and the model records it. The
+  alternative — any `unknown` blocks the L2 — makes the instrument unusable in a first
+  round, where most criteria are unexamined by definition.
+- **But `yes` requires a complete look.** An unexamined criterion is never counted as
+  satisfied. One criterion `yes` with five never looked at is `partial`, not `yes` —
+  otherwise a single observation could carry a whole capability, which is the same
+  over-claiming the strictness above is there to prevent. `yes` therefore means *every
+  criterion was examined and every one passed*.
 
 `unknown` remains never a zero, at both levels.
 
