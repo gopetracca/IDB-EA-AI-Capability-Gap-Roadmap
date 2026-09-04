@@ -12,6 +12,62 @@ def _load(name):
         return json.load(f)
 
 
+class _CapObs(dict):
+    """`obs_by_cap`, with a guard on the one mistake this shape invites.
+
+    `practised` moved to the criterion rows in ADR-0014, so it is absent here.
+    The `.get(type, {}).get('value', 'unknown')` idiom used throughout the
+    builders would swallow that and report `unknown` for a capability whose
+    every criterion is `yes` - a wrong number in a report, with no exception and
+    nothing for `build.py check` to catch, because the facts are valid and only
+    the reader is wrong.  It reached a published view once; hence the guard.
+    """
+
+    def __init__(self, criterion_types):
+        dict.__init__(self)
+        self._crit = set(criterion_types)
+
+    def _guard(self, key):
+        if key in self._crit:
+            raise KeyError(
+                "%r is recorded per L3 criterion, not on the capability "
+                "(ADR-0014). Use Model.values(cid)[%r] for the rolled-up value, "
+                "or Model.criteria_obs(cid, %r) for the criterion rows."
+                % (key, key, key))
+
+    def __getitem__(self, key):
+        self._guard(key)
+        return dict.__getitem__(self, key)
+
+    def get(self, key, default=None):
+        self._guard(key)
+        return dict.get(self, key, default)
+
+
+class _CapObsRow(dict):
+    """One capability's row map, guarding the second `.get` in the chain."""
+
+    def __init__(self, crit):
+        dict.__init__(self)
+        self._crit = crit
+
+    def _guard(self, key):
+        if key in self._crit:
+            raise KeyError(
+                "%r is recorded per L3 criterion, not on the capability "
+                "(ADR-0014). Use Model.values(cid)[%r] for the rolled-up value, "
+                "or Model.criteria_obs(cid, %r) for the criterion rows."
+                % (key, key, key))
+
+    def __getitem__(self, key):
+        self._guard(key)
+        return dict.__getitem__(self, key)
+
+    def get(self, key, default=None):
+        self._guard(key)
+        return dict.get(self, key, default)
+
+
 class Model(object):
     """Every fact in the repository, joined and ready to read."""
 
@@ -45,8 +101,10 @@ class Model(object):
         self.criterion_types = [t['id'] for t in self.observation_types
                                 if t.get('recorded_at') == 'criterion']
 
-        # capability -> {observation type: row}, for capability-level types only
-        self.obs_by_cap = {}
+        # capability -> {observation type: row}, for capability-level types only.
+        # Reading a criterion-level observation from here raises rather than
+        # quietly yielding 'unknown' - see _CapObs.
+        self.obs_by_cap = _CapObs(self.criterion_types)
         # capability -> {observation type: {criterion id: row}}
         self.obs_by_crit = {}
         for r in self.observations:
@@ -54,7 +112,9 @@ class Model(object):
                 (self.obs_by_crit.setdefault(r['capability'], {})
                      .setdefault(r['observation'], {})[r['criterion']]) = r
             else:
-                self.obs_by_cap.setdefault(r['capability'], {})[r['observation']] = r
+                (self.obs_by_cap.setdefault(
+                    r['capability'], _CapObsRow(self.criterion_types))
+                 [r['observation']]) = r
 
         # capability -> offerings enabling it
         self.offerings_for = {}
@@ -116,8 +176,8 @@ class Model(object):
             if t['id'] in self.criterion_types:
                 out[t['id']] = self.roll_up(cid, t['id'])
             else:
-                out[t['id']] = self.obs_by_cap.get(cid, {}).get(
-                    t['id'], {}).get('value', 'unknown')
+                row = dict.get(self.obs_by_cap, cid, {})
+                out[t['id']] = dict.get(row, t['id'], {}).get('value', 'unknown')
         return out
 
     def rate(self, scale, cid):
