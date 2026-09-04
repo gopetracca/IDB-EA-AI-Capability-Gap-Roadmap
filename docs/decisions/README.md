@@ -16,11 +16,18 @@ reading resolves it. It is settled by decision and recorded here.
 
 ## Index
 
+> ### ⚠ Read ADR-0013 first
+>
+> **[ADR-0013 · Facts and scales are separated](adr/0013-facts-and-scales.md)** supersedes
+> ADR-0001, ADR-0002 and ADR-0003, and amends ADR-0004 and ADR-0005. The two-scale model
+> (maturity on a capability, readiness on a realization) is no longer how this model works.
+> Those records are kept, unedited, as the account of what was believed and why.
+
 | ADR | Title | Status | Date |
 |---|---|---|---|
-| [ADR-0001](adr/0001-two-scales-never-merged.md) | Two scales, never merged | Accepted | 2026-09-02 |
-| [ADR-0002](adr/0002-readiness-levels.md) | Readiness levels | Accepted | 2026-09-02 |
-| [ADR-0003](adr/0003-consumption-model-is-recorded.md) | Consumption model is a recorded fact | Accepted | 2026-09-02 |
+| [ADR-0001](adr/0001-two-scales-never-merged.md) | Two scales, never merged | ~~Superseded~~ by ADR-0013 | 2026-09-02 |
+| [ADR-0002](adr/0002-readiness-levels.md) | Readiness levels | ~~Superseded~~ by ADR-0013 | 2026-09-02 |
+| [ADR-0003](adr/0003-consumption-model-is-recorded.md) | Consumption model is a recorded fact | ~~Superseded~~ by ADR-0013 | 2026-09-02 |
 | [ADR-0004](adr/0004-objects.md) | Objects — capability, pattern, ABB, SBB, service | Accepted | 2026-09-02 |
 | [ADR-0005](adr/0005-two-registers-kept-apart.md) | Two registers, kept apart | Accepted | 2026-09-02 |
 | [ADR-0006](adr/0006-single-primary-home.md) | Single primary home, not mutual exclusivity | Accepted | 2026-09-02 |
@@ -30,6 +37,7 @@ reading resolves it. It is settled by decision and recorded here.
 | [ADR-0010](adr/0010-provenance-grading.md) | Provenance graded by whether a reviewer can open it | Accepted | 2026-09-02 |
 | [ADR-0011](adr/0011-scale-provenance.md) | Provenance of the two scales | Accepted | 2026-09-04 |
 | [ADR-0012](adr/0012-capability-ownership-model.md) | How to record who owns a capability | **Proposed** | 2026-09-04 |
+| [ADR-0013](adr/0013-facts-and-scales.md) | **Facts and scales are separated** | **Accepted** | 2026-09-04 |
 
 ⚠ **ADR-0007 must be carved out of any approval request** until ISO/IEC 42001 Annex A and NIST AI
 RMF outcomes are mapped.

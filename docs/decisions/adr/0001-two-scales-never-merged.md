@@ -2,12 +2,21 @@
 id: ADR-0001
 alias: D1
 title: Two scales, never merged
-status: Accepted
+status: Superseded
 date: 2026-09-02
 supersedes: []
-superseded_by: []
+superseded_by: [ADR-0013]
 informs: [ADR-0002, ADR-0003, ADR-0011]
 ---
+
+> ## ⚠ SUPERSEDED by [ADR-0013](0013-facts-and-scales.md) — 4 September 2026
+>
+> The two-scale model is replaced by four recorded observations and one derived level. ADR-0013 §4 states where this record was right (supply and ability are different questions; the collapse fails asymmetrically) and where it was wrong (that they must therefore be reported as two numbers).
+>
+> This record is kept unedited: an ADR is never rewritten to reverse itself. Read it as
+> the account of what was believed on 2 September 2026 and why. For how the model works
+> now, see [ADR-0013](0013-facts-and-scales.md) and [`../../how-it-works.md`](../../how-it-works.md).
+
 
 # ADR-0001 · Two scales, never merged
 

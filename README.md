@@ -1,22 +1,97 @@
 # Enterprise AI Capability Model
 
-**IDB Enterprise Architecture** · AI maturity assessment, capability map, gap analysis and roadmap
+**IDB Enterprise Architecture** · what the Bank must be able to do with AI, what it has
+built, and the distance between them.
 
-A capability model for AI at the Bank, and the assessment instruments built on it.
+---
 
-**8 domains · 52 L2 capabilities · 258 L3 criteria**
+## Four questions, four answers
+
+| If you want to know… | Open |
+|---|---|
+| **What must the Bank be able to do?** | [`out/capability-assessment-level.md`](out/capability-assessment-level.md) — 8 domains, 52 capabilities |
+| **What has the Bank actually built?** | Sheet 3 of the workbook, or [`facts/offerings.json`](facts/offerings.json) — 7 offerings, 20 assets |
+| **Can we run AI agents?** | [`out/agent-readiness.md`](out/agent-readiness.md) — the one-pager |
+| **How does any of this work?** | [`docs/how-it-works.md`](docs/how-it-works.md) — ten minutes, no jargon |
+
+---
+
+## The idea in one picture
+
+```
+facts/            what is TRUE about the Bank        ← you edit this
+  capabilities      the map: 8 domains, 52 capabilities, 258 criteria
+  offerings         what a delivery team can actually get today
+  assets            the 20 standards, architectures, templates and modules
+  observations      four observations per capability, each with evidence
+  owners            which Bank unit owns what
+
+scales/           rules that turn facts into a LEVEL  ← rarely changes
+  capability_level  the default. Adapted from ISO/IEC 33020
+  executive         a coarser lens for a steering committee
+
+out/              VIEWS, one per scale                ← never edit, always generated
+```
+
+**An observation is a fact, not a score.** *"The Foundry Agents Standard is pre-release"*
+is true whichever framework reads it. Because the facts are separate from the scales,
+you can measure the same evidence two ways without reassessing anything — and two scales
+can never disagree about the evidence, only about what to make of it.
+
+---
+
+## The four observations
+
+You never type a level. You record four things per capability, each with evidence, and
+the level is computed.
+
+| | The question |
+|---|---|
+| **Practised** | Is this done on real AI systems in production, repeatedly? |
+| **Enabled** | Can a team get the tooling for this without building it themselves? |
+| **Skilled** | Do the people who must do this know how? |
+| **Defined** | Is there a published Bank standard or method for this? |
+
+Values: `yes` · `partial` · `no` · `n/a` (needs a reason) · `unknown` (nobody has
+looked — **never** a zero).
+
+> **Performance comes first.** A published standard with nothing performed against it
+> earns **no level at all**. That ordering is ISO/IEC 33020's, not ours, and it is what
+> stops *"we approved the technology"* from reading as *"we have the capability"*.
+
+---
+
+## Working with it
+
+Everything runs through one command. Requires Python 3 and `openpyxl`.
+
+```bash
+python3 build/build.py            # what the model currently says
+python3 build/build.py check      # validate facts/, report problems
+python3 build/build.py all        # rebuild the workbook and every view
+python3 build/build.py ingest     # read reviewer edits back into facts/
+```
+
+### The review loop
+
+1. `python3 build/build.py workbook` → `out/AI-Capability-Model.xlsx`
+2. Send it. **One reviewer at a time** — Excel does not merge.
+3. They fill the yellow cells on sheet **2. Observations**.
+4. `python3 build/build.py ingest path/to/returned.xlsx`
+5. `python3 build/build.py all`, then commit.
+
+The workbook has **no formulas**. Every derived number is computed in Python and written
+as a value, so it opens identically in Excel, LibreOffice and a browser, and there is no
+recalculation step to get wrong.
 
 ---
 
 ## The one rule
 
-> **`model/` is edited. `out/` is generated.**
+> **`facts/` is edited. `out/` is generated.**
 
-Never fix a finding by editing a workbook. Fix it in the model and rebuild. Every workbook,
-Markdown file and HTML artifact is reproducible from `model/` plus `build/` — that is what makes
-the assessment defensible rather than a set of spreadsheets that have quietly drifted apart.
-
-Anything in `out/` can be deleted and regenerated. Nothing in `model/` can.
+Never fix a finding by editing a workbook or a view. Fix the fact and rebuild. `ingest`
+is the only path that writes to `facts/`, and it only ever writes observations.
 
 ---
 
@@ -24,112 +99,36 @@ Anything in `out/` can be deleted and regenerated. Nothing in `model/` can.
 
 | Directory | What it is | Edited? |
 |---|---|---|
-| [`decisions/`](decisions/README.md) | **ADRs** — how the model is structured, one decision per file | ✏️ |
-| [`model/`](model/) | **The model** — capabilities, catalog, realizations, obligations, sources | ✏️ |
-| [`build/`](build/) | **The builders** — everything in `out/` comes from here | ✏️ |
-| [`provenance/`](provenance/README.md) | **Where the data came from** — grading rule, findings log | ✏️ |
-| [`analysis/`](analysis/) | **Worked reasoning** — comparisons, explainers, rationale | ✏️ |
-| [`sources/`](sources/) | Source documents obtained for the work | 📥 |
-| [`review/`](review/README.md) | Reviewer returns, one dated file per return | 📥 |
-| [`notes/`](notes/) | Scratch. Not authoritative | 🗒️ |
+| [`facts/`](facts/) | **The model.** Five registers, plain keyed JSON | ✏️ |
+| [`scales/`](scales/README.md) | Rules that turn observations into a level | ✏️ rarely |
+| [`build/`](build/) | Four files. `build.py` is the only entry point | ✏️ |
+| [`docs/`](docs/) | Everything a human reads — explainer, ADRs, analysis | ✏️ |
+| [`sources/`](sources/) · [`review/`](review/) | Documents obtained · reviewer returns | 📥 |
 | `out/` | **Generated.** Never edit | 🚫 |
-
-## Start here
-
-| If you want to… | Read |
-|---|---|
-| Understand how the model works | [`analysis/como-funciona-el-modelo.md`](analysis/como-funciona-el-modelo.md) *(ES)* |
-| Know why it is structured this way | [`decisions/README.md`](decisions/README.md) |
-| Know what is unresolved | [`OPEN-ITEMS.md`](OPEN-ITEMS.md) |
-| Know where a claim came from | [`provenance/README.md`](provenance/README.md) |
-| Defend the two scales to a reviewer | [`decisions/adr/0011-scale-provenance.md`](decisions/adr/0011-scale-provenance.md) |
-| Rebuild the deliverables | *Rebuilding*, below |
+| [`archive/`](archive/README.md) | Superseded. Kept, never deleted | 🗄️ |
 
 ---
 
-## The two scales
+## Where the work stands
 
-The single most important thing to understand — [ADR-0001](decisions/adr/0001-two-scales-never-merged.md):
+**Nothing is rated yet, and the model says so.** Every capability is `not rated` under
+the default scale, because `practised` has never been observed for any of them. What
+*is* recorded is real: 20 named assets with status and location, 7 offerings, 27
+in-the-box control questions, and an owner mapping against the Bank's own catalogue that
+finds **8 capabilities nobody claims**.
 
-| | **Maturity** | **Readiness** |
-|---|---|---|
-| Attaches to | An L2 **capability** | A **realization** (capability × pattern × technology) |
-| Asks | Can the institution *do* this, to what standard, with what evidence? | Has the enterprise *packaged* this well enough to consume? |
-| Scale | 1–5, evidence-gated, plus 0 / NE / UC / NA | 0–5, structural, read by inspection |
-| Owner | The accountable capability owner | The platform |
-| Clock | 5–10 years | Quarterly |
+That is the honest state, and it is the point of the design: what exists is evidenced,
+what does not is visibly absent rather than silently scored.
 
-**The gap between them is the finding.** Never merge them, and never write a readiness level into
-the capability catalog. Both numbers or neither.
+See [`OPEN-ITEMS.md`](OPEN-ITEMS.md) for what is unresolved and what it blocks.
 
 ---
 
-## The model
+## Handling rules
 
-| File | Holds |
-|---|---|
-| `model/model3.json` | 8 domains, 52 L2 capabilities, 258 L3 criteria |
-| `model/catalog4.py` | Reference catalog — 143 entries (76 services, 57 ABBs, 5 patterns, 5 standards) |
-| `model/realization.json` | Realizations, readiness and consumption definitions |
-| `model/obligations.json` | 18 statutory references — Legal-owned, all candidate |
-| `model/sources.json` | Verified source register — 40 sources, graded A–D |
-| `model/idb-assets.json` | Enterprise asset register |
-| `model/idb_owners.py` | Owner assignments |
-
----
-
-## Rebuilding
-
-Everything runs through `build/run.py`, from inside `build/`. Requires Python 3 and `openpyxl`.
-
-    cd build
-    python run.py build_tax.py
-
-`run.py` assembles a flat working directory from `model/`, `build/` and `out/`, runs the builder
-there, and copies anything new or changed into `out/`. **Nothing in `model/` is ever written to.**
-Run it with no arguments to list the builders.
-
-| Builder | Produces |
-|---|---|
-| `build_tax.py` | `AI-Capability-Taxonomy-for-review.xlsx` |
-| `build_prov.py` | `AI-Capability-Provenance-for-review.xlsx` |
-| `build_wb.py` | `Enterprise-AI-Capability-Model.xlsx` — the 13-sheet assessment workbook |
-| `build_md.py` | `Enterprise-AI-Capability-Model.md` |
-| `mkregister.py` | `register.json` — feeds the TRM |
-| `gen_trm.py` | `trm_data.js` (needs `register.json` first) |
-| `gen_views_data.py` | `views_data.json` — **illustrative scores, not an assessment** |
-
-After any workbook build:
-
-    python recalc.py ../out/<file>.xlsx
-
-**Ship only on `"status": "success"` with zero errors.**
-
-> ⚠ In the current environment `recalc.py` cannot run — LibreOffice is not on `PATH` — and
-> `openpyxl` is only installed for `python3.13`. See [`OPEN-ITEMS.md`](OPEN-ITEMS.md) #13.
-
----
-
-## Handling rules that are easy to break
-
-- **Cite by name, never by number**, for any list whose numbering changes between editions — the
-  OWASP Top 10 above all.
-- **NIST AI RMF locus form is `GOVERN 1.1`**, not hyphenated. The hyphenated form belongs to
-  AI 600-1 action ids (`GV-1.1-001`).
-- **Licensed analyst material** is usable inside the Bank, never reproduced externally, and never
-  listed as a source in the model.
-- **Grade D cannot support a claim in anything that leaves the Bank.**
-- **Do not invent a clause number.** Mark it unverified or reclassify as Synthesized.
-- **Never average or median an ordinal maturity score.** The rubric is gated.
-- **Excel formulas must survive LibreOffice recalc.** Excel-2007-era functions only — no XLOOKUP,
-  FILTER, SORT, UNIQUE. `SUMPRODUCT(MAX(...))` instead of MAXIFS.
-- **`views_data.json` is invented.** Never quote it.
-
----
-
-## Working agreement
-
-- **One session per workstream**, not one per project. Natural splits: taxonomy validation ·
-  provenance pinning · the risk instrument · views and deliverables.
-- **Point at files, don't paste model content into chat.**
-- **Decisions go to `decisions/` as they settle**, not at the end.
+- **Grade D sources cannot support a claim that leaves the Bank.** Licensed analyst
+  material stays internal and is never listed as a source.
+- **Cite by name, never by number**, for any list that renumbers between editions.
+- **Do not invent a clause number.** Mark it unverified or say it is ours.
+- **Do not quote ISO/IEC 33020's percentage bands** until someone opens the standard —
+  see [`scales/README.md`](scales/README.md).

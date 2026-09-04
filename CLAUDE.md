@@ -1,178 +1,126 @@
 # AI Capability Model — working brief
 
-**IDB Enterprise Architecture · AI maturity assessment, capability map, gap analysis and roadmap**
-Last updated 4 September 2026 · ADR refactor, `analysis/` and `provenance/` split
+**IDB Enterprise Architecture · AI capability map, assessment and roadmap**
+Last updated 4 September 2026 · **refactored to facts + scales (ADR-0013)**
 
-Read this first — you and Claude both. It exists so a new session starts warm instead of
-re-deriving decisions that are already settled. It is not a summary of past conversations; it is
-the set of conventions that govern the work.
+Read this first. It exists so a new session starts warm instead of re-deriving decisions
+that are already settled.
 
 ---
 
 ## 1. What this is
 
-A capability model for AI at the Bank, and the assessment instruments built on it:
+A capability model for AI at the Bank, and the assessment built on it.
 
-- **8 domains · 52 L2 capabilities · 258 L3 criteria** — `model/model3.json`
-- **143-entry reference catalog** (76 services, 57 ABBs, 5 patterns, 5 standards) — `model/catalog4.py`
-- **Realization and readiness register** — `model/realization.json`
-- **Obligations register** — 18 statutory references, all candidate, Legal-owned — `model/obligations.json`
-- **Verified source register** — 40 sources with edition, date, access and evidence grade — `model/sources.json`
-  (`build/prov_data.py` only loads it)
+- **8 domains · 52 L2 capabilities · 258 L3 criteria** — `facts/capabilities.json`
+- **7 offerings · 20 assets · 27 in-the-box questions** — `facts/offerings.json`, `facts/assets.json`
+- **208 observations** — `facts/observations.json`
+- **52 capabilities mapped to the Bank's own catalogue**, 8 with no owner — `facts/owners.json`
+- **40 graded sources · 18 candidate obligations** — `facts/sources.json`, `facts/obligations.json`
 
-Deliverables in `out/`, generated. Reviewer returns in `review/`.
+## 2. The architecture, and the rule that follows from it
 
-**Decisions are ADRs.** `decisions/adr/NNNN-*.md`, one per file, indexed in `decisions/README.md`,
-**which is canonical** — the claude.ai Project doc is now a mirror. The old `D1`–`D10` identifiers
-still name the same records (alias table in that README), but `D1`–`D8` are *also* the eight domain
-ids. **Write `ADR-0001` for a decision and `domain D3` for a domain; never rewrite a D-number
-mechanically.**
+```
+facts/    what is TRUE about the Bank, with evidence and a date   ← edited
+scales/   rules that turn observations into a level                ← rarely edited
+out/      views, one per scale                                     ← generated
+```
 
-| Where | What |
+> **`facts/` is edited. `out/` is generated.**
+
+Never fix a finding by editing a workbook or a view. Fix the fact and rebuild.
+`build.py ingest` is the **only** path that writes to `facts/`, and only to observations.
+
+**An observation is a fact, not a score.** That is what makes two scales possible over
+one body of evidence without reassessing anything.
+
+## 3. How assessment works — read this before touching a number
+
+Four observations per capability, each `yes` / `partial` / `no` / `n/a` / `unknown`,
+each with evidence:
+
+**Practised** (done on real systems?) · **Enabled** (tooling provided?) ·
+**Skilled** (people competent?) · **Defined** (published Bank standard?)
+
+**A level is never typed. It is always derived.** The default scale
+(`scales/capability_level.py`) is adapted from ISO/IEC 33020:2019:
+
+| Level | Requires |
 |---|---|
-| `decisions/adr/` | The 12 ADRs. 0001–0011 accepted, **0012 proposed** |
-| `analysis/` | Reasoning written to be handed to someone else — comparison, comparators, the Spanish explainer |
-| `provenance/` | The grading rule, dated verification findings, and what feeds the reviewer workbook |
-| `notes/` | Scratch. `external-model-screenshots.md` is **grade D, internal only** |
+| 1 Performed | It is done on real systems |
+| 2 Managed | …plus tooling provided and competent people |
+| 3 Established | …plus done against a published Bank standard |
 
-## 2. The rule that governs everything else
+**Performance comes first.** A standard with nothing performed against it earns **no
+level**. That ordering is the standard's, and it is what stops *"we approved the
+technology"* from reading as *"we have the capability"*.
 
-**`model/` is edited. `out/` is generated.**
-
-Never fix a finding by editing a workbook. Fix it in the model and rebuild. The workbooks, the
-Markdown and the HTML artifacts are all reproducible from `model/` plus `build/` — that is what
-makes the assessment defensible rather than a set of spreadsheets that have quietly drifted apart.
-
-## 3. Settled decisions
-
-Full text in `decisions/adr/`, indexed in `decisions/README.md`. The ones that come up most —
-old alias in brackets:
-
-**ADR-0001 (D1) — two scales, never merged.** A *capability* carries **maturity** (1–5, evidence-gated, plus
-states 0/NE/UC/NA). A *realization* carries **readiness** (0–5, structural, read by inspection).
-The gap between them is the finding. Never write a readiness level into the capability catalog —
-the workbook enforces this: sheet 1 column M is a locked formula pulling the best readiness from
-sheet 2. Provenance and the answer to *"is this standard?"* are in **ADR-0011**:
-**maturity adopted (CMMI lineage), readiness synthesized — nothing available measured enterprise
-packaging, TRL included.**
-
-**ADR-0002 (D2) — readiness levels.** 0 Not available · 1 Available/project-proven · 2 Approved ·
-3 Standardized · 4 Industrialized · 5 Productized. Level 5 is not the target everywhere.
-
-**ADR-0003 (D3) — consumption model** (Guidance · Building blocks · Reference implementation · Managed
-platform · Service/API) is recorded on the realization, not the capability.
-
-**ADR-0004 (D4) — objects.** Capability → Pattern → ABB → SBB, plus Service. Technology offering and deployed
-instance are *fields on the SBB*, not model objects. An SBB may be procured **or developed** — our
-Terraform modules are SBBs. A pattern is not a name: it needs problem, context, forces, solution,
-resulting context, rationale, known uses.
-
-**ADR-0005 (D5) — two registers kept apart.** Reference catalog (what could exist, vendor-neutral) vs
-realization catalog (what IDB actually provides).
-
-**ADR-0006 (D6) — one primary domain per subject**, plus typed links. The eight domains are reporting
-clusters, not a lifecycle.
-
-**ADR-0007 (D7) — anchoring is provisional.** Every capability carries New / Specialization / **Lens**.
-*Lens means do not create a node* — keep the existing enterprise capability and attach an AI
-profile. Unverified until the Bank's existing capability map is crosswalked.
-
-**ADR-0008 (D8) — statutory references live outside the model**, in a Legal-owned register, all marked
-candidate. `7.6.6 Regulatory Role Determination` is the prerequisite.
-
-**ADR-0009 (D9) — the taxonomy is validated before anything is scored against it.** `1.5 AI Ecosystem &
-Alliance Management` and `2.6 AI Innovation & Incubation` were added 3 September 2026; `8.6.4` was
-removed into `2.6.5`.
-
-**ADR-0010 (D10) — provenance is graded by whether a reviewer can open it.** A = open, dated, versioned,
-standards body. B = open and dated but vendor or non-normative. C = undated, superseded, flagged
-historical, or paywalled. D = non-public or not a publication. **Grade D cannot support a claim in
-anything that leaves the Bank.**
+- **`unknown` is never a zero.** It means nobody has looked.
+- **`n/a` needs a recorded reason**, and drops out of the calculation.
+- **Not rated is a result.** Today every capability is unrated because `practised` has
+  never been observed. Do not paper over that.
 
 ## 4. Rules that are easy to break
 
-- **Cite by name, never by number**, for any list whose numbering changes between editions. The
-  OWASP Top 10 above all.
-- **NIST AI RMF locus form is `GOVERN 1.1`** — function, space, category.subcategory. Not
-  hyphenated. The hyphenated form belongs to AI 600-1 action ids (`GV-1.1-001`).
-- **Gartner material is licensed.** Usable inside the Bank; never reproduced in anything that
-  circulates externally, and never listed as a source in the model. Any crosswalk lives in an
-  internal-only sheet citing the document number.
-- **The World Bank slide is a maturity model, not a readiness scale.** It is titled *Maturity
-  Model* (Initial → Optimizing); the "readiness" in its deck title names the subject, not a scale.
-  Grade D — *Official Use Only*, no date, no URL. Never cite it outside the Bank, never add it to
-  `model/sources.json`. **ADR-0011** §2.4.
-- **Do not invent a clause number.** If a locus cannot be verified against the source text, mark it
-  unverified or reclassify the capability as Synthesized. A citation that does not resolve is worse
-  than an honest "we assembled this."
-- **Never average or median an ordinal maturity score.** The rubric is gated: the rating is the
-  highest level for which every applicable mandatory criterion at that level and all lower levels is
-  met by valid evidence.
-- **Excel formulas must survive LibreOffice recalc.** Excel-2007-era functions only; no XLOOKUP,
-  FILTER, SORT, UNIQUE. `SUMPRODUCT(MAX(...))` instead of MAXIFS. Always run
-  `recalc.py` and ship only at zero errors.
+- **Never quote ISO/IEC 33020's N-P-L-F percentage bands or its exact level rule.** The
+  published preview stops before clause 5.3; those come from secondary sources about the
+  superseded ISO/IEC 15504. Cite the scale by name and levels by clause. See `scales/README.md`.
+- **Grade D cannot support a claim that leaves the Bank.** Licensed analyst material is
+  usable internally, never reproduced externally, never listed as a source.
+- **The World Bank slide is a maturity model, not a readiness scale.** Grade D, Official
+  Use Only. Never cite outside the Bank.
+- **Cite by name, never by number**, for lists that renumber between editions — the OWASP
+  Top 10 above all.
+- **NIST AI RMF locus form is `GOVERN 1.1`**, not hyphenated.
+- **Do not invent a clause number.** Mark it unverified or say it is ours.
+- **No formulas in the workbook.** Every derived value is computed in Python and written
+  as a value. This is why there is no recalc step and why LibreOffice is not needed.
+- **Do not average an ordinal level** in the default scale. The executive lens does
+  average, deliberately, and says so — that is why it is a lens and not the default.
 
-## 5. Known open items
+## 5. Settled decisions
 
-**All of them live in `OPEN-ITEMS.md`** — 13 items, grouped by what they block. Do not keep a
-second copy here; it drifts.
+`docs/decisions/`, indexed in `docs/decisions/README.md`.
 
-The four that change what you may do:
+**ADR-0013 is the one that governs the model.** It supersedes ADR-0001 (two scales),
+ADR-0002 (readiness levels) and ADR-0003 (consumption model), and amends ADR-0004 and
+ADR-0005. Those three are kept unedited, with banners.
 
-- **Grade-D sources back 4 capabilities** and "institutional practice" is used 6 times — both
-  block external publication (`provenance/findings-2026-09-03.md`).
-- **Control mapping is absent** — carve `ADR-0007` (D7) out of any approval request.
-- **51 of 52 rubrics do not exist** — every rating is provisional and must be labelled so.
-- **No target state exists anywhere in `model/`**, so the roadmap cannot yet be generated. Sheet 5
-  computes the gap but its Target column references a column nobody has filled.
+Still current and worth knowing:
 
-## 6. Rebuilding
+- **ADR-0006** — the 8 domains are reporting clusters, not a lifecycle.
+- **ADR-0007** — anchoring is provisional; 14 of 52 are lenses. **Carve out of any
+  approval request** until control mapping exists.
+- **ADR-0008** — statutory references are Legal-owned and all candidate.
+- **ADR-0009** — the taxonomy is validated before anything is scored against it.
+- **ADR-0010** — provenance is graded by whether a reviewer can open it.
+- **ADR-0012** — ownership model, still **Proposed**. Its own text says the dependency
+  flag is the stronger route.
 
-Everything runs through `build/run.py`, from inside `build/`. Requires Python 3 and `openpyxl`.
+## 6. Building
 
-    cd build
-    python run.py build_tax.py
+Python 3 and `openpyxl`. In this environment use `python3.13`.
 
-`run.py` assembles a flat working directory from `model/`, `build/` and `out/`, runs the builder
-there, and copies anything new or changed into `out/`. **Nothing in `model/` is ever written to.**
-Run it with no arguments to list the builders.
+```bash
+python3.13 build/build.py           # status
+python3.13 build/build.py check     # validate facts/
+python3.13 build/build.py all       # workbook + views
+python3.13 build/build.py ingest    # read reviewer edits back
+```
 
-| Builder | Produces |
-|---|---|
-| `build_tax.py` | `AI-Capability-Taxonomy-for-review.xlsx` — the taxonomy review workbook |
-| `build_prov.py` | `AI-Capability-Provenance-for-review.xlsx` — the provenance review workbook |
-| `build_wb.py` | `Enterprise-AI-Capability-Model.xlsx` — the 13-sheet assessment workbook |
-| `build_md.py` | `Enterprise-AI-Capability-Model.md` |
-| `mkregister.py` | `register.json` — feeds the TRM |
-| `gen_trm.py` | `trm_data.js` for the TRM artifact (needs `register.json` first) |
-| `gen_views_data.py` | `views_data.json` — **illustrative scores, not an assessment** |
-
-After any workbook build:
-
-    python recalc.py ../out/<file>.xlsx
-
-Ship only on `"status": "success"` with zero errors.
-
-⚠ **In this environment `recalc.py` cannot run** — LibreOffice is not on `PATH`. `openpyxl` is
-installed only for `python3.13`, so builders need `python3.13 run.py <builder>`. All six builders were verified working from
-this layout on 4 September 2026.
+`build/` is four files: `build.py` (entry point), `facts.py` (loader), `build_workbook.py`,
+`build_views.py`. Adding a scale to `scales/` adds a view automatically — nothing in
+`build_views.py` names a scale.
 
 ## 7. Working agreement
 
-- **One session per workstream**, not one per project. Natural splits: taxonomy validation ·
-  provenance pinning · the risk instrument · views and deliverables.
 - **Point at files, don't paste model content into chat.**
-- **Decisions go to `decisions/adr/`** as they are settled, not at the end — new file, next free
-  number, row in the README index. An ADR is never edited to reverse itself: a reversal is a new
-  ADR that supersedes it. Mirror to the Project doc afterwards.
-- Anything in `out/` can be deleted and regenerated. Nothing in `model/` can.
+- **Decisions go to `docs/decisions/adr/` as they settle.** An ADR is never edited to
+  reverse itself; a reversal is a new ADR with a banner on the old one.
+- **Anything in `out/` can be deleted and regenerated. `facts/` cannot.**
+- **`archive/` is history.** Nothing there is current; see `archive/README.md`.
 
-## 8. Where things are
+## 8. Strip before external circulation
 
-| | |
-|---|---|
-| This folder | OneDrive → Projects → IDB-EA-AI-Capability-Gap-Roadmap |
-| Decisions, canonical | **`decisions/README.md` + `decisions/adr/`, in this repo.** The claude.ai Project doc is a mirror — update it after a decision settles here |
-| Published artifacts | Capability register · TRM · Capability Views Catalogue (claude.ai artifacts) |
-| Illustrative data warning | `views_data.json` and everything drawn from it is invented. Never quote it. Only **1 of 5 realizations** is confirmed (`conf: true`) — the rest are marked *ILLUSTRATIVE*. |
-| Strip before external circulation | Gartner material anywhere · the World Bank slide and its wording · **ADR-0011** §2.4 and §3.4 · everything in `notes/` |
+Licensed analyst material anywhere · the World Bank slide and its wording · everything in
+`docs/notes/` · ADR-0011 §2.4 and §3.4.

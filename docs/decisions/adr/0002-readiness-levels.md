@@ -2,13 +2,22 @@
 id: ADR-0002
 alias: D2
 title: Readiness levels
-status: Accepted
+status: Superseded
 date: 2026-09-02
 supersedes: []
-superseded_by: []
+superseded_by: [ADR-0013]
 informs: [ADR-0003]
 depends_on: [ADR-0001]
 ---
+
+> ## ⚠ SUPERSEDED by [ADR-0013](0013-facts-and-scales.md) — 4 September 2026
+>
+> Readiness is no longer a scale. It is the in-the-box checklist on an offering, counted. The two questions that settled every row survive as two items on that checklist.
+>
+> This record is kept unedited: an ADR is never rewritten to reverse itself. Read it as
+> the account of what was believed on 2 September 2026 and why. For how the model works
+> now, see [ADR-0013](0013-facts-and-scales.md) and [`../../how-it-works.md`](../../how-it-works.md).
+
 
 # ADR-0002 · Readiness levels
 

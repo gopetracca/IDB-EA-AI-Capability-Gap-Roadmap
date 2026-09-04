@@ -1,0 +1,448 @@
+{
+ "source": "sources/Product and Applications_ENTERPRISE.xlsx",
+ "read_on": "4 September 2026",
+ "units": [
+  {
+   "name": "Artificial Intelligence",
+   "function": "Enabler",
+   "family": "Technology and Data Solutions",
+   "lead": "JAIRORI@IADB.ORG",
+   "technical_lead": "",
+   "claims": "Strategy & Roadmap · Platform Development (Unstructured Data Application, MCP Denodo, MCP Convergencia, MCP sgDelta) · Ops & Lifecycle Management · Agent Skill Admin · AI Gateway"
+  },
+  {
+   "name": "Enterprise Architecture",
+   "function": "Enabler",
+   "family": "Technology and Data Assurance",
+   "lead": "KARLAVI@IADB.ORG",
+   "technical_lead": "RauldaSilva",
+   "claims": "Technology Strategy (buy vs build, target architecture) · Software Architecture (co-design, institutional-reach projects)"
+  },
+  {
+   "name": "Cybersecurity",
+   "function": "Enabler",
+   "family": "Technology and Data Assurance",
+   "lead": "harleyj@IADB.ORG",
+   "technical_lead": "",
+   "claims": "Security Assurance (governance, awareness, ISMS, risk register, internal controls) · Security engineering and architecture"
+  },
+  {
+   "name": "Data Management",
+   "function": "Enabler",
+   "family": "Technology and Data Solutions",
+   "lead": "carlosd@iadb.org",
+   "technical_lead": "",
+   "claims": "Data Management · Database administration · Data Analytics Products · Data Marketplace · Data Architecture · Data services · Consultancy · Data Governance & Quality"
+  },
+  {
+   "name": "Cloud and Infrastructure",
+   "function": "Enabler",
+   "family": "Technology and Data Solutions",
+   "lead": "EGDARESF@IADB.ORG",
+   "technical_lead": "",
+   "claims": "Cloud Strategy and Cost Management · Cloud Operations, Engineering and Security · Identity and Access Management · Enterprise communications and networking (incl. observability)"
+  },
+  {
+   "name": "Core Platforms",
+   "function": "Enabler",
+   "family": "Technology and Data Solutions",
+   "lead": "JUANAA@iadb.org",
+   "technical_lead": "",
+   "claims": "Business process management · Integrations (Biztalk, API management, Service Bus) · Development platform (Terraform, CICD) · Content management (ezShare, OneDrive, SharePoint, search, e-disposition of records) · Collaboration and productivity"
+  },
+  {
+   "name": "Service Delivery",
+   "function": "Enabler",
+   "family": "Technology and Data Solutions",
+   "lead": "PAULOV@iadb.org",
+   "technical_lead": "",
+   "claims": "Service Desk · Desktop Support · Country Office Support · Contracts Management · Assets Management"
+  },
+  {
+   "name": "Strategic Portfolio Management",
+   "function": "Enabler",
+   "family": "Technology and Data Assurance",
+   "lead": "SUSANAP@IADB.ORG",
+   "technical_lead": "Cesar Garces",
+   "claims": "Governance Framework · Strategic Portfolio Management · Rationalization · Prioritization (WSJF) · Capacity & Budget Dashboard · Portfolio Health Monitoring · Ways of working · Dependency Mapping"
+  },
+  {
+   "name": "Strategic Resource Management",
+   "function": "Enabler",
+   "family": "CIO",
+   "lead": "BrunoFe@iadb.org",
+   "technical_lead": "",
+   "claims": "Resource Management · Budget Management · Vendor Management · People Management, Development, Engagement · Strategic Alignment / Prioritization of Resources"
+  },
+  {
+   "name": "IT Risk (Compliance)",
+   "function": "Enabler",
+   "family": "Technology and Data Assurance",
+   "lead": "",
+   "technical_lead": "julissac@iadb.org",
+   "claims": "Self-Assessment of Internal Controls for TTD · Oversight and follow-up of internal and external audits · PRAC reviews (design & implementation of controls) · Advisory services"
+  },
+  {
+   "name": "Digital Transformation",
+   "function": "Enabler",
+   "family": "Innovation and Business Transformation",
+   "lead": "gperla@IADB.ORG",
+   "technical_lead": "",
+   "claims": "Process transformation · Change management · Digitalization"
+  },
+  {
+   "name": "People Experience - IBT",
+   "function": "Enabler",
+   "family": "Innovation and Business Transformation",
+   "lead": "ANASP@IADB.ORG",
+   "technical_lead": "",
+   "claims": "Innovation · Open innovation · Communication · UX/UI (to be added) · Process redesign (to be added) · Digital transformation expertise"
+  },
+  {
+   "name": "Emerging Tech",
+   "function": "Product",
+   "family": "Technology and Transformation in the Region",
+   "lead": "rcerrato@IADB.ORG",
+   "technical_lead": "",
+   "claims": "Technological vigilance · Experimentation · Sandbox · Technological awareness (events, workshops) · Research"
+  },
+  {
+   "name": "Knowledge Management",
+   "function": "Product",
+   "family": "Operations",
+   "lead": "RBENITEZ@IADB.ORG",
+   "technical_lead": "JAVIERFE@IADB.ORG",
+   "claims": "Systematization · Analysis · Capture and dissemination of operational and analytical knowledge"
+  },
+  {
+   "name": "Risk, Audit & Compliance",
+   "function": "Product",
+   "family": "Enterprise and Finance",
+   "lead": "CARLOSEN@iadb.org",
+   "technical_lead": "",
+   "claims": "Operational Risk management (Metric Stream) · Control management · Audit and Assurance (CARP, TeamMate) · AML & CTM Operations · Grievances"
+  },
+  {
+   "name": "People Management",
+   "function": "Product",
+   "family": "Enterprise and Finance",
+   "lead": "ERICKMA@IADB.ORG",
+   "technical_lead": "",
+   "claims": "HR CORE · Performance Management · Learning · Recruitment & Onboarding · Compensation"
+  }
+ ],
+ "mapping": [
+  {
+   "capability": "1.1",
+   "unit": "Artificial Intelligence",
+   "match": "Direct",
+   "basis": "AI enabler claims 'Strategy & Roadmap: co-define and own the corporate AI capability strategy and execution roadmap with the Tech Office (TDA, TDS) and DT'."
+  },
+  {
+   "capability": "1.2",
+   "unit": "Strategic Portfolio Management",
+   "match": "Direct",
+   "basis": "SPM claims Strategic Portfolio Management, Prioritization (WSJF, strategic alignment, value, risk) and the Capacity & Budget Dashboard."
+  },
+  {
+   "capability": "1.3",
+   "unit": "Strategic Portfolio Management",
+   "match": "Inferred",
+   "basis": "SPM claims Portfolio Health Monitoring (progress, risk, impact). It does not claim value attribution for AI specifically — confirm whether AI benefit tracking sits here or with the AI enabler."
+  },
+  {
+   "capability": "1.4",
+   "unit": "Strategic Resource Management",
+   "match": "Partial",
+   "basis": "SRM claims Vendor Management. Nothing claims AI-specific contractual safeguards, model-provider evaluation, or concentration and exit risk. Second owner likely needed (Legal / Procurement)."
+  },
+  {
+   "capability": "1.5",
+   "unit": "",
+   "match": "NO MATCH",
+   "basis": "No product or enabler covers external AI partnerships, academic collaboration or multilateral cooperation. Nearest is Emerging Tech (research, publications, work with central banks), but its remit is technology watch, not alliance management."
+  },
+  {
+   "capability": "2.1",
+   "unit": "Artificial Intelligence",
+   "match": "Inferred",
+   "basis": "AI enabler maintains the enterprise AI capability catalogue, which implies an intake route, but no capability line names demand intake. Strategic Portfolio Management owns prioritisation. Boundary needs settling."
+  },
+  {
+   "capability": "2.2",
+   "unit": "Enterprise Architecture",
+   "match": "Inferred",
+   "basis": "EA claims co-design sessions and target/transition architecture work with product teams. Feasibility of AI use cases is not named by anyone."
+  },
+  {
+   "capability": "2.3",
+   "unit": "",
+   "match": "NO MATCH",
+   "basis": "Product management is exercised per product family, not centrally for AI. No enabler claims AI product management. Decide whether this is an AI-enabler responsibility or is delegated to consuming products."
+  },
+  {
+   "capability": "2.4",
+   "unit": "Digital Transformation",
+   "match": "Direct",
+   "basis": "Digital Transformation claims Process transformation and Digitalization. People Experience - IBT lists Process redesign as a capability to be formalised next year."
+  },
+  {
+   "capability": "2.5",
+   "unit": "People Experience - IBT",
+   "match": "Partial",
+   "basis": "IBT lists UX/UI as 'a formal capability to be added next year based on the bank's business plan'. Human-AI oversight design has no owner today."
+  },
+  {
+   "capability": "2.6",
+   "unit": "Emerging Tech",
+   "match": "Direct",
+   "basis": "Emerging Tech claims Experimentation, Sandbox, Technological vigilance and Research. People Experience - IBT also claims Innovation and Open innovation — two candidates, boundary needs settling."
+  },
+  {
+   "capability": "3.1",
+   "unit": "Data Management",
+   "match": "Direct",
+   "basis": "Data Management claims Data Governance & Quality."
+  },
+  {
+   "capability": "3.2",
+   "unit": "Data Management",
+   "match": "Partial",
+   "basis": "Data Management claims data integration, certification and publication. Licensing and provenance of data used for AI training or grounding is not covered by anyone."
+  },
+  {
+   "capability": "3.3",
+   "unit": "Data Management",
+   "match": "Direct",
+   "basis": "Data Management claims Data Governance & Quality, and data integration and certification."
+  },
+  {
+   "capability": "3.4",
+   "unit": "Data Management",
+   "match": "Direct",
+   "basis": "Data Management claims the Data Marketplace — catalog and publication of certified data assets — and Data Architecture."
+  },
+  {
+   "capability": "3.5",
+   "unit": "Core Platforms",
+   "match": "Partial",
+   "basis": "Core Platforms claims Content management (ezShare, OneDrive, SharePoint, search). Knowledge Management claims capture and dissemination of operational knowledge. Two candidates and neither claims curation of a corpus for AI grounding."
+  },
+  {
+   "capability": "3.6",
+   "unit": "Artificial Intelligence",
+   "match": "Direct",
+   "basis": "AI enabler claims Platform Development including the Unstructured Data Application and the MCP servers, which is where retrieval is delivered."
+  },
+  {
+   "capability": "3.7",
+   "unit": "Artificial Intelligence",
+   "match": "Inferred",
+   "basis": "Embeddings and derived representations are named nowhere in the catalogue. They fall inside the AI enabler's platform remit by elimination."
+  },
+  {
+   "capability": "4.1",
+   "unit": "Enterprise Architecture",
+   "match": "Direct",
+   "basis": "EA claims Technology Strategy (guidelines, target architecture) and Software Architecture (co-design, review with tech leads)."
+  },
+  {
+   "capability": "4.2",
+   "unit": "Artificial Intelligence",
+   "match": "Direct",
+   "basis": "AI enabler claims Platform Development from MVP through production."
+  },
+  {
+   "capability": "4.3",
+   "unit": "Artificial Intelligence",
+   "match": "Inferred",
+   "basis": "Prompt and context engineering is named nowhere. Falls inside the AI enabler's platform remit by elimination."
+  },
+  {
+   "capability": "4.4",
+   "unit": "Artificial Intelligence",
+   "match": "Partial",
+   "basis": "AI enabler claims 'Agent Skill Admin'. Administering agent skills is not the same as designing agent goals, guardrails and termination. The design half has no owner."
+  },
+  {
+   "capability": "4.5",
+   "unit": "Core Platforms",
+   "match": "Partial",
+   "basis": "Core Platforms claims Integrations (Biztalk, API management, Service Bus). The AI enabler separately owns the MCP servers. Split ownership — settle who owns tool exposure to AI clients."
+  },
+  {
+   "capability": "4.6",
+   "unit": "",
+   "match": "NO MATCH",
+   "basis": "No product or enabler claims evaluation or testing of AI systems. This is the capability that decides whether anything the Bank ships actually works."
+  },
+  {
+   "capability": "4.7",
+   "unit": "Core Platforms",
+   "match": "Inferred",
+   "basis": "Core Platforms claims the Development platform (Terraform, CICD). AI-specific release gating is not named."
+  },
+  {
+   "capability": "5.1",
+   "unit": "Artificial Intelligence",
+   "match": "Direct",
+   "basis": "AI enabler claims Ops & Lifecycle Management: operate and continuously improve AI platform capabilities in production."
+  },
+  {
+   "capability": "5.2",
+   "unit": "Artificial Intelligence",
+   "match": "Direct",
+   "basis": "The AI enabler's fact sheet names the AI Gateway (shared and dedicated model access) among its systems."
+  },
+  {
+   "capability": "5.3",
+   "unit": "Cloud and Infrastructure",
+   "match": "Direct",
+   "basis": "Cloud and Infrastructure claims Cloud Operations, Engineering and Security, and Identity and Access Management."
+  },
+  {
+   "capability": "5.4",
+   "unit": "Cloud and Infrastructure",
+   "match": "Direct",
+   "basis": "Cloud and Infrastructure claims Cloud Strategy and Cost Management."
+  },
+  {
+   "capability": "5.5",
+   "unit": "Artificial Intelligence",
+   "match": "Partial",
+   "basis": "AI enabler maintains the enterprise AI capability catalogue and owns the MCP servers. A catalogue of capabilities is not a governed inventory of callable tools with scopes and vetting."
+  },
+  {
+   "capability": "5.6",
+   "unit": "Core Platforms",
+   "match": "Partial",
+   "basis": "Core Platforms claims the Development platform (Terraform, CICD). Curation of AI reference implementations and templates is not named — today the AI enabler and EA produce them."
+  },
+  {
+   "capability": "6.1",
+   "unit": "Artificial Intelligence",
+   "match": "Direct",
+   "basis": "AI enabler claims Ops & Lifecycle Management in production."
+  },
+  {
+   "capability": "6.2",
+   "unit": "Cloud and Infrastructure",
+   "match": "Partial",
+   "basis": "Cloud and Infrastructure claims observability within networking and cloud service delivery. AI-specific telemetry — traces, tool calls, agent actions — is not named."
+  },
+  {
+   "capability": "6.3",
+   "unit": "",
+   "match": "NO MATCH",
+   "basis": "Nobody claims drift detection or continuous quality management. Related to 4.6: the Bank has no named owner for whether an AI system still works after release."
+  },
+  {
+   "capability": "6.4",
+   "unit": "Service Delivery",
+   "match": "Partial",
+   "basis": "Service Delivery claims the Service Desk as first point of contact. AI-specific incident handling, and the question of who triages a model or agent failure, is not covered."
+  },
+  {
+   "capability": "6.5",
+   "unit": "Cloud and Infrastructure",
+   "match": "Direct",
+   "basis": "Cloud and Infrastructure claims Cloud Strategy and Cost Management, including financial operations integration with SaaS and cloud."
+  },
+  {
+   "capability": "6.6",
+   "unit": "Service Delivery",
+   "match": "Partial",
+   "basis": "Service Delivery claims Assets Management; Core Platforms claims e-disposition of records. Retirement of an AI system with its evidence preserved is not named by either."
+  },
+  {
+   "capability": "7.1",
+   "unit": "Artificial Intelligence",
+   "match": "Partial",
+   "basis": "AI enabler owns the AI strategy; Cybersecurity owns Security Governance (policies, standards, baselines); EA owns technology guidelines. No one owns an AI management system as such."
+  },
+  {
+   "capability": "7.2",
+   "unit": "",
+   "match": "NO MATCH",
+   "basis": "No product or enabler names responsible, ethical or trustworthy AI. This is the single most visible absence in the catalogue for an institution of this kind."
+  },
+  {
+   "capability": "7.3",
+   "unit": "Risk, Audit & Compliance",
+   "match": "Partial",
+   "basis": "Risk, Audit & Compliance claims Operational Risk management (Metric Stream) and Control management. AI risk is not named, and it is unclear whether AI risk enters the operational risk register at all."
+  },
+  {
+   "capability": "7.4",
+   "unit": "Cybersecurity",
+   "match": "Direct",
+   "basis": "Cybersecurity claims Security engineering and architecture (design and review of applications) and Security Assurance including the risk register and exception management."
+  },
+  {
+   "capability": "7.5",
+   "unit": "",
+   "match": "NO MATCH",
+   "basis": "No privacy or data protection function appears anywhere in the catalogue. Confirm whether privacy sits outside TTD entirely."
+  },
+  {
+   "capability": "7.6",
+   "unit": "",
+   "match": "NO MATCH",
+   "basis": "Legal does not appear as a product or enabler. The obligations register (18 candidate statutory references) has no owner in this catalogue."
+  },
+  {
+   "capability": "7.7",
+   "unit": "Artificial Intelligence",
+   "match": "Partial",
+   "basis": "AI enabler maintains the enterprise AI capability catalogue. That is a catalogue of what the platform offers, not an inventory of every AI system and agent in operation with a named accountable owner."
+  },
+  {
+   "capability": "7.8",
+   "unit": "IT Risk (Compliance)",
+   "match": "Partial",
+   "basis": "IT Risk claims oversight of internal and external audits and PRAC reviews of control design and implementation. Producing and preserving AI assurance evidence is not named."
+  },
+  {
+   "capability": "7.9",
+   "unit": "",
+   "match": "NO MATCH",
+   "basis": "Nobody claims impact assessment or risk classification of AI systems. This is the prerequisite for almost every obligation in the register."
+  },
+  {
+   "capability": "8.1",
+   "unit": "Strategic Portfolio Management",
+   "match": "Inferred",
+   "basis": "SPM claims the Governance Framework (reviews, approvals, tracking of decisions) and Ways of working. AI decision rights specifically are not named."
+  },
+  {
+   "capability": "8.2",
+   "unit": "Strategic Resource Management",
+   "match": "Partial",
+   "basis": "SRM claims People Management and Development; People Management (product) claims Learning. Neither names AI skills or specialist capability building."
+  },
+  {
+   "capability": "8.3",
+   "unit": "Emerging Tech",
+   "match": "Partial",
+   "basis": "Emerging Tech claims Technological awareness — events, workshops and sessions to disseminate knowledge. Bank-wide AI literacy is broader than that and is not named by anyone."
+  },
+  {
+   "capability": "8.4",
+   "unit": "Artificial Intelligence",
+   "match": "Direct",
+   "basis": "The AI enabler's stated value proposition is to 'enable every product and enabler team' — adoption and enablement is its reason for existing."
+  },
+  {
+   "capability": "8.5",
+   "unit": "Digital Transformation",
+   "match": "Direct",
+   "basis": "Digital Transformation claims Change management."
+  },
+  {
+   "capability": "8.6",
+   "unit": "Emerging Tech",
+   "match": "Partial",
+   "basis": "Emerging Tech claims awareness and dissemination; People Experience - IBT claims Open innovation. Neither claims a practitioner community or reuse culture for AI."
+  }
+ ]
+}

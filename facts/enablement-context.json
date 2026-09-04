@@ -1,0 +1,22 @@
+{
+ "realized_by_enterprise_service": {
+  "1.2": "Enterprise portfolio and investment management",
+  "1.3": "Benefits realization and performance reporting tooling",
+  "1.4": "Procurement and vendor management systems",
+  "2.1": "Demand management / ITSM intake",
+  "4.7": "CI/CD pipeline and change management tooling",
+  "6.6": "CMDB and IT asset management",
+  "7.3": "Enterprise GRC platform",
+  "7.9": "GRC assessment and workflow tooling",
+  "8.2": "Learning management system",
+  "8.3": "Learning management system",
+  "8.4": "Service desk and adoption analytics",
+  "8.6": "Collaboration and knowledge platform"
+ },
+ "purely_organizational": [
+  "1.1",
+  "2.2",
+  "8.1",
+  "8.5"
+ ]
+}

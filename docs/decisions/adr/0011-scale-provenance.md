@@ -2,10 +2,18 @@
 id: ADR-0011
 alias: D1-provenance
 title: Provenance of the two scales — maturity adopted, readiness synthesized
-status: Accepted
+status: Accepted (conclusion superseded by ADR-0013)
 date: 2026-09-04
 depends_on: [ADR-0001, ADR-0002, ADR-0010]
 ---
+
+> ## ⚠ Its conclusion is superseded by [ADR-0013](0013-facts-and-scales.md)
+>
+> The survey below — what was available to adopt, what was found, and the World Bank
+> comparator — is accurate and worth keeping. Its **conclusion**, that the two scales must
+> stay separate, is superseded. The default scale is now **adapted from ISO/IEC 33020:2019**,
+> which is a stronger provenance position than the synthesized readiness scale had.
+
 
 # ADR-0011 · Provenance of the two scales
 

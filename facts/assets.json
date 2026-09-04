@@ -1,0 +1,164 @@
+{
+ "assets": [
+  {
+   "id": "STD-01",
+   "type": "Standard",
+   "name": "Tech Stack - AI",
+   "status": "Published",
+   "location": "https://ezws.iadb.org/getdocument.aspx?docnum=EZIDB0000557-1067528196-22",
+   "note": "Defines the approved AI technology stack."
+  },
+  {
+   "id": "STD-02",
+   "type": "Standard",
+   "name": "Custom MCP Server Standard",
+   "status": "Published",
+   "location": "https://ezws.iadb.org/getdocument.aspx?docnum=EZIDB0000557-1067528196-18",
+   "note": ""
+  },
+  {
+   "id": "STD-03",
+   "type": "Standard",
+   "name": "Microsoft Foundry Standard",
+   "status": "Published",
+   "location": "https://ezws.iadb.org/getdocument.aspx?docnum=EZIDB0000557-1067528196-957",
+   "note": "Covers platform deployment."
+  },
+  {
+   "id": "STD-04",
+   "type": "Standard",
+   "name": "Azure AI Search Standard",
+   "status": "Published",
+   "location": "https://ezws.iadb.org/getdocument.aspx?docnum=EZIDB0000557-1067528196-726",
+   "note": ""
+  },
+  {
+   "id": "STD-05",
+   "type": "Standard",
+   "name": "Azure Document Intelligence Standard",
+   "status": "Published",
+   "location": "https://ezws.iadb.org/getdocument.aspx?docnum=EZIDB0000557-1067528196-105",
+   "note": ""
+  },
+  {
+   "id": "STD-06",
+   "type": "Standard",
+   "name": "AI Agent Decision Tree",
+   "status": "Published",
+   "location": "https://ezws.iadb.org/getdocument.aspx?docnum=EZIDB0000557-1067528196-110",
+   "note": "Decision aid for whether and what kind of agent is appropriate."
+  },
+  {
+   "id": "STD-07",
+   "type": "Standard",
+   "name": "Foundry Agents Standard",
+   "status": "Pre-release",
+   "location": "",
+   "note": "PRE-RELEASE. Releasing this is one of two steps that move agent provisioning from readiness 3 to 4."
+  },
+  {
+   "id": "RA-01",
+   "type": "Reference architecture",
+   "name": "Custom MCP Server Reference Architecture",
+   "status": "Published",
+   "location": "https://iadb.leanix.net/IADBProduction/diagrams/dataflow/e1b8ef3c-f669-45ec-8f0e-aeee58780f8a",
+   "note": ""
+  },
+  {
+   "id": "RA-02",
+   "type": "Reference architecture",
+   "name": "Microsoft Foundry Reference Architecture",
+   "status": "Published",
+   "location": "https://iadb.leanix.net/IADBProduction/diagrams/freedraw/27c7c109-7da7-4c2f-b248-eeab47f07238",
+   "note": ""
+  },
+  {
+   "id": "RA-03",
+   "type": "Reference architecture",
+   "name": "Azure AI Search Reference Architecture",
+   "status": "Published",
+   "location": "https://iadb.leanix.net/IADBProduction/diagrams/freedraw/be67338a-33a5-49cb-95ed-13360102ff0e",
+   "note": ""
+  },
+  {
+   "id": "RA-04",
+   "type": "Reference architecture",
+   "name": "Azure Document Intelligence Reference Architecture",
+   "status": "Published",
+   "location": "https://iadb.leanix.net/IADBProduction/diagrams/dataflow/6379d8b3-20c7-421e-a555-8ba35e9e2b6e",
+   "note": ""
+  },
+  {
+   "id": "RA-05",
+   "type": "Reference architecture",
+   "name": "Foundry Agents Reference Architecture",
+   "status": "Pre-release",
+   "location": "",
+   "note": "PRE-RELEASE. The second of the two steps to readiness 4 for agent provisioning."
+  },
+  {
+   "id": "TPL-01",
+   "type": "Template",
+   "name": "MCP Server Template v1 (C# / .NET)",
+   "status": "In use",
+   "location": "",
+   "note": "Built by EA, shared with the AI MVP team. Used to build all custom MCP servers on that project and serves as the blueprint for other teams. Implements the SUPERSEDED MCP specification."
+  },
+  {
+   "id": "TPL-02",
+   "type": "Template",
+   "name": "MCP Server Template v2 (C# / .NET)",
+   "status": "Built, not yet distributed",
+   "location": "",
+   "note": "Implements the MCP specification released July 2026. To be shared across the organization. Every server built from v1 needs a migration plan inside the deprecation window."
+  },
+  {
+   "id": "IAC-01",
+   "type": "IaC module",
+   "name": "Container App Environment",
+   "status": "In review by DX",
+   "location": "https://github.com/dx-developer-platform/terraform.az-iac-core-modules/pull/16",
+   "note": "PR open. Not yet published by DX."
+  },
+  {
+   "id": "IAC-02",
+   "type": "IaC module",
+   "name": "Container Apps",
+   "status": "Published (JFrog)",
+   "location": "https://github.com/dx-developer-platform/terraform.az-iac-core-modules/pull/17",
+   "note": ""
+  },
+  {
+   "id": "IAC-03",
+   "type": "IaC module",
+   "name": "Container Registry",
+   "status": "In review by DX",
+   "location": "https://github.com/dx-developer-platform/terraform.az-iac-core-modules/pull/15",
+   "note": "PR open. Not yet published by DX."
+  },
+  {
+   "id": "IAC-04",
+   "type": "IaC module",
+   "name": "Foundry Account",
+   "status": "Published (JFrog)",
+   "location": "https://github.com/dx-developer-platform/terraform.az-iac-core-modules/pull/18",
+   "note": ""
+  },
+  {
+   "id": "IAC-05",
+   "type": "IaC module",
+   "name": "Foundry Project",
+   "status": "Published (JFrog)",
+   "location": "https://github.com/dx-developer-platform/terraform.az-iac-core-modules/pull/19",
+   "note": ""
+  },
+  {
+   "id": "IAC-06",
+   "type": "IaC module",
+   "name": "AI Search (fix)",
+   "status": "Published (JFrog)",
+   "location": "https://github.com/dx-developer-platform/terraform.az-iac-core-modules/pull/20",
+   "note": ""
+  }
+ ]
+}

@@ -1,0 +1,431 @@
+{
+ "generic_assets": [
+  {
+   "name": "Published standard",
+   "why": "The institutional standard for how this is built."
+  },
+  {
+   "name": "Architecture pattern document",
+   "why": "Problem, context, forces, solution, resulting context - not just a name."
+  },
+  {
+   "name": "Reference architecture",
+   "why": "The worked target design."
+  },
+  {
+   "name": "Infrastructure as code",
+   "why": "Provisioning is repeatable and reviewable."
+  },
+  {
+   "name": "CI/CD pipeline",
+   "why": "Change is built and released through a controlled path."
+  },
+  {
+   "name": "Security baseline",
+   "why": "Identity, network and data controls applied by default."
+  },
+  {
+   "name": "Observability wired",
+   "why": "Telemetry emitted without the team adding it."
+  },
+  {
+   "name": "Runbook",
+   "why": "Operations know what to do when it misbehaves."
+  },
+  {
+   "name": "Support model",
+   "why": "Someone answers when it breaks."
+  }
+ ],
+ "consumption_models": [
+  {
+   "name": "Guidance",
+   "definition": "EA tells you how to build it."
+  },
+  {
+   "name": "Building blocks",
+   "definition": "Reusable modules and components are provided."
+  },
+  {
+   "name": "Reference implementation",
+   "definition": "A working implementation exists and can be adapted."
+  },
+  {
+   "name": "Managed platform",
+   "definition": "The platform provides the underlying infrastructure; the consumer configures on top."
+  },
+  {
+   "name": "Service / API",
+   "definition": "The consumer calls it and gets a result."
+  }
+ ],
+ "offerings": [
+  {
+   "id": "OFF-01",
+   "name": "Foundry platform",
+   "was": [
+    "REAL-001"
+   ],
+   "assets": [
+    "STD-03",
+    "RA-02",
+    "IAC-04",
+    "IAC-05"
+   ],
+   "assets_released": 4,
+   "assets_total": 4,
+   "enables": [
+    "5.1",
+    "5.3",
+    "5.4"
+   ],
+   "consumption": "Building blocks",
+   "operated_by": "Consumer - each team deploys and runs its own instance",
+   "status": "Approved",
+   "not_provided": "",
+   "in_the_box": [],
+   "note": "REAL-001: Standard published, reference architecture published, both Terraform modules published in JFrog. This is the strongest realization in the estate."
+  },
+  {
+   "id": "OFF-02",
+   "name": "Foundry agents",
+   "was": [
+    "REAL-002"
+   ],
+   "assets": [
+    "STD-03",
+    "STD-07",
+    "RA-02",
+    "RA-05",
+    "IAC-04",
+    "IAC-05",
+    "IAC-02",
+    "STD-06"
+   ],
+   "assets_released": 6,
+   "assets_total": 8,
+   "enables": [
+    "4.4",
+    "5.1",
+    "5.6"
+   ],
+   "consumption": "Building blocks",
+   "operated_by": "Consumer - each team deploys and runs its own instance",
+   "status": "Approved",
+   "not_provided": "The agent itself: business rules, grounding data, evaluation criteria, human oversight design. Those remain with the delivery team.",
+   "in_the_box": [
+    {
+     "control": "Distinct workload identity per instance, not a shared service principal",
+     "catalog_ref": "S6.9",
+     "capability": "7.4.4",
+     "why": "A shared service principal makes every agent's actions indistinguishable. Nothing downstream can attribute or revoke.",
+     "status": ""
+    },
+    {
+     "control": "Automatic registration in the AI system / agent inventory",
+     "catalog_ref": "S6.6",
+     "capability": "7.7.2",
+     "why": "An inventory that depends on teams remembering to register is not an inventory.",
+     "status": ""
+    },
+    {
+     "control": "Tracing and tool-call logging enabled by default",
+     "catalog_ref": "S9.1",
+     "capability": "6.2.2",
+     "why": "If it is not on by default it will not be there when you need to explain what an agent did.",
+     "status": ""
+    },
+    {
+     "control": "Content filtering and safety controls on by default",
+     "catalog_ref": "S7.1",
+     "capability": "7.4.6",
+     "why": "Opt-in safety is the control that is missing exactly when it is needed.",
+     "status": ""
+    },
+    {
+     "control": "Prompt-injection defence configured",
+     "catalog_ref": "S7.4",
+     "capability": "7.4.3",
+     "why": "Content the agent reads can instruct it. Prompt design alone does not stop this at run time.",
+     "status": ""
+    },
+    {
+     "control": "Evaluation harness scaffolded in the template",
+     "catalog_ref": "S8.15",
+     "capability": "4.6.3",
+     "why": "Without a harness in the template, evaluation happens once at launch and never again.",
+     "status": ""
+    },
+    {
+     "control": "Cost attribution tags applied automatically",
+     "catalog_ref": "S9.4",
+     "capability": "6.5.1",
+     "why": "Untagged consumption cannot be attributed, forecast or stopped.",
+     "status": ""
+    },
+    {
+     "control": "A tested way to stop it and revoke its access",
+     "catalog_ref": "S7.13",
+     "capability": "6.4.2",
+     "why": "An untested kill switch is an assumption, not a control.",
+     "status": ""
+    },
+    {
+     "control": "Credential issuance and rotation handled by the platform",
+     "catalog_ref": "S6.9",
+     "capability": "5.2.4",
+     "why": "Credentials created by hand are credentials nobody rotates.",
+     "status": ""
+    },
+    {
+     "control": "Network isolation and private connectivity baseline",
+     "catalog_ref": "S8.20",
+     "capability": "5.3.3",
+     "why": "Isolation applied per team is isolation applied inconsistently.",
+     "status": ""
+    },
+    {
+     "control": "A hook for human approval of consequential actions",
+     "catalog_ref": "S5.10",
+     "capability": "2.5.2",
+     "why": "Oversight designed into the platform is exercised; oversight written into policy is not.",
+     "status": ""
+    },
+    {
+     "control": "Interaction log retention configured to policy",
+     "catalog_ref": "S9.2",
+     "capability": "3.1.4",
+     "why": "Interaction logs are evidence. Retention set per project is evidence you cannot rely on.",
+     "status": ""
+    }
+   ],
+   "note": "REAL-002: READINESS 3, NOT 4 - and only because the documentation trails the engineering. The Terraform modules are published and in use; the Foundry Agents Standard (STD-07) and its Reference Architecture (RA-05) are both PRE-RELEASE. Releasing those two documents is the whole distance to 4. Confirm this reading."
+  },
+  {
+   "id": "OFF-03",
+   "name": "Custom MCP servers",
+   "was": [
+    "REAL-003"
+   ],
+   "assets": [
+    "STD-02",
+    "RA-01",
+    "TPL-01",
+    "TPL-02",
+    "IAC-02",
+    "IAC-01",
+    "IAC-03"
+   ],
+   "assets_released": 4,
+   "assets_total": 7,
+   "enables": [
+    "4.5",
+    "5.5"
+   ],
+   "consumption": "Reference implementation",
+   "operated_by": "Consumer - each team deploys and runs its own server",
+   "status": "Approved",
+   "not_provided": "",
+   "in_the_box": [
+    {
+     "control": "Server registered in an approved-server registry before any client may call it",
+     "catalog_ref": "S6.6",
+     "capability": "5.5.2",
+     "why": "A public registry entry is not enterprise approval. Discovery and approval are different registers.",
+     "status": ""
+    },
+    {
+     "control": "Acting user's identity propagated on-behalf-of to the system of record",
+     "catalog_ref": "S6.8",
+     "capability": "4.5.4",
+     "why": "Without it every action looks like the service account and the audit trail names the wrong actor.",
+     "status": ""
+    },
+    {
+     "control": "Tool scopes issued at least privilege",
+     "catalog_ref": "S6.9",
+     "capability": "5.5.3",
+     "why": "A tool that can do more than its purpose is the confused-deputy path.",
+     "status": ""
+    },
+    {
+     "control": "Traffic passes a gateway or policy enforcement point",
+     "catalog_ref": "S6.5",
+     "capability": "7.4.5",
+     "why": "Per-server enforcement is enforcement that varies by team.",
+     "status": ""
+    },
+    {
+     "control": "Protocol revision pinned, with a migration plan for the July 2026 spec",
+     "catalog_ref": "S10.1",
+     "capability": "5.5.5",
+     "why": "Roots, Sampling, Logging, RFC 7591 dynamic client registration and legacy HTTP+SSE are deprecated on defined timelines. Template v1 predates this.",
+     "status": ""
+    },
+    {
+     "control": "Tool calls audited with arguments and effect",
+     "catalog_ref": "S9.3",
+     "capability": "6.2.3",
+     "why": "You cannot explain what an agent did without the call record.",
+     "status": ""
+    }
+   ],
+   "note": "REAL-003: Standard, reference architecture and a working template that built every custom MCP server on the AI MVP project. TEMPLATE v1 IMPLEMENTS THE SUPERSEDED MCP SPECIFICATION - the July 2026 revision deprecated Roots, Sampling, Logging, RFC 7591 dynamic client registration and the legacy HTTP+SSE transport on defined timelines. Every server built from v1 needs a migration plan inside that window, and v2 is built but not yet distributed. That is a dated roadmap item, not a maturity opinion."
+  },
+  {
+   "id": "OFF-04",
+   "name": "Retrieval on AI Search",
+   "was": [
+    "REAL-004",
+    "REAL-005"
+   ],
+   "assets": [
+    "STD-04",
+    "RA-03",
+    "IAC-06"
+   ],
+   "assets_released": 3,
+   "assets_total": 3,
+   "enables": [
+    "3.6"
+   ],
+   "consumption": "Building blocks",
+   "operated_by": "Consumer",
+   "status": "Approved",
+   "not_provided": "",
+   "in_the_box": [
+    {
+     "control": "Entitlement enforced at query time, before ranking",
+     "catalog_ref": "S3.10",
+     "capability": "3.6.2",
+     "why": "Filtering a ranked list after the fact both leaks and distorts relevance. The filter must precede ranking.",
+     "status": ""
+    },
+    {
+     "control": "Citations resolvable to source, version and location",
+     "catalog_ref": "S3.12",
+     "capability": "3.6.5",
+     "why": "A citation that cannot be opened is decoration. It also does not prove the statement is true.",
+     "status": ""
+    },
+    {
+     "control": "Retrieval quality measured against a benchmark",
+     "catalog_ref": "S8.15",
+     "capability": "3.6.3",
+     "why": "Relevance that is never measured degrades silently as the corpus changes.",
+     "status": ""
+    },
+    {
+     "control": "Re-embedding runbook for model change",
+     "catalog_ref": "S3.8",
+     "capability": "3.7.3",
+     "why": "Changing the embedding model invalidates the index. Without a runbook this is an outage.",
+     "status": ""
+    },
+    {
+     "control": "Index residency and access controls enforced",
+     "catalog_ref": "S3.8",
+     "capability": "3.1.5",
+     "why": "A vector index is a copy of the source content, and inherits its residency obligations.",
+     "status": ""
+    }
+   ],
+   "note": "REAL-004: Standard, reference architecture and a published Terraform module. Supply is well packaged - which is exactly why the maturity of capability 3.6 must be argued separately. See REAL-005. | REAL-005: CONFIRM THIS ROW - it decides the headline finding for D3. Does the Azure AI Search Standard (STD-04) mandate that source ACL metadata is extracted, indexed and applied as a pre-ranking filter? If it does, readiness follows REAL-004. If it does not, this sits at 0 and it is the reason capability 3.6 can carry readiness 4 and a much lower maturity. Filtering a ranked list after the fact both leaks and distorts relevance."
+  },
+  {
+   "id": "OFF-05",
+   "name": "Document extraction",
+   "was": [
+    "REAL-006"
+   ],
+   "assets": [
+    "STD-05",
+    "RA-04"
+   ],
+   "assets_released": 2,
+   "assets_total": 2,
+   "enables": [
+    "3.5"
+   ],
+   "consumption": "Guidance",
+   "operated_by": "Consumer",
+   "status": "Approved",
+   "not_provided": "",
+   "in_the_box": [
+    {
+     "control": "Extraction confidence thresholds set and enforced",
+     "catalog_ref": "S8.15",
+     "capability": "4.6.1",
+     "why": "Extraction without a confidence floor silently promotes guesses to facts.",
+     "status": ""
+    },
+    {
+     "control": "Human validation path for low-confidence output",
+     "catalog_ref": "S5.10",
+     "capability": "2.5.2",
+     "why": "The threshold is only useful if something happens when it is not met.",
+     "status": ""
+    },
+    {
+     "control": "Page and bounding-box provenance retained",
+     "catalog_ref": "S3.12",
+     "capability": "3.6.5",
+     "why": "An extracted value that cannot be traced to a page is unverifiable downstream.",
+     "status": ""
+    },
+    {
+     "control": "Output validated against a declared schema",
+     "catalog_ref": "S2.5",
+     "capability": "4.5.2",
+     "why": "Schema validation is what makes the output machine-consumable rather than plausible text.",
+     "status": ""
+    }
+   ],
+   "note": "REAL-006: Standard and reference architecture published; no Terraform module in the inventory. Publishing one is the step to 4."
+  },
+  {
+   "id": "OFF-06",
+   "name": "Approved AI tech stack",
+   "was": [
+    "REAL-007"
+   ],
+   "assets": [
+    "STD-01"
+   ],
+   "assets_released": 1,
+   "assets_total": 1,
+   "enables": [
+    "4.1",
+    "5.2"
+   ],
+   "consumption": "Guidance",
+   "operated_by": "-",
+   "status": "Approved",
+   "not_provided": "",
+   "in_the_box": [],
+   "note": "REAL-007: The approved AI technology stack. This is the asset that answers 'what is already approved for general use' at the technology level - it is evidence toward capability maturity, not a substitute for it."
+  },
+  {
+   "id": "OFF-07",
+   "name": "Agent design guidance",
+   "was": [
+    "REAL-008"
+   ],
+   "assets": [
+    "STD-06"
+   ],
+   "assets_released": 1,
+   "assets_total": 1,
+   "enables": [
+    "2.2",
+    "2.5"
+   ],
+   "consumption": "Guidance",
+   "operated_by": "-",
+   "status": "Approved",
+   "not_provided": "",
+   "in_the_box": [],
+   "note": "REAL-008: A published decision aid for whether and what kind of agent is appropriate. This is the only realization currently touching domain D2, and it maps to the autonomy and interaction-pattern determination."
+  }
+ ]
+}

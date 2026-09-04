@@ -1,0 +1,2465 @@
+{
+ "domains": [
+  {
+   "id": "D1",
+   "name": "AI Strategy & Value Management",
+   "definition": "Able to set direction for AI and convert it into measurable institutional value."
+  },
+  {
+   "id": "D2",
+   "name": "AI Demand & Solution Shaping",
+   "definition": "Able to find, qualify and shape AI opportunities into deliverable, adoptable solutions."
+  },
+  {
+   "id": "D3",
+   "name": "Data & Knowledge Management",
+   "definition": "Able to supply trusted, governed data and knowledge to AI systems."
+  },
+  {
+   "id": "D4",
+   "name": "AI Solution Engineering",
+   "definition": "Able to design, build, customize and validate AI solutions to a defined standard."
+  },
+  {
+   "id": "D5",
+   "name": "AI Platform & Infrastructure",
+   "definition": "Able to provide and sustain the technical means to build and run AI."
+  },
+  {
+   "id": "D6",
+   "name": "AI Operations & Reliability",
+   "definition": "Able to run AI in production dependably, observably and affordably."
+  },
+  {
+   "id": "D7",
+   "name": "AI Governance, Risk, Security & Assurance",
+   "definition": "Able to direct, control, protect and evidence the trustworthy use of AI."
+  },
+  {
+   "id": "D8",
+   "name": "AI People, Skills & Adoption",
+   "definition": "Able to build and sustain the human side of AI: who does it, who can, and who will."
+  }
+ ],
+ "capabilities": [
+  {
+   "id": "1.1",
+   "domain": "D1",
+   "name": "AI Vision & Strategy Definition",
+   "definition": "Able to establish and maintain a stated institutional position on AI and keep it current.",
+   "sources": [
+    "AWS CAF-AI - Business perspective",
+    "ISO/IEC 38507",
+    "MITRE AI Maturity Model"
+   ],
+   "criteria": [
+    {
+     "id": "1.1.1",
+     "name": "AI Ambition & Positioning",
+     "definition": "Define what role AI plays in the institutional mandate and how far the organization intends to go.",
+     "agentic": false
+    },
+    {
+     "id": "1.1.2",
+     "name": "AI Strategy Formulation & Refresh",
+     "definition": "Produce and periodically revise an endorsed AI strategy with explicit scope and stated exclusions.",
+     "agentic": false
+    },
+    {
+     "id": "1.1.3",
+     "name": "Strategic Alignment to Institutional Priorities",
+     "definition": "Trace every AI objective to a corporate goal, sector strategy or country program.",
+     "agentic": false
+    },
+    {
+     "id": "1.1.4",
+     "name": "AI Principles & Ethical Positioning",
+     "definition": "Set the non-negotiable commitments that constrain all downstream AI decisions.",
+     "agentic": false
+    },
+    {
+     "id": "1.1.5",
+     "name": "Horizon Scanning & Technology Foresight",
+     "definition": "Track emerging AI capability and judge what it changes for the institution.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "new",
+   "proposed_owner": "Chief AI Officer",
+   "confidence": "medium"
+  },
+  {
+   "id": "1.2",
+   "domain": "D1",
+   "name": "AI Portfolio & Investment Management",
+   "definition": "Able to decide which AI work is funded, in what order, and when it stops.",
+   "sources": [
+    "AWS CAF-AI",
+    "Gartner (analyst, non-public)",
+    "TOGAF (capability-based planning)"
+   ],
+   "criteria": [
+    {
+     "id": "1.2.1",
+     "name": "AI Investment Case Development",
+     "definition": "Build comparable business cases stating cost, benefit and risk on a common basis.",
+     "agentic": false
+    },
+    {
+     "id": "1.2.2",
+     "name": "Portfolio Prioritization & Sequencing",
+     "definition": "Rank and stage the AI portfolio against delivery capacity, risk appetite and dependency.",
+     "agentic": false
+    },
+    {
+     "id": "1.2.3",
+     "name": "Funding & Budget Allocation",
+     "definition": "Route funds to AI work through a mechanism that survives audit and annual planning.",
+     "agentic": false
+    },
+    {
+     "id": "1.2.4",
+     "name": "Portfolio Balance & Exposure Management",
+     "definition": "Keep the mix of experimental, scaling and production AI within stated tolerance.",
+     "agentic": false
+    },
+    {
+     "id": "1.2.5",
+     "name": "Stage-Gate & Investment Review",
+     "definition": "Decide continuation, pivot or termination at defined decision points on recorded criteria.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "lens",
+   "proposed_owner": "Enterprise Portfolio Owner",
+   "confidence": "high"
+  },
+  {
+   "id": "1.3",
+   "domain": "D1",
+   "name": "Value Realization & Performance Reporting",
+   "definition": "Able to prove what AI actually delivered, to the standard a governing body accepts.",
+   "sources": [
+    "WEF AI-First Operating System",
+    "MIT CISR",
+    "GAO AI Accountability Framework"
+   ],
+   "criteria": [
+    {
+     "id": "1.3.1",
+     "name": "Benefit Definition & Baselining",
+     "definition": "State expected benefit in measurable terms before build, with a recorded pre-intervention baseline.",
+     "agentic": false
+    },
+    {
+     "id": "1.3.2",
+     "name": "Value Tracking & Attribution",
+     "definition": "Measure realized benefit and attribute it defensibly to the AI intervention rather than to trend.",
+     "agentic": false
+    },
+    {
+     "id": "1.3.3",
+     "name": "AI Performance Metrics & KPI Management",
+     "definition": "Maintain the indicator set that describes AI performance institution-wide.",
+     "agentic": false
+    },
+    {
+     "id": "1.3.4",
+     "name": "Executive & Board Reporting",
+     "definition": "Report AI status, risk and value to governing bodies at their cadence and in their language.",
+     "agentic": false
+    },
+    {
+     "id": "1.3.5",
+     "name": "Post-Implementation Review",
+     "definition": "Assess delivered outcomes against the approved case and feed findings back into prioritization.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "lens",
+   "proposed_owner": "Strategy Performance Owner",
+   "confidence": "high"
+  },
+  {
+   "id": "1.4",
+   "domain": "D1",
+   "name": "AI Sourcing & Partner Strategy",
+   "definition": "Able to decide what is built, bought or partnered, and to stay able to change that decision.",
+   "sources": [
+    "ISO/IEC 42001 - third-party control",
+    "AWS CAF-AI"
+   ],
+   "criteria": [
+    {
+     "id": "1.4.1",
+     "name": "Build / Buy / Partner Decisioning",
+     "definition": "Choose the sourcing route per capability with recorded rationale and revisit triggers.",
+     "agentic": false
+    },
+    {
+     "id": "1.4.2",
+     "name": "AI Vendor & Model Provider Evaluation",
+     "definition": "Assess providers on capability, trustworthiness, transparency and cost of exit.",
+     "agentic": false
+    },
+    {
+     "id": "1.4.3",
+     "name": "Contractual Safeguards & AI Clauses",
+     "definition": "Secure rights covering data use, IP, indemnity, audit access and notification of model change.",
+     "agentic": false
+    },
+    {
+     "id": "1.4.4",
+     "name": "Concentration & Exit Risk Management",
+     "definition": "Limit dependence on any single provider and keep a tested, costed exit path.",
+     "agentic": false
+    },
+    {
+     "id": "1.4.5",
+     "name": "Supplier Performance & Assurance Monitoring",
+     "definition": "Monitor contracted providers against their obligations and assurance commitments for the life of the relationship.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "specialization",
+   "proposed_owner": "Chief Procurement Officer",
+   "confidence": "medium"
+  },
+  {
+   "id": "1.5",
+   "domain": "D1",
+   "name": "AI Ecosystem & Alliance Management",
+   "definition": "Able to hold external AI relationships that are not supplier contracts, and to stay operable when the ecosystem around them changes.",
+   "sources": [
+    "ISO/IEC 42001 - context and interested parties",
+    "The Open Group Open Agile Architecture",
+    "Institutional practice"
+   ],
+   "criteria": [
+    {
+     "id": "1.5.1",
+     "name": "Partnership Portfolio Definition",
+     "definition": "Decide which external relationships the institution needs in order to hold AI capability it will not build itself.",
+     "agentic": false
+    },
+    {
+     "id": "1.5.2",
+     "name": "Research & Academic Collaboration",
+     "definition": "Operate collaborations whose output is knowledge, method or evidence rather than a delivered system.",
+     "agentic": false
+    },
+    {
+     "id": "1.5.3",
+     "name": "Peer & Multilateral Cooperation",
+     "definition": "Exchange AI practice, assets and evidence with counterpart institutions under agreed terms.",
+     "agentic": false
+    },
+    {
+     "id": "1.5.4",
+     "name": "Insourcing / Outsourcing Posture Management",
+     "definition": "Set and periodically revisit which AI work is held internally and which is placed outside.",
+     "agentic": false
+    },
+    {
+     "id": "1.5.5",
+     "name": "Ecosystem Dependency & Continuity Management",
+     "definition": "Track aggregate dependency across the external AI ecosystem and stay able to operate when a member changes, merges or exits.",
+     "agentic": false
+    },
+    {
+     "id": "1.5.6",
+     "name": "Partnership Value & Obligation Tracking",
+     "definition": "Monitor what each relationship returns against what it obliges the institution to do.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "new",
+   "proposed_owner": "Chief AI Officer",
+   "confidence": "low"
+  },
+  {
+   "id": "2.1",
+   "domain": "D2",
+   "name": "Use Case Discovery & Intake",
+   "definition": "Able to surface candidate AI work and admit it through one controlled front door.",
+   "sources": [
+    "AWS CAF-AI",
+    "Google AI Adoption Framework"
+   ],
+   "criteria": [
+    {
+     "id": "2.1.1",
+     "name": "Opportunity Identification & Ideation",
+     "definition": "Actively generate candidate use cases from business need rather than waiting for requests.",
+     "agentic": false
+    },
+    {
+     "id": "2.1.2",
+     "name": "Demand Intake & Triage",
+     "definition": "Operate a single intake route that classifies and routes every AI request.",
+     "agentic": false
+    },
+    {
+     "id": "2.1.3",
+     "name": "Use Case Registration & Classification",
+     "definition": "Record each candidate against a common taxonomy before any build effort begins.",
+     "agentic": false
+    },
+    {
+     "id": "2.1.4",
+     "name": "Duplicate & Reuse Screening",
+     "definition": "Detect that a request is already solved, in flight, or satisfiable by an existing asset.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "lens",
+   "proposed_owner": "Demand Management Owner",
+   "confidence": "high"
+  },
+  {
+   "id": "2.2",
+   "domain": "D2",
+   "name": "AI Use-Case Feasibility & Qualification",
+   "definition": "Able to judge, before build, whether a use case is technically and operationally deliverable and worth doing.",
+   "sources": [
+    "IBM Generative AI Capability Model",
+    "AWS CAF-AI - Business perspective",
+    "The Open Group TOGAF"
+   ],
+   "criteria": [
+    {
+     "id": "2.2.1",
+     "name": "Technical & Data Feasibility Assessment",
+     "definition": "Judge whether the data, models and integration required actually exist and are obtainable.",
+     "agentic": false
+    },
+    {
+     "id": "2.2.2",
+     "name": "Cost, Effort & Capacity Feasibility",
+     "definition": "Estimate build and run cost, effort and the specialist capacity a use case would consume.",
+     "agentic": false
+    },
+    {
+     "id": "2.2.3",
+     "name": "Operational & Adoption Feasibility",
+     "definition": "Judge whether the receiving business area can absorb, operate and sustain the change.",
+     "agentic": false
+    },
+    {
+     "id": "2.2.4",
+     "name": "Go / No-Go Determination",
+     "definition": "Make and record a proceed decision with named accountability and stated conditions.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "new",
+   "proposed_owner": "AI Product Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "2.3",
+   "domain": "D2",
+   "name": "AI Product Management",
+   "definition": "Able to own an AI capability as a product across its life, not as a project that ends.",
+   "sources": [
+    "WEF AI-First Operating System",
+    "The Open Group IT4IT",
+    "The Open Group Open Agile Architecture"
+   ],
+   "criteria": [
+    {
+     "id": "2.3.1",
+     "name": "AI Product Definition & Roadmapping",
+     "definition": "Define the product, its users, its boundary and its forward path.",
+     "agentic": false
+    },
+    {
+     "id": "2.3.2",
+     "name": "Requirements & Acceptance Criteria Management",
+     "definition": "Express what good looks like precisely enough to be tested against.",
+     "agentic": false
+    },
+    {
+     "id": "2.3.3",
+     "name": "User Research & Feedback Integration",
+     "definition": "Learn from actual use and feed it back into the product.",
+     "agentic": false
+    },
+    {
+     "id": "2.3.4",
+     "name": "Backlog & Release Planning",
+     "definition": "Sequence work and commit to releases against capacity.",
+     "agentic": false
+    },
+    {
+     "id": "2.3.5",
+     "name": "Product Performance Ownership",
+     "definition": "Hold a named owner accountable for the product's outcomes in production.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "specialization",
+   "proposed_owner": "AI Product Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "2.4",
+   "domain": "D2",
+   "name": "Business Process & Service Redesign",
+   "definition": "Able to change how work is actually done, not merely to add a model to an unchanged process.",
+   "sources": [
+    "WEF AI-First Operating System",
+    "Consultancy transformation patterns (non-public)",
+    "The Open Group Open Agile Architecture"
+   ],
+   "criteria": [
+    {
+     "id": "2.4.1",
+     "name": "Process Analysis & AI Fit Assessment",
+     "definition": "Understand the current process well enough to know where AI changes it.",
+     "agentic": false
+    },
+    {
+     "id": "2.4.2",
+     "name": "Target Process & Task Redesign",
+     "definition": "Design the intended process, including what stops being done.",
+     "agentic": false
+    },
+    {
+     "id": "2.4.3",
+     "name": "Human / Machine Task Allocation",
+     "definition": "Decide explicitly which tasks move, which stay, and which become supervisory.",
+     "agentic": false
+    },
+    {
+     "id": "2.4.4",
+     "name": "Control Point Redesign",
+     "definition": "Relocate or rebuild the controls that the old process embedded in human steps.",
+     "agentic": false
+    },
+    {
+     "id": "2.4.5",
+     "name": "Service Model & Service Level Redefinition",
+     "definition": "Restate the service promise once AI changes what is deliverable.",
+     "agentic": false
+    },
+    {
+     "id": "2.4.6",
+     "name": "Language Coverage & Service Equity",
+     "definition": "Determine which languages an AI-delivered service must support, and at what measured quality, across the institution's countries.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "specialization",
+   "proposed_owner": "Business Process Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "2.5",
+   "domain": "D2",
+   "name": "Human-AI Interaction & Oversight Design",
+   "definition": "Able to design the human's role in the system, rather than assert oversight in policy alone.",
+   "sources": [
+    "IMDA Model AI Governance Framework",
+    "ISO/IEC 42001"
+   ],
+   "criteria": [
+    {
+     "id": "2.5.1",
+     "name": "Autonomy & Interaction Pattern Determination",
+     "definition": "Set and record, per system, the interaction pattern and how much an AI system or agent may do without human confirmation.",
+     "agentic": true
+    },
+    {
+     "id": "2.5.2",
+     "name": "Human Oversight & Intervention Design",
+     "definition": "Design the specific point, information and control through which a human can intervene.",
+     "agentic": true
+    },
+    {
+     "id": "2.5.3",
+     "name": "Explanation & Disclosure Design",
+     "definition": "Design what the system tells its user about what it is and how it reached an output.",
+     "agentic": false
+    },
+    {
+     "id": "2.5.4",
+     "name": "Escalation & Handover Design",
+     "definition": "Design the path by which work returns to a human, with sufficient context to act.",
+     "agentic": true
+    },
+    {
+     "id": "2.5.5",
+     "name": "Oversight Competence & Workload Design",
+     "definition": "Ensure the person assigned oversight has the time, information, training and authority to actually exercise it.",
+     "agentic": true
+    },
+    {
+     "id": "2.5.6",
+     "name": "Accessible & Inclusive Interaction Design",
+     "definition": "Design AI-delivered interaction to be usable with assistive technology and across literacy and channel constraints.",
+     "agentic": false
+    }
+   ],
+   "agentic": true,
+   "anchor": "new",
+   "proposed_owner": "Product Design Owner",
+   "confidence": "low"
+  },
+  {
+   "id": "2.6",
+   "domain": "D2",
+   "name": "AI Innovation & Incubation",
+   "definition": "Able to turn an untested AI idea into evidence, and evidence into either a funded product or a cheap, recorded stop.",
+   "sources": [
+    "Google AI Adoption Framework",
+    "AWS CAF-AI",
+    "Institutional practice"
+   ],
+   "criteria": [
+    {
+     "id": "2.6.1",
+     "name": "Idea Capture & Innovation Sourcing",
+     "definition": "Collect candidate AI ideas from staff, partners and technology watch outside the formal demand route.",
+     "agentic": false
+    },
+    {
+     "id": "2.6.2",
+     "name": "Sandboxed Experimentation",
+     "definition": "Run time-boxed experiments in an environment where failure is contained and permitted.",
+     "agentic": false
+    },
+    {
+     "id": "2.6.3",
+     "name": "Innovation Portfolio & Scaling Decisions",
+     "definition": "Hold the set of live experiments within capacity and decide which of them scale.",
+     "agentic": false
+    },
+    {
+     "id": "2.6.4",
+     "name": "Experiment-to-Product Transition",
+     "definition": "Move a proven experiment onto the funded delivery route, or record why it stops.",
+     "agentic": false
+    },
+    {
+     "id": "2.6.5",
+     "name": "Controlled Failure & Learning Capture",
+     "definition": "Permit experiments to fail and extract reusable learning from the failure.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "new",
+   "proposed_owner": "AI CoE Owner",
+   "confidence": "low"
+  },
+  {
+   "id": "3.1",
+   "domain": "D3",
+   "name": "Data Governance & Stewardship for AI",
+   "definition": "Able to say who owns each data asset, who may use it, and under what conditions.",
+   "sources": [
+    "EDM Council DCAM/ADAC",
+    "ISO/IEC 42001"
+   ],
+   "criteria": [
+    {
+     "id": "3.1.1",
+     "name": "Data Ownership & Stewardship Assignment",
+     "definition": "Name an accountable owner and an operating steward for each data asset used by AI.",
+     "agentic": false
+    },
+    {
+     "id": "3.1.2",
+     "name": "Data Classification & Sensitivity Labeling",
+     "definition": "Apply a consistent sensitivity classification that downstream controls can act on.",
+     "agentic": false
+    },
+    {
+     "id": "3.1.3",
+     "name": "Data Access Policy & Entitlement Management",
+     "definition": "Define and enforce who may access which data, for which purpose.",
+     "agentic": false
+    },
+    {
+     "id": "3.1.4",
+     "name": "Data Retention & Records Management",
+     "definition": "Apply retention and disposal rules to AI inputs, outputs and interaction records.",
+     "agentic": false
+    },
+    {
+     "id": "3.1.5",
+     "name": "Cross-Border Data Transfer Control",
+     "definition": "Determine and enforce which jurisdictions the institution's data may be transferred to and processed in.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "specialization",
+   "proposed_owner": "Chief Data Officer",
+   "confidence": "high"
+  },
+  {
+   "id": "3.2",
+   "domain": "D3",
+   "name": "Data Sourcing, Licensing & Provenance",
+   "definition": "Able to demonstrate lawful, documented origin for every dataset an AI system uses.",
+   "sources": [
+    "NIST AI RMF - Map",
+    "EDM Council DCAM/ADAC"
+   ],
+   "criteria": [
+    {
+     "id": "3.2.1",
+     "name": "Data Acquisition & Onboarding",
+     "definition": "Bring external and internal data into the estate through a controlled route.",
+     "agentic": false
+    },
+    {
+     "id": "3.2.2",
+     "name": "Licensing & Permitted-Use Verification",
+     "definition": "Confirm and record that intended AI use is permitted by the source's terms.",
+     "agentic": false
+    },
+    {
+     "id": "3.2.3",
+     "name": "Provenance & Chain-of-Custody Recording",
+     "definition": "Record where data came from and every transformation applied to it.",
+     "agentic": false
+    },
+    {
+     "id": "3.2.4",
+     "name": "Consent & Purpose Limitation Management",
+     "definition": "Track the basis on which data was collected and confine use to it.",
+     "agentic": false
+    },
+    {
+     "id": "3.2.5",
+     "name": "Synthetic Data Generation & Control",
+     "definition": "Produce and govern synthetic data, including disclosure of its synthetic nature.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "specialization",
+   "proposed_owner": "Chief Data Officer",
+   "confidence": "high"
+  },
+  {
+   "id": "3.3",
+   "domain": "D3",
+   "name": "Data Quality & Preparation for AI",
+   "definition": "Able to make data fit for the specific AI purpose and to prove it was fit.",
+   "sources": [
+    "ISO/IEC 5338",
+    "EDM Council DCAM/ADAC"
+   ],
+   "criteria": [
+    {
+     "id": "3.3.1",
+     "name": "Data Profiling & Quality Assessment",
+     "definition": "Measure completeness, accuracy, timeliness and consistency against stated thresholds.",
+     "agentic": false
+    },
+    {
+     "id": "3.3.2",
+     "name": "Data Cleansing & Remediation",
+     "definition": "Correct defects at source where possible, and record what was corrected downstream.",
+     "agentic": false
+    },
+    {
+     "id": "3.3.3",
+     "name": "Representativeness & Bias Screening",
+     "definition": "Test datasets for gaps and skews relative to the affected population.",
+     "agentic": false
+    },
+    {
+     "id": "3.3.4",
+     "name": "Labeling & Annotation Management",
+     "definition": "Produce, quality-check and version human and machine labels.",
+     "agentic": false
+    },
+    {
+     "id": "3.3.5",
+     "name": "Dataset Versioning & Snapshotting",
+     "definition": "Freeze and identify the exact dataset a model or evaluation used.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "specialization",
+   "proposed_owner": "Data Product Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "3.4",
+   "domain": "D3",
+   "name": "Metadata, Lineage & Cataloging for AI",
+   "definition": "Able to find data, understand what it means, and trace where it went.",
+   "sources": [
+    "EDM Council DCAM/ADAC",
+    "ISO/IEC 5338"
+   ],
+   "criteria": [
+    {
+     "id": "3.4.1",
+     "name": "Data Catalog Management",
+     "definition": "Maintain a searchable inventory of data assets with their attributes.",
+     "agentic": false
+    },
+    {
+     "id": "3.4.2",
+     "name": "Business Glossary & Semantic Definition",
+     "definition": "Hold one agreed definition per business term that data assets bind to.",
+     "agentic": false
+    },
+    {
+     "id": "3.4.3",
+     "name": "Lineage Capture & Traceability",
+     "definition": "Trace a model output back through transformations to source records.",
+     "agentic": false
+    },
+    {
+     "id": "3.4.4",
+     "name": "Data Product Publication",
+     "definition": "Publish curated, contracted datasets that consumers can depend on.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "specialization",
+   "proposed_owner": "Data Governance Owner",
+   "confidence": "high"
+  },
+  {
+   "id": "3.5",
+   "domain": "D3",
+   "name": "Knowledge Corpus & Content Management",
+   "definition": "Able to curate the document and content estate that grounded AI depends on.",
+   "sources": [
+    "IBM GenAI Capability Model"
+   ],
+   "criteria": [
+    {
+     "id": "3.5.1",
+     "name": "Corpus Definition & Curation",
+     "definition": "Decide what belongs in a knowledge corpus and what is deliberately excluded.",
+     "agentic": false
+    },
+    {
+     "id": "3.5.2",
+     "name": "Content Ingestion & Normalization",
+     "definition": "Bring heterogeneous content into a consistent, machine-usable form.",
+     "agentic": false
+    },
+    {
+     "id": "3.5.3",
+     "name": "Content Segmentation Design",
+     "definition": "Choose and apply segmentation that preserves meaning and citability.",
+     "agentic": false
+    },
+    {
+     "id": "3.5.4",
+     "name": "Corpus Freshness & Refresh Management",
+     "definition": "Keep the corpus current and know how stale any part of it is.",
+     "agentic": false
+    },
+    {
+     "id": "3.5.5",
+     "name": "Authoritative Source Designation",
+     "definition": "Declare which source wins when two documents disagree.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "new",
+   "proposed_owner": "Knowledge Management Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "3.6",
+   "domain": "D3",
+   "name": "Knowledge Access & Retrieval",
+   "definition": "Able to return the right knowledge to the right requester, with its provenance intact.",
+   "sources": [
+    "IBM GenAI Capability Model",
+    "NIST AI 600-1 Generative AI Profile"
+   ],
+   "criteria": [
+    {
+     "id": "3.6.1",
+     "name": "Retrieval Service Provision",
+     "definition": "Provide governed retrieval over institutional content — by meaning, by term, or both — as a reusable service.",
+     "agentic": false
+    },
+    {
+     "id": "3.6.2",
+     "name": "Access-Trimmed Retrieval Enforcement",
+     "definition": "Enforce, at retrieval time, the entitlements determined in 3.1.3, so a requester sees only what they may see.",
+     "agentic": false
+    },
+    {
+     "id": "3.6.3",
+     "name": "Retrieval Quality Evaluation & Tuning",
+     "definition": "Measure and improve retrieval precision and recall against a known set.",
+     "agentic": false
+    },
+    {
+     "id": "3.6.4",
+     "name": "Multi-Source Federation & Ranking",
+     "definition": "Retrieve across several repositories and rank the combined result coherently.",
+     "agentic": false
+    },
+    {
+     "id": "3.6.5",
+     "name": "Citation, Grounding & Traceability",
+     "definition": "Return every answer with the source it rests on, resolvable by the reader.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "new",
+   "proposed_owner": "Knowledge Platform Owner",
+   "confidence": "low"
+  },
+  {
+   "id": "3.7",
+   "domain": "D3",
+   "name": "Derived Representation Management",
+   "definition": "Able to manage derived representations of data as governed assets in their own right.",
+   "sources": [
+    "IBM GenAI Capability Model",
+    "ISO/IEC 5338"
+   ],
+   "criteria": [
+    {
+     "id": "3.7.1",
+     "name": "Feature Engineering & Store Management",
+     "definition": "Produce, share and reuse engineered features under version control.",
+     "agentic": false
+    },
+    {
+     "id": "3.7.2",
+     "name": "Embedding Model Selection & Versioning",
+     "definition": "Choose embedding models deliberately and record which version produced which index.",
+     "agentic": false
+    },
+    {
+     "id": "3.7.3",
+     "name": "Index Lifecycle & Re-embedding",
+     "definition": "Rebuild and migrate indexes when content or embedding models change.",
+     "agentic": false
+    },
+    {
+     "id": "3.7.4",
+     "name": "Derived Representation Governance",
+     "definition": "Apply access, retention and residency controls to vector representations.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "new",
+   "proposed_owner": "Data/ML Platform Owner",
+   "confidence": "low"
+  },
+  {
+   "id": "4.1",
+   "domain": "D4",
+   "name": "AI Architecture Management & Solution Governance",
+   "definition": "Able to set, steward and enforce the architecture that AI solutions are built to.",
+   "sources": [
+    "The Open Group TOGAF",
+    "SAP AI-native North Star architecture",
+    "NVIDIA Enterprise AI Factory"
+   ],
+   "criteria": [
+    {
+     "id": "4.1.1",
+     "name": "Solution Pattern Selection",
+     "definition": "Choose the architecture building block that realizes the required capability.",
+     "agentic": false
+    },
+    {
+     "id": "4.1.2",
+     "name": "Reference Architecture Compliance",
+     "definition": "Build to published reference architectures and detect deviation.",
+     "agentic": false
+    },
+    {
+     "id": "4.1.3",
+     "name": "Architecture Decision Recording",
+     "definition": "Record significant decisions with alternatives and consequences.",
+     "agentic": false
+    },
+    {
+     "id": "4.1.4",
+     "name": "Non-Functional Requirement Design",
+     "definition": "Design explicitly for latency, cost, availability, and degradation behavior.",
+     "agentic": false
+    },
+    {
+     "id": "4.1.5",
+     "name": "Architecture Review & Dispensation",
+     "definition": "Review designs and grant time-boxed exceptions with recorded conditions.",
+     "agentic": false
+    },
+    {
+     "id": "4.1.6",
+     "name": "ABB & Pattern Stewardship",
+     "definition": "Define, version and retire the institution's logical building blocks and the patterns that compose them.",
+     "agentic": false
+    },
+    {
+     "id": "4.1.7",
+     "name": "Solution Conformance Certification",
+     "definition": "Certify that a concrete solution conforms to the building blocks and controls it claims, and record the deviations.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "lens",
+   "proposed_owner": "Chief Enterprise Architect",
+   "confidence": "medium"
+  },
+  {
+   "id": "4.2",
+   "domain": "D4",
+   "name": "Model Selection, Customization & Tuning",
+   "definition": "Able to choose and adapt models on evidence, and to record what was done.",
+   "sources": [
+    "IBM GenAI Capability Model",
+    "ISO/IEC 5338",
+    "NIST AI 600-1 Generative AI Profile"
+   ],
+   "criteria": [
+    {
+     "id": "4.2.1",
+     "name": "Model Selection for Use Case",
+     "definition": "Select a model from within the cleared set against task-specific criteria and evidence.",
+     "agentic": false
+    },
+    {
+     "id": "4.2.2",
+     "name": "Fine-Tuning & Adaptation",
+     "definition": "Adapt models to institutional context under controlled, repeatable procedure.",
+     "agentic": false
+    },
+    {
+     "id": "4.2.3",
+     "name": "Model Training & Experimentation",
+     "definition": "Run and track experiments so results are reproducible.",
+     "agentic": false
+    },
+    {
+     "id": "4.2.4",
+     "name": "Model Documentation & Disclosure Production",
+     "definition": "Produce model cards covering intended use, limits, data and evaluation results.",
+     "agentic": false
+    },
+    {
+     "id": "4.2.5",
+     "name": "Model Versioning & Registration",
+     "definition": "Register every model version as an identifiable, ownable asset.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "new",
+   "proposed_owner": "AI Engineering Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "4.3",
+   "domain": "D4",
+   "name": "Prompt & Context Engineering",
+   "definition": "Able to treat prompts and context assembly as versioned, tested engineering artifacts.",
+   "sources": [
+    "IBM GenAI Capability Model",
+    "NIST AI 600-1 Generative AI Profile",
+    "OWASP GenAI Security Project"
+   ],
+   "criteria": [
+    {
+     "id": "4.3.1",
+     "name": "Prompt Design & Templating",
+     "definition": "Design prompts as reusable, parameterized templates rather than embedded strings.",
+     "agentic": false
+    },
+    {
+     "id": "4.3.2",
+     "name": "Prompt Versioning & Registry",
+     "definition": "Version, review and register prompts as controlled artifacts.",
+     "agentic": false
+    },
+    {
+     "id": "4.3.3",
+     "name": "Context Assembly & Window Management",
+     "definition": "Assemble context deliberately and manage what is included, ordered and dropped.",
+     "agentic": false
+    },
+    {
+     "id": "4.3.4",
+     "name": "Grounding Strategy Design",
+     "definition": "Decide what the model is permitted to answer from, and enforce it.",
+     "agentic": false
+    },
+    {
+     "id": "4.3.5",
+     "name": "Prompt & Context Boundary Design",
+     "definition": "Construct prompt and context boundaries that constrain what untrusted content can instruct.",
+     "agentic": true
+    }
+   ],
+   "agentic": false,
+   "anchor": "new",
+   "proposed_owner": "AI Engineering Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "4.4",
+   "domain": "D4",
+   "name": "Agent & Workflow Orchestration Design",
+   "definition": "Able to design what an agent may pursue, how it plans, and where it must stop.",
+   "sources": [
+    "Salesforce Agent Development Lifecycle",
+    "SAP AI-native North Star architecture",
+    "IBM Generative AI Capability Model",
+    "IMDA Model AI Governance Framework"
+   ],
+   "criteria": [
+    {
+     "id": "4.4.1",
+     "name": "Agent Specification & Goal Definition",
+     "definition": "State an agent's objective, scope and prohibited actions before it is built.",
+     "agentic": true
+    },
+    {
+     "id": "4.4.2",
+     "name": "Task Decomposition & Planning Design",
+     "definition": "Design how an agent breaks work down and selects its next step.",
+     "agentic": true
+    },
+    {
+     "id": "4.4.3",
+     "name": "Multi-Agent Coordination Design",
+     "definition": "Design how agents delegate, communicate and resolve conflict.",
+     "agentic": true
+    },
+    {
+     "id": "4.4.4",
+     "name": "Agent Memory & State Design",
+     "definition": "Design what an agent retains, for how long, and who else can see it.",
+     "agentic": true
+    },
+    {
+     "id": "4.4.5",
+     "name": "Guardrail & Constraint Design",
+     "definition": "Encode hard limits an agent cannot argue its way past.",
+     "agentic": true
+    },
+    {
+     "id": "4.4.6",
+     "name": "Termination & Loop Control Design",
+     "definition": "Design stopping conditions, budgets and loop detection.",
+     "agentic": true
+    }
+   ],
+   "agentic": true,
+   "anchor": "new",
+   "proposed_owner": "AI Engineering Owner",
+   "confidence": "low"
+  },
+  {
+   "id": "4.5",
+   "domain": "D4",
+   "name": "Integration & Tool Enablement",
+   "definition": "Able to give AI systems safe, governed reach into institutional systems.",
+   "sources": [
+    "IBM Generative AI Capability Model",
+    "Model Context Protocol specification",
+    "SAP AI-native North Star architecture",
+    "IMDA Model AI Governance Framework"
+   ],
+   "criteria": [
+    {
+     "id": "4.5.1",
+     "name": "API & System Integration Design",
+     "definition": "Design integration to institutional systems with contracts and error semantics.",
+     "agentic": false
+    },
+    {
+     "id": "4.5.2",
+     "name": "Tool & Function Definition",
+     "definition": "Define the callable actions exposed to a model, with typed inputs and stated effects.",
+     "agentic": true
+    },
+    {
+     "id": "4.5.3",
+     "name": "Capability Exposure to AI Clients",
+     "definition": "Expose institutional capability to AI clients through the prevailing open tool-interface standard.",
+     "agentic": true
+    },
+    {
+     "id": "4.5.4",
+     "name": "Identity Propagation & Delegated Access",
+     "definition": "Carry the acting user's identity through to the system of record.",
+     "agentic": true
+    },
+    {
+     "id": "4.5.5",
+     "name": "Legacy & Core System Adaptation",
+     "definition": "Reach systems that were never designed to be called by an AI client.",
+     "agentic": false
+    }
+   ],
+   "agentic": true,
+   "anchor": "new",
+   "proposed_owner": "Integration Architecture Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "4.6",
+   "domain": "D4",
+   "name": "AI Evaluation & Testing",
+   "definition": "Able to state, before release, what the system does and does not do reliably.",
+   "sources": [
+    "NIST AI 600-1 Generative AI Profile",
+    "ISO/IEC 5338"
+   ],
+   "criteria": [
+    {
+     "id": "4.6.1",
+     "name": "Evaluation Criteria & Metric Definition",
+     "definition": "Define the metrics that constitute acceptable performance for this use case.",
+     "agentic": false
+    },
+    {
+     "id": "4.6.2",
+     "name": "Golden Dataset & Test Set Management",
+     "definition": "Build and maintain representative evaluation sets with known-correct answers.",
+     "agentic": false
+    },
+    {
+     "id": "4.6.3",
+     "name": "Automated Evaluation Harness Operation",
+     "definition": "Run evaluations repeatably as part of the delivery pipeline.",
+     "agentic": false
+    },
+    {
+     "id": "4.6.4",
+     "name": "Human Review & Expert Evaluation",
+     "definition": "Obtain qualified human judgement where automated metrics are insufficient.",
+     "agentic": false
+    },
+    {
+     "id": "4.6.5",
+     "name": "Pre-Deployment Acceptance Testing",
+     "definition": "Test against acceptance criteria and record the result as release evidence.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "new",
+   "proposed_owner": "Quality Engineering Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "4.7",
+   "domain": "D4",
+   "name": "AI Release & Change Management",
+   "definition": "Able to move AI change into production under control and to reverse it.",
+   "sources": [
+    "ITIL 4",
+    "The Open Group IT4IT",
+    "ISO/IEC 5338"
+   ],
+   "criteria": [
+    {
+     "id": "4.7.1",
+     "name": "Build & Continuous Integration",
+     "definition": "Build AI artifacts through an automated, auditable pipeline.",
+     "agentic": false
+    },
+    {
+     "id": "4.7.2",
+     "name": "Promotion & Environment Progression",
+     "definition": "Move artifacts through environments under defined entry and exit criteria.",
+     "agentic": false
+    },
+    {
+     "id": "4.7.3",
+     "name": "Change Approval & Release Authorization",
+     "definition": "Authorise AI change through a route proportionate to its risk tier.",
+     "agentic": false
+    },
+    {
+     "id": "4.7.4",
+     "name": "Rollback & Release Reversal",
+     "definition": "Return a deployed AI system to a previously accepted release.",
+     "agentic": false
+    },
+    {
+     "id": "4.7.5",
+     "name": "Release Documentation & Evidence Capture",
+     "definition": "Capture at release the evidence that later assurance work will need.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "lens",
+   "proposed_owner": "DevSecOps Owner",
+   "confidence": "high"
+  },
+  {
+   "id": "5.1",
+   "domain": "D5",
+   "name": "AI Platform Service Provisioning",
+   "definition": "Able to offer AI platform services as a governed, supported institutional service.",
+   "sources": [
+    "AWS CAF-AI - Platform perspective",
+    "Microsoft Cloud Adoption Framework for AI",
+    "NVIDIA Enterprise AI Factory"
+   ],
+   "criteria": [
+    {
+     "id": "5.1.1",
+     "name": "Platform Service Catalog Management",
+     "definition": "Publish what AI platform services exist, their terms and how to obtain them.",
+     "agentic": false
+    },
+    {
+     "id": "5.1.2",
+     "name": "Landing Zone & Baseline Provisioning",
+     "definition": "Provision AI environments from a compliant baseline rather than by hand.",
+     "agentic": false
+    },
+    {
+     "id": "5.1.3",
+     "name": "Platform Configuration & Policy Enforcement",
+     "definition": "Enforce configuration standards technically, not by instruction.",
+     "agentic": false
+    },
+    {
+     "id": "5.1.4",
+     "name": "Platform Service Level Commitment",
+     "definition": "Commit to and meet service levels for the shared AI platform services the institution offers.",
+     "agentic": false
+    },
+    {
+     "id": "5.1.5",
+     "name": "Platform Upgrade & Deprecation Management",
+     "definition": "Move consumers across platform versions without stranding them.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "specialization",
+   "proposed_owner": "AI Platform Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "5.2",
+   "domain": "D5",
+   "name": "Model Access & Traffic Management",
+   "definition": "Able to control which models the institution may call, through one governed path.",
+   "sources": [
+    "IBM Generative AI Capability Model",
+    "Microsoft Cloud Adoption Framework for AI",
+    "ISO/IEC 42001"
+   ],
+   "criteria": [
+    {
+     "id": "5.2.1",
+     "name": "Model Clearance & Approved Model List",
+     "definition": "Assess candidate models against institutional criteria, record the clearance decision and its conditions, and maintain the approved list.",
+     "agentic": false
+    },
+    {
+     "id": "5.2.2",
+     "name": "Model Traffic Control & Routing",
+     "definition": "Route all model traffic through a controlled point that can observe and enforce.",
+     "agentic": false
+    },
+    {
+     "id": "5.2.3",
+     "name": "Quota, Throttling & Rate Management",
+     "definition": "Allocate and enforce consumption limits per consumer.",
+     "agentic": false
+    },
+    {
+     "id": "5.2.4",
+     "name": "Model Provider Credential Management",
+     "definition": "Issue, rotate and revoke the credentials used to reach model providers and platform services. Agent identity is 7.4.4.",
+     "agentic": false
+    },
+    {
+     "id": "5.2.5",
+     "name": "Model Version Availability & Provider Change Control",
+     "definition": "Control which model versions remain reachable and absorb provider-side version change without breaking consumers.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "new",
+   "proposed_owner": "AI Platform Owner",
+   "confidence": "low"
+  },
+  {
+   "id": "5.3",
+   "domain": "D5",
+   "name": "AI Environment & Workspace Management",
+   "definition": "Able to give teams isolated places to work without weakening controls.",
+   "sources": [
+    "Microsoft Cloud Adoption Framework for AI",
+    "ISO/IEC 27001"
+   ],
+   "criteria": [
+    {
+     "id": "5.3.1",
+     "name": "Experimentation Environment Provision",
+     "definition": "Provide safe environments for experimentation with clear data rules.",
+     "agentic": false
+    },
+    {
+     "id": "5.3.2",
+     "name": "Workspace Tenancy & Isolation",
+     "definition": "Define and enforce the tenancy and isolation topology between team workspaces.",
+     "agentic": false
+    },
+    {
+     "id": "5.3.3",
+     "name": "Network & Private Connectivity Control",
+     "definition": "Control network reachability of AI services and keep traffic private where required.",
+     "agentic": false
+    },
+    {
+     "id": "5.3.4",
+     "name": "Environment Data Segregation",
+     "definition": "Prevent production data from reaching environments not cleared for it.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "lens",
+   "proposed_owner": "Cloud Platform Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "5.4",
+   "domain": "D5",
+   "name": "AI Compute & Capacity Management",
+   "definition": "Able to secure and allocate the compute that AI work requires.",
+   "sources": [
+    "NVIDIA Enterprise AI Factory",
+    "Microsoft Cloud Adoption Framework for AI",
+    "FinOps Foundation"
+   ],
+   "criteria": [
+    {
+     "id": "5.4.1",
+     "name": "Compute Provisioning & Scheduling",
+     "definition": "Make compute available to workloads on a predictable basis.",
+     "agentic": false
+    },
+    {
+     "id": "5.4.2",
+     "name": "Capacity Planning & Forecasting",
+     "definition": "Forecast demand far enough ahead to secure supply.",
+     "agentic": false
+    },
+    {
+     "id": "5.4.3",
+     "name": "Accelerator & Quota Allocation",
+     "definition": "Allocate scarce accelerator capacity against portfolio priority.",
+     "agentic": false
+    },
+    {
+     "id": "5.4.4",
+     "name": "Workload Placement & Residency Enforcement",
+     "definition": "Place workloads in locations that enforce the transfer and residency decisions taken in 3.1.5.",
+     "agentic": false
+    },
+    {
+     "id": "5.4.5",
+     "name": "Edge & Disconnected Operation",
+     "definition": "Run AI where connectivity, latency or residency prevents central serving, including fully offline.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "specialization",
+   "proposed_owner": "Infrastructure Platform Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "5.5",
+   "domain": "D5",
+   "name": "Tool & Connector Catalog Management",
+   "definition": "Able to control what actions AI systems can reach, as a governed inventory.",
+   "sources": [
+    "SAP AI-native North Star architecture",
+    "IMDA Model AI Governance Framework",
+    "Model Context Protocol specification"
+   ],
+   "criteria": [
+    {
+     "id": "5.5.1",
+     "name": "Tool & Connector Catalog Management",
+     "definition": "Maintain the inventory of actions and connectors available to AI systems.",
+     "agentic": true
+    },
+    {
+     "id": "5.5.2",
+     "name": "Tool Source Registration & Approval",
+     "definition": "Register and approve any source of callable tools before an AI client may reach it.",
+     "agentic": true
+    },
+    {
+     "id": "5.5.3",
+     "name": "Tool Permission & Scope Governance",
+     "definition": "Set and enforce the scope each tool grants, at least privilege.",
+     "agentic": true
+    },
+    {
+     "id": "5.5.4",
+     "name": "Third-Party Tool Vetting",
+     "definition": "Assess externally supplied tools and connectors before admission.",
+     "agentic": true
+    },
+    {
+     "id": "5.5.5",
+     "name": "Tool Version & Deprecation Control",
+     "definition": "Manage tool change so agent behavior does not silently shift.",
+     "agentic": true
+    }
+   ],
+   "agentic": true,
+   "anchor": "new",
+   "proposed_owner": "Integration Platform Owner",
+   "confidence": "low"
+  },
+  {
+   "id": "5.6",
+   "domain": "D5",
+   "name": "AI Developer Experience & Reuse Assets",
+   "definition": "Able to make the compliant path the easiest path for delivery teams.",
+   "sources": [
+    "The Open Group IT4IT",
+    "The Open Group Open Agile Architecture",
+    "AWS CAF-AI"
+   ],
+   "criteria": [
+    {
+     "id": "5.6.1",
+     "name": "Reference Implementation & Template Provision",
+     "definition": "Publish working templates that already embed required controls.",
+     "agentic": false
+    },
+    {
+     "id": "5.6.2",
+     "name": "SDK, Library & Component Curation",
+     "definition": "Curate the approved libraries and shared components teams should build on.",
+     "agentic": false
+    },
+    {
+     "id": "5.6.3",
+     "name": "Self-Service Onboarding",
+     "definition": "Let a team start correctly without a bespoke engagement.",
+     "agentic": false
+    },
+    {
+     "id": "5.6.4",
+     "name": "Inner-Source & Asset Reuse",
+     "definition": "Make internally built assets discoverable and reusable across the institution.",
+     "agentic": false
+    },
+    {
+     "id": "5.6.5",
+     "name": "Developer Documentation & Support",
+     "definition": "Document the platform to the standard its users actually need.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "specialization",
+   "proposed_owner": "Developer Platform Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "6.1",
+   "domain": "D6",
+   "name": "AI Deployment & Serving Operations",
+   "definition": "Able to place AI systems into production and keep them serving.",
+   "sources": [
+    "IBM Generative AI Capability Model",
+    "ITIL 4",
+    "ISO/IEC 5338"
+   ],
+   "criteria": [
+    {
+     "id": "6.1.1",
+     "name": "Model & Agent Deployment",
+     "definition": "Deploy models and agents into production through a controlled mechanism.",
+     "agentic": true
+    },
+    {
+     "id": "6.1.2",
+     "name": "Inference Serving & Scaling",
+     "definition": "Serve inference at required throughput and scale it with demand.",
+     "agentic": false
+    },
+    {
+     "id": "6.1.3",
+     "name": "Configuration & Feature Flag Control",
+     "definition": "Change runtime behavior safely without redeployment.",
+     "agentic": false
+    },
+    {
+     "id": "6.1.4",
+     "name": "System Availability & Continuity Management",
+     "definition": "Meet availability and continuity commitments for individual AI systems in production.",
+     "agentic": false
+    },
+    {
+     "id": "6.1.5",
+     "name": "Operational Readiness & Handover",
+     "definition": "Hand over to operations with documented procedures before go-live.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "specialization",
+   "proposed_owner": "AI Operations Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "6.2",
+   "domain": "D6",
+   "name": "AI Monitoring & Observability",
+   "definition": "Able to see what an AI system did, in enough detail to explain it afterwards.",
+   "sources": [
+    "IBM Generative AI Capability Model",
+    "NVIDIA Enterprise AI Factory",
+    "NIST AI RMF - Measure"
+   ],
+   "criteria": [
+    {
+     "id": "6.2.1",
+     "name": "Telemetry Instrumentation & Collection",
+     "definition": "Instrument AI systems to emit the signals operations and assurance need.",
+     "agentic": false
+    },
+    {
+     "id": "6.2.2",
+     "name": "Trace & Interaction Logging",
+     "definition": "Record prompts, context, outputs and decisions to a defined retention standard.",
+     "agentic": true
+    },
+    {
+     "id": "6.2.3",
+     "name": "Agent Action & Tool-Call Observability",
+     "definition": "See every action an agent took, with what arguments and to what effect.",
+     "agentic": true
+    },
+    {
+     "id": "6.2.4",
+     "name": "Alerting & Threshold Management",
+     "definition": "Detect abnormal behavior and raise it to someone who can act.",
+     "agentic": false
+    },
+    {
+     "id": "6.2.5",
+     "name": "Operational Dashboarding",
+     "definition": "Present operational state to the people accountable for it.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "specialization",
+   "proposed_owner": "AI SRE Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "6.3",
+   "domain": "D6",
+   "name": "Continuous Evaluation, Drift & Quality Management",
+   "definition": "Able to know that a system still performs as it did at release.",
+   "sources": [
+    "NIST AI RMF - Measure",
+    "ISO/IEC 5338"
+   ],
+   "criteria": [
+    {
+     "id": "6.3.1",
+     "name": "Production Output Quality Monitoring",
+     "definition": "Measure output quality on live traffic, not only on test sets.",
+     "agentic": false
+    },
+    {
+     "id": "6.3.2",
+     "name": "Data & Concept Drift Detection",
+     "definition": "Detect when inputs or the world have moved away from training conditions.",
+     "agentic": false
+    },
+    {
+     "id": "6.3.3",
+     "name": "Bias & Fairness Monitoring in Production",
+     "definition": "Monitor outcome disparities on live populations over time.",
+     "agentic": false
+    },
+    {
+     "id": "6.3.4",
+     "name": "Feedback Capture & Ground-Truth Collection",
+     "definition": "Capture corrections and outcomes to build evolving ground truth.",
+     "agentic": false
+    },
+    {
+     "id": "6.3.5",
+     "name": "Retraining & Refresh Triggering",
+     "definition": "Trigger retraining or refresh on defined conditions rather than on schedule alone.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "new",
+   "proposed_owner": "AI Product Operations Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "6.4",
+   "domain": "D6",
+   "name": "AI Incident & Problem Management",
+   "definition": "Able to stop AI harm quickly and account for it afterwards.",
+   "sources": [
+    "ISO/IEC 42001",
+    "NIST AI RMF - Manage",
+    "ITIL 4"
+   ],
+   "criteria": [
+    {
+     "id": "6.4.1",
+     "name": "AI Incident Detection & Classification",
+     "definition": "Recognise an AI incident as distinct from a conventional IT incident.",
+     "agentic": false
+    },
+    {
+     "id": "6.4.2",
+     "name": "Containment & Kill-Switch Execution",
+     "definition": "Stop a model or agent immediately, at any hour, with a tested mechanism.",
+     "agentic": true
+    },
+    {
+     "id": "6.4.3",
+     "name": "Root Cause Analysis",
+     "definition": "Establish why an AI system behaved as it did, including at the data and prompt level.",
+     "agentic": false
+    },
+    {
+     "id": "6.4.4",
+     "name": "Regulatory & Stakeholder Notification",
+     "definition": "Notify the parties an incident obliges the institution to notify, within the deadline.",
+     "agentic": false
+    },
+    {
+     "id": "6.4.5",
+     "name": "Corrective Action & Lessons Learned",
+     "definition": "Close findings and feed them back into design and control.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "lens",
+   "proposed_owner": "Service Operations Owner",
+   "confidence": "high"
+  },
+  {
+   "id": "6.5",
+   "domain": "D6",
+   "name": "AI Cost Management",
+   "definition": "Able to know what AI costs, per unit of value, and to control it.",
+   "sources": [
+    "FinOps Foundation",
+    "Microsoft Cloud Adoption Framework for AI",
+    "Gartner (analyst, non-public)"
+   ],
+   "criteria": [
+    {
+     "id": "6.5.1",
+     "name": "Consumption Metering & Attribution",
+     "definition": "Attribute token, compute and storage consumption to an owner.",
+     "agentic": false
+    },
+    {
+     "id": "6.5.2",
+     "name": "Cost Forecasting & Budget Control",
+     "definition": "Forecast AI spend and stop it exceeding authorization.",
+     "agentic": false
+    },
+    {
+     "id": "6.5.3",
+     "name": "Unit Economics & Cost-per-Outcome",
+     "definition": "Express cost per transaction, per document or per outcome, not per month.",
+     "agentic": false
+    },
+    {
+     "id": "6.5.4",
+     "name": "Optimization & Rightsizing",
+     "definition": "Reduce cost through model, caching and routing choices without losing quality.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "lens",
+   "proposed_owner": "FinOps Owner",
+   "confidence": "high"
+  },
+  {
+   "id": "6.6",
+   "domain": "D6",
+   "name": "AI Asset Retirement & Evidence Preservation",
+   "definition": "Able to retire AI systems deliberately, with their evidence preserved.",
+   "sources": [
+    "ISO/IEC 5338 - retirement processes",
+    "ISO/IEC 42001",
+    "GAO AI Accountability Framework"
+   ],
+   "criteria": [
+    {
+     "id": "6.6.1",
+     "name": "Periodic Recertification & Review",
+     "definition": "Re-confirm at defined intervals that a system should remain in service.",
+     "agentic": false
+    },
+    {
+     "id": "6.6.2",
+     "name": "Deprecation & Sunset Planning",
+     "definition": "Plan and communicate withdrawal before it happens.",
+     "agentic": false
+    },
+    {
+     "id": "6.6.3",
+     "name": "Decommissioning & Data Disposition",
+     "definition": "Remove the system and dispose of its data under retention rules.",
+     "agentic": false
+    },
+    {
+     "id": "6.6.4",
+     "name": "Archive & Evidence Preservation",
+     "definition": "Preserve the records that assurance and legal obligations require after retirement.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "lens",
+   "proposed_owner": "Asset Management Owner",
+   "confidence": "high"
+  },
+  {
+   "id": "7.1",
+   "domain": "D7",
+   "name": "AI Policy, Standards & Management System",
+   "definition": "Able to operate a functioning management system for AI, not a policy document.",
+   "sources": [
+    "ISO/IEC 42001 - AI management system",
+    "ISO/IEC 38507",
+    "GAO AI Accountability Framework"
+   ],
+   "criteria": [
+    {
+     "id": "7.1.1",
+     "name": "AI Management System Operation",
+     "definition": "Operate the AIMS itself — scope, objectives, reviews, continual improvement.",
+     "agentic": false
+    },
+    {
+     "id": "7.1.2",
+     "name": "AI Policy Development & Maintenance",
+     "definition": "Issue and maintain the institutional AI policy set.",
+     "agentic": false
+    },
+    {
+     "id": "7.1.3",
+     "name": "Standards & Technical Guideline Issuance",
+     "definition": "Translate policy into standards a delivery team can actually build to.",
+     "agentic": false
+    },
+    {
+     "id": "7.1.4",
+     "name": "Governance Body & Decision Rights Operation",
+     "definition": "Run the forums that decide AI matters, with defined authority.",
+     "agentic": false
+    },
+    {
+     "id": "7.1.5",
+     "name": "Exception & Dispensation Management",
+     "definition": "Grant, time-box and track departures from standard.",
+     "agentic": false
+    },
+    {
+     "id": "7.1.6",
+     "name": "Conformance Monitoring",
+     "definition": "Detect where practice has diverged from policy without waiting for audit.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "specialization",
+   "proposed_owner": "AI Management System Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "7.2",
+   "domain": "D7",
+   "name": "Responsible & Trustworthy AI Practice",
+   "definition": "Able to make the institution's stated AI principles operative in delivered systems.",
+   "sources": [
+    "NIST AI RMF - Govern",
+    "OECD AI Principles",
+    "ISO/IEC 42001"
+   ],
+   "criteria": [
+    {
+     "id": "7.2.1",
+     "name": "Fairness Standard Setting & Adjudication",
+     "definition": "Set the fairness standard per use case, adjudicate measured disparity against it, and mandate remediation. Measurement is 6.3.3.",
+     "agentic": false
+    },
+    {
+     "id": "7.2.2",
+     "name": "Transparency & Explainability Provision",
+     "definition": "Provide explanation proportionate to the decision's consequence.",
+     "agentic": false
+    },
+    {
+     "id": "7.2.3",
+     "name": "Human Agency & Oversight Enforcement",
+     "definition": "Verify that designed oversight is actually exercised in operation.",
+     "agentic": true
+    },
+    {
+     "id": "7.2.4",
+     "name": "Contestability & Redress Handling",
+     "definition": "Give affected people a route to challenge an AI-influenced outcome.",
+     "agentic": false
+    },
+    {
+     "id": "7.2.5",
+     "name": "Environmental & Social Responsibility",
+     "definition": "Account for the environmental and social footprint of AI use.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "new",
+   "proposed_owner": "Responsible AI Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "7.3",
+   "domain": "D7",
+   "name": "AI Risk Management",
+   "definition": "Able to identify, treat and monitor AI risk within a stated appetite.",
+   "sources": [
+    "NIST AI RMF",
+    "ISO/IEC 23894",
+    "ISO/IEC 42005"
+   ],
+   "criteria": [
+    {
+     "id": "7.3.1",
+     "name": "AI Risk Identification & Taxonomy",
+     "definition": "Maintain a common taxonomy of AI risks the institution recognizes.",
+     "agentic": false
+    },
+    {
+     "id": "7.3.2",
+     "name": "Risk Assessment & Scoring",
+     "definition": "Assess AI risks consistently enough to compare them across the portfolio.",
+     "agentic": false
+    },
+    {
+     "id": "7.3.3",
+     "name": "Control Design & Treatment Planning",
+     "definition": "Design proportionate controls and record accepted residual risk.",
+     "agentic": false
+    },
+    {
+     "id": "7.3.4",
+     "name": "Risk Appetite & Tolerance Setting",
+     "definition": "State how much AI risk the institution will carry, by category.",
+     "agentic": false
+    },
+    {
+     "id": "7.3.5",
+     "name": "Risk Monitoring & Reporting",
+     "definition": "Track risk position over time and report it to accountable bodies.",
+     "agentic": false
+    },
+    {
+     "id": "7.3.6",
+     "name": "Independent Model Risk Validation",
+     "definition": "Validate consequential models independently of the team that built them.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "specialization",
+   "proposed_owner": "Enterprise Risk Owner",
+   "confidence": "high"
+  },
+  {
+   "id": "7.4",
+   "domain": "D7",
+   "name": "AI Security & Resilience",
+   "definition": "Able to defend AI systems against attack, including attacks that use the AI itself.",
+   "sources": [
+    "OWASP GenAI Security Project",
+    "ISO/IEC 27001",
+    "IMDA Model AI Governance Framework",
+    "NIST AI RMF"
+   ],
+   "criteria": [
+    {
+     "id": "7.4.1",
+     "name": "AI Threat Modeling",
+     "definition": "Model threats specific to AI systems, not only to their hosting infrastructure.",
+     "agentic": false
+    },
+    {
+     "id": "7.4.2",
+     "name": "Model & Supply Chain Integrity",
+     "definition": "Verify the provenance and integrity of models, weights and dependencies.",
+     "agentic": false
+    },
+    {
+     "id": "7.4.3",
+     "name": "Injection & Jailbreak Detection and Response",
+     "definition": "Detect subversion attempts in live traffic and respond to them.",
+     "agentic": true
+    },
+    {
+     "id": "7.4.4",
+     "name": "Agent Identity & Credential Lifecycle",
+     "definition": "Issue, sponsor, rotate and revoke a distinct identity per agent, rather than a shared service account.",
+     "agentic": true
+    },
+    {
+     "id": "7.4.5",
+     "name": "Runtime Authorization & Action Control",
+     "definition": "Authorise each consequential action at the moment it is attempted.",
+     "agentic": true
+    },
+    {
+     "id": "7.4.6",
+     "name": "Output Filtering & Content Safety",
+     "definition": "Prevent unsafe or disclosing output from reaching its recipient.",
+     "agentic": false
+    },
+    {
+     "id": "7.4.7",
+     "name": "Adversarial & Red-Team Testing",
+     "definition": "Actively attempt to make AI systems fail or misbehave, before release and on a recurring basis thereafter.",
+     "agentic": false
+    }
+   ],
+   "agentic": true,
+   "anchor": "new",
+   "proposed_owner": "Chief Information Security Officer",
+   "confidence": "medium"
+  },
+  {
+   "id": "7.5",
+   "domain": "D7",
+   "name": "Privacy & Data Protection for AI",
+   "definition": "Able to use personal data in AI without breaching the institution's obligations.",
+   "sources": [
+    "ISO/IEC 27701",
+    "ISO/IEC 42001",
+    "Institutional data protection framework"
+   ],
+   "criteria": [
+    {
+     "id": "7.5.1",
+     "name": "Privacy Impact Assessment for AI",
+     "definition": "Assess privacy impact where AI processing introduces new exposure.",
+     "agentic": false
+    },
+    {
+     "id": "7.5.2",
+     "name": "Personal Data Minimization & Masking",
+     "definition": "Reduce personal data to what the purpose requires before it reaches a model.",
+     "agentic": false
+    },
+    {
+     "id": "7.5.3",
+     "name": "Data Subject Rights Handling",
+     "definition": "Answer access, correction and objection requests where AI is involved.",
+     "agentic": false
+    },
+    {
+     "id": "7.5.4",
+     "name": "Confidentiality & Non-Disclosure Control",
+     "definition": "Prevent confidential material leaving through model providers or outputs.",
+     "agentic": false
+    },
+    {
+     "id": "7.5.5",
+     "name": "Training-Data Privacy Controls",
+     "definition": "Control whether institutional data may be used to train provider models.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "specialization",
+   "proposed_owner": "Privacy Officer",
+   "confidence": "high"
+  },
+  {
+   "id": "7.6",
+   "domain": "D7",
+   "name": "Legal, Regulatory & Contractual Compliance for AI",
+   "definition": "Able to know which obligations bind the institution and to demonstrate compliance.",
+   "sources": [
+    "ISO/IEC 42001",
+    "Institutional legal framework"
+   ],
+   "criteria": [
+    {
+     "id": "7.6.1",
+     "name": "Regulatory Horizon Monitoring",
+     "definition": "Track AI regulation across the jurisdictions the institution operates in.",
+     "agentic": false
+    },
+    {
+     "id": "7.6.2",
+     "name": "Applicability & Obligation Mapping",
+     "definition": "Determine which obligations apply to which AI system, and record why.",
+     "agentic": false
+    },
+    {
+     "id": "7.6.3",
+     "name": "Intellectual Property & Copyright Control",
+     "definition": "Manage IP exposure in both training inputs and generated outputs.",
+     "agentic": false
+    },
+    {
+     "id": "7.6.4",
+     "name": "Records, Disclosure & Registration Obligations",
+     "definition": "Meet registration, logging and disclosure duties on time.",
+     "agentic": false
+    },
+    {
+     "id": "7.6.5",
+     "name": "Institutional Legal Status Determination",
+     "definition": "Determine, as a prerequisite to any obligation mapping, how the institution's international legal status affects which AI regimes apply. Not a maturity dimension — a legal determination that exists or does not.",
+     "agentic": false
+    },
+    {
+     "id": "7.6.6",
+     "name": "Regulatory Role Determination",
+     "definition": "Establish whether the institution acts as provider, deployer or distributor for each AI system, as the prerequisite to obligation mapping.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "specialization",
+   "proposed_owner": "General Counsel",
+   "confidence": "medium"
+  },
+  {
+   "id": "7.7",
+   "domain": "D7",
+   "name": "AI System & Agent Inventory Management",
+   "definition": "Able to state, at any moment, every AI system and agent in operation and who owns it.",
+   "sources": [
+    "ISO/IEC 42001",
+    "GAO AI Accountability Framework"
+   ],
+   "criteria": [
+    {
+     "id": "7.7.1",
+     "name": "AI System Registration",
+     "definition": "Register every AI system before it reaches production, with mandatory attributes.",
+     "agentic": true
+    },
+    {
+     "id": "7.7.2",
+     "name": "Agent Registration & Attribute Recording",
+     "definition": "Record each agent in the inventory with its owner, purpose, scope and identity reference.",
+     "agentic": true
+    },
+    {
+     "id": "7.7.3",
+     "name": "Ownership & Accountability Recording",
+     "definition": "Record a named accountable individual for every registered AI system and keep it current as people and teams change.",
+     "agentic": false
+    },
+    {
+     "id": "7.7.4",
+     "name": "Shadow AI Discovery",
+     "definition": "Find AI in use that was never registered.",
+     "agentic": false
+    },
+    {
+     "id": "7.7.5",
+     "name": "Inventory Completeness Assurance",
+     "definition": "Test that the inventory is actually complete rather than assumed to be.",
+     "agentic": false
+    }
+   ],
+   "agentic": true,
+   "anchor": "new",
+   "proposed_owner": "AI Governance Owner",
+   "confidence": "low"
+  },
+  {
+   "id": "7.8",
+   "domain": "D7",
+   "name": "AI Assurance & Evidence Management",
+   "definition": "Able to produce and retain evidence about AI that an independent reviewer can rely on. Independent assessment of that evidence is Internal Audit's, not this capability's.",
+   "sources": [
+    "GAO AI Accountability Framework",
+    "ISO/IEC 42001",
+    "Institutional internal audit standards"
+   ],
+   "criteria": [
+    {
+     "id": "7.8.1",
+     "name": "Control Testing & Assurance Planning",
+     "definition": "Plan and perform first- and second-line testing of AI controls on a risk basis.",
+     "agentic": false
+    },
+    {
+     "id": "7.8.2",
+     "name": "Evidence Management & Audit Trail",
+     "definition": "Retain evidence in a form an auditor can rely on, without reconstruction.",
+     "agentic": false
+    },
+    {
+     "id": "7.8.3",
+     "name": "External Certification & Attestation",
+     "definition": "Obtain and maintain external certification where it is required or valuable.",
+     "agentic": false
+    },
+    {
+     "id": "7.8.4",
+     "name": "Finding Remediation Tracking",
+     "definition": "Close audit and assurance findings and evidence the closure.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "specialization",
+   "proposed_owner": "Second-Line Assurance Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "7.9",
+   "domain": "D7",
+   "name": "AI Impact Assessment & Risk Classification",
+   "definition": "Able to determine, independently of the team proposing a use case, what impact it may have and what risk tier it belongs to.",
+   "sources": [
+    "ISO/IEC 42005",
+    "ISO/IEC 23894",
+    "NIST AI RMF - Map",
+    "IIA Three Lines Model"
+   ],
+   "criteria": [
+    {
+     "id": "7.9.1",
+     "name": "AI System Impact Assessment",
+     "definition": "Conduct the structured impact assessment on affected individuals and groups per ISO/IEC 42005.",
+     "agentic": false
+    },
+    {
+     "id": "7.9.2",
+     "name": "Rights Impact Assessment Determination",
+     "definition": "Determine whether a fundamental-rights impact assessment is required for a use case, and conduct it where it is.",
+     "agentic": false
+    },
+    {
+     "id": "7.9.3",
+     "name": "Risk Classification & Tiering",
+     "definition": "Assign each use case to a risk tier that determines the controls it must carry.",
+     "agentic": false
+    },
+    {
+     "id": "7.9.4",
+     "name": "Classification Review & Reclassification",
+     "definition": "Re-examine impact and risk tier when purpose, data, autonomy or affected population materially change.",
+     "agentic": false
+    },
+    {
+     "id": "7.9.5",
+     "name": "Independent Challenge of First-Line Classification",
+     "definition": "Challenge and, where warranted, overturn a proposing team's own assessment of impact or risk tier.",
+     "agentic": true
+    }
+   ],
+   "agentic": true,
+   "anchor": "specialization",
+   "proposed_owner": "AI Risk & Governance Owner",
+   "confidence": "low"
+  },
+  {
+   "id": "8.1",
+   "domain": "D8",
+   "name": "AI Operating Model & Decision Rights",
+   "definition": "Able to say who decides what about AI, and who does the work.",
+   "sources": [
+    "WEF AI-First Operating System",
+    "MITRE AI Maturity Model",
+    "ISO/IEC 38507"
+   ],
+   "criteria": [
+    {
+     "id": "8.1.1",
+     "name": "Operating Model Design",
+     "definition": "Choose and maintain the centralized, federated or hybrid model for AI work.",
+     "agentic": false
+    },
+    {
+     "id": "8.1.2",
+     "name": "Role & Responsibility Definition",
+     "definition": "Define the AI roles the institution needs and what each is accountable for.",
+     "agentic": false
+    },
+    {
+     "id": "8.1.3",
+     "name": "Decision Rights & Escalation Paths",
+     "definition": "State who may decide what, and where a disagreement goes.",
+     "agentic": false
+    },
+    {
+     "id": "8.1.4",
+     "name": "Capacity & Resourcing Management",
+     "definition": "Match available skilled capacity to the committed portfolio.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "lens",
+   "proposed_owner": "Chief AI Officer",
+   "confidence": "high"
+  },
+  {
+   "id": "8.2",
+   "domain": "D8",
+   "name": "AI Skills & Specialist Capability Building",
+   "definition": "Able to grow and retain the specialist skill the portfolio depends on.",
+   "sources": [
+    "AWS CAF-AI - People perspective",
+    "WEF AI-First Operating System",
+    "Google AI Adoption Framework"
+   ],
+   "criteria": [
+    {
+     "id": "8.2.1",
+     "name": "Skills Taxonomy & Assessment",
+     "definition": "Define the AI skills required and assess where the institution stands.",
+     "agentic": false
+    },
+    {
+     "id": "8.2.2",
+     "name": "Training & Certification Delivery",
+     "definition": "Deliver structured learning against identified gaps.",
+     "agentic": false
+    },
+    {
+     "id": "8.2.3",
+     "name": "Recruitment & Talent Acquisition",
+     "definition": "Acquire skills the institution cannot build in time.",
+     "agentic": false
+    },
+    {
+     "id": "8.2.4",
+     "name": "Career Pathways & Retention",
+     "definition": "Give AI practitioners a reason to stay.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "lens",
+   "proposed_owner": "Chief Human Resources Officer",
+   "confidence": "high"
+  },
+  {
+   "id": "8.3",
+   "domain": "D8",
+   "name": "AI Literacy & Awareness",
+   "definition": "Able to ensure everyone who uses or is affected by AI understands enough to act safely.",
+   "sources": [
+    "ISO/IEC 42001",
+    "OECD AI Principles"
+   ],
+   "criteria": [
+    {
+     "id": "8.3.1",
+     "name": "Baseline AI Literacy Delivery",
+     "definition": "Deliver a common minimum level of AI understanding across the institution.",
+     "agentic": false
+    },
+    {
+     "id": "8.3.2",
+     "name": "Role-Specific Awareness",
+     "definition": "Give each role the specific understanding its AI exposure requires.",
+     "agentic": false
+    },
+    {
+     "id": "8.3.3",
+     "name": "Acceptable Use Communication",
+     "definition": "Make clear, in practical terms, what staff may and may not do with AI.",
+     "agentic": false
+    },
+    {
+     "id": "8.3.4",
+     "name": "Literacy Coverage Evidence",
+     "definition": "Evidence who has received what AI training, to the standard the institution's own policy sets.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "new",
+   "proposed_owner": "Learning & Development Owner",
+   "confidence": "medium"
+  },
+  {
+   "id": "8.4",
+   "domain": "D8",
+   "name": "AI Adoption, Enablement & Support",
+   "definition": "Able to convert delivered AI capability into actual, sustained use.",
+   "sources": [
+    "Google AI Adoption Framework",
+    "AWS CAF-AI",
+    "WEF AI-First Operating System"
+   ],
+   "criteria": [
+    {
+     "id": "8.4.1",
+     "name": "Adoption Planning & Targeting",
+     "definition": "Plan adoption deliberately rather than assuming availability creates use.",
+     "agentic": false
+    },
+    {
+     "id": "8.4.2",
+     "name": "User Onboarding & Enablement",
+     "definition": "Bring new users to competent use quickly.",
+     "agentic": false
+    },
+    {
+     "id": "8.4.3",
+     "name": "User Support Provision",
+     "definition": "Answer users when AI behaves unexpectedly.",
+     "agentic": false
+    },
+    {
+     "id": "8.4.4",
+     "name": "Adoption Measurement",
+     "definition": "Measure real usage and depth of use, not licenses issued.",
+     "agentic": false
+    },
+    {
+     "id": "8.4.5",
+     "name": "Champion Network Operation",
+     "definition": "Sustain distributed advocates who carry adoption locally.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "lens",
+   "proposed_owner": "Change Enablement Owner",
+   "confidence": "high"
+  },
+  {
+   "id": "8.5",
+   "domain": "D8",
+   "name": "AI Change Management & Workforce Transition",
+   "definition": "Able to carry the workforce through the change AI causes.",
+   "sources": [
+    "WEF AI-First Operating System",
+    "Consultancy transformation patterns (non-public)",
+    "OECD AI Principles"
+   ],
+   "criteria": [
+    {
+     "id": "8.5.1",
+     "name": "Change Impact Assessment",
+     "definition": "Assess what AI changes for specific roles and teams before it lands.",
+     "agentic": false
+    },
+    {
+     "id": "8.5.2",
+     "name": "Stakeholder Engagement & Communication",
+     "definition": "Engage those affected early enough to influence the design.",
+     "agentic": false
+    },
+    {
+     "id": "8.5.3",
+     "name": "Workforce Transition & Redeployment",
+     "definition": "Move people whose work changes into work that is needed.",
+     "agentic": false
+    },
+    {
+     "id": "8.5.4",
+     "name": "Staff Consultation & Representation",
+     "definition": "Consult staff representation where AI changes conditions of work.",
+     "agentic": false
+    },
+    {
+     "id": "8.5.5",
+     "name": "Trust & Resistance Management",
+     "definition": "Address well-founded concern rather than treating it as an obstacle.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "lens",
+   "proposed_owner": "Chief Human Resources Officer",
+   "confidence": "high"
+  },
+  {
+   "id": "8.6",
+   "domain": "D8",
+   "name": "AI Community & Reuse Culture",
+   "definition": "Able to make institutional learning about AI compound rather than repeat.",
+   "sources": [
+    "The Open Group Open Agile Architecture",
+    "AWS CAF-AI",
+    "Institutional practice"
+   ],
+   "criteria": [
+    {
+     "id": "8.6.1",
+     "name": "Practitioner Community Operation",
+     "definition": "Sustain a working community across organizational boundaries.",
+     "agentic": false
+    },
+    {
+     "id": "8.6.2",
+     "name": "Knowledge Sharing & Documentation",
+     "definition": "Capture what was learned in a form others can find and use.",
+     "agentic": false
+    },
+    {
+     "id": "8.6.3",
+     "name": "Reuse Incentives & Recognition",
+     "definition": "Make reuse and contribution visibly worth doing.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "lens",
+   "proposed_owner": "AI CoE Owner",
+   "confidence": "high"
+  }
+ ]
+}
