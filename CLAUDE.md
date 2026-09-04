@@ -44,6 +44,15 @@ each with evidence:
 **Enabled** (tooling provided?) · **Skilled** (people competent?) ·
 **Defined** (approved institutional standard?)
 
+The capability's `practised` value is **rolled up** from its criteria: `yes` only if
+every criterion was examined and every one passed · `partial` if some are `yes`/`partial`
+**or any is left unexamined** · `no` if none is `yes`/`partial` and at least one is `no` ·
+`unknown` if none has been looked at. One weak link stops the claim, and an unexamined
+criterion is never counted as satisfied.
+
+> Read `Model.values(cid)` — it returns all four already rolled up. **`obs_by_cap` no
+> longer holds `practised`**; criterion rows live in `obs_by_crit`.
+
 **A level is never typed. It is always derived.** The default scale
 (`scales/capability_level.py`) is adapted from ISO/IEC 33020:2019:
 

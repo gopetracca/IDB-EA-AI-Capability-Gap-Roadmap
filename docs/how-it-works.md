@@ -38,15 +38,38 @@ evidence, and they cannot disagree about what is true — only about what to mak
 
 ## 3. The four observations
 
-Per capability, four questions. Each answered `yes` / `partial` / `no` / `n/a` / `unknown`,
-each with evidence and a name attached.
+Four questions, each answered `yes` / `partial` / `no` / `n/a` / `unknown`, each with
+evidence and a name attached.
 
-| | The question | Who usually answers |
-|---|---|---|
-| **Practised** | Is this done on real AI systems in production, repeatedly? **Asked once per L3 criterion** (ADR-0014) | The capability owner |
-| **Enabled** | Can a team get the tooling without building it themselves? | The platform team |
-| **Skilled** | Do the people who must do this know how? | The owner, or L&D |
-| **Defined** | Is there an approved institutional standard, policy or method? | Whoever owns the subject: the platform team, Cybersecurity, Data Management, Legal, HR, EA |
+| | The question | Asked at | Who usually answers |
+|---|---|---|---|
+| **Practised** | Is this specific practice done on real AI systems in production, repeatedly? | **each L3 criterion** | The capability owner |
+| **Enabled** | Can a team get the tooling without building it themselves? | the L2 capability | The platform team |
+| **Skilled** | Do the people who must do this know how? | the L2 capability | The owner, or L&D |
+| **Defined** | Is there an approved institutional standard, policy or method? | the L2 capability | Whoever owns the subject: the platform team, Cybersecurity, Data Management, Legal, HR, EA |
+
+### Why `practised` is asked lower down
+
+*4.4 Agent & Workflow Orchestration Design* covers six distinct practices — goal
+definition, task decomposition, multi-agent coordination, memory design, guardrails,
+termination control. The Bank might do guardrails well and never do loop control at all.
+
+*"Is 4.4 practised?"* has no honest single answer. So it is not asked. Each of the six
+criteria is judged on its own, and **the capability's value is derived** (ADR-0014):
+
+| The criteria say | The capability reads |
+|---|---|
+| every one examined, every one `yes` | `yes` |
+| some `yes` or `partial`, or any left unexamined | `partial` |
+| none `yes` or `partial`, at least one `no` | `no` |
+| none examined | `unknown` |
+
+One weak link stops the claim, and an unexamined criterion is never counted as
+satisfied — so a capability cannot read `yes` on the strength of one observation while
+the rest has never been looked at.
+
+The gain is that a gap gets a name. *"4.4 is partial"* becomes *"termination and loop
+control has never been done"*, which is a piece of work someone can be given.
 
 Two values carry weight people usually miss:
 
@@ -93,9 +116,22 @@ ours, and what is not yet verified.
 **4.4 Agent & Workflow Orchestration Design** — *able to design what an agent may
 pursue, how it plans, and where it must stop.*
 
+Practised, judged criterion by criterion:
+
+| L3 criterion | Value | Evidence |
+|---|---|---|
+| 4.4.1 Agent Specification & Goal Definition | yes | Specs written for all 4 Foundry agents |
+| 4.4.2 Task Decomposition & Planning Design | partial | Only the retrieval agent has a designed plan |
+| 4.4.3 Multi-Agent Coordination Design | no | No multi-agent work attempted |
+| 4.4.4 Agent Memory & State Design | unknown | Nobody has looked |
+| 4.4.5 Guardrail & Constraint Design | yes | Guardrails on 1 of 4 agents |
+| 4.4.6 Termination & Loop Control Design | no | No budget or loop control anywhere |
+
+Which derives the capability's four values:
+
 | Observation | Value | Evidence |
 |---|---|---|
-| Practised | partial | 4 agents built on Foundry; 1 has written guardrails |
+| Practised | **partial** (derived) | 2 of 6 criteria done, 2 not done, 1 partial, 1 unexamined |
 | Enabled | partial | Foundry agents offering, 6 of 8 assets released |
 | Skilled | unknown | Nobody has looked |
 | Defined | partial | Foundry Agents Standard is **pre-release** |
@@ -105,6 +141,10 @@ pursue, how it plans, and where it must stop.*
 And the sentence that lands in the room: *the platform is strong, the standard is nearly
 there, and the practice is thin. The fix is not to buy anything — it is to release two
 documents and build the next agent against them.*
+
+Note what the criterion rows add: the roadmap item is no longer *"improve agent
+orchestration"*. It is **multi-agent coordination and termination control** — two named
+practices nobody has done — and **agent memory design**, which nobody has yet looked at.
 
 ### Standards are not one function's job
 
