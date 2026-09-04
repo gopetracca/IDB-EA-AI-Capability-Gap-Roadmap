@@ -24,13 +24,20 @@ import random
 import collections
 from datetime import date
 
-C = {"yes": "#2f6f4e", "partial": "#c08a2e", "no": "#a33a2c",
-     "n/a": "#9aa5ad", "unknown": "#dfe5ea"}
-LVL = {0: "#a33a2c", 1: "#c2683a", 2: "#c08a2e", 3: "#5b8f4e",
-       4: "#2f6f4e", 5: "#1d5138", None: "#dfe5ea"}
+# Same analyst palette as the report: navy ramp, one warm accent.
+C = {"yes": "#002869", "partial": "#4C8CD2", "no": "#E36135",
+     "n/a": "#C9D2DA", "unknown": "#EDF1F4"}
+LVL = {0: "#E36135", 1: "#9BB8DC", 2: "#4C8CD2", 3: "#0057AF",
+       4: "#002869", 5: "#001B45", None: "#EDF1F4"}
 ORDER = ["yes", "partial", "no", "n/a", "unknown"]
 LABEL = {"yes": "Yes", "partial": "Partial", "no": "No",
          "n/a": "Not applicable", "unknown": "Not observed"}
+
+
+def _shortname(name):
+    n = name.replace("AI ", "", 1)
+    return {"Governance, Risk, Security & Assurance":
+            "Governance, Risk & Assurance"}.get(n, n)
 
 
 def esc(s):
@@ -128,38 +135,51 @@ def legend(keys, labels=None, cols=None):
 
 # ------------------------------------------------------------------ views
 def v_heatmap(m, obs, levels):
-    """52 capabilities as a grid, coloured by derived level."""
-    cell, gap, pad = 46, 5, 210
+    """52 capabilities BY NAME, coloured by derived level.
+
+    Rows, not a grid: a capability name averages 33 characters, and `2.3` tells a
+    reader nothing without a lookup table.
+    """
+    rowh, gap, pad, top = 19, 3, 388, 30
+    barw = 300
     rows = []
     for d in m.domains:
-        caps = sorted([c for c in m.capabilities if c['domain'] == d['id']],
-                      key=lambda x: m.sort_key(x['id']))
-        rows.append((d, caps))
-    ncol = max(len(c) for _, c in rows)
-    w = pad + ncol * (cell + gap)
-    h = len(rows) * (cell + gap) + 8
-    o = ['<svg viewBox="0 0 %d %d" class="chart">' % (w, h)]
-    for i, (d, caps) in enumerate(rows):
-        y = i * (cell + gap)
-        o.append('<text x="0" y="%d" class="bl">%s</text>' % (y + cell / 2 + 2, d['id']))
-        nm = d['name'].replace("AI ", "", 1)
-        nm = {"Governance, Risk, Security & Assurance":
-              "Governance, Risk & Assurance"}.get(nm, nm)
-        o.append('<text x="28" y="%d" class="bs">%s</text>'
-                 % (y + cell / 2 + 2, esc(nm)))
-        for j, c in enumerate(caps):
-            x = pad + j * (cell + gap)
+        rows.append((d, sorted([c for c in m.capabilities if c['domain'] == d['id']],
+                               key=lambda x: m.sort_key(x['id']))))
+    W = pad + barw + 96
+    H = top + sum(len(c) * (rowh + gap) + 26 for _, c in rows)
+    o = ['<svg viewBox="0 0 %d %d" class="chart">' % (W, H)]
+    o.append('<text x="%d" y="16" class="ch">Level</text>' % (pad + 4))
+    y = top
+    for d, caps in rows:
+        o.append('<text x="0" y="%d" class="dh">%s &#183; %s</text>'
+                 % (y + 12, d['id'], esc(_shortname(d['name']))))
+        y += 22
+        for c in caps:
             lv = levels.get(c['id'])
-            o.append('<rect x="%d" y="%d" width="%d" height="%d" rx="5" fill="%s">'
-                     '<title>%s %s — level %s</title></rect>'
-                     % (x, y, cell, cell, LVL[lv], c['id'], esc(c['name']),
-                        "not rated" if lv is None else lv))
-            o.append('<text x="%d" y="%d" class="hc">%s</text>'
-                     % (x + cell / 2, y + cell / 2 - 2, c['id']))
-            o.append('<text x="%d" y="%d" class="hl">%s</text>'
-                     % (x + cell / 2, y + cell / 2 + 12,
-                        "-" if lv is None else lv))
-    o.append(wm(w, h))
+            nm = c['name']
+            if len(nm) > 44:
+                nm = nm[:43].rstrip(" ,&") + "\u2026"
+            o.append('<text x="14" y="%d" class="cn">%s</text>' % (y + 13, esc(nm)))
+            o.append('<text x="%d" y="%d" class="ci" text-anchor="end">%s</text>'
+                     % (pad - 14, y + 13, c['id']))
+            # a bar whose length is the level, so the eye reads magnitude not hue alone
+            frac = 0 if lv is None else max(lv, 0.12) / 3.0
+            o.append('<rect x="%d" y="%d" width="%d" height="%d" fill="#EDF1F4"/>'
+                     % (pad, y, barw, rowh))
+            if lv is not None:
+                o.append('<rect x="%d" y="%d" width="%.1f" height="%d" fill="%s">'
+                         '<title>%s %s &#8212; level %d</title></rect>'
+                         % (pad, y, barw * frac, rowh, LVL[lv],
+                            c['id'], esc(c['name']), lv))
+                o.append('<text x="%d" y="%d" class="lvn">%d</text>'
+                         % (pad + barw + 10, y + 13, lv))
+            else:
+                o.append('<text x="%d" y="%d" class="lvn">&#8212;</text>'
+                         % (pad + barw + 10, y + 13))
+            y += rowh + gap
+        y += 4
+    o.append(wm(W, H))
     o.append("</svg>")
     return "".join(o)
 
@@ -362,7 +382,7 @@ def v_owners(m, levels):
     o = ['<svg viewBox="0 0 %d %d" class="chart">' % (W, h)]
     for i, (unit, n) in enumerate(rows):
         y = i * (rowh + gap)
-        col = "#a33a2c" if unit == "NO OWNER" else "#12455c"
+        col = "#E36135" if unit == "NO OWNER" else "#002869"
         o.append('<text x="0" y="%d" class="bl" fill="%s">%s</text>'
                  % (y + 14, col, esc(unit)))
         o.append('<rect x="%d" y="%d" width="%.1f" height="%d" rx="3" fill="%s" '
@@ -515,14 +535,12 @@ def preview(m, scale):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Views catalogue &mdash; SAMPLE DATA</title>
 <style>
-:root{--ink:#101619;--muted:#5d6b74;--rule:#dde3e8;--page:#f4f6f8;--card:#fff;
---accent:#12455c;--accent-soft:#e4eef3;--warn:#a33a2c;--good:#2f6f4e;
---q1:#f6f2e6;--q2:#eaf3ec;--q3:#f7eceb;--q4:#fdf6e3;
---shadow:0 1px 2px rgba(16,22,25,.05),0 8px 24px rgba(16,22,25,.06)}
-@media(prefers-color-scheme:dark){:root{--ink:#eef2f4;--muted:#9aa7b0;--rule:#2a3138;
---page:#0d1114;--card:#151b20;--accent:#7fb8c9;--accent-soft:#16303c;
---q1:#241f14;--q2:#14241a;--q3:#241615;--q4:#241f10;
---shadow:0 1px 2px rgba(0,0,0,.5),0 8px 24px rgba(0,0,0,.35)}}
+:root{--ink:#0d1b2a;--muted:#5a798c;--rule:#e2e8ee;--page:#fff;--card:#fff;
+--accent:#002869;--accent-soft:#F1F5FA;--warn:#E36135;--good:#002869;
+--q1:#F7F9FB;--q2:#F1F5FA;--q3:#FBF3EF;--q4:#F7F9FB;--shadow:none}
+@media(prefers-color-scheme:dark){:root{--ink:#eef2f6;--muted:#93a7b8;--rule:#22303d;
+--page:#0b1219;--card:#0f1822;--accent:#7FB2E8;--accent-soft:#12202e;
+--q1:#0f1822;--q2:#12202e;--q3:#1c1512;--q4:#0f1822;--shadow:none}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--page);color:var(--ink);
 font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,sans-serif;
@@ -551,19 +569,24 @@ padding-left:14px;margin:2px 0 18px}
 .bs{font-size:10.5px;fill:var(--muted)}
 .bn{font-size:11.5px;font-weight:700;text-anchor:middle}
 .bt{font-size:11.5px;fill:var(--muted);font-weight:600}
-.hc{font-size:11px;font-weight:700;fill:#fff;text-anchor:middle}
-.hl{font-size:10px;fill:#fff;fill-opacity:.85;text-anchor:middle}
+.ch{font-size:9px;fill:var(--muted);font-weight:700;letter-spacing:.04em;
+text-transform:uppercase}
+.dh{font-size:11px;fill:var(--accent);font-weight:700;letter-spacing:.06em;
+text-transform:uppercase}
+.cn{font-size:11.5px;fill:var(--ink)}
+.ci{font-size:10px;fill:var(--muted);font-weight:600}
+.lvn{font-size:11px;fill:var(--muted);font-weight:700}
 .ax{font-size:11.5px;fill:var(--muted);font-weight:700;text-anchor:middle}
 .axs{font-size:9.5px;fill:var(--muted)}
 .axl{font-size:11.5px;fill:var(--muted);font-weight:600}
 .axis{stroke:var(--rule);stroke-width:1.5}
 .grid{fill:none;stroke:var(--rule);stroke-width:1}
 .spoke{stroke:var(--rule);stroke-width:1}
-.cur{fill:rgba(18,69,92,.32);stroke:#12455c;stroke-width:2}
-.tgt{fill:none;stroke:#2f6f4e;stroke-width:2;stroke-dasharray:5 4}
-.tl-now{fill:none;stroke:#12455c;stroke-width:2.5}
-.tl-then{fill:none;stroke:#2f6f4e;stroke-width:2.5;stroke-dasharray:5 4}
-.tp-now{fill:#12455c} .tp-then{fill:#2f6f4e}
+.cur{fill:rgba(0,40,105,.26);stroke:#002869;stroke-width:2}
+.tgt{fill:none;stroke:#E36135;stroke-width:2;stroke-dasharray:5 4}
+.tl-now{fill:none;stroke:#002869;stroke-width:2.5}
+.tl-then{fill:none;stroke:#E36135;stroke-width:2.5;stroke-dasharray:5 4}
+.tp-now{fill:#002869} .tp-then{fill:#E36135}
 .qq{font-size:11px;fill:var(--muted);font-weight:700;letter-spacing:.04em}
 .wm{font-size:44px;font-weight:800;fill:var(--ink);fill-opacity:.045;
 letter-spacing:.24em;pointer-events:none}
@@ -626,8 +649,8 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin-top:32px;line-
         if vid in ("profile",):
             w(legend(ORDER))
         if vid == "radar":
-            w('<div class="legend"><span><i style="background:#12455c"></i>Current</span>'
-              '<span><i style="background:#2f6f4e"></i>Target, 12 months</span></div>')
+            w('<div class="legend"><span><i style="background:#002869"></i>Current</span>'
+              '<span><i style="background:#E36135"></i>Target, 12 months</span></div>')
         if vid == "quadrant":
             w('<p style="margin-top:14px;font-size:13.5px;color:var(--muted)">'
               'Each dot is a capability. <b>Bottom-right</b> is the pattern this '

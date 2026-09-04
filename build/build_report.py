@@ -14,9 +14,16 @@ than hiding it behind an invented number.
 from datetime import date
 import collections
 
+# Palette: a monochrome navy ramp with a single warm accent for the one thing
+# that needs attention. Consultancy decks do not use traffic lights - a red/amber/
+# green wall reads as alarm rather than as information, and it does not survive
+# being printed in grey.
 C = {
-    "yes": "#2f6f4e", "partial": "#c08a2e", "no": "#a33a2c",
-    "n/a": "#9aa5ad", "unknown": "#dfe5ea",
+    "yes": "#002869",      # deep navy - present
+    "partial": "#4C8CD2",  # mid blue - partial
+    "no": "#E36135",       # the single accent - absent, and the thing to act on
+    "n/a": "#C9D2DA",      # grey - does not apply
+    "unknown": "#EDF1F4",  # palest - nobody has looked
 }
 LABEL = {"yes": "Yes", "partial": "Partial", "no": "No",
          "n/a": "Not applicable", "unknown": "Not observed"}
@@ -147,41 +154,53 @@ def report(m, scale):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AI Capability &mdash; Management Report</title>
 <style>
-:root{--ink:#101619;--muted:#5d6b74;--rule:#dde3e8;--page:#f4f6f8;--card:#fff;
---accent:#12455c;--accent-soft:#e4eef3;--warn:#a33a2c;--good:#2f6f4e;--mid:#c08a2e;
---shadow:0 1px 2px rgba(16,22,25,.05),0 8px 24px rgba(16,22,25,.06)}
-@media(prefers-color-scheme:dark){:root{--ink:#eef2f4;--muted:#9aa7b0;--rule:#2a3138;
---page:#0d1114;--card:#151b20;--accent:#7fb8c9;--accent-soft:#16303c;
---shadow:0 1px 2px rgba(0,0,0,.5),0 8px 24px rgba(0,0,0,.35)}}
+:root{--ink:#0d1b2a;--muted:#5a798c;--rule:#e2e8ee;--page:#fff;--card:#fff;
+--accent:#002869;--accent-soft:#F1F5FA;--warn:#E36135;--good:#002869;--mid:#4C8CD2;
+--band:#F7F9FB;--shadow:none}
+@media(prefers-color-scheme:dark){:root{--ink:#eef2f6;--muted:#93a7b8;--rule:#22303d;
+--page:#0b1219;--card:#0f1822;--accent:#7FB2E8;--accent-soft:#12202e;--band:#0d1620;
+--shadow:none}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--page);color:var(--ink);
-font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,sans-serif;
+font:14.5px/1.6 "Segoe UI",-apple-system,BlinkMacSystemFont,Inter,Helvetica,Arial,sans-serif;
 -webkit-font-smoothing:antialiased}
-.wrap{max-width:1000px;margin:0 auto;padding:40px 24px 72px}
-header{border-bottom:3px solid var(--accent);padding-bottom:18px;margin-bottom:30px}
-h1{font-size:30px;line-height:1.15;margin:0 0 6px;letter-spacing:-.02em}
-.sub{color:var(--muted);font-size:13.5px}
-h2{font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);
-margin:0 0 4px;font-weight:700}
-h3{font-size:19px;margin:0 0 14px;letter-spacing:-.01em}
-section{background:var(--card);border:1px solid var(--rule);border-radius:10px;
-padding:26px 28px;margin-bottom:20px;box-shadow:var(--shadow)}
+.wrap{max-width:1060px;margin:0 auto;padding:0 40px 80px}
+header{padding:44px 0 20px;margin-bottom:0}
+.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+color:var(--muted);font-weight:700;margin-bottom:12px}
+h1{font-size:36px;line-height:1.1;margin:0 0 10px;letter-spacing:-.025em;
+font-weight:700;max-width:34ch}
+.sub{color:var(--muted);font-size:13px;border-top:2px solid var(--accent);
+padding-top:12px;margin-top:18px}
+h2{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+margin:0 0 6px;font-weight:700}
+h3{font-size:23px;margin:0 0 16px;letter-spacing:-.02em;font-weight:700;max-width:42ch}
+section{background:var(--card);border:none;border-top:1px solid var(--rule);
+border-radius:0;padding:40px 0 34px;margin:0}
+section:first-of-type{border-top:2px solid var(--accent)}
 p{margin:0 0 12px;max-width:76ch}
 .lede{font-size:16.5px;line-height:1.5}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:18px 0 4px}
-.kpi{background:var(--page);border:1px solid var(--rule);border-radius:8px;padding:14px 16px}
-.kpi b{display:block;font-size:27px;line-height:1.1;letter-spacing:-.02em}
-.kpi span{font-size:12px;color:var(--muted);display:block;margin-top:3px}
-.kpi.warn b{color:var(--warn)} .kpi.good b{color:var(--good)} .kpi.mid b{color:var(--mid)}
-.callout{border-left:4px solid var(--accent);background:var(--accent-soft);
-padding:16px 20px;border-radius:0 8px 8px 0;margin:18px 0}
-.callout.warn{border-left-color:var(--warn);background:rgba(163,58,44,.08)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0;
+margin:24px 0 8px;border-top:1px solid var(--rule)}
+.kpi{padding:18px 22px 16px;border-right:1px solid var(--rule);
+border-bottom:1px solid var(--rule)}
+.kpi:last-child{border-right:none}
+.kpi b{display:block;font-size:34px;line-height:1;letter-spacing:-.03em;
+font-weight:700;color:var(--accent)}
+.kpi span{font-size:11px;color:var(--muted);display:block;margin-top:8px;
+letter-spacing:.02em;line-height:1.35}
+.kpi.warn b{color:var(--warn)}
+.callout{background:var(--accent-soft);padding:22px 26px;margin:22px 0;
+border-left:3px solid var(--accent)}
+.callout.warn{border-left-color:var(--warn)}
 .callout p:last-child{margin-bottom:0}
-.callout b{font-size:16px}
-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0 4px}
-th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;
-color:var(--muted);border-bottom:2px solid var(--rule);padding:8px 10px 7px}
-td{padding:9px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+.callout b{font-size:17px;letter-spacing:-.01em}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:16px 0 4px}
+th{text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+color:var(--muted);border-bottom:1.5px solid var(--accent);padding:0 12px 8px;
+font-weight:700}
+td{padding:11px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+tbody tr:nth-child(even){background:var(--band)}
 tr:last-child td{border-bottom:none}
 td.c,th.c{text-align:center}
 code{font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--page);
@@ -197,11 +216,17 @@ vertical-align:-1px}
 .split{display:grid;grid-template-columns:170px 1fr;gap:26px;align-items:center}
 @media(max-width:640px){.split{grid-template-columns:1fr}}
 .donut{width:150px;height:150px}
-.pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
-.p-no{background:rgba(163,58,44,.13);color:var(--warn)}
-.p-mid{background:rgba(192,138,46,.16);color:#8a6110}
-.p-yes{background:rgba(47,111,78,.14);color:var(--good)}
-.hs{font-size:7.5px;fill:var(--muted);text-anchor:middle}
+.pill{display:inline-block;font-size:10.5px;font-weight:700;padding:3px 9px;
+letter-spacing:.04em;text-transform:uppercase}
+.p-no{background:rgba(227,97,53,.14);color:#B8471F}
+.p-mid{background:rgba(227,97,53,.14);color:#B8471F}
+.p-yes{background:var(--accent-soft);color:var(--accent)}
+.ch{font-size:9px;fill:var(--muted);font-weight:700;text-anchor:middle;
+letter-spacing:.04em;text-transform:uppercase}
+.dh{font-size:11px;fill:var(--accent);font-weight:700;letter-spacing:.06em;
+text-transform:uppercase}
+.cn{font-size:11.5px;fill:var(--ink)}
+.ci{font-size:10px;fill:var(--muted);font-weight:600}
 .empty{display:flex;gap:16px;align-items:flex-start;background:var(--page);
 border:1px dashed var(--rule);border-radius:8px;padding:20px 22px;margin:12px 0}
 .empty .ei{font-size:26px;color:var(--muted);line-height:1}
@@ -216,13 +241,13 @@ margin-top:12px}
 .wave ul{margin:0;padding-left:16px;font-size:12.5px;line-height:1.6}
 .wave li.more{color:var(--muted);list-style:none;margin-left:-16px}
 .viewhdr{display:flex;justify-content:space-between;align-items:baseline;
-gap:12px;margin:30px 0 6px;padding-top:22px;border-top:1px solid var(--rule)}
-.viewhdr:first-of-type{border-top:none;padding-top:0;margin-top:8px}
-.viewhdr h4{font-size:16px;margin:0;letter-spacing:-.01em}
-.tag{font-size:10px;font-weight:800;letter-spacing:.07em;padding:3px 9px;
-border-radius:20px;white-space:nowrap}
-.t-real{background:rgba(47,111,78,.14);color:var(--good)}
-.t-wait{background:rgba(93,107,116,.14);color:var(--muted)}
+gap:12px;margin:38px 0 6px;padding-top:26px;border-top:1px solid var(--rule)}
+.viewhdr:first-of-type{border-top:none;padding-top:0;margin-top:10px}
+.viewhdr h4{font-size:17px;margin:0;letter-spacing:-.015em;font-weight:700}
+.tag{font-size:9.5px;font-weight:700;letter-spacing:.1em;padding:4px 10px;
+white-space:nowrap;text-transform:uppercase}
+.t-real{background:var(--accent);color:#fff}
+.t-wait{background:transparent;color:var(--muted);box-shadow:inset 0 0 0 1px var(--rule)}
 .vd{font-size:13.5px;color:var(--muted);margin:0 0 10px;max-width:78ch}
 footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-height:1.7}
 @media print{body{background:#fff}section{break-inside:avoid;box-shadow:none}.wrap{padding:0}}
@@ -276,7 +301,8 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-
         rows.append(("%s · %s" % (d['id'], _short(d['name'])),
                      "%d capabilities · %d criteria" % (len(caps), ncrit),
                      {"yes": cnt["yes"], "unknown": cnt["unknown"]}))
-    w('<h3 style="margin-top:26px;font-size:15px">How much has been observed, by domain</h3>')
+    w('<h3 style="margin-top:30px;font-size:14px;max-width:none;'
+      'letter-spacing:.02em">How much has been observed, by domain</h3>')
     w(stacked_bar(rows, keys=["yes", "unknown"]))
     w('<div class="legend"><span><i style="background:%s"></i>Observed, with evidence</span>'
       '<span><i style="background:%s"></i>Nobody has looked yet</span></div>'
@@ -296,7 +322,8 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-
       'waiting on named documents or modules, listed in section 4.</p>'
       % (len(ready), len(m.offerings)))
     # enablement by domain
-    w('<h3 style="margin-top:26px;font-size:15px">Can a team get the tooling? By domain</h3>')
+    w('<h3 style="margin-top:30px;font-size:14px;max-width:none;'
+      'letter-spacing:.02em">Can a team get the tooling? By domain</h3>')
     rows = []
     for d in m.domains:
         caps = [c for c in m.capabilities if c['domain'] == d['id']]
@@ -531,8 +558,8 @@ footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-
 # empty state saying what is missing and who would supply it - never a zero,
 # never an invented number.
 
-LVL = {0: "#a33a2c", 1: "#c2683a", 2: "#c08a2e", 3: "#5b8f4e",
-       4: "#2f6f4e", 5: "#1d5138", None: "#e3e8ec"}
+LVL = {0: "#E36135", 1: "#9BB8DC", 2: "#4C8CD2", 3: "#0057AF",
+       4: "#002869", 5: "#001B45", None: "#EDF1F4"}
 
 
 def _empty(title, missing, who, h=150):
@@ -543,36 +570,46 @@ def _empty(title, missing, who, h=150):
 
 
 def obs_heatmap(m):
-    """Every capability x every observation. FULLY POPULATED with real data:
-    what is known is coloured, what is not is visibly blank."""
-    cw, ch, gap, pad, top = 15, 30, 3, 232, 54
+    """Every capability by name, with its four observations.
+
+    Rows are capabilities, not a grid of ids. A 9-wide grid cannot show a name
+    that averages 33 characters, and `2.3` tells a reader nothing - the point of
+    a heat map is that you can see what is weak without a lookup table.
+    """
+    rowh, gap, pad, colw, top = 19, 3, 388, 66, 44
+    W = pad + colw * 4 + 30
     rows = []
     for d in m.domains:
-        rows.append((d, sorted([c for c in m.capabilities if c['domain'] == d['id']],
-                               key=lambda x: m.sort_key(x['id']))))
-    ncol = max(len(c) for _, c in rows)
-    W = pad + ncol * (cw * 4 + gap * 2 + 8)
-    H = top + len(rows) * (ch + 8)
+        caps = sorted([c for c in m.capabilities if c['domain'] == d['id']],
+                      key=lambda x: m.sort_key(x['id']))
+        rows.append((d, caps))
+    H = top + sum(len(c) * (rowh + gap) + 26 for _, c in rows)
     o = ['<svg viewBox="0 0 %d %d" class="chart">' % (W, H)]
-    o.append('<text x="0" y="18" class="bs">Each capability shows four cells: '
-             'practised &#183; enabled &#183; skilled &#183; defined</text>')
-    for i, (d, caps) in enumerate(rows):
-        y = top + i * (ch + 8)
-        o.append('<text x="0" y="%d" class="bl">%s</text>' % (y + 16, d['id']))
-        nm = d['name'].replace("AI ", "", 1)
-        nm = {"Governance, Risk, Security & Assurance":
-              "Governance, Risk & Assurance"}.get(nm, nm)
-        o.append('<text x="26" y="%d" class="bs">%s</text>' % (y + 16, esc(nm)))
-        for j, c in enumerate(caps):
-            x = pad + j * (cw * 4 + gap * 2 + 8)
+    for k, lab in enumerate(("Practised", "Enabled", "Skilled", "Defined")):
+        o.append('<text x="%.1f" y="30" class="ch">%s</text>'
+                 % (pad + k * colw + (colw - 4) / 2, lab))
+    y = top
+    for d, caps in rows:
+        o.append('<text x="0" y="%d" class="dh">%s &#183; %s</text>'
+                 % (y + 12, d['id'], esc(_short(d['name']))))
+        y += 22
+        for c in caps:
             v = m.values(c['id'])
+            nm = c['name']
+            if len(nm) > 44:
+                nm = nm[:43].rstrip(" ,&") + "\u2026"
+            o.append('<text x="14" y="%d" class="cn">%s<title>%s</title></text>'
+                     % (y + 13, esc(nm), esc(c['name'])))
+            o.append('<text x="%d" y="%d" class="ci" text-anchor="end">%s</text>'
+                     % (pad - 14, y + 13, c['id']))
             for k, t in enumerate(("practised", "enabled", "skilled", "defined")):
-                o.append('<rect x="%d" y="%d" width="%d" height="%d" rx="2" fill="%s">'
+                x = pad + k * colw
+                o.append('<rect x="%.1f" y="%d" width="%d" height="%d" fill="%s">'
                          '<title>%s %s &#8212; %s: %s</title></rect>'
-                         % (x + k * (cw + 1), y, cw, ch - 8, C[v[t]],
+                         % (x, y, colw - 4, rowh, C[v[t]],
                             c['id'], esc(c['name']), t, LABEL[v[t]]))
-            o.append('<text x="%d" y="%d" class="hs">%s</text>'
-                     % (x + cw * 2, y + ch + 2, c['id']))
+            y += rowh + gap
+        y += 4
     o.append("</svg>")
     return "".join(o)
 
