@@ -32,9 +32,19 @@ def capability_view(m, scale):
 
     rated = {c['id']: m.rate(scale, c['id']) for c in m.capabilities}
     n_rated = sum(1 for v in rated.values() if v[0] is not None)
+    n_crit = sum(len(c['criteria']) for c in m.capabilities)
+    w("The taxonomy has three levels: **%d domains (L1)**, **%d capabilities (L2)** — the "
+      "unit that carries a level and an accountable owner — and **%d criteria (L3)**, "
+      "which are what you look for when judging whether a capability is genuinely "
+      "practised. L3 criteria carry no score of their own; they are listed per "
+      "capability in section *By domain* below and on sheet 6 of the workbook."
+      % (len(m.domains), len(m.capabilities), n_crit))
+    w("")
     w("| | |")
     w("|---|---|")
-    w("| Capabilities | %d |" % len(m.capabilities))
+    w("| Domains (L1) | %d |" % len(m.domains))
+    w("| Capabilities (L2) | %d |" % len(m.capabilities))
+    w("| Criteria (L3) | %d |" % n_crit)
     w("| Rated | %d |" % n_rated)
     w("| Not rated | %d |" % (len(m.capabilities) - n_rated))
     w("| Offerings | %d |" % len(m.offerings))
@@ -100,6 +110,20 @@ def capability_view(m, scale):
               % (c['id'], c['name'], unit, MARK[v['practised']], MARK[v['enabled']],
                  MARK[v['skilled']], MARK[v['defined']], lab, why))
         w("")
+        # the L3 criteria behind each capability in this domain
+        for c in sorted(caps, key=lambda x: m.sort_key(x['id'])):
+            if not c['criteria']:
+                continue
+            w("<details><summary><code>%s</code> %s — %d L3 criteria</summary>"
+              % (c['id'], c['name'], len(c['criteria'])))
+            w("")
+            w("| L3 | Criterion | What it means |")
+            w("|---|---|---|")
+            for x in c['criteria']:
+                w("| `%s` | **%s** | %s |" % (x['id'], x['name'], x['definition']))
+            w("")
+            w("</details>")
+            w("")
     w("---")
     w("")
 

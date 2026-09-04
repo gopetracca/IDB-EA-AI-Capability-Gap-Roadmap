@@ -13,6 +13,7 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.datavalidation import DataValidation
+from openpyxl.worksheet.hyperlink import Hyperlink
 
 import facts
 
@@ -71,6 +72,11 @@ def build(m, scale, path):
         ("P", "It is the model", "Not a report generated from somewhere else. This file is where the facts live. Edit the yellow cells, save, and the views are rebuilt from it."),
         ("P", "Facts, not scores", "You never type a level. You record four observations per capability, each with evidence. The level is computed."),
         ("", "", ""),
+        ("H", "The taxonomy has three levels", ""),
+        ("P", "L1 - Domain", "8 of them. A reporting cluster, never scored. Sheet 1, column A."),
+        ("P", "L2 - Capability", "52 of them. THE UNIT THAT CARRIES A LEVEL - one accountable owner each. One row per capability on sheet 1."),
+        ("P", "L3 - Criterion", "258 of them, on sheet 6. What you look for when deciding whether an L2 is genuinely practised. They carry no score of their own. Click the last column of sheet 1 to jump to a capability's criteria."),
+        ("", "", ""),
         ("H", "The four observations", ""),
         ("P", "Practised", "Is this done on real AI systems in production, repeatedly?"),
         ("P", "Enabled", "Can a team get the tooling for this without building it themselves?"),
@@ -120,7 +126,13 @@ def build(m, scale, path):
     head(ws, [("Domain", 8), ("ID", 7), ("Capability", 34), ("Able to...", 52),
               ("Owner (Bank unit)", 26), ("Match", 11), ("Practised", 10),
               ("Enabled", 10), ("Skilled", 10), ("Defined", 10),
-              ("LEVEL", 8), ("Level name", 14), ("Why", 62), ("Criteria", 9)])
+              ("LEVEL", 8), ("Level name", 14), ("Why", 62),
+              ("L3 criteria (click)", 17)])
+    # row each capability's block starts on, on sheet 6, so sheet 1 can link to it
+    critrow, _rr = {}, 2
+    for c in sorted(m.capabilities, key=lambda x: m.sort_key(x['id'])):
+        critrow[c['id']] = _rr
+        _rr += 1 + len(c['criteria'])
     r = 2
     for c in sorted(m.capabilities, key=lambda x: m.sort_key(x['id'])):
         vals = m.values(c['id'])
@@ -130,7 +142,8 @@ def build(m, scale, path):
         row = [c['domain'], c['id'], c['name'], c['definition'], unit or "NO OWNER",
                match, vals['practised'], vals['enabled'], vals['skilled'],
                vals['defined'], lvl if lvl is not None else "-", lname, why,
-               len(c['criteria'])]
+               ("%s - %s" % (c['criteria'][0]['id'], c['criteria'][-1]['id']))
+               if c['criteria'] else ""]
         for j, v in enumerate(row, 1):
             cell = ws.cell(row=r, column=j, value=v)
             cell.border = BOX; cell.font = T
@@ -148,6 +161,13 @@ def build(m, scale, path):
                 cell.fill = PatternFill("solid", fgColor=LVL_FILL[lvl])
                 cell.font = Font(name=F, size=11, bold=True, color="FFFFFF")
             if j == 13: cell.font = TS
+            if j == 14 and c['criteria']:
+                cell.font = Font(name=F, size=9, color="0000EE", underline="single")
+                cell.hyperlink = Hyperlink(
+                    ref="N%d" % r,
+                    location="'6. Criteria (L3)'!B%d" % critrow[c['id']],
+                    tooltip="Jump to the %d L3 criteria for %s"
+                            % (len(c['criteria']), c['id']))
         ws.row_dimensions[r].height = 28
         r += 1
     ws.freeze_panes = "D2"; ws.auto_filter.ref = "A1:N%d" % (r - 1)
@@ -302,13 +322,27 @@ def build(m, scale, path):
          "watch: PRE-RELEASE and IN REVIEW do not establish anything, they establish that "
          "it is one release away. Those rows are the cheapest roadmap items here.", 40)
 
-    # =============================================== 6. Criteria
-    ws = wb.create_sheet("6. Criteria")
-    head(ws, [("Domain", 8), ("Capability", 11), ("Capability name", 30),
-              ("Criterion", 10), ("Criterion name", 40), ("Definition", 74),
+    # =============================================== 6. Criteria (L3)
+    ws = wb.create_sheet("6. Criteria (L3)")
+    head(ws, [("Domain", 8), ("L2 capability", 12), ("Capability name", 30),
+              ("L3 criterion", 11), ("Criterion name", 40), ("Definition", 74),
               ("Agentic", 9)])
+    ws.sheet_properties.outlinePr.summaryBelow = False
+    CAPHDR = PatternFill("solid", fgColor="DEE9EF")
     r = 2
     for c in sorted(m.capabilities, key=lambda x: m.sort_key(x['id'])):
+        # one header row per capability, its criteria grouped and collapsible beneath
+        hdr = [c['domain'], c['id'], c['name'], "",
+               "%d L3 criteria" % len(c['criteria']),
+               m.owner(c['id'])[0] or "no owner in the catalogue", ""]
+        for j, v in enumerate(hdr, 1):
+            cell = ws.cell(row=r, column=j, value=v)
+            cell.border = BOX; cell.fill = CAPHDR
+            cell.font = Font(name=F, size=10, bold=True,
+                             color=ACC if j in (2, 5) else INK)
+            cell.alignment = WRAP if j in (3, 6) else TOP
+        ws.row_dimensions[r].height = 20
+        r += 1
         for x in c['criteria']:
             row = [c['domain'], c['id'], c['name'], x['id'], x['name'],
                    x['definition'], "yes" if x['agentic'] else ""]
@@ -321,12 +355,18 @@ def build(m, scale, path):
                 if j == 5: cell.font = B
                 if j == 6: cell.font = TS
             ws.row_dimensions[r].height = 24
+            ws.row_dimensions[r].outlineLevel = 1
             r += 1
     ws.freeze_panes = "E2"; ws.auto_filter.ref = "A1:G%d" % (r - 1)
     note(ws, r + 1, 7,
-         "The checklist behind a Practised judgement - what to look for when deciding "
-         "whether a capability is genuinely performed. These are NOT gates and they do "
-         "not carry scores. Filter column B to one capability before an interview.", 40)
+         "ALL %d L3 CRITERIA, the third level of the taxonomy, grouped under their L2 "
+         "capability. Use the +/- outline handles in the left margin to collapse a "
+         "capability, or filter column B to one capability ID. Reached from the last "
+         "column of sheet 1. "
+         "These are the checklist behind a Practised judgement - what to look for when "
+         "deciding whether a capability is genuinely performed. They are NOT gates and "
+         "carry no scores of their own."
+         % sum(len(c['criteria']) for c in m.capabilities), 46)
 
     # =============================================== 7. Owners
     ws = wb.create_sheet("7. Owners")
