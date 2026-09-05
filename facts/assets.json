@@ -1,4 +1,31 @@
 {
+ "_comment": "The evidence layer: everything the Bank has actually built, each with a status and a location a reader can open. `statuses` declares which statuses count as released to delivery teams; build/facts.py reads it and build.py check rejects an asset whose status is not declared. Release counts on offerings are derived from this, never typed.",
+ "statuses": {
+  "Published": {
+   "released": true,
+   "meaning": "Approved and available to delivery teams."
+  },
+  "Published (JFrog)": {
+   "released": true,
+   "meaning": "Module published in the Bank's artifact repository and consumable by pipelines."
+  },
+  "In use": {
+   "released": true,
+   "meaning": "Used on at least one real project. Not formally published, but a team can get it."
+  },
+  "Pre-release": {
+   "released": false,
+   "meaning": "Written and circulating for approval. Not yet an approved standard."
+  },
+  "Built, not yet distributed": {
+   "released": false,
+   "meaning": "Exists and works, but has not been shared with delivery teams."
+  },
+  "In review by DX": {
+   "released": false,
+   "meaning": "Submitted to the developer experience team for review before publication."
+  }
+ },
  "assets": [
   {
    "id": "STD-01",

@@ -1,4 +1,5 @@
 {
+ "_comment": "Why a capability has no platform offering and is still not a gap. Read by build.py check: every `enabled: n/a` observation must have its reason here, and a capability listed here that an offering enables is flagged. Edited by hand; the seed on 4 September 2026 wrote the `enabled: n/a` observations from it.",
  "realized_by_enterprise_service": {
   "1.2": "Enterprise portfolio and investment management",
   "1.3": "Benefits realization and performance reporting tooling",
@@ -15,7 +16,6 @@
  },
  "purely_organizational": [
   "1.1",
-  "2.2",
   "8.1",
   "8.5"
  ]

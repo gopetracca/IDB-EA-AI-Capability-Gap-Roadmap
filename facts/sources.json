@@ -1,5 +1,5 @@
 {
- "_comment": "Verified source register for the AI capability model. Governed by ADR-0010. Edited here; build/prov_data.py only loads it.",
+ "_comment": "Verified source register for the AI capability model. Governed by ADR-0010. Edited here. build/facts.py loads it; build.py check verifies that every citation string on a capability resolves through `normalize` (or `extra_from`) to an entry, and the provenance view reports grade exposure and locus coverage.",
  "access_date": "3 September 2026",
  "grades": {
   "A": "openly available, dated, versioned, standards body or public authority",
@@ -66,7 +66,7 @@
    "locus_form": "Clause number (e.g. 6.4 Risk assessment)",
    "grade": "C",
    "status": "Current",
-   "caution": "Paywalled. Structure mirrors ISO 31000."
+   "caution": "Paywalled. Structure mirrors ISO 31000. The locus 6.4.2 Risk identification (7.3) was confirmed on 5 September 2026 against the standard's own table of contents in the publisher-authorized free preview (First edition, 2023-02, clause listed at page 11) - the clause body was not opened. Cite the clause number and title only; do not paraphrase or quote its content until a Bank licence holder reads it (OPEN-ITEMS item 11)."
   },
   {
    "id": "S05",
@@ -809,6 +809,14 @@
   "Institutional internal audit standards": {
    "source": "S39",
    "locus": ""
+  },
+  "NIST AI RMF - Govern 1.2": {
+   "source": "S08",
+   "locus": "GOVERN 1.2"
+  },
+  "ISO/IEC 23894 - risk identification": {
+   "source": "S04",
+   "locus": "6.4.2 Risk identification"
   }
  },
  "extra_from": {

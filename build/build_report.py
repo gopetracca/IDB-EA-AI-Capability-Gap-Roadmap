@@ -2,215 +2,765 @@
 """The management report as a self-contained HTML page.
 
 No external assets, no JavaScript libraries, no build step beyond this file.
-Charts are inline SVG computed from facts/, so the page cannot drift from the
-model and works offline, in email, and from a file:// URL.
+Charts are inline SVG computed from facts/ (see charts.py), so the page cannot
+drift from the model and works offline, in email, and from a file:// URL.
 
-Design constraint that shapes everything here: THERE ARE NO SCORES YET. A heat
-map of 52 unrated capabilities is one flat colour, and a current-vs-target gap
-chart is empty. So this reports what is actually known - what is built, what is
-owned, what is observed - and shows the absence of ratings as a finding rather
-than hiding it behind an invented number.
+Design constraint that shapes everything here: THERE MAY BE NO SCORES YET.  A
+heat map of 52 unrated capabilities is one flat colour, and a current-vs-target
+gap chart is empty.  So this reports what is actually known - what is built,
+what is owned, what is observed - and shows the absence of ratings as a finding
+rather than hiding it behind an invented number.
+
+Two rules the code keeps:
+  * Nothing here names a scale.  The report argues in whichever scale is the
+    default and compares every scale that ships, reading each one's NAME,
+    QUESTION, LEVELS and behaviour from the module itself.
+  * Every sentence that contains a number is computed from the same facts the
+    chart beside it is drawn from.  Prose that would go stale when the facts
+    change is generated, not typed.
 """
 from datetime import date
 import collections
 
-# Palette: a monochrome navy ramp with a single warm accent for the one thing
-# that needs attention. Consultancy decks do not use traffic lights - a red/amber/
-# green wall reads as alarm rather than as information, and it does not survive
-# being printed in grey.
-C = {
-    "yes": "#002869",      # deep navy - present
-    "partial": "#4C8CD2",  # mid blue - partial
-    "no": "#E36135",       # the single accent - absent, and the thing to act on
-    "n/a": "#C9D2DA",      # grey - does not apply
-    "unknown": "#EDF1F4",  # palest - nobody has looked
-}
-LABEL = {"yes": "Yes", "partial": "Partial", "no": "No",
-         "n/a": "Not applicable", "unknown": "Not observed"}
-RELEASED = {"Published", "Published (JFrog)", "In use"}
-ORDER = ["yes", "partial", "no", "n/a", "unknown"]
+import charts as ch
+from charts import esc, C, LABEL, ORDER, LVL
 
 
-def _short(name):
-    """Domain names, trimmed to fit the chart gutter."""
-    n = name.replace("AI ", "", 1)
-    return {"Governance, Risk, Security & Assurance": "Governance, Risk & Assurance"}.get(n, n)
+# The sections of the report, in order.  Numbering and every forward reference
+# ("listed in Section N") are computed from this list, so adding a section
+# cannot leave a stale number behind.
+SECTIONS = [
+    "What this report can and cannot say",
+    "What the institution has built",
+    "The finding",
+    "The same evidence",            # completed with ", read N ways" at render time
+    "The views",
+    "What needs a decision",
+    "What would make the next report say more",
+]
 
 
-def _dl(d):
-    """Domain label, trimmed to fit a chart gutter."""
-    n = d['name'].replace("AI ", "", 1)
-    n = {"Governance, Risk, Security & Assurance": "Governance, Risk & Assurance"}.get(n, n)
-    return "%s · %s" % (d['id'], n)
+class _Sections(object):
+    """Section numbering driven by SECTIONS."""
+
+    def __init__(self):
+        self.n = 0
+
+    def next(self, title):
+        self.n += 1
+        expected = SECTIONS[self.n - 1]
+        assert title.startswith(expected), (title, expected)
+        return '<section><h2>Section %d</h2><h3>%s</h3>' % (self.n, title)
+
+    @staticmethod
+    def number_of(title):
+        return SECTIONS.index(title) + 1
+
+    def sub(self, k, title):
+        return ('<h3 style="font-size:15px;margin-top:%dpx">%d.%d &nbsp;%s</h3>'
+                % (8 if k == 1 else 28, self.n, k, title))
 
 
-def esc(s):
-    return (str(s).replace("&", "&amp;").replace("<", "&lt;")
-            .replace(">", "&gt;").replace('"', "&quot;"))
+def _gates_on_practice(scale):
+    """Does this scale refuse to rate when practice is unobserved, however good
+    the enablers look?  Read from the scale's behaviour, not from its name."""
+    strong = {"practised": "unknown", "enabled": "yes", "skilled": "yes", "defined": "yes"}
+    return scale.level(strong)[0] is None
 
 
-# ----------------------------------------------------------------- charts
-def stacked_bar(rows, width=880, rowh=30, gap=8, keys=ORDER):
-    """rows: [(label, sublabel, {key: count})]. Horizontal 100% stacked bars."""
-    left, right = 296, 62
-    bw = width - left - right
-    h = len(rows) * (rowh + gap)
-    out = ['<svg viewBox="0 0 %d %d" role="img" class="chart">' % (width, h)]
-    for i, (label, sub, counts) in enumerate(rows):
-        y = i * (rowh + gap)
-        total = sum(counts.values()) or 1
-        out.append('<text x="0" y="%d" class="bl">%s</text>' % (y + 14, esc(label)))
-        if sub:
-            out.append('<text x="0" y="%d" class="bs">%s</text>' % (y + 26, esc(sub)))
-        x = left
-        for k in keys:
-            n = counts.get(k, 0)
-            if not n:
-                continue
-            w = bw * n / total
-            out.append('<rect x="%.1f" y="%d" width="%.1f" height="%d" fill="%s">'
-                       '<title>%s: %d</title></rect>'
-                       % (x, y, w, rowh, C[k], LABEL[k], n))
-            if w > 22:
-                out.append('<text x="%.1f" y="%d" class="bn" fill="%s">%d</text>'
-                           % (x + w / 2, y + rowh / 2 + 4,
-                              "#fff" if k in ("yes", "no") else "#1a2126", n))
-            x += w
-        out.append('<text x="%d" y="%d" class="bt">%d</text>'
-                   % (width - right + 10, y + rowh / 2 + 4, total))
-    out.append("</svg>")
-    return "".join(out)
+def _top(scale):
+    cap = getattr(scale, "DERIVABLE_MAX", None)
+    return cap if cap is not None else max(n for n, _, _ in scale.LEVELS)
 
 
-def progress_rows(rows, width=880, rowh=26, gap=10):
-    """rows: [(label, done, total, note)] - completeness bars."""
-    left, right = 246, 88
-    bw = width - left - right
-    h = len(rows) * (rowh + gap)
-    out = ['<svg viewBox="0 0 %d %d" role="img" class="chart">' % (width, h)]
-    for i, (label, done, total, note) in enumerate(rows):
-        y = i * (rowh + gap)
-        frac = done / total if total else 0
-        out.append('<text x="0" y="%d" class="bl">%s</text>' % (y + 13, esc(label)))
-        if note:
-            out.append('<text x="0" y="%d" class="bs">%s</text>' % (y + 24, esc(note)))
-        out.append('<rect x="%d" y="%d" width="%d" height="%d" rx="3" fill="#e7ecf0"/>'
-                   % (left, y, bw, rowh - 8))
-        if frac:
-            out.append('<rect x="%d" y="%d" width="%.1f" height="%d" rx="3" fill="%s"/>'
-                       % (left, y, bw * frac, rowh - 8,
-                          C["yes"] if frac == 1 else C["partial"]))
-        out.append('<text x="%d" y="%d" class="bt">%d of %d</text>'
-                   % (left + bw + 10, y + rowh / 2, done, total))
-    out.append("</svg>")
-    return "".join(out)
+def _plural(n, one, many=None):
+    return one if n == 1 else (many or one + "s")
 
 
-def donut(counts, size=150, keys=ORDER):
-    """Single donut with a centre figure."""
-    import math
-    total = sum(counts.values()) or 1
-    cx = cy = size / 2
-    r, sw = size / 2 - 14, 22
-    out = ['<svg viewBox="0 0 %d %d" class="donut" role="img">' % (size, size)]
-    a = -math.pi / 2
-    for k in keys:
-        n = counts.get(k, 0)
-        if not n:
-            continue
-        sweep = 2 * math.pi * n / total
-        x1, y1 = cx + r * math.cos(a), cy + r * math.sin(a)
-        a += sweep
-        x2, y2 = cx + r * math.cos(a), cy + r * math.sin(a)
-        large = 1 if sweep > math.pi else 0
-        out.append('<path d="M %.2f %.2f A %.2f %.2f 0 %d 1 %.2f %.2f" fill="none" '
-                   'stroke="%s" stroke-width="%d"><title>%s: %d</title></path>'
-                   % (x1, y1, r, r, large, x2, y2, C[k], sw, LABEL[k], n))
-    out.append("</svg>")
-    return "".join(out)
+def _derivable(scale):
+    """The level numbers a scale can actually return, found by running it over
+    every combination of observation values rather than trusting DERIVABLE_MAX."""
+    import itertools
+    vals = ("yes", "partial", "no", "n/a", "unknown")
+    out = set()
+    for combo in itertools.product(vals, repeat=4):
+        lv = scale.level(dict(zip(("practised", "enabled", "skilled", "defined"), combo)))[0]
+        if lv is not None:
+            out.add(lv)
+    return out
 
 
-def legend(keys=ORDER):
-    return ('<div class="legend">' + "".join(
-        '<span><i style="background:%s"></i>%s</span>' % (C[k], LABEL[k])
-        for k in keys) + "</div>")
+def _comparable(default, other):
+    """Two scales' numbers can be compared one for one only when every level
+    the lens can return is also a level the default can return.  A 1-5
+    executive ladder against a 0-3 ladder is not - 'reads higher' would be an
+    artefact of the numbering, not a disagreement about the capability."""
+    return _derivable(other) <= _derivable(default)
 
 
-# ----------------------------------------------------------------- page
-class _Demo(object):
-    """The real model with SAMPLE observations layered on top.
+def _agreement(m, default, other):
+    """(both, agree, higher, lower) comparing one scale against the default.
 
-    Wraps rather than copies, so every fact that is real - capabilities,
-    offerings, assets, owners, criteria - stays real and only the observations
-    are substituted. Nothing is written to facts/.
+    Only capabilities both scales actually RATE are compared - a not-rated is
+    the absence of a placement, not a low one, and counting it as a
+    disagreement would overstate how far the scales diverge.  agree/higher/
+    lower are None when the ladders are not comparable (see _comparable).
     """
-
-    def __init__(self, m, obs):
-        self._m = m
-        self._obs = obs
-
-    def __getattr__(self, k):
-        return getattr(self._m, k)
-
-    def values(self, cid):
-        return dict(self._obs[cid])
-
-    def rate(self, scale, cid):
-        return scale.level(self.values(cid))
-
-    def criteria_obs(self, cid, otype):
-        """Sample criterion rows, consistent with the rolled-up L2 value."""
-        rolled = self._obs[cid].get(otype, 'unknown')
-        out = []
-        for i, x in enumerate(self._m.by_id[cid]['criteria']):
-            if rolled == 'yes':
-                v = 'yes'
-            elif rolled == 'no':
-                v = 'no'
-            elif rolled == 'n/a':
-                v = 'n/a'
-            elif rolled == 'partial':
-                v = ('yes', 'no', 'yes', 'partial', 'unknown')[i % 5]
-            else:
-                v = 'unknown'
-            out.append((x, {'value': v, 'evidence': 'sample', 'basis': 'sample'}))
-        return out
+    both = agree = higher = lower = 0
+    for c in m.capabilities:
+        a = m.rate(default, c['id'])[0]
+        b = m.rate(other, c['id'])[0]
+        if a is None or b is None:
+            continue
+        both += 1
+        if b == a:
+            agree += 1
+        elif b > a:
+            higher += 1
+        else:
+            lower += 1
+    if not _comparable(default, other):
+        return both, None, None, None
+    return both, agree, higher, lower
 
 
-def report(m, scale, demo=False):
+def report(m, scale, demo=False, scales=None):
+    """scale: the scale the report ARGUES IN - its narrative is written against
+    that ladder.  scales: every scale that ships, for the comparison section.
+    Defaults to [scale] so a caller that passes one still produces a valid page.
+    """
+    scales = list(scales or [scale])
+    if not any(s is scale for s in scales):
+        same = [s for s in scales if getattr(s, "SHORT", None) == getattr(scale, "SHORT", "")]
+        scale = same[0] if same else scale
+        if not same:
+            scales = [scale] + scales
     if demo:
-        import build_preview
-        m = _Demo(m, build_preview.sample_observations(m))
-    D = (lambda txt: '<span class="smp" title="Sample value, not an observation">'
-                     '%s</span>' % txt) if demo else (lambda txt: txt)
+        import sample
+        m = sample.Demo(m, sample.sample_observations(m))
     total = len(m.capabilities)
+    top = _top(scale)
     rated = {c['id']: m.rate(scale, c['id']) for c in m.capabilities}
     n_rated = sum(1 for v in rated.values() if v[0] is not None)
-    pending = [a for a in m.assets if a['status'] not in RELEASED]
+    pending = m.pending_assets()
     noowner = [c for c in m.capabilities if m.owner(c['id'])[1] == 'NO MATCH']
     box_total = sum(len(o['in_the_box']) for o in m.offerings)
     box_done = sum(1 for o in m.offerings for x in o['in_the_box'] if x['status'])
+    obsv = {c['id']: m.values(c['id']) for c in m.capabilities}
+
     # count what this page actually shows: in demo mode the observations are the
     # sample ones, so reading m.observations (which passes through to the real
     # rows) would print a coverage figure that contradicts every chart beside it
-    if demo:
-        n_obs = n_known = 0
-        for c in m.capabilities:
-            for t in m.observation_types:
-                if t['id'] in m.criterion_types:
-                    rows_ = [r for _x, r in m.criteria_obs(c['id'], t['id'])]
-                else:
-                    rows_ = [{'value': m.values(c['id'])[t['id']]}]
-                n_obs += len(rows_)
-                n_known += sum(1 for r in rows_
-                               if r.get('value', 'unknown') != 'unknown')
-    else:
-        n_obs = len(m.observations)
-        n_known = sum(1 for r in m.observations if r.get('value') != 'unknown')
+    n_obs = n_known = 0
+    for c in m.capabilities:
+        for t in m.observation_types:
+            if t['id'] in m.criterion_types:
+                rows_ = [r for _x, r in m.criteria_obs(c['id'], t['id'])]
+            else:
+                rows_ = [m.cap_obs(c['id'], t['id'])]
+            n_obs += len(rows_)
+            n_known += sum(1 for r in rows_ if r.get('value', 'unknown') != 'unknown')
 
+    S = _Sections()
     o = []
     w = o.append
-    w("""<!doctype html><html lang="en"><head><meta charset="utf-8">
+    w(STYLE)
+
+    # ---------------------------------------------------------- header
+    if demo:
+        w('<div class="banner">ILLUSTRATIVE &mdash; the capability map, offerings, '
+          'assets and owners are real. The observations behind every chart are '
+          'SAMPLE values, shown so the finished report can be reviewed before the '
+          'assessment is run. This is not an assessment.</div>')
+    w('<div class="wrap">')
+    tag = ('<br><span style="font-size:20px;font-weight:600;color:var(--warn)">'
+           'Illustrative edition</span>') if demo else ''
+    w('<header><h1>AI Capability &mdash; Management Report%s</h1>'
+      '<div class="sub">Inter-American Development Bank &nbsp;&#183;&nbsp; %s '
+      '&nbsp;&#183;&nbsp; generated from the capability model</div></header>'
+      % (tag, date.today().strftime("%d %B %Y")))
+
+    # ---------------------------------------------------------- 1 coverage
+    w(S.next('What this report can and cannot say'))
+    w('<p class="lede">Read this before the findings. It states how much of the '
+      'assessment has actually been done, so nothing below is read as more than it is.</p>')
+    w('<div class="kpis">')
+    w('<div class="kpi good"><b>%d</b><span>Platform offerings, evidenced</span></div>' % len(m.offerings))
+    w('<div class="kpi good"><b>%d</b><span>Assets with a location</span></div>' % len(m.assets))
+    w('<div class="kpi mid"><b>%d%%</b><span>Observations recorded</span></div>'
+      % (100 * n_known // (n_obs or 1)))
+    w('<div class="kpi %s"><b>%d of %d</b><span>Capabilities rated</span></div>'
+      % ("warn" if n_rated == 0 else "mid", n_rated, total))
+    w('</div>')
+    if n_rated == 0:
+        w('<div class="callout warn"><p><b>No capability is rated yet &mdash; and that is a '
+          'factual statement, not a bad result.</b></p><p>A rating requires knowing whether '
+          'something is actually <i>practised</i> on real AI systems. That question has not '
+          'yet been put to the capability owners. What <i>has</i> been established is what '
+          'the institution has <b>built</b>, and that is substantial and evidenced.</p>'
+          '<p>This is the difference between <i>we do not know</i> and <i>we do not have '
+          'it</i>. Most maturity assessments cannot tell those apart and score an '
+          'unexamined capability as if it were absent. This one refuses to.</p></div>')
+    else:
+        w('<div class="callout"><p><b>%d of %d capabilities carry a rating.</b> The '
+          'remainder are not zero &mdash; they are unobserved, and are shown as such '
+          'throughout.</p></div>' % (n_rated, total))
+    # coverage by domain - counted over the rows a reviewer actually fills in,
+    # which after ADR-0014 is one per L3 criterion for `practised`
+    rows = []
+    for d in m.domains:
+        caps = [c for c in m.capabilities if c['domain'] == d['id']]
+        cnt = collections.Counter()
+        ncrit = 0
+        for c in caps:
+            for t in m.observation_types:
+                if t['id'] in m.criterion_types:
+                    for _x, r_ in m.criteria_obs(c['id'], t['id']):
+                        cnt["unknown" if r_.get('value', 'unknown') == 'unknown'
+                            else "yes"] += 1
+                        ncrit += 1
+                else:
+                    v = m.cap_obs(c['id'], t['id']).get('value', 'unknown')
+                    cnt["unknown" if v == "unknown" else "yes"] += 1
+        rows.append((ch.domain_label(d),
+                     "%d capabilities · %d criteria" % (len(caps), ncrit),
+                     {"yes": cnt["yes"], "unknown": cnt["unknown"]}))
+    w('<h3 class="minor">How much has been observed, by domain</h3>')
+    w(ch.stacked_bar(rows, keys=["yes", "unknown"]))
+    w('<div class="legend"><span><i style="background:%s"></i>Observed, with evidence</span>'
+      '<span><i style="background:%s"></i>Nobody has looked yet</span></div>'
+      % (C["yes"], C["unknown"]))
+    w('</section>')
+
+    # ---------------------------------------------------------- 2 what exists
+    w(S.next('What the institution has built'))
+    w('<p>Every row is backed by a named asset with a status and a location. '
+      'This is the part of the picture that is <b>not</b> an opinion.</p>')
+    w(ch.progress_rows([(x['name'],) + m.release_count(x)
+                        + ("enables " + ", ".join(x['enables']),)
+                        for x in m.offerings]))
+    ready = [x for x in m.offerings if m.offering_complete(x)]
+    w('<p style="margin-top:16px"><b>%d of %d offerings are complete.</b> %s</p>'
+      % (len(ready), len(m.offerings),
+         ("The others are waiting on named documents or modules, listed in Section %d."
+          % S.number_of("What needs a decision"))
+         if len(ready) < len(m.offerings) else "Nothing is pending."))
+    # enablement by domain
+    w('<h3 class="minor">Can a team get the tooling? By domain</h3>')
+    rows = []
+    for d in m.domains:
+        caps = [c for c in m.capabilities if c['domain'] == d['id']]
+        rows.append((ch.domain_label(d), "",
+                     dict(collections.Counter(obsv[c['id']]['enabled'] for c in caps))))
+    w(ch.stacked_bar(rows))
+    w(ch.legend())
+    if demo:
+        w('<p class="vd">Sample values in this edition; the offerings above are real.</p>')
+    w('<p style="margin-top:14px"><i>Not applicable</i> is a legitimate answer, not a gap: '
+      'a strategy or workforce capability is not worse for having no platform component. '
+      '<i>Not observed</i> means the platform register was checked and nothing was found, '
+      'and nobody has yet asked whether an enterprise service provides it. The shape to '
+      'notice is that the platform and engineering domains carry the tooling, and the '
+      'governance domains carry almost none.</p>')
+    w('</section>')
+
+    # ---------------------------------------------------------- 3 finding
+    w(S.next('The finding'))
+    w('<div class="callout"><p><b>The institution has built its enablers ahead of its '
+      'practice.</b></p></div>')
+    w('<p>The scale used here &mdash; <b>%s</b> &mdash; places <b>performance</b> at '
+      'Level 1, <b>tooling and competent people</b> at Level 2, and <b>an approved '
+      'standard, applied</b> at Level 3. Measured that way, a large part of the Level '
+      '2 and Level 3 apparatus exists &mdash; platforms, standards, reference '
+      'architectures, infrastructure modules &mdash; while Level 1, whether the work is '
+      'actually done, %s.</p>'
+      % (esc(scale.NAME),
+         "has never been examined" if n_rated == 0 else
+         "has been examined for %d of %d capabilities" % (n_rated, total)))
+    w('<p>That is not a criticism of the build. It explains a disagreement that recurs '
+      'here: one person says a capability exists, meaning the platform and the standard '
+      'exist; another says it does not, meaning nothing is running on it. '
+      '<b>Both are right about different things.</b> A model carrying a single number '
+      'cannot show that. This one shows it as four columns.</p>')
+    en = collections.Counter(v['enabled'] for v in obsv.values())
+    de = collections.Counter(v['defined'] for v in obsv.values())
+    sk = collections.Counter(v['skilled'] for v in obsv.values())
+    pr = collections.Counter(v['practised'] for v in obsv.values())
+    w('<table><thead><tr><th>What can be evidenced today</th>'
+      '<th>What cannot</th></tr></thead><tbody>')
+    for a, b in [
+        ("%d offerings and %d assets, with locations" % (len(m.offerings), len(m.assets)),
+         "Whether any of it is used in production"
+         if pr['unknown'] == total else
+         "Whether it is used in production: known for %d of %d capabilities"
+         % (total - pr['unknown'], total)),
+        ("Which capabilities have platform tooling (%d), partial tooling (%d), and where "
+         "tooling does not apply (%d)" % (en['yes'], en['partial'], en['n/a']),
+         "Whether tooling exists for the %d capabilities nobody has yet examined"
+         % en['unknown'] if en['unknown'] else
+         "Which of the %d capabilities without tooling genuinely need it" % en['no']),
+        ("Which capabilities have an approved standard (%d) or one in pre-release (%d)"
+         % (de['yes'], de['partial']),
+         "Whether the work is done against it"),
+        ("Where a standard exists in the platform register",
+         "Whether the people who need the skills have them: %d of %d unobserved"
+         % (sk['unknown'], total))]:
+        w('<tr><td>%s</td><td style="color:var(--muted)">%s</td></tr>' % (esc(a), esc(b)))
+    w('</tbody></table></section>')
+
+    # ------------------------------------------------- 4 the same evidence,
+    # read N ways.  Placed immediately after the finding because it is the
+    # evidence FOR the finding, not an alternative to it.
+    w(scales_section(m, scale, scales, total, demo, S))
+
+    # ---------------------------------------------------------- 5 views
+    w(S.next('The views'))
+    views = []           # (title, ready:bool) - counted at the end, not typed
+
+    def vh(title, ready, desc):
+        views.append((title, ready))
+        tag_ = ("READY" if not demo else "REAL DATA") if ready else \
+               ("SAMPLE" if demo else "AWAITING OBSERVATIONS")
+        w('<div class="viewhdr"><h4>%s</h4><span class="tag %s">%s</span></div>'
+          % (esc(title), "t-real" if ready else "t-wait", tag_))
+        w('<p class="vd">%s</p>' % desc)
+
+    if demo:
+        w('<p class="lede">The views this model produces, every one populated. '
+          'Views marked <span class="tag t-real">REAL DATA</span> are drawn from '
+          '<b>recorded facts</b> and look exactly like this today. Views marked '
+          '<span class="tag t-wait">SAMPLE</span> are filled with '
+          '<b>illustrative observations</b>, because the real ones have not been '
+          'collected yet.</p>')
+    else:
+        w('<p class="lede">The views this model produces. Those marked '
+          '<span class="tag t-real">READY</span> are drawn from recorded facts and are '
+          'usable today. Those marked <span class="tag t-wait">AWAITING OBSERVATIONS'
+          '</span> are built and will populate as answers arrive &mdash; they are '
+          'shown empty rather than filled with an estimate.</p>')
+
+    # 1 observation heat map - always drawn; in the live edition it shows what is known
+    vh("Observation heat map", not demo,
+       ("Every capability, every observation, on one screen. This is what the "
+        "assessment looks like once the questions have been answered."
+        if demo else
+        "Every capability, every observation. This is the whole assessment on one "
+        "screen: what is known is coloured, what nobody has looked at is pale. "
+        "The pale columns are the work still to do."))
+    if demo:
+        views[-1] = (views[-1][0], False)
+    w(ch.obs_heatmap(m))
+    w(ch.legend())
+    w('<p style="margin-top:14px;font-size:13.5px;color:var(--muted)">'
+      'The <b>practised</b> cell is a roll-up: it is observed once per L3 criterion '
+      '(%d in total) and derived here, so one weak practice inside a capability shows '
+      'as <i>partial</i> rather than disappearing into an average. The other three are '
+      'observed once per capability.</p>'
+      % sum(len(c['criteria']) for c in m.capabilities))
+
+    # 2 enablement by domain - real in the live edition; in the illustrative
+    # edition `enabled` is sampled with everything else, so it must say so
+    vh("Tooling by domain", not demo,
+       "Can a delivery team get what it needs without building it? The platform and "
+       "engineering domains carry the tooling; the governance domains carry almost "
+       "none; People &amp; Skills is correctly not a technical question at all.")
+    rows = []
+    for d in m.domains:
+        caps = [c for c in m.capabilities if c['domain'] == d['id']]
+        rows.append((ch.domain_label(d), "", dict(collections.Counter(
+            obsv[c['id']]['enabled'] for c in caps))))
+    w(ch.stacked_bar(rows))
+    w(ch.legend())
+
+    # 3 accountability - REAL
+    vh("Accountability spread", True,
+       "Capabilities per unit, mapped against the institution's own product and "
+       "enabler catalogue. The red bar is the finding.")
+    w(ch.owners_chart(m))
+
+    # 4 control exposure - REAL
+    vh("Control exposure", True,
+       "For each offering, whether a delivery team inherits its controls or rebuilds "
+       "them. Every unanswered row is both a risk and a roadmap item.")
+    w(ch.progress_rows([(x['name'],
+                         sum(1 for y in x['in_the_box'] if y['status']),
+                         len(x['in_the_box']), "")
+                        for x in m.offerings if x['in_the_box']]))
+
+    # 5 roadmap horizons - REAL
+    vh("Roadmap horizons", True,
+       "What moves now, next and later &mdash; assembled from the facts rather than "
+       "from a workshop.")
+    w(ch.waves_chart(m))
+
+    # 6-10 need levels
+    levels = {c['id']: rated[c['id']][0] for c in m.capabilities}
+    keys = ch.level_keys(scale)
+    lvl_legend = ch.legend(keys, ch.level_labels(scale), LVL)
+    if demo:
+        import sample
+        targets = sample.sample_targets(m, levels, top)
+    else:
+        targets = None
+    have_levels = n_rated > 0
+
+    def vw(title, desc, chart, missing, who, extra=""):
+        """A view: populated when it can be, an honest empty state otherwise."""
+        vh(title, False if demo else have_levels, desc)
+        if demo or have_levels:
+            w(chart())
+            if extra:
+                w(extra)
+        else:
+            w(ch.empty_state(missing[0], missing[1], who))
+
+    vw("Capability heat map",
+       "All %d capabilities by their derived level &mdash; the single picture of "
+       "the estate." % total,
+       lambda: ch.v_heatmap(m, obsv, levels, top) + lvl_legend,
+       ("Nothing to colour yet",
+        "A level needs to know whether a capability is practised. That has not been "
+        "asked of anyone yet, so all %d are unrated and the map would be one flat "
+        "colour." % total),
+       "Capability owners, one question per L3 criterion")
+
+    def need_targets(title, desc, chart, missing_now, who):
+        # targets are a decision nobody has recorded; without them these two
+        # views stay empty even once levels exist
+        vh(title, False, desc)
+        if demo:
+            w(chart())
+        else:
+            w(ch.empty_state(*missing_now, who))
+
+    need_targets("Domain scorecard",
+                 "Eight domains, current against target &mdash; the radar a steering "
+                 "committee reads fastest.",
+                 lambda: ch.v_radar(m, obsv, levels, targets, top)
+                         + '<div class="legend"><span><i style="background:#002869"></i>'
+                           'Current</span><span><i style="background:#E36135"></i>'
+                           'Target, 12 months</span></div>',
+                 ("No target state exists" if have_levels else "No current position, and no target",
+                  "Needs a level per capability, and a target level per domain with a date."
+                  + (" Levels exist; targets are a decision nobody has recorded yet."
+                     if have_levels else " Neither exists yet.")),
+                 "Capability owners, then a target-setting decision")
+
+    vw("Built against practised",
+       "The disagreement, plotted: capabilities the platform has enabled that nobody "
+       "is yet doing.",
+       lambda: ch.v_quadrant(m, obsv, levels),
+       ("Half the axis exists",
+        "Enablement is recorded for %d capabilities. Practice is recorded for "
+        "none, so every point would sit on one line." % (total - en['unknown'])),
+       "Capability owners",
+       '<p style="margin-top:12px;font-size:13px;color:var(--muted)">Each dot is a '
+       'capability. <b>Bottom-right</b> is the pattern this institution expects to '
+       'find: the platform is built, the practice has not caught up.</p>')
+
+    need_targets("Biggest gaps to target",
+                 "The capabilities furthest from where they need to be, with the "
+                 "accountable unit beside each.",
+                 lambda: ch.v_gapbars(m, obsv, levels, targets, top),
+                 ("No target state exists",
+                  "A gap needs both a current level and a target. Setting targets is a "
+                  "decision, not an observation, and it is worth taking after the first "
+                  "real ratings rather than before."),
+                 "The steering group, once ratings exist")
+
+    vw("Level distribution",
+       "How many capabilities sit at each level. A histogram is harder to argue with "
+       "than an average, and this model never averages.",
+       lambda: ch.v_levels(m, levels, keys) + lvl_legend,
+       ("Nothing to distribute",
+        "Reads the derived level. All %d are currently unrated." % total),
+       "Capability owners")
+
+    need_targets("Trajectory",
+                 "Where the portfolio sits today against where the targets would put it.",
+                 lambda: ch.v_trajectory(m, levels, targets, keys)
+                         + '<div class="legend"><span><i style="background:#002869"></i>'
+                           'Today</span><span><i style="background:#E36135"></i>'
+                           'If targets are met</span></div>',
+                 ("Nothing to plot",
+                  "Needs both a current distribution and a target distribution."),
+                 "Capability owners, then a target-setting decision")
+
+    # the profile is drawable from whatever has been observed
+    vh("Assessment profile", not demo,
+       "The four observations across all %d capabilities. Shows which question is the "
+       "constraint &mdash; usually practice, not tooling." % total)
+    w(ch.v_profile(m, obsv) + ch.legend())
+    if not demo:
+        unobserved = [t['id'] for t in m.observation_types
+                      if all(v[t['id']] == 'unknown' for v in obsv.values())]
+        if unobserved:
+            w('<p style="margin-top:10px;font-size:13px;color:var(--muted)">'
+              '%s %s not been recorded for any capability yet, so %s bar%s %s entirely '
+              'pale.</p>'
+              % (" and ".join("<b>%s</b>" % t for t in unobserved),
+                 "has" if len(unobserved) == 1 else "have",
+                 "that" if len(unobserved) == 1 else "those",
+                 "" if len(unobserved) == 1 else "s",
+                 "is" if len(unobserved) == 1 else "are"))
+
+    n_ready = sum(1 for _, r in views if r)
+    if demo:
+        w('<div class="callout warn"><p><b>Every chart marked SAMPLE is illustrative.</b> '
+          'The capability map, the offerings, the assets and the owners are real; '
+          'the observations are not. Answering four questions &mdash; put to the '
+          'capability owners, the platform teams, the standard-setting functions and '
+          'Learning &amp; Development &mdash; is what turns this into an '
+          'assessment.</p></div>')
+    else:
+        w('<div class="callout"><p><b>%d of %d views are usable today.</b> The '
+          'others are not blocked by tooling or by design &mdash; they are blocked by '
+          '%s To see the whole report populated with illustrative numbers, open '
+          '<code>management-report-illustrative.html</code>.</p></div>'
+          % (n_ready, len(views),
+             "one question that has never been put to the capability owners: "
+             "<i>is this actually done, and where?</i>" if not have_levels else
+             "a target state that nobody has yet decided."))
+    w('</section>')
+
+    # ---------------------------------------------------------- 6 decisions
+    w(S.next('What needs a decision'))
+    w(S.sub(1, 'Capabilities nobody owns'))
+    w('<div class="split"><div>%s<div style="text-align:center;font-size:12px;'
+      'color:var(--muted);margin-top:6px">%d of %d unowned</div></div><div>'
+      % (ch.donut({"no": len(noowner), "yes": total - len(noowner)}, keys=["no", "yes"]),
+         len(noowner), total))
+    w('<p>These are claimed by no product or enabler in the institution\'s own catalogue. '
+      'Several are governance capabilities an institution of this kind is normally '
+      'expected to hold.</p>')
+    w('<table><tbody>')
+    for c in sorted(noowner, key=lambda x: m.sort_key(x['id'])):
+        w('<tr><td><code>%s</code></td><td><b>%s</b></td>'
+          '<td style="color:var(--muted)">%s</td></tr>'
+          % (c['id'], esc(c['name']), esc(m.domain_by_id[c['domain']]['name'])))
+    w('</tbody></table></div></div>')
+    w('<p><b>Decision required:</b> assign an owner to each, or record a deliberate '
+      'decision not to hold it.</p>')
+
+    w(S.sub(2, 'Finished, but not released'))
+    w('<p>%d assets exist and are not yet available to delivery teams. Each is days from '
+      'being usable, and each currently holds a capability below what the underlying work '
+      'would support.</p>' % len(pending))
+    w('<table><thead><tr><th>Asset</th><th>What it is</th><th>Status</th></tr></thead><tbody>')
+    for a in pending:
+        w('<tr><td><code>%s</code></td><td>%s</td>'
+          '<td><span class="pill p-mid" title="%s">%s</span></td></tr>'
+          % (a['id'], esc(a['name']),
+             esc(m.asset_statuses.get(a['status'], {}).get('meaning', '')),
+             esc(a['status'])))
+    w('</tbody></table>')
+    w('<p><b>Decision required:</b> a release date for each, with a named owner.</p>')
+
+    w(S.sub(3, 'Questions only the platform teams can answer'))
+    w('<p><b>%d of %d answered.</b> These decide whether a delivery team inherits its '
+      'controls or rebuilds them. Every unanswered row is an unknown; every <i>no</i> is '
+      'a roadmap item, usually a cheap one, because it means extending a module rather '
+      'than building a platform.</p>' % (box_done, box_total))
+    w(ch.progress_rows([(x['name'],
+                         sum(1 for y in x['in_the_box'] if y['status']),
+                         len(x['in_the_box']), "")
+                        for x in m.offerings if x['in_the_box']]))
+    w('</section>')
+
+    # ---------------------------------------------------------- 7 next
+    w(S.next('What would make the next report say more'))
+    w('<table><thead><tr><th>Who</th><th>What is asked of them</th>'
+      '<th>What it unlocks</th></tr></thead><tbody>')
+    n_undef = de['unknown']
+    for who, what, why in [
+        ("Capability owners",
+         "For each L3 criterion under a capability they own: is this specific "
+         "practice done on real AI systems, and where?",
+         "Every rating in the model. Nothing can be rated without it"),
+        ("Platform teams", "The %d outstanding in-the-box questions" % (box_total - box_done),
+         "Whether controls are inherited or rebuilt by every team"),
+        ("Cybersecurity · Data Management · Legal · HR",
+         "Does an approved standard exist in your domain?",
+         "%d capabilities show <i>not observed</i> only because the asset register "
+         "covers platform assets" % n_undef),
+        ("Learning &amp; Development", "Who is trained, and in what?",
+         "Level 2 for every capability where practice exists")]:
+        w('<tr><td><b>%s</b></td><td>%s</td><td style="color:var(--muted)">%s</td></tr>'
+          % (who, what, why))
+    w('</tbody></table>')
+    w('<div class="callout"><p>None of this requires new tooling or new investment. '
+      'It requires four questions put to people who already know the answers.</p></div>')
+    w('</section>')
+
+    w('<footer>Generated from the capability model &mdash; %d domains, %d capabilities, '
+      '%d criteria.<br>Scale: %s. %s<br>%s</footer>'
+      % (len(m.domains), total, sum(len(c['criteria']) for c in m.capabilities),
+         esc(scale.NAME), esc(scale.BASIS),
+         "Observations on this page are SAMPLE values and were never written to facts/."
+         if demo else
+         "Every figure traces to a recorded fact with evidence and a date; nothing here "
+         "is estimated."))
+    w('</div></body></html>')
+    return "\n".join(o)
+
+
+def scales_section(m, default, scales, total, demo, S):
+    """The same evidence read by every scale that ships.
+
+    Self-contained on purpose: a reader who has never opened the repository
+    should finish this section knowing what a scale IS, what each one asks,
+    why more than one exists, and which one to believe when they disagree.
+
+    Every sentence with a number in it is computed from the scales' behaviour
+    on the observations shown, so adding a scale or recording an observation
+    cannot leave this text describing a page that no longer exists.
+    """
+    o = []
+    w = o.append
+    n = len(scales)
+    words = {1: "one way", 2: "two ways", 3: "three ways", 4: "four ways", 5: "five ways"}
+    w(S.next('The same evidence, read %s' % words.get(n, "%d ways" % n)))
+
+    # ---- what a scale is
+    w('<p class="lede">A <b>level</b> is never typed into this model. It is '
+      '<b>derived</b> &mdash; a rule reads the four observations and returns a level '
+      'and a sentence saying why. That rule is called a <b>scale</b>, and it is the '
+      'only place in the model where a judgement is encoded.</p>')
+    w('<p>Separating the two matters more than it sounds. <b>An observation is a fact, '
+      'not a score.</b> &ldquo;The standard is pre-release&rdquo; is true whichever '
+      'framework reads it. So the same body of evidence can be read by more than one '
+      'scale, and the scales <b>cannot disagree about what is true</b> &mdash; only '
+      'about what to make of it. Adding a scale re-rates nothing and re-interviews '
+      'nobody.</p>')
+    w('<p>That is why this section exists. A reader who arrives holding a different '
+      'frame &mdash; a maturity ladder, an executive readiness tier &mdash; can be '
+      'answered in it, without the assessment being redone and without anyone '
+      'pretending the underlying evidence changed.</p>')
+
+    # ---- what each one asks
+    w('<table><thead><tr><th style="width:22%">Scale</th><th style="width:26%">The '
+      'question it asks</th><th style="width:30%">Levels</th>'
+      '<th style="width:22%">Standing</th></tr></thead><tbody>')
+    for s in scales:
+        names = " · ".join("%d %s" % (n_, k) for n_, k, _ in s.LEVELS)
+        cap = getattr(s, "DERIVABLE_MAX", None)
+        is_def = s is default
+        standing = ('<b>The default.</b> The assessment itself.' if is_def
+                    else 'A lens. Reporting only.')
+        if cap is not None:
+            standing += ' Tops out at <b>%d</b> today.' % cap
+        standing += (' Gates on performance.' if _gates_on_practice(s)
+                     else ' Does <b>not</b> gate on performance.')
+        w('<tr><td><b>%s</b><br><span style="color:var(--muted);font-size:12px">%s</span></td>'
+          '<td>%s</td><td style="font-size:12px">%s</td><td>%s</td></tr>'
+          % (esc(s.NAME), esc(getattr(s, "SHORT", "")),
+             esc(getattr(s, "QUESTION", None) or getattr(s, "BASIS", "")[:120]),
+             esc(names), standing))
+    w('</tbody></table>')
+
+    # ---- the comparison itself
+    rows = []
+    counts_by = {}
+    for s in scales:
+        counts = collections.Counter(m.rate(s, c['id'])[0] for c in m.capabilities)
+        counts_by[s.SHORT] = counts
+        rows.append((s.NAME, getattr(s, "SHORT", ""), counts,
+                     dict((n_, k) for n_, k, _ in s.LEVELS)))
+    w('<h4 style="margin:28px 0 2px;font-size:14px">All %d capabilities, under each '
+      'scale</h4>' % total)
+    w('<p class="vd">The same %d capabilities and the same observations in every bar. '
+      'Only the rule changes.</p>' % total)
+    w(ch.scale_compare(rows, total))
+
+    # ---- read the disagreement, from the numbers rather than from memory
+    gated = [s for s in scales if _gates_on_practice(s)]
+    ungated = [s for s in scales if not _gates_on_practice(s)]
+    rated_by = {s.SHORT: total - counts_by[s.SHORT].get(None, 0) for s in scales}
+    nothing = [s for s in scales if rated_by[s.SHORT] == 0]
+    something = [s for s in scales if rated_by[s.SHORT] > 0]
+
+    def names_(ss):
+        ns = ["<b>%s</b>" % esc(s.NAME) for s in ss]
+        return ns[0] if len(ns) == 1 else ", ".join(ns[:-1]) + " and " + ns[-1]
+
+    if nothing and something and not demo:
+        w('<div class="callout warn"><p><b>%s rate%s nothing today; %s rate%s %s.</b></p>'
+          % (names_(nothing), "s" if len(nothing) == 1 else "",
+             names_(something), "s" if len(something) == 1 else "",
+             " and ".join("%d of %d" % (rated_by[s.SHORT], total) for s in something)))
+        w('<p>That contrast <i>is</i> the finding of Section %d, shown a second way. '
+          % S.number_of("The finding"))
+        if gated:
+            w('%s gate%s on <b>performance</b>: until someone is asked whether the work '
+              'is done on real systems, %s return%s <b>not rated</b>. '
+              % (names_(gated), "s" if len(gated) == 1 else "",
+                 "it" if len(gated) == 1 else "they", "s" if len(gated) == 1 else ""))
+        if ungated:
+            w('%s do%s not gate &mdash; %s read%s whatever has been observed, so tooling '
+              'and approved standards alone are enough to place a capability.</p>'
+              % (names_(ungated), "es" if len(ungated) == 1 else "",
+                 "it" if len(ungated) == 1 else "they", "s" if len(ungated) == 1 else ""))
+            w('<p>Read %s carefully. Every level it shows rests on <b>enablers with no '
+              'observed practice behind them</b>. It is exactly the reading this report '
+              'exists to caution against, and it is shown here rather than hidden because '
+              'someone will produce it otherwise.</p></div>'
+              % ("that bar" if len(ungated) == 1 else "those bars"))
+        else:
+            w('</p></div>')
+    elif not something and not demo:
+        w('<div class="callout warn"><p><b>No scale rates anything today.</b> Every scale '
+          'that ships gates on performance, and performance has not been observed for '
+          'any capability.</p></div>')
+    else:
+        w('<div class="callout"><p><b>Where they disagree, the default scale is the '
+          'finding.</b></p>')
+        any_higher = False
+        for s in scales:
+            if s is default:
+                continue
+            both, agree, higher, lower = _agreement(m, default, s)
+            if both == 0:
+                w('<p><b>%s</b> and the default scale rate no capability in common%s.</p>'
+                  % (esc(s.NAME),
+                     " yet" if rated_by[s.SHORT] == 0 else ""))
+                continue
+            if agree is None:
+                lo, hi = min(_derivable(s)), max(_derivable(s))
+                dlo, dhi = min(_derivable(default)), max(_derivable(default))
+                w('<p><b>%s</b> rates <b>%d</b> of the capabilities the default scale '
+                  'rates, but its ladder runs %d&ndash;%d where the default runs '
+                  '%d&ndash;%d today, so its numbers cannot be read against the '
+                  'default\'s one for one. Compare the shape of its bar, not the '
+                  'digits.</p>'
+                  % (esc(s.NAME), both, lo, hi, dlo, dhi))
+                continue
+            any_higher = any_higher or bool(higher)
+            w('<p><b>%s</b> agrees with the default scale on <b>%d of the %d</b> '
+              'capabilities both scales rate%s.%s</p>'
+              % (esc(s.NAME), agree, both,
+                 ', reads <b>%d higher</b> and <b>%d lower</b>' % (higher, lower)
+                 if (higher or lower) else '',
+                 ' The remaining %d are rated by one scale and not the other.' % (total - both)
+                 if total - both else ''))
+        w('<p>A lens reading <i>higher</i> is the case to watch: it is a capability '
+          'the Bank would be claiming on a coarser rule than the assessment applies. '
+          'That is not an error &mdash; a lens is meant to be more forgiving &mdash; '
+          'but it is not a reason to pick the friendlier number.</p></div>')
+
+    # ---- the rule
+    w('<p style="margin-top:18px"><b>The rule, stated once.</b> The default scale is '
+      'the assessment. The others are lenses, useful for reporting into a frame a room '
+      'already holds. Where a lens and the default scale disagree, <b>the default '
+      'scale is the finding</b> &mdash; a lens is never the reason to claim a '
+      'capability the Bank has not established.</p>')
+    w('<p class="vd">Every scale is one file in <code>scales/</code>. Adding one adds '
+      'a view automatically and changes no fact. The full rules, level definitions and '
+      'provenance of each are in <code>scales/README.md</code>.</p>')
+    w('</section>')
+    return "\n".join(o)
+
+
+STYLE = """<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AI Capability &mdash; Management Report</title>
 <style>
@@ -236,6 +786,7 @@ padding-top:12px;margin-top:18px}
 h2{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
 margin:0 0 6px;font-weight:700}
 h3{font-size:23px;margin:0 0 16px;letter-spacing:-.02em;font-weight:700;max-width:42ch}
+h3.minor{margin-top:30px;font-size:14px;max-width:none;letter-spacing:.02em}
 section{background:var(--card);border:none;border-top:1px solid var(--rule);
 border-radius:0;padding:40px 0 34px;margin:0}
 section:first-of-type{border-top:2px solid var(--accent)}
@@ -311,9 +862,6 @@ white-space:nowrap;text-transform:uppercase}
 .t-wait{background:transparent;color:var(--muted);box-shadow:inset 0 0 0 1px var(--rule)}
 .vd{font-size:13.5px;color:var(--muted);margin:0 0 10px;max-width:78ch}
 footer{color:var(--muted);font-size:12px;text-align:center;margin-top:34px;line-height:1.7}
-/* chart classes shared with the illustrative views - without these the radar
-   and quadrant render as solid black, because an SVG polygon defaults to a
-   black fill and the text defaults to 16px */
 .ax{font-size:11.5px;fill:var(--muted);font-weight:700;text-anchor:middle}
 .axs{font-size:9.5px;fill:var(--muted)}
 .axl{font-size:11.5px;fill:var(--muted);font-weight:600}
@@ -337,492 +885,4 @@ letter-spacing:.01em}
 box-shadow:inset 0 -1px 0 rgba(227,97,53,.4)}
 @media print{body{background:#fff}section{break-inside:avoid;box-shadow:none}
 .wrap{padding:0}.banner{position:static}}
-</style></head><body>""")
-
-    # ---------------------------------------------------------- header
-    if demo:
-        w('<div class="banner">ILLUSTRATIVE &mdash; the capability map, offerings, '
-          'assets and owners are real. The observations behind every chart are '
-          'SAMPLE values, shown so the finished report can be reviewed before the '
-          'assessment is run. This is not an assessment.</div>')
-    w('<div class="wrap">')
-    tag = ('<br><span style="font-size:20px;font-weight:600;color:var(--warn)">'
-           'Illustrative edition</span>') if demo else ''
-    w('<header><h1>AI Capability &mdash; Management Report%s</h1>'
-      '<div class="sub">Inter-American Development Bank &nbsp;&#183;&nbsp; %s '
-      '&nbsp;&#183;&nbsp; generated from the capability model</div></header>'
-      % (tag, date.today().strftime("%d %B %Y")))
-
-    # ---------------------------------------------------------- 1 coverage
-    w('<section><h2>Section 1</h2><h3>What this report can and cannot say</h3>')
-    w('<p class="lede">Read this before the findings. It states how much of the '
-      'assessment has actually been done, so nothing below is read as more than it is.</p>')
-    w('<div class="kpis">')
-    w('<div class="kpi good"><b>%d</b><span>Platform offerings, evidenced</span></div>' % len(m.offerings))
-    w('<div class="kpi good"><b>%d</b><span>Assets with a location</span></div>' % len(m.assets))
-    w('<div class="kpi mid"><b>%d%%</b><span>Observations recorded</span></div>'
-      % (100 * n_known // n_obs))
-    w('<div class="kpi %s"><b>%d of %d</b><span>Capabilities rated</span></div>'
-      % ("warn" if n_rated == 0 else "mid", n_rated, total))
-    w('</div>')
-    if n_rated == 0:
-        w('<div class="callout warn"><p><b>No capability is rated yet &mdash; and that is a '
-          'factual statement, not a bad result.</b></p><p>A rating requires knowing whether '
-          'something is actually <i>practised</i> on real AI systems. That question has not '
-          'yet been put to the capability owners. What <i>has</i> been established is what '
-          'the institution has <b>built</b>, and that is substantial and evidenced.</p>'
-          '<p>This is the difference between <i>we do not know</i> and <i>we do not have '
-          'it</i>. Most maturity assessments cannot tell those apart and score an '
-          'unexamined capability as if it were absent. This one refuses to.</p></div>')
-    # coverage by domain - counted over the rows a reviewer actually fills in,
-    # which after ADR-0014 is one per L3 criterion for `practised`
-    rows = []
-    for d in m.domains:
-        caps = [c for c in m.capabilities if c['domain'] == d['id']]
-        cnt = collections.Counter()
-        ncrit = 0
-        for c in caps:
-            for t in m.observation_types:
-                if t['id'] in m.criterion_types:
-                    for _x, r_ in m.criteria_obs(c['id'], t['id']):
-                        cnt["unknown" if r_.get('value', 'unknown') == 'unknown'
-                            else "yes"] += 1
-                        ncrit += 1
-                else:
-                    v = m.obs_by_cap.get(c['id'], {}).get(t['id'], {}).get(
-                        'value', 'unknown')
-                    cnt["unknown" if v == "unknown" else "yes"] += 1
-        rows.append(("%s · %s" % (d['id'], _short(d['name'])),
-                     "%d capabilities · %d criteria" % (len(caps), ncrit),
-                     {"yes": cnt["yes"], "unknown": cnt["unknown"]}))
-    w('<h3 style="margin-top:30px;font-size:14px;max-width:none;'
-      'letter-spacing:.02em">How much has been observed, by domain</h3>')
-    w(stacked_bar(rows, keys=["yes", "unknown"]))
-    w('<div class="legend"><span><i style="background:%s"></i>Observed, with evidence</span>'
-      '<span><i style="background:%s"></i>Nobody has looked yet</span></div>'
-      % (C["yes"], C["unknown"]))
-    w('</section>')
-
-    # ---------------------------------------------------------- 2 what exists
-    w('<section><h2>Section 2</h2><h3>What the institution has built</h3>')
-    w('<p>Every row is backed by a named asset with a status and a location. '
-      'This is the part of the picture that is <b>not</b> an opinion.</p>')
-    w(progress_rows([(x['name'],
-                      x['assets_released'], x['assets_total'],
-                      "enables " + ", ".join(x['enables']))
-                     for x in m.offerings]))
-    ready = [x for x in m.offerings if x['assets_released'] == x['assets_total']]
-    w('<p style="margin-top:16px"><b>%d of %d offerings are complete.</b> The others are '
-      'waiting on named documents or modules, listed in section 4.</p>'
-      % (len(ready), len(m.offerings)))
-    # enablement by domain
-    w('<h3 style="margin-top:30px;font-size:14px;max-width:none;'
-      'letter-spacing:.02em">Can a team get the tooling? By domain</h3>')
-    rows = []
-    for d in m.domains:
-        caps = [c for c in m.capabilities if c['domain'] == d['id']]
-        cnt = collections.Counter(m.values(c['id'])['enabled'] for c in caps)
-        rows.append(("%s · %s" % (d['id'], _short(d['name'])),
-                     "", dict(cnt)))
-    w(stacked_bar(rows))
-    w(legend())
-    w('<p style="margin-top:14px"><i>Not applicable</i> is a legitimate answer, not a gap: '
-      'a strategy or workforce capability is not worse for having no platform component. '
-      'The shape to notice is that the platform and engineering domains carry the tooling, '
-      'and the governance domains carry almost none.</p>')
-    w('</section>')
-
-    # ---------------------------------------------------------- 3 finding
-    w('<section><h2>Section 3</h2><h3>The finding</h3>')
-    w('<div class="callout"><p><b>The institution has built its enablers ahead of its '
-      'practice.</b></p></div>')
-    w('<p>The scale used here places <b>performance</b> at Level 1, <b>tooling and '
-      'competent people</b> at Level 2, and <b>an approved standard, applied</b> at '
-      'Level 3. Measured that way, a large part of the Level 2 and Level 3 apparatus '
-      'exists &mdash; platforms, standards, reference architectures, infrastructure '
-      'modules &mdash; while Level 1, whether the work is actually done, has never been '
-      'examined.</p>')
-    w('<p>That is not a criticism of the build. It explains a disagreement that recurs '
-      'here: one person says a capability exists, meaning the platform and the standard '
-      'exist; another says it does not, meaning nothing is running on it. '
-      '<b>Both are right about different things.</b> A model carrying a single number '
-      'cannot show that. This one shows it as four columns.</p>')
-    w('<table><thead><tr><th>What can be evidenced today</th>'
-      '<th>What cannot</th></tr></thead><tbody>')
-    for a, b in [("%d offerings and %d assets, with locations" % (len(m.offerings), len(m.assets)),
-                  "Whether any of it is used in production"),
-                 ("Which capabilities have an approved standard",
-                  "Whether the work is done against it"),
-                 ("Which capabilities have no tooling and no reason recorded",
-                  "Whether the people who need the skills have them")]:
-        w('<tr><td>%s</td><td style="color:var(--muted)">%s</td></tr>' % (esc(a), esc(b)))
-    w('</tbody></table></section>')
-
-    # ---------------------------------------------------------- 3b views
-    w('<section><h2>Section 4</h2><h3>The views</h3>')
-    if demo:
-        w('<p class="lede">The ten views this model produces, every one populated. '
-          'Views marked <span class="tag t-real">READY</span> are drawn from '
-          '<b>recorded facts</b> and look exactly like this today. Views marked '
-          '<span class="tag t-wait">SAMPLE</span> are filled with '
-          '<b>illustrative observations</b>, because the real ones have not been '
-          'collected yet.</p>')
-    else:
-        w('<p class="lede">The ten views this model produces. Those marked '
-          '<span class="tag t-real">READY</span> are drawn from recorded facts and are '
-          'usable today. Those marked <span class="tag t-wait">AWAITING OBSERVATIONS'
-          '</span> are built and will populate as answers arrive &mdash; they are '
-          'shown empty rather than filled with an estimate.</p>')
-
-    def vh(title, tag, desc):
-        w('<div class="viewhdr"><h4>%s</h4><span class="tag %s">%s</span></div>'
-          % (esc(title),
-             "t-real" if tag in ("READY", "REAL DATA") else "t-wait", tag))
-        w('<p class="vd">%s</p>' % desc)
-
-    # 1 observation heat map - REAL and fully populated
-    vh("Observation heat map", "SAMPLE" if demo else "READY",
-       ("Every capability, every observation, on one screen. This is what the "
-        "assessment looks like once the questions have been answered."
-        if demo else
-        "Every capability, every observation. This is the whole assessment on one "
-        "screen: what is known is coloured, what nobody has looked at is pale. "
-        "The pale columns are the work still to do."))
-    w(obs_heatmap(m))
-    w(legend())
-    w('<p style="margin-top:14px;font-size:13.5px;color:var(--muted)">'
-      'The <b>practised</b> cell is a roll-up: it is observed once per L3 criterion '
-      '(%d in total) and derived here, so one weak practice inside a capability shows '
-      'as <i>partial</i> rather than disappearing into an average. The other three are '
-      'observed once per capability.</p>'
-      % sum(len(c['criteria']) for c in m.capabilities))
-
-    # 2 enablement by domain - REAL
-    vh("Tooling by domain", "READY" if not demo else "REAL DATA",
-       "Can a delivery team get what it needs without building it? The platform and "
-       "engineering domains carry the tooling; the governance domains carry almost "
-       "none; People &amp; Skills is correctly not a technical question at all.")
-    rows = []
-    for d in m.domains:
-        caps = [c for c in m.capabilities if c['domain'] == d['id']]
-        rows.append((_dl(d), "", dict(collections.Counter(
-            m.values(c['id'])['enabled'] for c in caps))))
-    w(stacked_bar(rows))
-    w(legend())
-
-    # 3 accountability - REAL
-    vh("Accountability spread", "READY" if not demo else "REAL DATA",
-       "Capabilities per unit, mapped against the institution's own product and "
-       "enabler catalogue. The red bar is the finding.")
-    w(owners_chart(m))
-
-    # 4 control exposure - REAL
-    vh("Control exposure", "READY" if not demo else "REAL DATA",
-       "For each offering, whether a delivery team inherits its controls or rebuilds "
-       "them. Every unanswered row is both a risk and a roadmap item.")
-    w(progress_rows([(x['name'],
-                      sum(1 for y in x['in_the_box'] if y['status']),
-                      len(x['in_the_box']), "")
-                     for x in m.offerings if x['in_the_box']]))
-
-    # 5 roadmap horizons - REAL
-    vh("Roadmap horizons", "READY" if not demo else "REAL DATA",
-       "What moves now, next and later &mdash; assembled from the facts rather than "
-       "from a workshop.")
-    w(waves_chart(m))
-
-    # 6-10 need levels
-    import build_preview as _bp
-    levels = {c['id']: m.rate(scale, c['id'])[0] for c in m.capabilities}
-    targets = _bp.sample_targets(m, levels) if demo else None
-    obsv = {c['id']: m.values(c['id']) for c in m.capabilities}
-
-    def vw(title, desc, chart, missing, who, extra=""):
-        """A view: populated in demo mode, an honest empty state otherwise."""
-        vh(title, "SAMPLE" if demo else "AWAITING OBSERVATIONS", desc)
-        if demo:
-            w(chart())
-            if extra:
-                w(extra)
-        else:
-            w(_empty(missing[0], missing[1], who))
-
-    vw("Capability heat map",
-       "All 52 capabilities by their derived level &mdash; the single picture of "
-       "the estate.",
-       lambda: _bp.v_heatmap(m, obsv, levels)
-               + _bp.legend([0, 1, 2, 3], {0: "0 Incomplete", 1: "1 Performed",
-                                            2: "2 Managed", 3: "3 Established"}, LVL),
-       ("Nothing to colour yet",
-        "A level needs to know whether a capability is practised. That has not been "
-        "asked of anyone yet, so all 52 are unrated and the map would be one flat "
-        "colour."),
-       "Capability owners, one question per L3 criterion")
-
-    vw("Domain scorecard",
-       "Eight domains, current against target &mdash; the radar a steering committee "
-       "reads fastest.",
-       lambda: _bp.v_radar(m, obsv, levels, targets)
-               + '<div class="legend"><span><i style="background:#002869"></i>'
-                 'Current</span><span><i style="background:#E36135"></i>'
-                 'Target, 12 months</span></div>',
-       ("No current position, and no target",
-        "Needs a level per capability, and a target level per domain with a date. "
-        "Neither exists yet."),
-       "Capability owners, then a target-setting decision")
-
-    vw("Built against practised",
-       "The disagreement, plotted: capabilities the platform has enabled that nobody "
-       "is yet doing.",
-       lambda: _bp.v_quadrant(m, obsv, levels),
-       ("Half the axis exists",
-        "Enablement is recorded for all 52 capabilities. Practice is recorded for "
-        "none, so every point would sit on one line."),
-       "Capability owners",
-       '<p style="margin-top:12px;font-size:13px;color:var(--muted)">Each dot is a '
-       'capability. <b>Bottom-right</b> is the pattern this institution expects to '
-       'find: the platform is built, the practice has not caught up.</p>')
-
-    vw("Biggest gaps to target",
-       "The capabilities furthest from where they need to be, with the accountable "
-       "unit beside each.",
-       lambda: _bp.v_gapbars(m, obsv, levels, targets),
-       ("No target state exists",
-        "A gap needs both a current level and a target. Setting targets is a "
-        "decision, not an observation, and it is worth taking after the first real "
-        "ratings rather than before."),
-       "The steering group, once ratings exist")
-
-    vw("Level distribution",
-       "How many capabilities sit at each level. A histogram is harder to argue with "
-       "than an average, and this model never averages.",
-       lambda: _bp.v_levels(m, levels),
-       ("Nothing to distribute",
-        "Reads the derived level. All 52 are currently unrated."),
-       "Capability owners")
-
-    vw("Trajectory",
-       "Where the portfolio sits today against where the targets would put it.",
-       lambda: _bp.v_trajectory(m, levels, targets)
-               + '<div class="legend"><span><i style="background:#002869"></i>'
-                 'Today</span><span><i style="background:#E36135"></i>'
-                 'If targets are met</span></div>',
-       ("Nothing to plot",
-        "Needs both a current distribution and a target distribution."),
-       "Capability owners, then a target-setting decision")
-
-    vw("Assessment profile",
-       "The four observations across all 52 capabilities. Shows which question is the "
-       "constraint &mdash; usually practice, not tooling.",
-       lambda: _bp.v_profile(m, obsv) + legend(),
-       ("Only two of four questions answered",
-        "Enabled and defined are partly recorded; practised and skilled are not "
-        "recorded at all."),
-       "Capability owners and L&D")
-
-    if demo:
-        w('<div class="callout warn"><p><b>Every chart above is illustrative.</b> '
-          'The capability map, the offerings, the assets and the owners are real; '
-          'the observations are not. Answering four questions &mdash; put to the '
-          'capability owners, the platform teams, the standard-setting functions and '
-          'Learning &amp; Development &mdash; is what turns this into an '
-          'assessment.</p></div>')
-    else:
-        w('<div class="callout"><p><b>Five of ten views are usable today.</b> The '
-          'other five are not blocked by tooling or by design &mdash; they are '
-          'blocked by one question that has never been put to the capability owners: '
-          '<i>is this actually done, and where?</i> To see the whole report populated '
-          'with illustrative numbers, open '
-          '<code>management-report-illustrative.html</code>.</p></div>')
-    w('</section>')
-
-    # ---------------------------------------------------------- 5 decisions
-    w('<section><h2>Section 5</h2><h3>What needs a decision</h3>')
-
-    w('<h3 style="font-size:15px;margin-top:8px">4.1 &nbsp;Capabilities nobody owns</h3>')
-    w('<div class="split"><div>%s<div style="text-align:center;font-size:12px;'
-      'color:var(--muted);margin-top:6px">%d of %d unowned</div></div><div>'
-      % (donut({"no": len(noowner), "yes": total - len(noowner)}, keys=["no", "yes"]),
-         len(noowner), total))
-    w('<p>These are claimed by no product or enabler in the institution\'s own catalogue. '
-      'Several are governance capabilities an institution of this kind is normally '
-      'expected to hold.</p>')
-    w('<table><tbody>')
-    for c in sorted(noowner, key=lambda x: m.sort_key(x['id'])):
-        w('<tr><td><code>%s</code></td><td><b>%s</b></td>'
-          '<td style="color:var(--muted)">%s</td></tr>'
-          % (c['id'], esc(c['name']), esc(m.domain_by_id[c['domain']]['name'])))
-    w('</tbody></table></div></div>')
-    w('<p><b>Decision required:</b> assign an owner to each, or record a deliberate '
-      'decision not to hold it.</p>')
-
-    w('<h3 style="font-size:15px;margin-top:28px">4.2 &nbsp;Finished, but not released</h3>')
-    w('<p>%d assets exist and are not yet available to delivery teams. Each is days from '
-      'being usable, and each currently holds a capability below what the underlying work '
-      'would support.</p>' % len(pending))
-    w('<table><thead><tr><th>Asset</th><th>What it is</th><th>Status</th></tr></thead><tbody>')
-    for a in pending:
-        w('<tr><td><code>%s</code></td><td>%s</td>'
-          '<td><span class="pill p-mid">%s</span></td></tr>'
-          % (a['id'], esc(a['name']), esc(a['status'])))
-    w('</tbody></table>')
-    w('<p><b>Decision required:</b> a release date for each, with a named owner.</p>')
-
-    w('<h3 style="font-size:15px;margin-top:28px">4.3 &nbsp;Questions only the platform '
-      'teams can answer</h3>')
-    w('<p><b>%d of %d answered.</b> These decide whether a delivery team inherits its '
-      'controls or rebuilds them. Every unanswered row is an unknown; every <i>no</i> is '
-      'a roadmap item, usually a cheap one, because it means extending a module rather '
-      'than building a platform.</p>' % (box_done, box_total))
-    w(progress_rows([(x['name'],
-                      sum(1 for y in x['in_the_box'] if y['status']),
-                      len(x['in_the_box']), "")
-                     for x in m.offerings if x['in_the_box']]))
-    w('</section>')
-
-    # ---------------------------------------------------------- 5 next
-    w('<section><h2>Section 6</h2><h3>What would make the next report say more</h3>')
-    w('<table><thead><tr><th>Who</th><th>What is asked of them</th>'
-      '<th>What it unlocks</th></tr></thead><tbody>')
-    n_undef = sum(1 for c in m.capabilities if m.values(c['id'])['defined'] == 'unknown')
-    for who, what, why in [
-        ("Capability owners",
-         "For each L3 criterion under a capability they own: is this specific "
-         "practice done on real AI systems, and where?",
-         "Every rating in the model. Nothing can be rated without it"),
-        ("Platform teams", "The %d outstanding in-the-box questions" % (box_total - box_done),
-         "Whether controls are inherited or rebuilt by every team"),
-        ("Cybersecurity · Data Management · Legal · HR",
-         "Does an approved standard exist in your domain?",
-         "%d capabilities show <i>not observed</i> only because the asset register "
-         "covers platform assets" % n_undef),
-        ("Learning &amp; Development", "Who is trained, and in what?",
-         "Level 2 for every capability where practice exists")]:
-        w('<tr><td><b>%s</b></td><td>%s</td><td style="color:var(--muted)">%s</td></tr>'
-          % (who, what, why))
-    w('</tbody></table>')
-    w('<div class="callout"><p>None of this requires new tooling or new investment. '
-      'It requires four questions put to people who already know the answers.</p></div>')
-    w('</section>')
-
-    w('<footer>Generated from the capability model &mdash; %d domains, %d capabilities, '
-      '%d criteria.<br>Scale: %s. %s<br>Every figure traces to a recorded fact with '
-      'evidence and a date; nothing here is estimated.</footer>'
-      % (len(m.domains), total, sum(len(c['criteria']) for c in m.capabilities),
-         esc(scale.NAME), esc(scale.BASIS)))
-    w('</div></body></html>')
-    return "\n".join(o)
-
-
-# ================================================================= full views
-# The same ten views the preview shows, rendered from REAL data only.
-# Where a view needs something nobody has observed yet, it renders its own
-# empty state saying what is missing and who would supply it - never a zero,
-# never an invented number.
-
-LVL = {0: "#E36135", 1: "#9BB8DC", 2: "#4C8CD2", 3: "#0057AF",
-       4: "#002869", 5: "#001B45", None: "#EDF1F4"}
-
-
-def _empty(title, missing, who, h=150):
-    """Honest empty state for a view that has nothing to draw yet."""
-    return ('<div class="empty"><div class="ei">&#9633;</div>'
-            '<div><b>%s</b><p>%s</p><p class="who">Supplied by: %s</p></div></div>'
-            % (esc(title), esc(missing), esc(who)))
-
-
-def obs_heatmap(m):
-    """Every capability by name, with its four observations.
-
-    Rows are capabilities, not a grid of ids. A 9-wide grid cannot show a name
-    that averages 33 characters, and `2.3` tells a reader nothing - the point of
-    a heat map is that you can see what is weak without a lookup table.
-    """
-    rowh, gap, pad, colw, top = 19, 3, 388, 66, 44
-    W = pad + colw * 4 + 30
-    rows = []
-    for d in m.domains:
-        caps = sorted([c for c in m.capabilities if c['domain'] == d['id']],
-                      key=lambda x: m.sort_key(x['id']))
-        rows.append((d, caps))
-    H = top + sum(len(c) * (rowh + gap) + 26 for _, c in rows)
-    o = ['<svg viewBox="0 0 %d %d" class="chart">' % (W, H)]
-    for k, lab in enumerate(("Practised", "Enabled", "Skilled", "Defined")):
-        o.append('<text x="%.1f" y="30" class="ch">%s</text>'
-                 % (pad + k * colw + (colw - 4) / 2, lab))
-    y = top
-    for d, caps in rows:
-        o.append('<text x="0" y="%d" class="dh">%s &#183; %s</text>'
-                 % (y + 12, d['id'], esc(_short(d['name']))))
-        y += 22
-        for c in caps:
-            v = m.values(c['id'])
-            nm = c['name']
-            if len(nm) > 44:
-                nm = nm[:43].rstrip(" ,&") + "\u2026"
-            o.append('<text x="14" y="%d" class="cn">%s<title>%s</title></text>'
-                     % (y + 13, esc(nm), esc(c['name'])))
-            o.append('<text x="%d" y="%d" class="ci" text-anchor="end">%s</text>'
-                     % (pad - 14, y + 13, c['id']))
-            for k, t in enumerate(("practised", "enabled", "skilled", "defined")):
-                x = pad + k * colw
-                o.append('<rect x="%.1f" y="%d" width="%d" height="%d" fill="%s">'
-                         '<title>%s %s &#8212; %s: %s</title></rect>'
-                         % (x, y, colw - 4, rowh, C[v[t]],
-                            c['id'], esc(c['name']), t, LABEL[v[t]]))
-            y += rowh + gap
-        y += 4
-    o.append("</svg>")
-    return "".join(o)
-
-
-def owners_chart(m):
-    """Accountability spread. REAL."""
-    cnt = collections.Counter(m.owner(c['id'])[0] or "NO OWNER"
-                              for c in m.capabilities)
-    rows = cnt.most_common()
-    W, rowh, gap, left, right = 880, 22, 8, 268, 58
-    bw = W - left - right
-    mx = max(cnt.values())
-    h = len(rows) * (rowh + gap)
-    o = ['<svg viewBox="0 0 %d %d" class="chart">' % (W, h)]
-    for i, (unit, n) in enumerate(rows):
-        y = i * (rowh + gap)
-        col = "#a33a2c" if unit == "NO OWNER" else "#12455c"
-        o.append('<text x="0" y="%d" class="bl" fill="%s">%s</text>'
-                 % (y + 14, col, esc(unit)))
-        o.append('<rect x="%d" y="%d" width="%.1f" height="%d" rx="3" fill="%s" '
-                 'fill-opacity="%s"/>'
-                 % (left, y, bw * n / mx, rowh - 6, col,
-                    "1" if unit == "NO OWNER" else ".8"))
-        o.append('<text x="%.1f" y="%d" class="bt">%d</text>'
-                 % (left + bw * n / mx + 8, y + rowh / 2 + 2, n))
-    o.append("</svg>")
-    return "".join(o)
-
-
-def waves_chart(m):
-    """Roadmap horizons, assembled from facts. REAL."""
-    RELEASED_ = {"Published", "Published (JFrog)", "In use"}
-    waves = [
-        ("Now &mdash; this quarter", "Release what is already built",
-         ["%s %s" % (a['id'], a['name']) for a in m.assets
-          if a['status'] not in RELEASED_]),
-        ("Next &mdash; 6 months", "Answer what comes in the box, then close the gaps",
-         ["%s &mdash; %d questions" % (o_['name'], len(o_['in_the_box']))
-          for o_ in m.offerings if o_['in_the_box']]),
-        ("Later &mdash; 12 months+", "Capabilities nobody owns today",
-         ["%s %s" % (c['id'], c['name']) for c in m.capabilities
-          if m.owner(c['id'])[1] == "NO MATCH"]),
-    ]
-    o = ['<div class="waves">']
-    for title, sub, items in waves:
-        o.append('<div class="wave"><div class="wh">%s</div><div class="ws">%s</div><ul>'
-                 % (title, esc(sub)))
-        for it in items[:8]:
-            o.append("<li>%s</li>" % it)
-        if len(items) > 8:
-            o.append('<li class="more">+ %d more</li>' % (len(items) - 8))
-        o.append("</ul></div>")
-    o.append("</div>")
-    return "".join(o)
+</style></head><body>"""

@@ -11,7 +11,8 @@ than argued about.
 | **The report** | [`out/management-report.html`](out/management-report.html) — open in a browser |
 | **What it will look like** | [`out/management-report-illustrative.html`](out/management-report-illustrative.html) — the same report, every chart populated with **sample observations** |
 | **The worked example** | [`out/agent-readiness.md`](out/agent-readiness.md) — *"can we run AI agents?"* |
-| **The detail** | [`out/capability-assessment-level.md`](out/capability-assessment-level.md) — all 52 capabilities |
+| **The detail** | [`out/capability-assessment-level.md`](out/capability-assessment-level.md) — all 52 capabilities, 258 criteria |
+| **Where the map comes from** | [`out/provenance.md`](out/provenance.md) — sources by grade, and what cannot leave the Bank |
 | **How to work with it** | [`docs/using-the-model.md`](docs/using-the-model.md) |
 | **How it works inside** | [`docs/how-it-works.md`](docs/how-it-works.md) |
 
@@ -63,7 +64,10 @@ those answers rather than typed:
 | **Defined** | Is there an approved institutional standard, policy or method? | Whoever owns the subject |
 
 **Nobody types a level.** A level is derived from the four observations by a rule that is
-written down and can be argued with separately from the facts it reads.
+written down and can be argued with separately from the facts it reads. Three such rules
+ship: the default scale, adapted from ISO/IEC 33020, and two lenses for rooms that already
+hold an executive or a maturity frame. Where a lens and the default disagree, the default
+is the finding.
 
 ### Who this is a model of
 
@@ -87,6 +91,7 @@ Learning & Development. Architecture sets some and not most.
 | Who owns this? | The owner mapping, against the institution's own catalogue |
 | What do we tell an auditor? | Every observation carries evidence, a source and a date |
 | Are we behind? | Only where an observation says so. Elsewhere the model says *unknown* rather than guessing |
+| Can we say this outside the Bank? | The provenance view: which capabilities rest on a source a reviewer cannot open |
 
 ## 4 · How it relates to what exists in the market
 
@@ -127,7 +132,8 @@ one would undo the point.
 knowing whether something is *practised*, and that question has not yet been put to the
 capability owners.
 
-What is established is substantial and evidenced:
+What is established is substantial and evidenced (figures as of 4 September 2026; the
+report carries the live ones):
 
 | | |
 |---|---|
@@ -136,6 +142,7 @@ What is established is substantial and evidenced:
 | Assets finished but not yet released to teams | 5 |
 | Capabilities nobody in the institution's catalogue claims | 8 |
 | Questions outstanding for the platform teams | 27 |
+| Capabilities where nobody has yet asked whether tooling exists | 24 |
 
 The finding those support: **the institution has built its enablers ahead of its
 practice.** That is the explanation for the disagreement in section 1, and it names its
@@ -143,7 +150,8 @@ own fix.
 
 The distinction the model refuses to blur is between *we do not know* and *we do not have
 it*. Most assessments cannot tell those apart and score an unexamined capability as if it
-were absent.
+were absent. This model records `no` only as an evidenced negative; a register that was
+searched and had nothing stays `unknown` until the owner is asked.
 
 ## 6 · How a report is produced
 
@@ -158,7 +166,8 @@ what is true       how we judge       what we tell people
 
 1. Someone answers a question — a capability owner, a platform team, Cybersecurity.
 2. The answer is recorded as an observation, with evidence, a name and a date.
-3. `python3 build/build.py all` regenerates the workbook and every view.
+3. `python3 build/build.py all` validates the facts, then regenerates the workbook and
+   every view. Nothing is built from facts that fail validation.
 
 Recording happens in a workbook: send it, the reviewer fills in the yellow cells, it comes
 back, and one command reads it in. Full instructions in
@@ -178,15 +187,18 @@ tooling or new investment:
 
 | Directory | What it is |
 |---|---|
-| [`facts/`](facts/) | The model. What is true, with evidence and dates |
-| [`scales/`](scales/README.md) | Rules that turn observations into a level |
-| [`out/`](out/) | Generated reports and the workbook. Never edited |
-| [`docs/`](docs/) | Explanations, decisions, analysis |
-| [`build/`](build/) | Four files. One command |
+| [`facts/`](facts/README.md) | The model. What is true, with evidence and dates. Schemas in its README |
+| [`scales/`](scales/README.md) | Rules that turn observations into a level. The contract a scale must keep |
+| [`out/`](out/README.md) | Generated reports, views and the workbook. Never edited |
+| [`build/`](build/README.md) | Seven modules. One command |
+| [`tests/`](tests/) | The rules the documentation promises, as tests |
+| [`docs/`](docs/) | Explanations, decisions, provenance, analysis |
+| [`review/`](review/README.md) | Returned workbooks, dated, never edited |
 | [`archive/`](archive/README.md) | Superseded work, kept and explained |
 
 **The one rule:** `facts/` is edited, `out/` is generated. A finding is never fixed by
-editing a report.
+editing a report. Derived values — release counts, the capability's *practised*, every
+level — are computed, never stored.
 
 ## 8 · Handling
 

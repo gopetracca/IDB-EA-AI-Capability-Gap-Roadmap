@@ -17,6 +17,7 @@ carried into this repository (CLAUDE.md handling rules).
 
 NAME = "Executive readiness"
 SHORT = "exec"
+QUESTION = "How much of what we said we would do actually exists?"
 BASIS = ("Our own coarse roll-up for executive reporting. Reads the same "
          "observations as the default scale. Not adopted from any published model.")
 
@@ -30,6 +31,15 @@ LEVELS = [
 
 WEIGHT = {"yes": 1.0, "partial": 0.5, "no": 0.0}
 
+# An average over one observation is not an average, it is that one value
+# wearing an average's clothes.  One 'yes' out of four dimensions produced a
+# reported Level 5 "Leading" before this floor existed - the least-gated
+# scale in the repository placing the most confident claim on the thinnest
+# evidence, which is exactly the over-claiming this whole model exists to
+# prevent.  Below this many SCORED dimensions (n/a and unknown do not count
+# toward it - see level()), the lens declines to average at all.
+MIN_SCORED = 2
+
 
 def level(obs):
     """Fraction of the applicable observations that are achieved, banded.
@@ -38,13 +48,22 @@ def level(obs):
     failures - a governance capability with no platform component is not worse
     for having none.  'unknown' also drops out, but is reported, because an
     average over two known cells is not the same claim as one over four.
+
+    Fewer than MIN_SCORED observed dimensions is not rated, however strong the
+    one or two that exist look: a fraction computed from one cell is not an
+    average, and reporting it as one would let a single 'yes' read as
+    institution-wide reliance.
     """
     scored = {k: v for k, v in obs.items() if v in WEIGHT}
     na = [k for k, v in obs.items() if v == "n/a"]
     unknown = [k for k, v in obs.items() if v in ("unknown", "")]
 
-    if not scored:
-        return None, "Not rated: nothing has been observed"
+    if len(scored) < MIN_SCORED:
+        if not scored:
+            return None, "Not rated: nothing has been observed"
+        return None, ("Not rated: only %d of 4 dimensions observed (%s) - too "
+                      "few to average without one cell carrying the whole claim"
+                      % (len(scored), ", ".join(sorted(scored))))
 
     frac = sum(WEIGHT[v] for v in scored.values()) / len(scored)
     lvl = (1 if frac == 0 else 2 if frac < 0.5 else

@@ -33,7 +33,7 @@ This model splits them.
 | **Scale** | A rule that reads facts and produces a level | *No practice, no level* |
 | **View** | A rendering of one scale over the map | The assessment page, the agent one-pager |
 
-A fact is true whichever framework reads it. So you can run two scales over the same
+A fact is true whichever framework reads it. So you can run several scales over the same
 evidence, and they cannot disagree about what is true — only about what to make of it.
 
 ## 3. The four observations
@@ -71,8 +71,11 @@ the rest has never been looked at.
 The gain is that a gap gets a name. *"4.4 is partial"* becomes *"termination and loop
 control has never been done"*, which is a piece of work someone can be given.
 
-Two values carry weight people usually miss:
+Three values carry weight people usually miss:
 
+- **`no` is an evidenced negative.** Someone looked and it is not there, and the record
+  says what they looked at. A register that was searched and had nothing is **not** a
+  `no` until the owner has been asked whether something outside the register provides it.
 - **`n/a` needs a reason.** *"No platform component exists for AI strategy"* is a
   legitimate n/a. It drops out of the calculation rather than counting as a failure —
   a governance capability is not worse for having no tooling.
@@ -124,14 +127,14 @@ Practised, judged criterion by criterion:
 | 4.4.2 Task Decomposition & Planning Design | partial | Only the retrieval agent has a designed plan |
 | 4.4.3 Multi-Agent Coordination Design | no | No multi-agent work attempted |
 | 4.4.4 Agent Memory & State Design | unknown | Nobody has looked |
-| 4.4.5 Guardrail & Constraint Design | yes | Guardrails on 1 of 4 agents |
+| 4.4.5 Guardrail & Constraint Design | partial | Guardrails on 1 of 4 agents |
 | 4.4.6 Termination & Loop Control Design | no | No budget or loop control anywhere |
 
 Which derives the capability's four values:
 
 | Observation | Value | Evidence |
 |---|---|---|
-| Practised | **partial** (derived) | 2 of 6 criteria done, 2 not done, 1 partial, 1 unexamined |
+| Practised | **partial** (derived) | 1 of 6 criteria done, 2 partial, 2 not done, 1 unexamined |
 | Enabled | partial | Foundry agents offering, 6 of 8 assets released |
 | Skilled | unknown | Nobody has looked |
 | Defined | partial | Foundry Agents Standard is **pre-release** |
@@ -144,7 +147,8 @@ documents and build the next agent against them.*
 
 Note what the criterion rows add: the roadmap item is no longer *"improve agent
 orchestration"*. It is **multi-agent coordination and termination control** — two named
-practices nobody has done — and **agent memory design**, which nobody has yet looked at.
+practices nobody has done — **guardrails on the other three agents**, and **agent memory
+design**, which nobody has yet looked at.
 
 ### Standards are not one function's job
 
@@ -159,22 +163,13 @@ Where `defined` currently reads `unknown` — 39 of 52 — it means the asset re
 AI platform assets only, so a standard owned by another function may well exist and simply
 not be recorded here. Those are questions to ask, not gaps to assume.
 
-### Practised is asked at L3, and derived at L2
+### Why the roll-up is asymmetric
 
-The other three observations are properties of tooling, people and standards, and are
-answered once per capability. `practised` is different: *"is 4.4 Agent & Workflow
-Orchestration Design practised?"* covers six distinct practices, and the Bank plausibly
-does some and not others. So it is asked once per **criterion** — a named practice with
-a definition, answerable by looking — and the capability value is rolled up from those
-answers.
-
-The rule is strict: every applicable criterion `yes` gives `yes`; any weak link gives
-`partial`; `unknown` criteria drop out rather than un-rating the whole capability. One
-weak link stops the claim, which is the same asymmetry the level ladder enforces.
-
-That turns *"4.4 is partial"* into *"4.4.1 and 4.4.6 yes, 4.4.5 no, three unexamined"* —
-and the roadmap item becomes a named practice rather than a vague improvement.
-See [ADR-0014](decisions/adr/0014-practised-is-observed-at-l3.md).
+`yes` needs a complete look: every criterion examined and every one passed. `no` does
+not: one examined `no` with the rest unexamined still reads `no`. That is deliberate.
+Under-claiming costs a follow-up question; over-claiming is the failure this model exists
+to prevent, so the rule leans one way. The record is
+[ADR-0014](decisions/adr/0014-practised-is-observed-at-l3.md).
 
 ## 5. What a capability is, and what it is not
 
@@ -191,15 +186,32 @@ number — and why [`../out/agent-readiness.md`](../out/agent-readiness.md) exis
 
 ### Not every capability has an offering, and that is correct
 
-Of 52 capabilities: about a dozen are realised by enterprise services the Bank already
-runs, four are purely organisational, and the rest are governance and practice
-capabilities where tooling is at most a form in a GRC system. For all of these, `enabled`
-is `n/a` with a reason, and the level rests on the other three observations.
+Of 52 capabilities, 12 are realised by enterprise services the Bank already runs and 3 are
+purely organisational; for those, `enabled` is `n/a` with the reason recorded in
+`facts/enablement-context.json`, and the level rests on the other three observations. A
+further 24 have no platform offering and have not yet been examined by their owner: they
+read `unknown`, not `no`, until someone says whether an enterprise service or a GRC
+platform provides the tooling, or whether none is needed.
 
 Forcing a supply number onto a strategy capability is how a model starts producing
-nonsense that nobody trusts.
+nonsense that nobody trusts. Recording an unexamined absence as a zero is the other way.
 
-## 6. What replaced what
+## 6. Several scales, one set of facts
+
+Because an observation is a fact and a level is a rule over facts, more than one rule can
+read the same evidence. Three ship, each one file in `scales/`:
+
+| Scale | Asks | Standing |
+|---|---|---|
+| Capability level | Has the institution established this practice? | **The default.** The assessment |
+| Executive readiness | How much of what we said we would do exists? | A lens. Averages, deliberately, and says so |
+| Institutional maturity | How far has the practice spread beyond the people doing it? | A lens. Same performance gate as the default |
+
+The report shows all three over the same 52 capabilities. **Where a lens and the default
+disagree, the default is the finding.** A lens exists so a room that already holds a frame
+can be answered in it, not so the friendlier number can be chosen.
+
+## 7. What replaced what
 
 Earlier versions carried **two scales** — maturity on a capability, readiness on a
 realization — that were never to be merged. The distinction was real, but it could not
@@ -213,12 +225,14 @@ visible columns, and the columns are where the argument belongs.
 
 See [ADR-0013](decisions/adr/0013-facts-and-scales.md).
 
-## 7. Doing something with it
+## 8. Doing something with it
 
 | To… | Do |
 |---|---|
 | Read the map | `out/capability-assessment-level.md`, or sheet 1 of the workbook |
 | Record what you learned | Sheet 2 of the workbook, then `build.py ingest` |
 | Ask the platform team something | Sheet 4, *In the box* — 27 questions, each a roadmap item |
-| Brief a committee | `out/capability-assessment-exec.md` — the coarser lens |
-| Answer the agent claim | `out/agent-readiness.md` |
+| Brief a committee | `out/management-report.html`; `out/capability-assessment-exec.md` for the coarser lens |
+| Answer the agent claim | `out/agent-readiness.md` — generated from `facts/questions.json` |
+| Answer a new *"can we do X?"* | Add an entry to `facts/questions.json`; a page appears on the next build |
+| Check what may leave the Bank | `out/provenance.md` |

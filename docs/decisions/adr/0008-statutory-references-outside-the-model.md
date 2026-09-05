@@ -30,3 +30,9 @@ the institution would be a **deployer**.
 ## Where it lives
 
 `model/obligations.json` — 18 statutory references, all candidate.
+
+> *Location note, 4 September 2026:* now `facts/obligations.json`, read by the build and
+> shown on sheet 9 of the workbook and in `out/provenance.md`. Six of the 18 had pointed at
+> service ids in the frozen reference catalog rather than at capabilities; they were re-homed
+> to the parent capability of the criteria the catalog linked them to (the `subject` names
+> the former service id). The re-homing is mechanical; applicability remains for Legal.

@@ -4,7 +4,7 @@ Architecture Decision Records for the AI capability model. **One decision per fi
 `ADR-NNNN`, never renumbered once issued.
 
 These records govern *how the model is structured*. They are not the content of the model itself —
-that lives in `model/`.
+that lives in `facts/` (schemas in [`../../facts/README.md`](../../facts/README.md)).
 
 ## Why these exist
 
@@ -29,8 +29,8 @@ reading resolves it. It is settled by decision and recorded here.
 | [ADR-0001](adr/0001-two-scales-never-merged.md) | Two scales, never merged | ~~Superseded~~ by ADR-0013 | 2026-09-02 |
 | [ADR-0002](adr/0002-readiness-levels.md) | Readiness levels | ~~Superseded~~ by ADR-0013 | 2026-09-02 |
 | [ADR-0003](adr/0003-consumption-model-is-recorded.md) | Consumption model is a recorded fact | ~~Superseded~~ by ADR-0013 | 2026-09-02 |
-| [ADR-0004](adr/0004-objects.md) | Objects — capability, pattern, ABB, SBB, service | Accepted | 2026-09-02 |
-| [ADR-0005](adr/0005-two-registers-kept-apart.md) | Two registers, kept apart | Accepted | 2026-09-02 |
+| [ADR-0004](adr/0004-objects.md) | Objects — capability, pattern, ABB, SBB, service | Accepted, amended by ADR-0013 | 2026-09-02 |
+| [ADR-0005](adr/0005-two-registers-kept-apart.md) | Two registers, kept apart | Accepted, amended by ADR-0013 | 2026-09-02 |
 | [ADR-0006](adr/0006-single-primary-home.md) | Single primary home, not mutual exclusivity | Accepted | 2026-09-02 |
 | [ADR-0007](adr/0007-anchoring-is-provisional.md) | Repository anchoring is provisional | Accepted ⚠ | 2026-09-02 |
 | [ADR-0008](adr/0008-statutory-references-outside-the-model.md) | Statutory references live outside the model | Accepted | 2026-09-02 |
@@ -38,7 +38,7 @@ reading resolves it. It is settled by decision and recorded here.
 | [ADR-0010](adr/0010-provenance-grading.md) | Provenance graded by whether a reviewer can open it | Accepted | 2026-09-02 |
 | [ADR-0011](adr/0011-scale-provenance.md) | Provenance of the two scales | Accepted | 2026-09-04 |
 | [ADR-0012](adr/0012-capability-ownership-model.md) | How to record who owns a capability | **Proposed** | 2026-09-04 |
-| [ADR-0013](adr/0013-facts-and-scales.md) | **Facts and scales are separated** | **Accepted** | 2026-09-04 |
+| [ADR-0013](adr/0013-facts-and-scales.md) | **Facts and scales are separated** | **Accepted**, amended twice | 2026-09-04 |
 | [ADR-0014](adr/0014-practised-is-observed-at-l3.md) | **Practised is observed at L3 and derived at L2** | **Accepted** | 2026-09-04 |
 
 ⚠ **ADR-0007 must be carved out of any approval request** until ISO/IEC 42001 Annex A and NIST AI
@@ -78,7 +78,9 @@ to reviewers. **Both identifiers name the same record.**
 
 An ADR is **never edited to reverse itself**. A reversal is a new ADR that supersedes it. Dated
 amendments that refine a decision without reversing it are added as `## Amendment N` sections
-(see ADR-0009).
+(see ADR-0009, ADR-0013). When a file an ADR points at moves, the record gets a dated
+*location note* under the pointer rather than a silent rewrite — the pointer is a fact about
+the repository, not part of the decision.
 
 ## Adding one
 

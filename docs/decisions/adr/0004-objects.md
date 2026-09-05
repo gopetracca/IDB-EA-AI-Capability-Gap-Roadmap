@@ -7,6 +7,11 @@ date: 2026-09-02
 depends_on: []
 ---
 
+> **Amended by [ADR-0013](0013-facts-and-scales.md) — 4 September 2026.** The realization
+> triple (capability × pattern × technology) is replaced by the **offering** as the object a
+> team consumes; technology offering and deployed instance become fields on the offering
+> record in `facts/offerings.json`. The ordering capability → pattern → ABB → SBB stands.
+
 # ADR-0004 · Objects
 
 > **Alias `D4`.**

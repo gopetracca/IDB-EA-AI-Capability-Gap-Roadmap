@@ -7,7 +7,7 @@ grade: D — screenshots of licensed and non-public material
 >
 > Screenshots of licensed analyst material and shared slides. Under
 > [ADR-0010](../decisions/adr/0010-provenance-grading.md) these **cannot support a claim in
-> anything that leaves the Bank**, are not listed in `model/sources.json`, and must not be
+> anything that leaves the Bank**, are not listed in `facts/sources.json`, and must not be
 > reproduced or paraphrased externally.
 >
 > The defensible version of the crosswalk below is

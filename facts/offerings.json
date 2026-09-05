@@ -1,4 +1,5 @@
 {
+ "_comment": "What a delivery team can actually get today: a bundle of standard, reference architecture, modules and templates, with someone operating it. `enables` names the capabilities it gives tooling for; `assets` are ids in facts/assets.json; `in_the_box` is the control checklist the platform team answers. Released counts are derived from asset statuses by build/facts.py, not stored here. `was` records the realization ids this offering was migrated from on 4 September 2026; `note` is the migration note and may still use the superseded readiness vocabulary.",
  "generic_assets": [
   {
    "name": "Published standard",
@@ -72,8 +73,6 @@
     "IAC-04",
     "IAC-05"
    ],
-   "assets_released": 4,
-   "assets_total": 4,
    "enables": [
     "5.1",
     "5.3",
@@ -102,8 +101,6 @@
     "IAC-02",
     "STD-06"
    ],
-   "assets_released": 6,
-   "assets_total": 8,
    "enables": [
     "4.4",
     "5.1",
@@ -216,8 +213,6 @@
     "IAC-01",
     "IAC-03"
    ],
-   "assets_released": 4,
-   "assets_total": 7,
    "enables": [
     "4.5",
     "5.5"
@@ -284,8 +279,6 @@
     "RA-03",
     "IAC-06"
    ],
-   "assets_released": 3,
-   "assets_total": 3,
    "enables": [
     "3.6"
    ],
@@ -342,8 +335,6 @@
     "STD-05",
     "RA-04"
    ],
-   "assets_released": 2,
-   "assets_total": 2,
    "enables": [
     "3.5"
    ],
@@ -392,8 +383,6 @@
    "assets": [
     "STD-01"
    ],
-   "assets_released": 1,
-   "assets_total": 1,
    "enables": [
     "4.1",
     "5.2"
@@ -414,8 +403,6 @@
    "assets": [
     "STD-06"
    ],
-   "assets_released": 1,
-   "assets_total": 1,
    "enables": [
     "2.2",
     "2.5"

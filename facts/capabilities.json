@@ -1822,7 +1822,7 @@
    "name": "Responsible & Trustworthy AI Practice",
    "definition": "Able to make the institution's stated AI principles operative in delivered systems.",
    "sources": [
-    "NIST AI RMF - Govern",
+    "NIST AI RMF - Govern 1.2",
     "OECD AI Principles",
     "ISO/IEC 42001"
    ],
@@ -1870,7 +1870,7 @@
    "definition": "Able to identify, treat and monitor AI risk within a stated appetite.",
    "sources": [
     "NIST AI RMF",
-    "ISO/IEC 23894",
+    "ISO/IEC 23894 - risk identification",
     "ISO/IEC 42005"
    ],
    "criteria": [

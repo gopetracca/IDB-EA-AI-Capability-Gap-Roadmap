@@ -4,6 +4,7 @@ title: Facts and scales are separated; one derived level replaces the two scales
 status: Accepted
 date: 2026-09-04
 amended: 2026-09-04
+amendments: 2
 supersedes: [ADR-0001, ADR-0002, ADR-0003]
 amends: [ADR-0004, ADR-0005]
 amended_by: [ADR-0014]
@@ -165,3 +166,25 @@ Two consequences worth recording:
   authority, including for the parts that are sound. This is the same failure mode
   ADR-0012 warns about for the ownership columns: *if it only ever says EA, it is a
   credit column, not a model.*
+
+---
+
+## Amendment 2 — 4 September 2026
+
+**Wording and its enforcement; no decision reversed.** §1 says `unknown` *"means nobody has
+looked and is never treated as zero"*. It did not say what `no` means, and the 4 September
+seed of `facts/observations.json` wrote `enabled: no` for 24 capabilities whose only
+evidence was that the platform register had no offering for them — with the basis *"no
+reason recorded"*. The executive lens, which does not gate on performance, then placed all
+24 at its lowest level on the strength of that placeholder.
+
+`no` is an **evidenced negative**: someone looked, it is not there, and the record says
+what was looked at. An absence in a register that covers only platform assets is not that
+— an enterprise service or a GRC platform may provide the tooling, and nobody has asked. The
+24 rows were corrected to `unknown` with a basis that says exactly this, and the seeding
+rule is now recorded on the `enabled` observation type in `facts/observations.json`.
+
+`check` enforces the distinction: a `no` with neither evidence nor basis fails, as an
+unevidenced `yes` always did. The same asymmetry the roll-up keeps (ADR-0014) applies
+here: an unexamined absence must not become a zero, because a zero is a claim.
+

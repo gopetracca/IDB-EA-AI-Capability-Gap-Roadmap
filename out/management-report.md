@@ -1,6 +1,6 @@
 # AI capability — management report
 
-**Inter-American Development Bank** · 2026-09-04
+**Inter-American Development Bank** · 2026-09-05
 
 ---
 
@@ -44,15 +44,16 @@ Every row below is backed by a named asset with a location and a status. This is
 
 > **The institution has built its enablers ahead of its practice.**
 
-The scale used here places *performance* at Level 1, *tooling and competent people* at Level 2, and *an approved standard, applied* at Level 3. Measured that way, the institution has assembled a large part of its Level 2 and Level 3 apparatus — platforms, standards, reference architectures, infrastructure modules — while Level 1, whether the work is actually done, has never been examined.
+The scale used here — *Capability level* — places *performance* at Level 1, *tooling and competent people* at Level 2, and *an approved standard, applied* at Level 3. Measured that way, the institution has assembled a large part of its Level 2 and Level 3 apparatus — platforms, standards, reference architectures, infrastructure modules — while Level 1, whether the work is actually done, has never been examined.
 
 That is not a criticism of the build. It is the explanation for a disagreement that recurs in this institution: one person says the capability exists, meaning the platform and the standard exist, and another says it does not, meaning nothing is running on it. **Both are right about different things**, and a model carrying a single number cannot show that. This one shows it as four columns.
 
 | What we can evidence today | What we cannot |
 |---|---|
 | 7 offerings, 20 assets, with locations | Whether any of it is used in production |
-| Which capabilities have approved standards | Whether work is done against them |
-| Which capabilities have no tooling and no reason recorded | Whether the people who need the skills have them |
+| Which capabilities have platform tooling (8), partial tooling (5), or none needed (15) | Whether tooling exists for the 24 nobody has yet examined |
+| Which capabilities have an approved standard (10) or one in pre-release (3) | Whether work is done against them |
+| Where a standard exists in the platform register | Whether the people who need the skills have them: 52 of 52 unobserved |
 
 ---
 
@@ -106,7 +107,7 @@ That is not a criticism of the build. It is the explanation for a disagreement t
 
 | Who | What is being asked of them | What it unlocks |
 |---|---|---|
-| Capability owners | For each capability they own: is this done on real AI systems, and where? | Every rating in the model. Nothing can be rated without it |
+| Capability owners | For each L3 criterion under a capability they own: is this done on real AI systems, and where? | Every rating in the model. Nothing can be rated without it |
 | Platform teams | The 27 in-the-box questions | Whether controls are inherited or rebuilt per team |
 | Cybersecurity · Data Management · Legal · HR | Does an approved standard exist in your domain? | 39 capabilities currently show *unknown* because the asset register covers platform assets only |
 | Learning & Development | Who is trained, and in what? | Level 2 for every capability where practice exists |

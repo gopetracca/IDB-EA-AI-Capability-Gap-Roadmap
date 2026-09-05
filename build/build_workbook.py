@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
-"""The working workbook: read it, fill it in, send it, get it back.
+"""The review workbook: read it, fill in sheet 2, send it, get it back.
 
-Seven sheets. No formulas anywhere - every derived number is computed in Python
+Ten sheets. No formulas anywhere - every derived number is computed in Python
 and written as a value, so the workbook needs no recalculation and opens the
 same way in Excel, LibreOffice and the browser.
 
-Yellow cells are the only ones to edit. `python3 build/build.py ingest` reads
-them back into facts/observations.json.
+The workbook is GENERATED from facts/ and is not where the facts live. Sheet 2
+is the one instrument that flows back: its yellow cells are the only ones to
+edit, and `python3 build/build.py ingest` reads them into
+facts/observations.json. Every other sheet is reference and is overwritten on
+the next build.
 """
 import os
 from openpyxl import Workbook
@@ -69,8 +72,8 @@ def build(m, scale, path):
         ("S", "A capability model for AI  ·  Inter-American Development Bank", ""),
         ("", "", ""),
         ("H", "What this workbook is", ""),
-        ("P", "It is the model", "Not a report generated from somewhere else. This file is where the facts live. Edit the yellow cells, save, and the views are rebuilt from it."),
-        ("P", "Facts, not scores", "You never type a level. You record four observations per capability, each with evidence. The level is computed."),
+        ("P", "It is the review instrument", "Generated from the model's recorded facts. Sheet 2 is the one sheet that flows back: fill its yellow cells, save, send it, and your answers are read into the model. Every other sheet is reference and is regenerated on the next build."),
+        ("P", "Facts, not scores", "You never type a level. You record observations, each with evidence. The level is computed by a published rule, and the same evidence can be read by more than one rule without anyone re-answering."),
         ("", "", ""),
         ("H", "Three levels, and what you DO with each", ""),
         ("P", "L1 - Domain  (8)", "A reporting cluster. You read it. Never scored, never assessed. Sheet 1, column A."),
@@ -83,13 +86,13 @@ def build(m, scale, path):
         ("P", "Enabled  (per L2)", "Can a team get the tooling for this without building it themselves?"),
         ("P", "Skilled  (per L2)", "Do the people who must do this know how?"),
         ("P", "Defined  (per L2)", "Is there an approved institutional standard, policy or method? Whoever owns the subject sets it - the platform team, Cybersecurity, Data Management, Legal, HR or EA. Not one function's job."),
-        ("P", "Values", "yes / partial / no / n-a / unknown.  n-a needs a reason. unknown means nobody has looked - it is not a zero."),
+        ("P", "Values", "yes / partial / no / n/a / unknown.  'no' is an evidenced negative - say what you looked at. 'n/a' means it does not apply here and needs the reason in column K. 'unknown' means nobody has looked - it is not a zero, and it is the right answer when you have not."),
         ("", "", ""),
         ("H", "The order matters", ""),
         ("W", "Performance comes first", "A published standard with nothing performed against it earns NO LEVEL. That is the ISO/IEC 33020 ordering and it is deliberate: it is what stops 'we approved the technology' from reading as 'we have the capability'."),
         ("", "", ""),
         ("H", "How to use it", ""),
-        ("P", "1 - Read", "Sheet 1 for the capability map. Find the capabilities you own. Sheet 3 for what the platform actually offers today."),
+        ("P", "1 - Read", "Sheet 1 for the capability map. Find the capabilities you own. Sheet 3 for what the platform actually offers today. Sheets 8 and 9 hold the source register and the statutory references, for the provenance and Legal reviewers."),
         ("P", "2 - Jump", "Click the last column of sheet 1 - 'Assess it' - to land on that capability's block on sheet 2."),
         ("P", "3 - Complete", "Sheet 2. For each of your capabilities: judge every L3 criterion for Practised, then answer Enabled, Skilled and Defined once. Fill value, evidence, who said so, when. Answer only for the capabilities you own - leave the rest 'unknown'."),
         ("P", "4 - Send", "Send this file back. One reviewer at a time - Excel does not merge."),
@@ -246,10 +249,10 @@ def build(m, scale, path):
                     ws.row_dimensions[r].outlineLevel = 1
                 ws.row_dimensions[r].height = 26
                 r += 1
-    dv = DataValidation(type="list", formula1='"yes,partial,no,n-a,unknown"',
+    dv = DataValidation(type="list", formula1='"yes,partial,no,n/a,unknown"',
                         allow_blank=False, showErrorMessage=True,
                         errorTitle="Observation value",
-                        error="yes / partial / no / n-a (needs a reason) / unknown (nobody has looked)")
+                        error="yes / partial / no / n/a (needs a reason) / unknown (nobody has looked)")
     ws.add_data_validation(dv); dv.add("G2:G%d" % (r - 1))
     ws.freeze_panes = "E2"; ws.auto_filter.ref = "A1:K%d" % (r - 1)
     note(ws, r + 1, 11,
@@ -261,7 +264,7 @@ def build(m, scale, path):
          "sheet 1; you never type it. ENABLED, SKILLED and DEFINED are asked once for "
          "the capability. An observation with no evidence is an opinion - write what "
          "you saw and who says so. 'unknown' is an honest answer and is never a zero. "
-         "Use 'n-a' only with a reason in column K.", 62)
+         "Use 'n/a' only with a reason in column K.", 62)
 
     # =============================================== 3. Offerings
     ws = wb.create_sheet("3. Offerings")
@@ -272,9 +275,10 @@ def build(m, scale, path):
     r = 2
     for o in m.offerings:
         answered = sum(1 for x in o['in_the_box'] if x['status'])
+        rel, tot = m.release_count(o)
         row = [o['id'], o['name'], o['consumption'], o['operated_by'], o['status'],
                ", ".join(o['assets']),
-               "%d of %d" % (o['assets_released'], o['assets_total']),
+               "%d of %d" % (rel, tot),
                ", ".join(o['enables']),
                "%d of %d" % (answered, len(o['in_the_box'])) if o['in_the_box'] else "-",
                o['not_provided'], o['note']]
@@ -286,7 +290,7 @@ def build(m, scale, path):
             if j == 1: cell.font = Font(name=F, size=10, bold=True, color=ACC)
             if j == 2: cell.font = B
             if j in (10, 11): cell.font = TS
-            if j == 7 and o['assets_released'] < o['assets_total']:
+            if j == 7 and rel < tot:
                 cell.fill = PatternFill("solid", fgColor="C9AE4A")
                 cell.font = Font(name=F, size=10, bold=True, color="2A2200")
         ws.row_dimensions[r].height = 46
@@ -294,8 +298,11 @@ def build(m, scale, path):
     ws.freeze_panes = "C2"
     note(ws, r + 1, 11,
          "What the platform actually gives a delivery team today. This is the object the "
-         "room asks about - not the capability. Readiness is not a score here: it is the "
-         "'In the box' column on sheet 4, counted.", 40)
+         "room asks about - not the capability. 'Released' is derived from the asset "
+         "statuses on sheet 5. Readiness is not a score here: it is the 'In the box' "
+         "column on sheet 4, counted. The Note column carries the migration notes from "
+         "the old realization register and may still use its superseded readiness "
+         "vocabulary.", 46)
 
     # =============================================== 4. In the box
     ws = wb.create_sheet("4. In the box")
@@ -331,42 +338,46 @@ def build(m, scale, path):
 
     # =============================================== 5. Assets
     ws = wb.create_sheet("5. Assets")
-    head(ws, [("ID", 9), ("Type", 22), ("Name", 46), ("Status", 26),
-              ("Used by", 22), ("Location", 62), ("Note", 62)])
+    head(ws, [("ID", 9), ("Type", 22), ("Name", 46), ("Status", 26), ("Released", 9),
+              ("What the status means", 40), ("Used by", 22), ("Location", 62),
+              ("Note", 62)])
     used = {}
     for o in m.offerings:
         for a in o['assets']:
             used.setdefault(a, []).append(o['id'])
-    STC = {"Published": "3F6F32", "Published (JFrog)": "3F6F32", "In use": "3F6F32",
-           "Pre-release": "C9AE4A", "Built, not yet distributed": "C9AE4A",
-           "In review by DX": "9E5A21"}
     r = 2
     for a in m.assets:
-        row = [a['id'], a['type'], a['name'], a['status'],
+        rel = m.released(a)
+        row = [a['id'], a['type'], a['name'], a['status'], "yes" if rel else "no",
+               m.asset_statuses.get(a['status'], {}).get('meaning', ''),
                ", ".join(used.get(a['id'], [])), a['location'], a['note']]
         for j, v in enumerate(row, 1):
             cell = ws.cell(row=r, column=j, value=v)
             cell.border = BOX; cell.font = T
-            cell.alignment = WRAP if j in (3, 6, 7) else TOP
+            cell.alignment = WRAP if j in (3, 6, 8, 9) else TOP
             if j == 1: cell.font = Font(name=F, size=10, bold=True, color=ACC)
             if j == 3: cell.font = B
             if j == 4:
-                hx = STC.get(a['status'], "C3CCD3")
+                hx = "3F6F32" if rel else "C9AE4A"
                 cell.fill = PatternFill("solid", fgColor=hx)
                 cell.font = Font(name=F, size=9, bold=True,
-                                 color="2A2200" if hx == "C9AE4A" else "FFFFFF")
+                                 color="FFFFFF" if rel else "2A2200")
                 cell.alignment = CTR
-            if j == 6 and a['location']:
+            if j == 5: cell.alignment = CTR
+            if j == 6: cell.font = TS
+            if j == 8 and a['location']:
                 cell.font = Font(name=F, size=9, color="0000EE", underline="single")
                 cell.hyperlink = a['location']
-            if j == 7: cell.font = TS
+            if j == 9: cell.font = TS
         ws.row_dimensions[r].height = 32
         r += 1
-    ws.freeze_panes = "C2"; ws.auto_filter.ref = "A1:G%d" % (r - 1)
-    note(ws, r + 1, 7,
+    ws.freeze_panes = "C2"; ws.auto_filter.ref = "A1:I%d" % (r - 1)
+    note(ws, r + 1, 9,
          "The evidence layer. Everything the Bank has actually built. Status is what to "
-         "watch: PRE-RELEASE and IN REVIEW do not establish anything, they establish that "
-         "it is one release away. Those rows are the cheapest roadmap items here.", 40)
+         "watch: a status that is not RELEASED does not establish anything, it "
+         "establishes that the asset is one release away. Those rows are the cheapest "
+         "roadmap items here. Which statuses count as released is declared once, in "
+         "facts/assets.json.", 40)
 
     # =============================================== 6. Criteria (L3)
     ws = wb.create_sheet("6. Criteria (L3)")
@@ -440,6 +451,73 @@ def build(m, scale, path):
          "%d capabilities have NO MATCH: nothing in the Bank's own catalogue claims them. "
          "That is a finding about the Bank, not a gap in this model."
          % (m.owners_source['source'], m.owners_source['read_on'], nomatch), 40)
+
+    # =============================================== 8. Sources
+    ws = wb.create_sheet("8. Sources")
+    head(ws, [("ID", 7), ("Grade", 7), ("Source", 30), ("Title", 44), ("Publisher", 26),
+              ("Edition", 16), ("Date", 11), ("Status", 26), ("Access", 30),
+              ("Cited by", 9), ("Caution", 70), ("URL", 40)])
+    cited = {}
+    for c in m.capabilities:
+        for _cit, src, _loc in m.capability_sources(c['id']):
+            if src:
+                cited[src['id']] = cited.get(src['id'], 0) + 1
+    GRADE = {"A": "3F6F32", "B": "6E8F3A", "C": "C9AE4A", "D": "8E3226"}
+    r = 2
+    for s in m.sources:
+        row = [s['id'], s['grade'], s['short'], s.get('title', ''), s.get('publisher', ''),
+               s.get('edition', ''), s.get('date', ''), s.get('status', ''),
+               s.get('access', ''), cited.get(s['id'], 0), s.get('caution', ''),
+               s.get('url', '')]
+        for j, v in enumerate(row, 1):
+            cell = ws.cell(row=r, column=j, value=v)
+            cell.border = BOX; cell.font = T
+            cell.alignment = WRAP if j in (3, 4, 5, 8, 9, 11) else (
+                CTR if j in (1, 2, 7, 10) else TOP)
+            if j == 1: cell.font = Font(name=F, size=10, bold=True, color=ACC)
+            if j == 2:
+                cell.fill = PatternFill("solid", fgColor=GRADE.get(v, "C3CCD3"))
+                cell.font = Font(name=F, size=10, bold=True,
+                                 color="2A2200" if v == "C" else "FFFFFF")
+            if j == 3: cell.font = B
+            if j == 11: cell.font = TS
+            if j == 12 and v:
+                cell.font = Font(name=F, size=9, color="0000EE", underline="single")
+                cell.hyperlink = v
+        ws.row_dimensions[r].height = 46
+        r += 1
+    ws.freeze_panes = "D2"; ws.auto_filter.ref = "A1:L%d" % (r - 1)
+    note(ws, r + 1, 12,
+         "The source register (ADR-0010). Grade A: open, dated, versioned, standards body "
+         "or public authority. B: open and dated, vendor or non-normative. C: undated, "
+         "superseded, flagged historical, or paywalled. D: non-public or not a "
+         "publication - USABLE INTERNALLY, NEVER IN ANYTHING THAT LEAVES THE BANK. "
+         "'Cited by' counts the capabilities on sheet 1 that name this source. Edited in "
+         "facts/sources.json; the full picture is out/provenance.md.", 52)
+
+    # =============================================== 9. Obligations
+    ws = wb.create_sheet("9. Obligations")
+    head(ws, [("Capability", 11), ("Capability name", 40), ("Instrument", 24),
+              ("Subject", 60), ("Status", 46)])
+    r = 2
+    for ob in m.obligations:
+        row = [ob['capability'], ob.get('capability_name', ''), ob['instrument'],
+               ob['subject'], ob['status']]
+        for j, v in enumerate(row, 1):
+            cell = ws.cell(row=r, column=j, value=v)
+            cell.border = BOX; cell.font = T
+            cell.alignment = WRAP if j in (2, 4, 5) else (CTR if j == 1 else TOP)
+            if j == 1: cell.font = Font(name=F, size=10, bold=True, color=ACC)
+            if j == 3: cell.font = B
+            if j == 5: cell.font = TS
+        ws.row_dimensions[r].height = 30
+        r += 1
+    ws.freeze_panes = "C2"; ws.auto_filter.ref = "A1:E%d" % (r - 1)
+    note(ws, r + 1, 5,
+         "Statutory references, Legal-owned, all CANDIDATE until applicability is "
+         "determined (ADR-0008). 7.6.6 Regulatory Role Determination is the prerequisite: "
+         "on the use cases contemplated the Bank would be a deployer, not a provider. "
+         "Edited in facts/obligations.json.", 40)
 
     wb.save(path)
     return wb.sheetnames

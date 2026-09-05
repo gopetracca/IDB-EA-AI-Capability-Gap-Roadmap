@@ -1,0 +1,52 @@
+{
+ "_comment": "Use-case questions of the form 'do we have the capability to X'. X touches several capabilities with different owners, so the answer is a table, not a number. Each entry names the offerings and capabilities it touches; the view derives everything else from facts/. `finding` and `next` are judgements, so they carry who made them and when, like an observation. One view is generated per question: out/<output>.md.",
+ "questions": [
+  {
+   "id": "agents",
+   "output": "agent-readiness",
+   "title": "Can the Bank run AI agents?",
+   "claim": "We cannot run AI agents.",
+   "offerings": [
+    "OFF-01",
+    "OFF-02",
+    "OFF-03",
+    "OFF-07"
+   ],
+   "capabilities": [
+    "4.4",
+    "5.1",
+    "5.5",
+    "7.7",
+    "2.5",
+    "4.5",
+    "7.4",
+    "8.3"
+   ],
+   "finding": "The Bank can provision and build agents to a published standard today. What it cannot yet do is operate them as an institution. The enablers were built before the practice: the tooling and the standards exist, and whether the work is done on real systems has never been observed.",
+   "finding_by": "EA",
+   "finding_on": "2026-09-04",
+   "next": [
+    {
+     "who": "Platform team",
+     "what": "Answer the in-the-box questions. Release the pre-release documents. Distribute template v2 and plan the v1 migration inside the MCP specification window."
+    },
+    {
+     "who": "Product teams",
+     "what": "Build against the standard, so there is practice to observe."
+    },
+    {
+     "who": "Capability owners",
+     "what": "Confirm what is actually practised, criterion by criterion, with named systems."
+    },
+    {
+     "who": "Cybersecurity, Data Management, Legal",
+     "what": "Confirm whether an approved standard exists in their own domain."
+    },
+    {
+     "who": "Learning & Development",
+     "what": "8.3 literacy and 8.2 skills: no observation exists yet."
+    }
+   ]
+  }
+ ]
+}

@@ -1,128 +1,131 @@
-[
- {
-  "capability": "7.6",
-  "capability_name": "Legal, Regulatory & Contractual Compliance for AI",
-  "instrument": "EU AI Act",
-  "subject": "Provider / deployer role determination (see 7.6.6)",
-  "status": "candidate - applicability not determined (see 7.6.5)"
- },
- {
-  "capability": "2.2",
-  "capability_name": "Feasibility & Impact Assessment",
-  "instrument": "EU AI Act",
-  "subject": "Fundamental rights impact assessment",
-  "status": "candidate - applicability not determined (see 7.6.5)"
- },
- {
-  "capability": "2.5",
-  "capability_name": "Human-AI Interaction & Oversight Design",
-  "instrument": "EU AI Act Art. 14",
-  "subject": "Human oversight",
-  "status": "candidate - applicability not determined (see 7.6.5)"
- },
- {
-  "capability": "3.1",
-  "capability_name": "Data Governance & Stewardship for AI",
-  "instrument": "EU AI Act Art. 10",
-  "subject": "Data and data governance",
-  "status": "candidate - applicability not determined (see 7.6.5)"
- },
- {
-  "capability": "3.2",
-  "capability_name": "Data Sourcing, Licensing & Provenance",
-  "instrument": "EU AI Act Art. 10",
-  "subject": "Data and data governance",
-  "status": "candidate - applicability not determined (see 7.6.5)"
- },
- {
-  "capability": "3.3",
-  "capability_name": "Data Quality & Preparation",
-  "instrument": "EU AI Act Art. 10",
-  "subject": "Data and data governance",
-  "status": "candidate - applicability not determined (see 7.6.5)"
- },
- {
-  "capability": "4.6",
-  "capability_name": "Evaluation & Testing",
-  "instrument": "EU AI Act Art. 15",
-  "subject": "Accuracy, robustness, cybersecurity",
-  "status": "candidate - applicability not determined (see 7.6.5)"
- },
- {
-  "capability": "6.3",
-  "capability_name": "Continuous Evaluation, Drift & Quality Management",
-  "instrument": "EU AI Act Art. 72",
-  "subject": "Post-market monitoring - PROVIDER obligation",
-  "status": "candidate - applicability not determined (see 7.6.5)"
- },
- {
-  "capability": "6.4",
-  "capability_name": "AI Incident & Problem Management",
-  "instrument": "EU AI Act Art. 73",
-  "subject": "Serious incident reporting - PROVIDER obligation",
-  "status": "candidate - applicability not determined (see 7.6.5)"
- },
- {
-  "capability": "7.6",
-  "capability_name": "Legal, Regulatory & Contractual Compliance",
-  "instrument": "EU AI Act",
-  "subject": "General",
-  "status": "candidate - applicability not determined (see 7.6.5)"
- },
- {
-  "capability": "7.7",
-  "capability_name": "AI System & Agent Inventory Management",
-  "instrument": "EU AI Act Art. 49",
-  "subject": "Registration - PROVIDER and public-authority deployer only",
-  "status": "candidate - applicability not determined (see 7.6.5)"
- },
- {
-  "capability": "8.3",
-  "capability_name": "AI Literacy & Awareness",
-  "instrument": "EU AI Act Art. 4",
-  "subject": "AI literacy",
-  "status": "candidate - applicability not determined (see 7.6.5)"
- },
- {
-  "capability": "service:S1.12",
-  "capability_name": "Face Detection & Recognition",
-  "instrument": "EU AI Act Annex III (biometric identification)",
-  "subject": "",
-  "status": "candidate - applicability not determined (see 7.6.5)"
- },
- {
-  "capability": "service:S5.10",
-  "capability_name": "Human-in-the-Loop Interrupt & Approval",
-  "instrument": "EU AI Act Art. 14",
-  "subject": "",
-  "status": "candidate - applicability not determined (see 7.6.5)"
- },
- {
-  "capability": "service:S7.10",
-  "capability_name": "Output Provenance & Watermarking",
-  "instrument": "EU AI Act Art. 50",
-  "subject": "",
-  "status": "candidate - applicability not determined (see 7.6.5)"
- },
- {
-  "capability": "service:S9.2",
-  "capability_name": "Interaction & Prompt Logging",
-  "instrument": "EU AI Act Art. 12 (logging)",
-  "subject": "",
-  "status": "candidate - applicability not determined (see 7.6.5)"
- },
- {
-  "capability": "service:S9.6",
-  "capability_name": "Production Evaluation & Online Scoring",
-  "instrument": "EU AI Act Art. 72 (post-market monitoring)",
-  "subject": "",
-  "status": "candidate - applicability not determined (see 7.6.5)"
- },
- {
-  "capability": "service:S9.11",
-  "capability_name": "Fleet & Agent Inventory Telemetry",
-  "instrument": "EU AI Act Art. 49",
-  "subject": "",
-  "status": "candidate - applicability not determined (see 7.6.5)"
- }
-]
+{
+ "_comment": "Statutory references, Legal-owned, all candidate until applicability is determined (ADR-0008). 7.6.6 Regulatory Role Determination is the prerequisite. `capability` is the L2 id the reference attaches to; `subject` says which part of the capability and, where the reference was migrated from the frozen reference catalog on 4 September 2026, names the former service id so Legal can see the origin. Edited by hand; build.py check verifies every capability resolves.",
+ "obligations": [
+  {
+   "capability": "7.6",
+   "capability_name": "Legal, Regulatory & Contractual Compliance for AI",
+   "instrument": "EU AI Act",
+   "subject": "Provider / deployer role determination (see 7.6.6)",
+   "status": "candidate - applicability not determined (see 7.6.5)"
+  },
+  {
+   "capability": "2.2",
+   "capability_name": "Feasibility & Impact Assessment",
+   "instrument": "EU AI Act",
+   "subject": "Fundamental rights impact assessment",
+   "status": "candidate - applicability not determined (see 7.6.5)"
+  },
+  {
+   "capability": "2.5",
+   "capability_name": "Human-AI Interaction & Oversight Design",
+   "instrument": "EU AI Act Art. 14",
+   "subject": "Human oversight",
+   "status": "candidate - applicability not determined (see 7.6.5)"
+  },
+  {
+   "capability": "3.1",
+   "capability_name": "Data Governance & Stewardship for AI",
+   "instrument": "EU AI Act Art. 10",
+   "subject": "Data and data governance",
+   "status": "candidate - applicability not determined (see 7.6.5)"
+  },
+  {
+   "capability": "3.2",
+   "capability_name": "Data Sourcing, Licensing & Provenance",
+   "instrument": "EU AI Act Art. 10",
+   "subject": "Data and data governance",
+   "status": "candidate - applicability not determined (see 7.6.5)"
+  },
+  {
+   "capability": "3.3",
+   "capability_name": "Data Quality & Preparation",
+   "instrument": "EU AI Act Art. 10",
+   "subject": "Data and data governance",
+   "status": "candidate - applicability not determined (see 7.6.5)"
+  },
+  {
+   "capability": "4.6",
+   "capability_name": "Evaluation & Testing",
+   "instrument": "EU AI Act Art. 15",
+   "subject": "Accuracy, robustness, cybersecurity",
+   "status": "candidate - applicability not determined (see 7.6.5)"
+  },
+  {
+   "capability": "6.3",
+   "capability_name": "Continuous Evaluation, Drift & Quality Management",
+   "instrument": "EU AI Act Art. 72",
+   "subject": "Post-market monitoring - PROVIDER obligation",
+   "status": "candidate - applicability not determined (see 7.6.5)"
+  },
+  {
+   "capability": "6.4",
+   "capability_name": "AI Incident & Problem Management",
+   "instrument": "EU AI Act Art. 73",
+   "subject": "Serious incident reporting - PROVIDER obligation",
+   "status": "candidate - applicability not determined (see 7.6.5)"
+  },
+  {
+   "capability": "7.6",
+   "capability_name": "Legal, Regulatory & Contractual Compliance",
+   "instrument": "EU AI Act",
+   "subject": "General",
+   "status": "candidate - applicability not determined (see 7.6.5)"
+  },
+  {
+   "capability": "7.7",
+   "capability_name": "AI System & Agent Inventory Management",
+   "instrument": "EU AI Act Art. 49",
+   "subject": "Registration - PROVIDER and public-authority deployer only",
+   "status": "candidate - applicability not determined (see 7.6.5)"
+  },
+  {
+   "capability": "8.3",
+   "capability_name": "AI Literacy & Awareness",
+   "instrument": "EU AI Act Art. 4",
+   "subject": "AI literacy",
+   "status": "candidate - applicability not determined (see 7.6.5)"
+  },
+  {
+   "capability": "7.9",
+   "capability_name": "AI Impact Assessment & Risk Classification",
+   "instrument": "EU AI Act Annex III (biometric identification)",
+   "subject": "Biometric identification is an Annex III high-risk category, so any face-recognition use case must be classified before build (formerly catalog service S1.12 Face Detection & Recognition, which had no criterion link; classification is 7.9)",
+   "status": "candidate - applicability not determined (see 7.6.5)"
+  },
+  {
+   "capability": "2.5",
+   "capability_name": "Human-AI Interaction & Oversight Design",
+   "instrument": "EU AI Act Art. 14",
+   "subject": "Human-in-the-loop interrupt and approval before an action takes effect (2.5.2, 2.5.4, 7.2.3; formerly catalog service S5.10)",
+   "status": "candidate - applicability not determined (see 7.6.5)"
+  },
+  {
+   "capability": "7.2",
+   "capability_name": "Responsible & Trustworthy AI Practice",
+   "instrument": "EU AI Act Art. 50",
+   "subject": "Marking generated content so its origin can be established (7.2.2, 7.6.4; formerly catalog service S7.10 Output Provenance & Watermarking)",
+   "status": "candidate - applicability not determined (see 7.6.5)"
+  },
+  {
+   "capability": "6.2",
+   "capability_name": "AI Monitoring & Observability",
+   "instrument": "EU AI Act Art. 12 (logging)",
+   "subject": "Retention-managed logging of prompts, context, outputs and decisions (6.2.2, 7.8.2; formerly catalog service S9.2 Interaction & Prompt Logging)",
+   "status": "candidate - applicability not determined (see 7.6.5)"
+  },
+  {
+   "capability": "6.3",
+   "capability_name": "Continuous Evaluation, Drift & Quality Management",
+   "instrument": "EU AI Act Art. 72 (post-market monitoring)",
+   "subject": "Continuous evaluation of live output quality as the mechanism of post-market monitoring (6.3.1, 4.6.3; formerly catalog service S9.6)",
+   "status": "candidate - applicability not determined (see 7.6.5)"
+  },
+  {
+   "capability": "7.7",
+   "capability_name": "AI System & Agent Inventory Management",
+   "instrument": "EU AI Act Art. 49",
+   "subject": "Registration presupposes knowing which AI systems and agents are running (7.7.4, 7.7.5; formerly catalog service S9.11 Fleet & Agent Inventory Telemetry)",
+   "status": "candidate - applicability not determined (see 7.6.5)"
+  }
+ ]
+}

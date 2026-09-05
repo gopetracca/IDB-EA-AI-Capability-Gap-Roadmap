@@ -1,6 +1,6 @@
 # The builders before the refactor
 
-Eleven files, replaced by four in `build/`.
+Eleven files, replaced by four in `build/` on 4 September 2026 — seven after the review the same day added `charts.py`, `sample.py` and `build_report.py`; see `build/README.md`.
 
 | File | Built | Replaced by |
 |---|---|---|

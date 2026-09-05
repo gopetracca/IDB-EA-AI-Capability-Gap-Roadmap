@@ -262,8 +262,9 @@ Three things a reviewer will find if they look, so they are better heard from us
 - **The capability taxonomy is out for validation.** 1.5 and 2.6 are new and carry low confidence
   until that comes back.
 - **Provenance is pinned at source level, not clause level.** The register records edition, date and
-  access for all 40 sources; 19 of 147 capability-to-source citations still have no locus, and
-  eleven sources are paywalled or members-only.
+  access for all 40 sources; of 143 capability-to-source citations, 14 carry a verified locus
+  (as of 4 September 2026 — `out/provenance.md` has the live count), and eleven sources are
+  paywalled or members-only.
 - **D7 is not yet control-mapped.** ISO/IEC 42001 Annex A and NIST AI RMF outcomes are not mapped to
   our governance capabilities. That domain should be carved out of any approval request until they
   are.

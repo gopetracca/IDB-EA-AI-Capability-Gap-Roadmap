@@ -11,7 +11,8 @@
    "id": "enabled",
    "question": "Can a team get the tooling for this without building it themselves?",
    "evidence_expected": "An offering in the offerings register, or the enterprise service that provides it",
-   "recorded_at": "capability"
+   "recorded_at": "capability",
+   "note": "Seeded from the offerings and asset register on 4 September 2026: every asset released gives yes, some released gives partial; capabilities realized by an enterprise service or purely organizational are n/a (facts/enablement-context.json); anything else is unknown until the owner looks. A human answer overrides the seed."
   },
   {
    "id": "skilled",
@@ -405,11 +406,11 @@
   {
    "capability": "1.5",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "1.5",
@@ -616,11 +617,11 @@
   {
    "capability": "2.3",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "2.3",
@@ -703,11 +704,11 @@
   {
    "capability": "2.4",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "2.4",
@@ -867,11 +868,11 @@
   {
    "capability": "2.6",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "2.6",
@@ -944,11 +945,11 @@
   {
    "capability": "3.1",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "3.1",
@@ -1021,11 +1022,11 @@
   {
    "capability": "3.2",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "3.2",
@@ -1098,11 +1099,11 @@
   {
    "capability": "3.3",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "3.3",
@@ -1165,11 +1166,11 @@
   {
    "capability": "3.4",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "3.4",
@@ -1386,11 +1387,11 @@
   {
    "capability": "3.7",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "3.7",
@@ -1560,11 +1561,11 @@
   {
    "capability": "4.2",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "4.2",
@@ -1637,11 +1638,11 @@
   {
    "capability": "4.3",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "4.3",
@@ -1878,11 +1879,11 @@
   {
    "capability": "4.6",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "4.6",
@@ -2484,11 +2485,11 @@
   {
    "capability": "6.1",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "6.1",
@@ -2561,11 +2562,11 @@
   {
    "capability": "6.2",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "6.2",
@@ -2638,11 +2639,11 @@
   {
    "capability": "6.3",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "6.3",
@@ -2715,11 +2716,11 @@
   {
    "capability": "6.4",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "6.4",
@@ -2782,11 +2783,11 @@
   {
    "capability": "6.5",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "6.5",
@@ -2936,11 +2937,11 @@
   {
    "capability": "7.1",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "7.1",
@@ -3013,11 +3014,11 @@
   {
    "capability": "7.2",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "7.2",
@@ -3197,11 +3198,11 @@
   {
    "capability": "7.4",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "7.4",
@@ -3274,11 +3275,11 @@
   {
    "capability": "7.5",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "7.5",
@@ -3361,11 +3362,11 @@
   {
    "capability": "7.6",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "7.6",
@@ -3438,11 +3439,11 @@
   {
    "capability": "7.7",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "7.7",
@@ -3505,11 +3506,11 @@
   {
    "capability": "7.8",
    "observation": "enabled",
-   "value": "no",
+   "value": "unknown",
    "evidence": "",
-   "basis": "No offering in the register and no reason recorded",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "7.8",

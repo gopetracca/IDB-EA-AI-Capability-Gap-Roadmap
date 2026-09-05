@@ -1,12 +1,12 @@
-# Capability assessment — Capability level
+# Capability assessment — Institutional maturity
 
-**Inter-American Development Bank** · generated 2026-09-05 · scale `level` · **the default scale**
+**Inter-American Development Bank** · generated 2026-09-05 · scale `maturity` · **a lens, not the assessment**
 
-> **The question this scale asks:** Has the institution established this practice?
+> **The question this scale asks:** How far has this practice spread beyond the people doing it?
 >
-> Adapted from ISO/IEC 33020:2019 (process measurement framework). Simplified: four observations rather than five process attributes, three values rather than the standard's four-point N-P-L-F scale.
+> Ours. The conventional five-stage maturity ladder (CMM/CMMI line, SEI 1991) applied to the same four observations as the default scale. Not adopted from any specific published maturity model.
 >
-> Level 3 is the highest this model can currently derive. Levels 4 and 5 are defined but need observations nobody collects yet - threshold monitoring and a closed improvement cycle - so a capability at 3 is at the top of what is measured here, not at the top of the scale. Level 3 also reads conformance from a standard and a practice co-existing; it is not separately evidenced.
+> A LENS, not the assessment. It reads the same observations as the default scale and asks how far a practice has spread rather than what has been established, so it will place some capabilities differently; where the two disagree, the default scale is the finding. Level 3 is the highest it can derive - Integrating and Optimizing need cross-unit measurement and a closed improvement cycle, which nobody observes yet. Unlike most maturity ladders this one does not rate the enablers on their own: a capability with tooling and an approved standard but no observed practice is NOT RATED, not Level 1.
 
 The taxonomy has three levels: **8 domains (L1)**, a reporting cluster that is never scored; **52 capabilities (L2)** — the unit that carries a level and an accountable owner; and **258 criteria (L3)** — the specific practices that can actually be witnessed. *Practised* is observed once per criterion and the capability value is **derived** from those observations, never typed: it reads `yes` only when every criterion was examined and every one passed (ADR-0014). Criteria carry no level of their own. They are listed per capability in section *By domain* below, and each has a row on sheet 2 of the workbook.
 
@@ -28,12 +28,11 @@ The taxonomy has three levels: **8 domains (L1)**, a reporting cluster that is n
 
 | Level | Name | Meaning | Derivable today |
 |---|---|---|:-:|
-| **0** | Incomplete | The capability is not performed, or performance cannot be shown. | yes |
-| **1** | Performed | It is done on real AI systems. Nothing is guaranteed to be repeatable. | yes |
-| **2** | Managed | It is done, the tooling is provided, and the people doing it are competent. | yes |
-| **3** | Established | An approved institutional standard exists and the work is done against it. | yes |
-| **4** | Predictable | Performance is measured against thresholds and held there. | — |
-| **5** | Innovating | One evidence-driven improvement cycle has closed with a verified benefit. | — |
+| **1** | Initial | Done where an individual or a team makes it happen. Nothing carries beyond them. | yes |
+| **2** | Emerging | Done in more than one place and supported by tooling and competent people, but each team still assembles its own way of working. | yes |
+| **3** | Consolidating | Done against an approved institutional standard. The practice is the Bank's, not a team's. | yes |
+| **4** | Integrating | Joined up across units and measured against thresholds. | — |
+| **5** | Optimizing | Improved on evidence, with a closed cycle showing a verified benefit. | — |
 
 Levels above **3** are defined but cannot be reached from the observations this model collects. A capability at 3 is at the top of what is *measured* here, not at the top of what is *possible*.
 
@@ -58,11 +57,11 @@ Values: `yes` · `partial` · `no` · `n/a` (with a reason) · `unknown` (nobody
 
 | ID | Capability | Owner | Pra | Ena | Ski | Def | Level | Why |
 |---|---|---|:-:|:-:|:-:|:-:|:-:|---|
-| `1.1` | AI Vision & Strategy Definition | Artificial Intelligence | ? | n-a | ? | ? | *not rated* | Not rated: performance has never been observed (enabled recorded, which cannot place a level on its own) |
-| `1.2` | AI Portfolio & Investment Management | Strategic Portfolio Management | ? | n-a | ? | ? | *not rated* | Not rated: performance has never been observed (enabled recorded, which cannot place a level on its own) |
-| `1.3` | Value Realization & Performance Reporting | Strategic Portfolio Management | ? | n-a | ? | ? | *not rated* | Not rated: performance has never been observed (enabled recorded, which cannot place a level on its own) |
-| `1.4` | AI Sourcing & Partner Strategy | Strategic Resource Management | ? | n-a | ? | ? | *not rated* | Not rated: performance has never been observed (enabled recorded, which cannot place a level on its own) |
-| `1.5` | AI Ecosystem & Alliance Management | **none** | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
+| `1.1` | AI Vision & Strategy Definition | Artificial Intelligence | ? | n-a | ? | ? | *not rated* | Not rated: the practice has never been observed (enabled recorded, which describes the enablers, not the practice) |
+| `1.2` | AI Portfolio & Investment Management | Strategic Portfolio Management | ? | n-a | ? | ? | *not rated* | Not rated: the practice has never been observed (enabled recorded, which describes the enablers, not the practice) |
+| `1.3` | Value Realization & Performance Reporting | Strategic Portfolio Management | ? | n-a | ? | ? | *not rated* | Not rated: the practice has never been observed (enabled recorded, which describes the enablers, not the practice) |
+| `1.4` | AI Sourcing & Partner Strategy | Strategic Resource Management | ? | n-a | ? | ? | *not rated* | Not rated: the practice has never been observed (enabled recorded, which describes the enablers, not the practice) |
+| `1.5` | AI Ecosystem & Alliance Management | **none** | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
 
 <details><summary><code>1.1</code> AI Vision & Strategy Definition — 5 L3 criteria, 0 observed</summary>
 
@@ -131,12 +130,12 @@ Values: `yes` · `partial` · `no` · `n/a` (with a reason) · `unknown` (nobody
 
 | ID | Capability | Owner | Pra | Ena | Ski | Def | Level | Why |
 |---|---|---|:-:|:-:|:-:|:-:|:-:|---|
-| `2.1` | Use Case Discovery & Intake | Artificial Intelligence | ? | n-a | ? | ? | *not rated* | Not rated: performance has never been observed (enabled recorded, which cannot place a level on its own) |
-| `2.2` | AI Use-Case Feasibility & Qualification | Enterprise Architecture | ? | yes | ? | yes | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `2.3` | AI Product Management | **none** | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `2.4` | Business Process & Service Redesign | Digital Transformation | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `2.5` | Human-AI Interaction & Oversight Design | People Experience - IBT | ? | yes | ? | yes | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `2.6` | AI Innovation & Incubation | Emerging Tech | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
+| `2.1` | Use Case Discovery & Intake | Artificial Intelligence | ? | n-a | ? | ? | *not rated* | Not rated: the practice has never been observed (enabled recorded, which describes the enablers, not the practice) |
+| `2.2` | AI Use-Case Feasibility & Qualification | Enterprise Architecture | ? | yes | ? | yes | *not rated* | Not rated: the practice has never been observed (enabled, defined recorded, which describes the enablers, not the practice) |
+| `2.3` | AI Product Management | **none** | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `2.4` | Business Process & Service Redesign | Digital Transformation | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `2.5` | Human-AI Interaction & Oversight Design | People Experience - IBT | ? | yes | ? | yes | *not rated* | Not rated: the practice has never been observed (enabled, defined recorded, which describes the enablers, not the practice) |
+| `2.6` | AI Innovation & Incubation | Emerging Tech | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
 
 <details><summary><code>2.1</code> Use Case Discovery & Intake — 4 L3 criteria, 0 observed</summary>
 
@@ -216,13 +215,13 @@ Values: `yes` · `partial` · `no` · `n/a` (with a reason) · `unknown` (nobody
 
 | ID | Capability | Owner | Pra | Ena | Ski | Def | Level | Why |
 |---|---|---|:-:|:-:|:-:|:-:|:-:|---|
-| `3.1` | Data Governance & Stewardship for AI | Data Management | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `3.2` | Data Sourcing, Licensing & Provenance | Data Management | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `3.3` | Data Quality & Preparation for AI | Data Management | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `3.4` | Metadata, Lineage & Cataloging for AI | Data Management | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `3.5` | Knowledge Corpus & Content Management | Core Platforms | ? | yes | ? | yes | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `3.6` | Knowledge Access & Retrieval | Artificial Intelligence | ? | yes | ? | yes | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `3.7` | Derived Representation Management | Artificial Intelligence | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
+| `3.1` | Data Governance & Stewardship for AI | Data Management | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `3.2` | Data Sourcing, Licensing & Provenance | Data Management | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `3.3` | Data Quality & Preparation for AI | Data Management | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `3.4` | Metadata, Lineage & Cataloging for AI | Data Management | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `3.5` | Knowledge Corpus & Content Management | Core Platforms | ? | yes | ? | yes | *not rated* | Not rated: the practice has never been observed (enabled, defined recorded, which describes the enablers, not the practice) |
+| `3.6` | Knowledge Access & Retrieval | Artificial Intelligence | ? | yes | ? | yes | *not rated* | Not rated: the practice has never been observed (enabled, defined recorded, which describes the enablers, not the practice) |
+| `3.7` | Derived Representation Management | Artificial Intelligence | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
 
 <details><summary><code>3.1</code> Data Governance & Stewardship for AI — 5 L3 criteria, 0 observed</summary>
 
@@ -312,13 +311,13 @@ Values: `yes` · `partial` · `no` · `n/a` (with a reason) · `unknown` (nobody
 
 | ID | Capability | Owner | Pra | Ena | Ski | Def | Level | Why |
 |---|---|---|:-:|:-:|:-:|:-:|:-:|---|
-| `4.1` | AI Architecture Management & Solution Governance | Enterprise Architecture | ? | yes | ? | yes | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `4.2` | Model Selection, Customization & Tuning | Artificial Intelligence | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `4.3` | Prompt & Context Engineering | Artificial Intelligence | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `4.4` | Agent & Workflow Orchestration Design | Artificial Intelligence | ? | part | ? | part | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `4.5` | Integration & Tool Enablement | Core Platforms | ? | part | ? | yes | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `4.6` | AI Evaluation & Testing | **none** | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `4.7` | AI Release & Change Management | Core Platforms | ? | n-a | ? | ? | *not rated* | Not rated: performance has never been observed (enabled recorded, which cannot place a level on its own) |
+| `4.1` | AI Architecture Management & Solution Governance | Enterprise Architecture | ? | yes | ? | yes | *not rated* | Not rated: the practice has never been observed (enabled, defined recorded, which describes the enablers, not the practice) |
+| `4.2` | Model Selection, Customization & Tuning | Artificial Intelligence | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `4.3` | Prompt & Context Engineering | Artificial Intelligence | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `4.4` | Agent & Workflow Orchestration Design | Artificial Intelligence | ? | part | ? | part | *not rated* | Not rated: the practice has never been observed (enabled, defined recorded, which describes the enablers, not the practice) |
+| `4.5` | Integration & Tool Enablement | Core Platforms | ? | part | ? | yes | *not rated* | Not rated: the practice has never been observed (enabled, defined recorded, which describes the enablers, not the practice) |
+| `4.6` | AI Evaluation & Testing | **none** | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `4.7` | AI Release & Change Management | Core Platforms | ? | n-a | ? | ? | *not rated* | Not rated: the practice has never been observed (enabled recorded, which describes the enablers, not the practice) |
 
 <details><summary><code>4.1</code> AI Architecture Management & Solution Governance — 7 L3 criteria, 0 observed</summary>
 
@@ -413,12 +412,12 @@ Values: `yes` · `partial` · `no` · `n/a` (with a reason) · `unknown` (nobody
 
 | ID | Capability | Owner | Pra | Ena | Ski | Def | Level | Why |
 |---|---|---|:-:|:-:|:-:|:-:|:-:|---|
-| `5.1` | AI Platform Service Provisioning | Artificial Intelligence | ? | part | ? | part | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `5.2` | Model Access & Traffic Management | Artificial Intelligence | ? | yes | ? | yes | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `5.3` | AI Environment & Workspace Management | Cloud and Infrastructure | ? | yes | ? | yes | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `5.4` | AI Compute & Capacity Management | Cloud and Infrastructure | ? | yes | ? | yes | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `5.5` | Tool & Connector Catalog Management | Artificial Intelligence | ? | part | ? | yes | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `5.6` | AI Developer Experience & Reuse Assets | Core Platforms | ? | part | ? | part | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
+| `5.1` | AI Platform Service Provisioning | Artificial Intelligence | ? | part | ? | part | *not rated* | Not rated: the practice has never been observed (enabled, defined recorded, which describes the enablers, not the practice) |
+| `5.2` | Model Access & Traffic Management | Artificial Intelligence | ? | yes | ? | yes | *not rated* | Not rated: the practice has never been observed (enabled, defined recorded, which describes the enablers, not the practice) |
+| `5.3` | AI Environment & Workspace Management | Cloud and Infrastructure | ? | yes | ? | yes | *not rated* | Not rated: the practice has never been observed (enabled, defined recorded, which describes the enablers, not the practice) |
+| `5.4` | AI Compute & Capacity Management | Cloud and Infrastructure | ? | yes | ? | yes | *not rated* | Not rated: the practice has never been observed (enabled, defined recorded, which describes the enablers, not the practice) |
+| `5.5` | Tool & Connector Catalog Management | Artificial Intelligence | ? | part | ? | yes | *not rated* | Not rated: the practice has never been observed (enabled, defined recorded, which describes the enablers, not the practice) |
+| `5.6` | AI Developer Experience & Reuse Assets | Core Platforms | ? | part | ? | part | *not rated* | Not rated: the practice has never been observed (enabled, defined recorded, which describes the enablers, not the practice) |
 
 <details><summary><code>5.1</code> AI Platform Service Provisioning — 5 L3 criteria, 0 observed</summary>
 
@@ -497,12 +496,12 @@ Values: `yes` · `partial` · `no` · `n/a` (with a reason) · `unknown` (nobody
 
 | ID | Capability | Owner | Pra | Ena | Ski | Def | Level | Why |
 |---|---|---|:-:|:-:|:-:|:-:|:-:|---|
-| `6.1` | AI Deployment & Serving Operations | Artificial Intelligence | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `6.2` | AI Monitoring & Observability | Cloud and Infrastructure | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `6.3` | Continuous Evaluation, Drift & Quality Management | **none** | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `6.4` | AI Incident & Problem Management | Service Delivery | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `6.5` | AI Cost Management | Cloud and Infrastructure | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `6.6` | AI Asset Retirement & Evidence Preservation | Service Delivery | ? | n-a | ? | ? | *not rated* | Not rated: performance has never been observed (enabled recorded, which cannot place a level on its own) |
+| `6.1` | AI Deployment & Serving Operations | Artificial Intelligence | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `6.2` | AI Monitoring & Observability | Cloud and Infrastructure | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `6.3` | Continuous Evaluation, Drift & Quality Management | **none** | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `6.4` | AI Incident & Problem Management | Service Delivery | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `6.5` | AI Cost Management | Cloud and Infrastructure | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `6.6` | AI Asset Retirement & Evidence Preservation | Service Delivery | ? | n-a | ? | ? | *not rated* | Not rated: the practice has never been observed (enabled recorded, which describes the enablers, not the practice) |
 
 <details><summary><code>6.1</code> AI Deployment & Serving Operations — 5 L3 criteria, 0 observed</summary>
 
@@ -580,15 +579,15 @@ Values: `yes` · `partial` · `no` · `n/a` (with a reason) · `unknown` (nobody
 
 | ID | Capability | Owner | Pra | Ena | Ski | Def | Level | Why |
 |---|---|---|:-:|:-:|:-:|:-:|:-:|---|
-| `7.1` | AI Policy, Standards & Management System | Artificial Intelligence | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `7.2` | Responsible & Trustworthy AI Practice | **none** | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `7.3` | AI Risk Management | Risk, Audit & Compliance | ? | n-a | ? | ? | *not rated* | Not rated: performance has never been observed (enabled recorded, which cannot place a level on its own) |
-| `7.4` | AI Security & Resilience | Cybersecurity | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `7.5` | Privacy & Data Protection for AI | **none** | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `7.6` | Legal, Regulatory & Contractual Compliance for AI | **none** | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `7.7` | AI System & Agent Inventory Management | Artificial Intelligence | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `7.8` | AI Assurance & Evidence Management | IT Risk (Compliance) | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `7.9` | AI Impact Assessment & Risk Classification | **none** | ? | n-a | ? | ? | *not rated* | Not rated: performance has never been observed (enabled recorded, which cannot place a level on its own) |
+| `7.1` | AI Policy, Standards & Management System | Artificial Intelligence | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `7.2` | Responsible & Trustworthy AI Practice | **none** | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `7.3` | AI Risk Management | Risk, Audit & Compliance | ? | n-a | ? | ? | *not rated* | Not rated: the practice has never been observed (enabled recorded, which describes the enablers, not the practice) |
+| `7.4` | AI Security & Resilience | Cybersecurity | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `7.5` | Privacy & Data Protection for AI | **none** | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `7.6` | Legal, Regulatory & Contractual Compliance for AI | **none** | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `7.7` | AI System & Agent Inventory Management | Artificial Intelligence | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `7.8` | AI Assurance & Evidence Management | IT Risk (Compliance) | ? | ? | ? | ? | *not rated* | Not rated: the practice has never been observed |
+| `7.9` | AI Impact Assessment & Risk Classification | **none** | ? | n-a | ? | ? | *not rated* | Not rated: the practice has never been observed (enabled recorded, which describes the enablers, not the practice) |
 
 <details><summary><code>7.1</code> AI Policy, Standards & Management System — 6 L3 criteria, 0 observed</summary>
 
@@ -708,12 +707,12 @@ Values: `yes` · `partial` · `no` · `n/a` (with a reason) · `unknown` (nobody
 
 | ID | Capability | Owner | Pra | Ena | Ski | Def | Level | Why |
 |---|---|---|:-:|:-:|:-:|:-:|:-:|---|
-| `8.1` | AI Operating Model & Decision Rights | Strategic Portfolio Management | ? | n-a | ? | ? | *not rated* | Not rated: performance has never been observed (enabled recorded, which cannot place a level on its own) |
-| `8.2` | AI Skills & Specialist Capability Building | Strategic Resource Management | ? | n-a | ? | ? | *not rated* | Not rated: performance has never been observed (enabled recorded, which cannot place a level on its own) |
-| `8.3` | AI Literacy & Awareness | Emerging Tech | ? | n-a | ? | ? | *not rated* | Not rated: performance has never been observed (enabled recorded, which cannot place a level on its own) |
-| `8.4` | AI Adoption, Enablement & Support | Artificial Intelligence | ? | n-a | ? | ? | *not rated* | Not rated: performance has never been observed (enabled recorded, which cannot place a level on its own) |
-| `8.5` | AI Change Management & Workforce Transition | Digital Transformation | ? | n-a | ? | ? | *not rated* | Not rated: performance has never been observed (enabled recorded, which cannot place a level on its own) |
-| `8.6` | AI Community & Reuse Culture | Emerging Tech | ? | n-a | ? | ? | *not rated* | Not rated: performance has never been observed (enabled recorded, which cannot place a level on its own) |
+| `8.1` | AI Operating Model & Decision Rights | Strategic Portfolio Management | ? | n-a | ? | ? | *not rated* | Not rated: the practice has never been observed (enabled recorded, which describes the enablers, not the practice) |
+| `8.2` | AI Skills & Specialist Capability Building | Strategic Resource Management | ? | n-a | ? | ? | *not rated* | Not rated: the practice has never been observed (enabled recorded, which describes the enablers, not the practice) |
+| `8.3` | AI Literacy & Awareness | Emerging Tech | ? | n-a | ? | ? | *not rated* | Not rated: the practice has never been observed (enabled recorded, which describes the enablers, not the practice) |
+| `8.4` | AI Adoption, Enablement & Support | Artificial Intelligence | ? | n-a | ? | ? | *not rated* | Not rated: the practice has never been observed (enabled recorded, which describes the enablers, not the practice) |
+| `8.5` | AI Change Management & Workforce Transition | Digital Transformation | ? | n-a | ? | ? | *not rated* | Not rated: the practice has never been observed (enabled recorded, which describes the enablers, not the practice) |
+| `8.6` | AI Community & Reuse Culture | Emerging Tech | ? | n-a | ? | ? | *not rated* | Not rated: the practice has never been observed (enabled recorded, which describes the enablers, not the practice) |
 
 <details><summary><code>8.1</code> AI Operating Model & Decision Rights — 4 L3 criteria, 0 observed</summary>
 

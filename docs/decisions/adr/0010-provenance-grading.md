@@ -57,4 +57,11 @@ a source it cannot point into.
 `model/sources.json` — 40 canonical sources with edition, date, access, URL and grade.
 `model/citations.json` — 147 capability-source pairs with derivation type and locus.
 
+> *Location note, 4 September 2026:* the register is `facts/sources.json`. The pairs are no
+> longer a separate file: each capability's `sources` strings resolve through the register's
+> `normalize` table to a source id and a locus — 143 pairs after the ADR-0009 amendment, 14
+> with a locus pinned. `build.py check` fails on a citation that does not resolve, and
+> `out/provenance.md` reports grade exposure and locus coverage. Derivation type is not yet
+> recorded per pair; a pair with no locus is treated as *synthesized* until one is pinned.
+
 Findings from re-verification: `provenance/findings-2026-09-03.md`.

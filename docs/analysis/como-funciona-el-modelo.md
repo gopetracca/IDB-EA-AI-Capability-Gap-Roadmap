@@ -1,5 +1,16 @@
 # Cómo funciona el modelo — explicado
 
+> ### ⚠ Desactualizado — describe el modelo de dos escalas, reemplazado el 4 de septiembre de 2026
+>
+> Esta nota explica **madurez** y **preparación** (*readiness*) como dos escalas separadas
+> (ADR-0001), y `model/` como el lugar donde se edita. Ese modelo fue reemplazado por
+> [ADR-0013](../decisions/adr/0013-facts-and-scales.md): cuatro observaciones registradas
+> como hechos y un nivel derivado, con `facts/` editado y `out/` generado. La explicación
+> vigente en inglés es [`../how-it-works.md`](../how-it-works.md). Esta nota se reescribirá
+> cuando el nuevo modelo haya sobrevivido una conversación real (OPEN-ITEMS, ítem 17). Las
+> secciones 1, 7.1 y 9 siguen siendo útiles como forma de contar la idea; los archivos,
+> escalas y números que cita ya no existen en esa forma.
+
 **Nota de orientación. No es normativa.** Lo normativo está en
 [[../decisions/README|decisions/README.md]] y en `CLAUDE.md`.
 Esta nota existe para entenderlo y para poder explicarlo.

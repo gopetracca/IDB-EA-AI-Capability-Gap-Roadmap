@@ -1,4 +1,9 @@
-
+> ### ⚠ Superseded — 4 September 2026
+>
+> The readiness scale below was **retired by [ADR-0013](../decisions/adr/0013-facts-and-scales.md)**.
+> Readiness is no longer a scale: it is the in-the-box checklist on an offering, counted
+> (`facts/offerings.json`, sheet 4 of the workbook). This note is kept as the record of the
+> scale that was built and of the World Bank comparator analysis, which still stands.
 
 > [!info] Por qué "Custom"
 > Esta escala es **construcción propia**, no adoptada. No desciende de TRL: TRL mide qué tan

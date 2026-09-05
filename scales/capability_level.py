@@ -12,6 +12,11 @@ nothing performed against it earns no level at all.
 
 NAME = "Capability level"
 SHORT = "level"
+# The assessment itself. Exactly one scale in scales/ carries this flag; the
+# others are lenses, and the builders label them so.
+DEFAULT = True
+# The one-sentence question this scale puts to the four observations.
+QUESTION = "Has the institution established this practice?"
 BASIS = ("Adapted from ISO/IEC 33020:2019 (process measurement framework). "
          "Simplified: four observations rather than five process attributes, "
          "three values rather than the standard's four-point N-P-L-F scale.")
