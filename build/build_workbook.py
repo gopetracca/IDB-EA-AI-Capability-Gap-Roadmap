@@ -7,7 +7,7 @@ same way in Excel, LibreOffice and the browser.
 
 The workbook is GENERATED from facts/ and is not where the facts live. Sheet 2
 is the one instrument that flows back: its yellow cells are the only ones to
-edit, and `python3 build/build.py ingest` reads them into
+edit, and `uv run python build/build.py ingest` reads them into
 facts/observations.json. Every other sheet is reference and is overwritten on
 the next build.
 """
@@ -153,7 +153,7 @@ def build(m, scale, path):
         ("P", "2 - Jump", "Click the last column of sheet 1 - 'Assess it' - to land on that capability's block on sheet 2, or on an L3 row to land on the exact criterion row that judges it."),
         ("P", "3 - Complete", "Sheet 2. For each of your capabilities: judge every L3 criterion for Practised, then answer Enabled, Skilled and Defined once. Fill value, evidence, who said so, when. Answer only for the capabilities you own - leave the rest 'unknown'."),
         ("P", "4 - Send", "Send this file back. One reviewer at a time - Excel does not merge."),
-        ("P", "5 - Rebuild", "python3 build/build.py ingest   then   python3 build/build.py all"),
+        ("P", "5 - Rebuild", "uv run python build/build.py ingest   then   uv run python build/build.py all"),
         ("", "", ""),
         ("H", "Cell conventions", ""),
         ("Y", "Yellow, blue bold", "Your input. The only cells to edit."),

@@ -20,9 +20,9 @@ when several arrive on the same day.
 ## Reading them in
 
 ```bash
-python3.13 build/build.py ingest review/2026-09-12-platform.xlsx review/2026-09-12-cybersecurity.xlsx
-python3.13 build/build.py check
-python3.13 build/build.py all
+uv run python build/build.py ingest review/2026-09-12-platform.xlsx review/2026-09-12-cybersecurity.xlsx
+uv run python build/build.py check
+uv run python build/build.py all
 git add -A && git commit -m "Observations from <who>, <date>"
 ```
 

@@ -1801,6 +1801,16 @@
   },
   {
    "capability": "4.5",
+   "criterion": "4.5.6",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "4.5",
    "observation": "enabled",
    "value": "partial",
    "evidence": "OFF-03 Custom MCP servers (4 of 7 assets released)",
@@ -1869,6 +1879,36 @@
   {
    "capability": "4.6",
    "criterion": "4.6.5",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "4.6",
+   "criterion": "4.6.6",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "4.6",
+   "criterion": "4.6.7",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "4.6",
+   "criterion": "4.6.8",
    "observation": "practised",
    "value": "unknown",
    "evidence": "",
@@ -2433,6 +2473,160 @@
    "observed_by": "EA, from the asset register"
   },
   {
+   "capability": "5.7",
+   "criterion": "5.7.1",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.7",
+   "criterion": "5.7.2",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.7",
+   "criterion": "5.7.3",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.7",
+   "criterion": "5.7.4",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.7",
+   "criterion": "5.7.5",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.7",
+   "observation": "enabled",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never examined. No platform offering names this capability, and no enterprise service has been asked whether it provides it (ADR-0013 Amendment 2).",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.7",
+   "observation": "skilled",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner or L&D.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.7",
+   "observation": "defined",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never examined. Whoever owns the subject has not been asked whether an approved standard exists.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.8",
+   "criterion": "5.8.1",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.8",
+   "criterion": "5.8.2",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.8",
+   "criterion": "5.8.3",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.8",
+   "criterion": "5.8.4",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.8",
+   "criterion": "5.8.5",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.8",
+   "observation": "enabled",
+   "value": "partial",
+   "evidence": "OFF-02 Foundry agents (6 of 8 assets released)",
+   "basis": "Assets: IAC-02, IAC-04, IAC-05, RA-02, RA-05, STD-03, STD-06, STD-07",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA, from the asset register"
+  },
+  {
+   "capability": "5.8",
+   "observation": "skilled",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner or L&D.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.8",
+   "observation": "defined",
+   "value": "partial",
+   "evidence": "RA-02 Microsoft Foundry Reference Architecture (Published); RA-05 Foundry Agents Reference Architecture (Pre-release); STD-03 Microsoft Foundry Standard (Published); STD-06 AI Agent Decision Tree (Published); STD-07 Foundry Agents Standard (Pre-release)",
+   "basis": "Pre-release documents hold this at partial",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA, from the asset register"
+  },
+  {
    "capability": "6.1",
    "criterion": "6.1.1",
    "observation": "practised",
@@ -2475,6 +2669,26 @@
   {
    "capability": "6.1",
    "criterion": "6.1.5",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "6.1",
+   "criterion": "6.1.6",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "6.1",
+   "criterion": "6.1.7",
    "observation": "practised",
    "value": "unknown",
    "evidence": "",
@@ -2638,6 +2852,16 @@
   },
   {
    "capability": "6.3",
+   "criterion": "6.3.6",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "6.3",
    "observation": "enabled",
    "value": "unknown",
    "evidence": "",
@@ -2782,6 +3006,16 @@
   },
   {
    "capability": "6.5",
+   "criterion": "6.5.5",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "6.5",
    "observation": "enabled",
    "value": "unknown",
    "evidence": "",
@@ -2871,6 +3105,83 @@
    "value": "unknown",
    "evidence": "",
    "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "6.7",
+   "criterion": "6.7.1",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "6.7",
+   "criterion": "6.7.2",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "6.7",
+   "criterion": "6.7.3",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "6.7",
+   "criterion": "6.7.4",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "6.7",
+   "criterion": "6.7.5",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "6.7",
+   "observation": "enabled",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never examined. No platform offering names this capability, and no enterprise service has been asked whether it provides it (ADR-0013 Amendment 2).",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "6.7",
+   "observation": "skilled",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner or L&D.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "6.7",
+   "observation": "defined",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never examined. Whoever owns the subject has not been asked whether an approved standard exists.",
    "observed_on": "",
    "observed_by": ""
   },

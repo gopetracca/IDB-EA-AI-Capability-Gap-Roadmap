@@ -1087,7 +1087,8 @@
     "IBM Generative AI Capability Model",
     "Model Context Protocol specification",
     "SAP AI-native North Star architecture",
-    "IMDA Model AI Governance Framework"
+    "IMDA Model AI Governance Framework",
+    "A2A protocol specification"
    ],
    "criteria": [
     {
@@ -1119,6 +1120,12 @@
      "name": "Legacy & Core System Adaptation",
      "definition": "Reach systems that were never designed to be called by an AI client.",
      "agentic": false
+    },
+    {
+     "id": "4.5.6",
+     "name": "Agent-to-Agent Interoperability",
+     "definition": "Publish and consume agent descriptions, negotiate a task through a defined lifecycle, and carry identity and authorization across an agent boundary.",
+     "agentic": true
     }
    ],
    "agentic": true,
@@ -1133,7 +1140,10 @@
    "definition": "Able to state, before release, what the system does and does not do reliably.",
    "sources": [
     "NIST AI 600-1 Generative AI Profile",
-    "ISO/IEC 5338"
+    "ISO/IEC 5338",
+    "ISO/IEC TR 29119-11",
+    "ISO/IEC 25059",
+    "IMDA Agentic AI Framework"
    ],
    "criteria": [
     {
@@ -1165,9 +1175,27 @@
      "name": "Pre-Deployment Acceptance Testing",
      "definition": "Test against acceptance criteria and record the result as release evidence.",
      "agentic": false
+    },
+    {
+     "id": "4.6.6",
+     "name": "Agent Trajectory & Tool-Use Evaluation",
+     "definition": "Evaluate the path taken, not only the answer returned: tool selection, argument correctness, recovery from a failed call, termination and task completion.",
+     "agentic": true
+    },
+    {
+     "id": "4.6.7",
+     "name": "Simulation & Scenario-Based Testing",
+     "definition": "Exercise the system against simulated users, environments and adversarial inputs before it can reach a system of record.",
+     "agentic": true
+    },
+    {
+     "id": "4.6.8",
+     "name": "Evaluator Validation & Judge Governance",
+     "definition": "Where a model does the grading, validate the grader against human judgement and monitor the grader's own drift.",
+     "agentic": false
     }
    ],
-   "agentic": false,
+   "agentic": true,
    "anchor": "new",
    "proposed_owner": "Quality Engineering Owner",
    "confidence": "medium"
@@ -1180,7 +1208,8 @@
    "sources": [
     "ITIL 4",
     "The Open Group IT4IT",
-    "ISO/IEC 5338"
+    "ISO/IEC 5338",
+    "NIST SP 800-218A"
    ],
    "criteria": [
     {
@@ -1495,6 +1524,100 @@
    "confidence": "medium"
   },
   {
+   "id": "5.7",
+   "domain": "D5",
+   "name": "AI Runtime Mediation & Egress Control",
+   "definition": "Able to stand in the path of every tool and agent call, and to control what goes out through it.",
+   "sources": [
+    "OWASP GenAI Security Project - agent control standard",
+    "Model Context Protocol specification",
+    "IBM Generative AI Capability Model"
+   ],
+   "criteria": [
+    {
+     "id": "5.7.1",
+     "name": "Tool Traffic Mediation",
+     "definition": "Route every tool invocation through a controlled point that can observe, authorize and refuse.",
+     "agentic": true
+    },
+    {
+     "id": "5.7.2",
+     "name": "Outbound Content & Data Egress Control",
+     "definition": "Inspect what a tool returns before it enters context, and what a call carries out of the institution.",
+     "agentic": true
+    },
+    {
+     "id": "5.7.3",
+     "name": "Runtime Policy Distribution & Enforcement",
+     "definition": "Distribute policy from one control plane and enforce it at every data-plane instance.",
+     "agentic": true
+    },
+    {
+     "id": "5.7.4",
+     "name": "Invocation Rate, Budget & Loop Enforcement",
+     "definition": "Enforce per-agent call budgets and stop runaway invocation at the mediation point rather than in the agent's own code.",
+     "agentic": true
+    },
+    {
+     "id": "5.7.5",
+     "name": "Mediation Telemetry Hand-off",
+     "definition": "Emit from the mediation point the record that 6.2.3 and 7.8.2 depend on.",
+     "agentic": true
+    }
+   ],
+   "agentic": true,
+   "anchor": "new",
+   "proposed_owner": "AI Platform Owner",
+   "confidence": "low"
+  },
+  {
+   "id": "5.8",
+   "domain": "D5",
+   "name": "AI Agent Runtime & Execution Environment",
+   "definition": "Able to give agents a governed place to execute, remember and be bounded.",
+   "sources": [
+    "OWASP GenAI Security Project - securing agentic applications",
+    "IBM Generative AI Capability Model",
+    "Microsoft Cloud Adoption Framework for AI"
+   ],
+   "criteria": [
+    {
+     "id": "5.8.1",
+     "name": "Agent Hosting & Execution Runtime",
+     "definition": "Provide the managed substrate an agent executes in.",
+     "agentic": true
+    },
+    {
+     "id": "5.8.2",
+     "name": "Code & Computer-Use Sandboxing",
+     "definition": "Execute model-generated code and computer-use actions in an isolated, disposable environment.",
+     "agentic": true
+    },
+    {
+     "id": "5.8.3",
+     "name": "Agent Memory & State Infrastructure",
+     "definition": "Provide the store that enforces what 4.4.4 designed: retention, isolation, and who else can read it.",
+     "agentic": true
+    },
+    {
+     "id": "5.8.4",
+     "name": "Long-Running Task & Scheduling Support",
+     "definition": "Support work that outlives a request, including resumption and cancellation.",
+     "agentic": true
+    },
+    {
+     "id": "5.8.5",
+     "name": "Runtime Resource & Blast-Radius Limits",
+     "definition": "Bound what a single agent execution can consume and reach.",
+     "agentic": true
+    }
+   ],
+   "agentic": true,
+   "anchor": "new",
+   "proposed_owner": "AI Platform Owner",
+   "confidence": "low"
+  },
+  {
    "id": "6.1",
    "domain": "D6",
    "name": "AI Deployment & Serving Operations",
@@ -1502,7 +1625,8 @@
    "sources": [
     "IBM Generative AI Capability Model",
     "ITIL 4",
-    "ISO/IEC 5338"
+    "ISO/IEC 5338",
+    "IMDA Agentic AI Framework"
    ],
    "criteria": [
     {
@@ -1533,6 +1657,18 @@
      "id": "6.1.5",
      "name": "Operational Readiness & Handover",
      "definition": "Hand over to operations with documented procedures before go-live.",
+     "agentic": false
+    },
+    {
+     "id": "6.1.6",
+     "name": "Agent Fleet & Version Operations",
+     "definition": "Operate many agents as a fleet: pinned versions, coordinated rollout, and detection of behavioural change caused by a dependency moving rather than by a release.",
+     "agentic": true
+    },
+    {
+     "id": "6.1.7",
+     "name": "Provider Failover & Degraded-Mode Operation",
+     "definition": "Fail over between model providers, or degrade deliberately, under a policy that is defined and exercised.",
      "agentic": false
     }
    ],
@@ -1595,7 +1731,8 @@
    "definition": "Able to know that a system still performs as it did at release.",
    "sources": [
     "NIST AI RMF - Measure",
-    "ISO/IEC 5338"
+    "ISO/IEC 5338",
+    "OWASP GenAI Security Project"
    ],
    "criteria": [
     {
@@ -1626,6 +1763,12 @@
      "id": "6.3.5",
      "name": "Retraining & Refresh Triggering",
      "definition": "Trigger retraining or refresh on defined conditions rather than on schedule alone.",
+     "agentic": false
+    },
+    {
+     "id": "6.3.6",
+     "name": "Guardrail Effectiveness Monitoring & Tuning",
+     "definition": "Measure block rate, false positives and after-the-fact false negatives, and change-control every threshold adjustment.",
      "agentic": false
     }
    ],
@@ -1689,7 +1832,8 @@
    "sources": [
     "FinOps Foundation",
     "Microsoft Cloud Adoption Framework for AI",
-    "Gartner (analyst, non-public)"
+    "Gartner (analyst, non-public)",
+    "Green Software Foundation SCI"
    ],
    "criteria": [
     {
@@ -1714,6 +1858,12 @@
      "id": "6.5.4",
      "name": "Optimization & Rightsizing",
      "definition": "Reduce cost through model, caching and routing choices without losing quality.",
+     "agentic": false
+    },
+    {
+     "id": "6.5.5",
+     "name": "Energy & Carbon Accounting for AI",
+     "definition": "Express AI consumption per functional unit in energy and carbon, not only in money.",
      "agentic": false
     }
    ],
@@ -1762,6 +1912,54 @@
    "anchor": "lens",
    "proposed_owner": "Asset Management Owner",
    "confidence": "high"
+  },
+  {
+   "id": "6.7",
+   "domain": "D6",
+   "name": "Human Oversight Operations",
+   "definition": "Able to run the human supervision that 2.5 designed and 7.2.3 requires, at the volume production produces.",
+   "sources": [
+    "IMDA Agentic AI Framework",
+    "ISO/IEC 42001",
+    "NIST AI RMF - Manage",
+    "GAO AI Accountability Framework"
+   ],
+   "criteria": [
+    {
+     "id": "6.7.1",
+     "name": "Review & Approval Queue Operation",
+     "definition": "Run the queue an agent's actions wait in, with defined routing and coverage.",
+     "agentic": true
+    },
+    {
+     "id": "6.7.2",
+     "name": "Oversight Service Levels & Throughput Management",
+     "definition": "Commit to and meet a latency and coverage standard for human decisions.",
+     "agentic": false
+    },
+    {
+     "id": "6.7.3",
+     "name": "Override & Intervention Rate Monitoring",
+     "definition": "Monitor how often humans override, and treat a falling rate as a signal rather than as success.",
+     "agentic": false
+    },
+    {
+     "id": "6.7.4",
+     "name": "Reviewer Competence, Rotation & Automation-Bias Control",
+     "definition": "Keep the reviewer capable of dissent.",
+     "agentic": false
+    },
+    {
+     "id": "6.7.5",
+     "name": "Oversight Evidence Capture",
+     "definition": "Record the human decision so that 7.8.2 can produce it later.",
+     "agentic": false
+    }
+   ],
+   "agentic": true,
+   "anchor": "new",
+   "proposed_owner": "AI Operations Owner",
+   "confidence": "low"
   },
   {
    "id": "7.1",
@@ -1925,7 +2123,8 @@
     "OWASP GenAI Security Project",
     "ISO/IEC 27001",
     "IMDA Model AI Governance Framework",
-    "NIST AI RMF"
+    "NIST AI RMF",
+    "NIST SP 800-218A"
    ],
    "criteria": [
     {

@@ -30,8 +30,8 @@ runs 1–5 and the default derives 0–3 today, the report does not read one's d
 the other's; it compares the maturity lens level for level because every level it can
 return is one the default can return.
 
-Run `python3 build/build.py views` to regenerate every view for every scale, and
-`python3 build/build.py check` to validate every scale against the contract below.
+Run `uv run python build/build.py views` to regenerate every view for every scale, and
+`uv run python build/build.py check` to validate every scale against the contract below.
 
 ## Adding a scale — the contract
 

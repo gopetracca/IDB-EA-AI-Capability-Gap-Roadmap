@@ -12,9 +12,9 @@ ADR-0014.
 ## Before anything else
 
 ```bash
-python3.13 build/build.py            # what the model currently says
-python3.13 build/build.py check      # validate facts/ and scales/, must pass
-python3.13 build/build.py test       # tests/, must pass
+uv run python build/build.py            # what the model currently says
+uv run python build/build.py check      # validate facts/ and scales/, must pass
+uv run python build/build.py test       # tests/, must pass
 ```
 
 `check` must pass before and after any change. It catches unevidenced claims, an
@@ -72,10 +72,10 @@ to do.
 For a review round, use the workbook:
 
 ```bash
-python3.13 build/build.py workbook              # out/AI-Capability-Model.xlsx
+uv run python build/build.py workbook              # out/AI-Capability-Model.xlsx
 # send it; reviewers fill yellow cells on sheet 2; returns go in review/, dated
-python3.13 build/build.py ingest review/<date>-<who>.xlsx [review/<date>-<who2>.xlsx ...]
-python3.13 build/build.py all                   # check, then workbook + views
+uv run python build/build.py ingest review/<date>-<who>.xlsx [review/<date>-<who2>.xlsx ...]
+uv run python build/build.py all                   # check, then workbook + views
 ```
 
 Ingest reads sheet 2 only: value, evidence, observed_by, observed_on. It never touches

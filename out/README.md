@@ -1,6 +1,6 @@
 # `out/` — generated. Do not edit.
 
-Everything here is produced by `python3 build/build.py all` from `facts/` and `scales/`,
+Everything here is produced by `uv run python build/build.py all` from `facts/` and `scales/`,
 and is overwritten on the next build. A finding is never fixed here; fix the fact and
 rebuild. These files are tracked in git so that the current state of the model can be
 read without running anything.

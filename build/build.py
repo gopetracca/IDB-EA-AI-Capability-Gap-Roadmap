@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 """The only build command.
 
-    python3 build/build.py            what the model currently says
-    python3 build/build.py check      validate facts/ and scales/, report problems
-    python3 build/build.py workbook   write out/AI-Capability-Model.xlsx
-    python3 build/build.py views      write the reports and views to out/
-    python3 build/build.py all        check, then workbook + views
-    python3 build/build.py ingest [path ...]   read reviewer edits back into facts/
-    python3 build/build.py test       run the test suite
+    uv run python build/build.py            what the model currently says
+    uv run python build/build.py check      validate facts/ and scales/, report problems
+    uv run python build/build.py workbook   write out/AI-Capability-Model.xlsx
+    uv run python build/build.py views      write the reports and views to out/
+    uv run python build/build.py all        check, then workbook + views
+    uv run python build/build.py ingest [path ...]   read reviewer edits back into facts/
+    uv run python build/build.py test       run the test suite
 
 facts/ is edited. out/ is generated. `ingest` is the one path that writes to
 facts/, and it only ever writes observations.
@@ -474,7 +474,7 @@ def cmd_ingest(paths=None):
         total += len(changed)
     F.save_facts('observations.json', doc)
     if total:
-        print("now run: python3 build/build.py all")
+        print("now run: uv run python build/build.py all")
     return 0
 
 

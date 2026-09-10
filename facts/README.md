@@ -4,8 +4,8 @@ Every file here records something true, with evidence and a date where a claim i
 made. **Nothing here is a score.** Levels are derived by `scales/`; views are generated
 into `out/`. This directory is edited; the other two are not.
 
-`python3 build/build.py check` validates every file below and must pass before and after
-any change. `python3 build/build.py ingest` is the only program that writes here, and it
+`uv run python build/build.py check` validates every file below and must pass before and after
+any change. `uv run python build/build.py ingest` is the only program that writes here, and it
 writes only `observations.json`.
 
 All files are JSON, UTF-8, indent 1, no trailing newline (the form `ingest` writes, so a

@@ -4,20 +4,20 @@ The operating manual. What [`../README.md`](../README.md) describes, this explai
 run. For why it is shaped this way, see [`how-it-works.md`](how-it-works.md). For the shape
 of every file in `facts/`, see [`../facts/README.md`](../facts/README.md).
 
-Requires Python 3 and `openpyxl`. In this environment use `python3.13`.
+Requires Python 3 and `openpyxl`. In this environment use `uv run python`.
 
 ---
 
 ## The commands
 
 ```bash
-python3 build/build.py            # what the model currently says
-python3 build/build.py check      # validate facts/ and scales/, report problems
-python3 build/build.py workbook   # write out/AI-Capability-Model.xlsx
-python3 build/build.py views      # write the reports and views
-python3 build/build.py all        # check, then workbook + views
-python3 build/build.py ingest [path ...]   # read returned workbook(s) back in
-python3 build/build.py test       # run the test suite
+uv run python build/build.py            # what the model currently says
+uv run python build/build.py check      # validate facts/ and scales/, report problems
+uv run python build/build.py workbook   # write out/AI-Capability-Model.xlsx
+uv run python build/build.py views      # write the reports and views
+uv run python build/build.py all        # check, then workbook + views
+uv run python build/build.py ingest [path ...]   # read returned workbook(s) back in
+uv run python build/build.py test       # run the test suite
 ```
 
 `check` must pass before and after any change. It catches claims without evidence, a `no`
@@ -39,7 +39,7 @@ This is the main loop. Everything else is a variation on it.
 **1 · Produce the workbook**
 
 ```bash
-python3 build/build.py workbook
+uv run python build/build.py workbook
 ```
 
 Ten sheets. Sheet 2 is the one that gets filled in; the rest are reference. There are no
@@ -97,8 +97,8 @@ an opinion, and the model does not store opinions. `n-a` is accepted as `n/a`.
 **4 · Read it back**
 
 ```bash
-python3 build/build.py ingest review/2026-09-12-owner-D4.xlsx review/2026-09-12-platform.xlsx
-python3 build/build.py all
+uv run python build/build.py ingest review/2026-09-12-owner-D4.xlsx review/2026-09-12-platform.xlsx
+uv run python build/build.py all
 git add -A && git commit -m "Observations from <who>, <date>"
 ```
 

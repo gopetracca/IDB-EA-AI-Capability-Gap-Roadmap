@@ -8,15 +8,15 @@
 >
 > Level 3 is the highest this model can currently derive. Levels 4 and 5 are defined but need observations nobody collects yet - threshold monitoring and a closed improvement cycle - so a capability at 3 is at the top of what is measured here, not at the top of the scale. Level 3 also reads conformance from a standard and a practice co-existing; it is not separately evidenced.
 
-The taxonomy has three levels: **8 domains (L1)**, a reporting cluster that is never scored; **52 capabilities (L2)** — the unit that carries a level and an accountable owner; and **258 criteria (L3)** — the specific practices that can actually be witnessed. *Practised* is observed once per criterion and the capability value is **derived** from those observations, never typed: it reads `yes` only when every criterion was examined and every one passed (ADR-0014). Criteria carry no level of their own. They are listed per capability in section *By domain* below, and each has a row on sheet 2 of the workbook.
+The taxonomy has three levels: **8 domains (L1)**, a reporting cluster that is never scored; **55 capabilities (L2)** — the unit that carries a level and an accountable owner; and **281 criteria (L3)** — the specific practices that can actually be witnessed. *Practised* is observed once per criterion and the capability value is **derived** from those observations, never typed: it reads `yes` only when every criterion was examined and every one passed (ADR-0014). Criteria carry no level of their own. They are listed per capability in section *By domain* below, and each has a row on sheet 2 of the workbook.
 
 | | |
 |---|---|
 | Domains (L1) | 8 |
-| Capabilities (L2) | 52 |
-| Criteria (L3) | 258 |
+| Capabilities (L2) | 55 |
+| Criteria (L3) | 281 |
 | Rated | 0 |
-| Not rated | 52 |
+| Not rated | 55 |
 | Offerings | 7 |
 | Assets | 20 |
 
@@ -55,10 +55,10 @@ This is the question most often got wrong. **Only two of the three taxonomy leve
 | Taxonomy level | What is recorded against it | Rows |
 |---|---|:-:|
 | **L1 domain** (8) | *Nothing.* A domain is a reporting cluster and is never scored | — |
-| **L2 capability** (52) | `enabled`, `skilled`, `defined` — one row each. Plus `practised`, **derived** from the criteria below it and never typed | 156 |
-| **L3 criterion** (258) | `practised` — one row per criterion | 258 |
+| **L2 capability** (55) | `enabled`, `skilled`, `defined` — one row each. Plus `practised`, **derived** from the criteria below it and never typed | 165 |
+| **L3 criterion** (281) | `practised` — one row per criterion | 281 |
 
-So a reviewer answers **414 rows**, not 52: `enabled`, `skilled`, `defined` once per capability, and `practised` once per criterion. The capability's `practised` value shown in the tables below was computed by the roll-up (ADR-0014); **there is nowhere to type it, and typing one is the one edit `check` rejects outright.**
+So a reviewer answers **446 rows**, not 55: `enabled`, `skilled`, `defined` once per capability, and `practised` once per criterion. The capability's `practised` value shown in the tables below was computed by the roll-up (ADR-0014); **there is nowhere to type it, and typing one is the one edit `check` rejects outright.**
 
 ---
 
@@ -433,7 +433,7 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 
 </details>
 
-<details><summary><code>4.5</code> Integration & Tool Enablement — 5 L3 criteria, 0 observed</summary>
+<details><summary><code>4.5</code> Integration & Tool Enablement — 6 L3 criteria, 0 observed</summary>
 
 | L3 | Criterion | What it means | Practised | Evidence |
 |---|---|---|:-:|---|
@@ -442,10 +442,11 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 | `4.5.3` | **Capability Exposure to AI Clients** | Expose institutional capability to AI clients through the prevailing open tool-interface standard. | ? |  |
 | `4.5.4` | **Identity Propagation & Delegated Access** | Carry the acting user's identity through to the system of record. | ? |  |
 | `4.5.5` | **Legacy & Core System Adaptation** | Reach systems that were never designed to be called by an AI client. | ? |  |
+| `4.5.6` | **Agent-to-Agent Interoperability** | Publish and consume agent descriptions, negotiate a task through a defined lifecycle, and carry identity and authorization across an agent boundary. | ? |  |
 
 </details>
 
-<details><summary><code>4.6</code> AI Evaluation & Testing — 5 L3 criteria, 0 observed</summary>
+<details><summary><code>4.6</code> AI Evaluation & Testing — 8 L3 criteria, 0 observed</summary>
 
 | L3 | Criterion | What it means | Practised | Evidence |
 |---|---|---|:-:|---|
@@ -454,6 +455,9 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 | `4.6.3` | **Automated Evaluation Harness Operation** | Run evaluations repeatably as part of the delivery pipeline. | ? |  |
 | `4.6.4` | **Human Review & Expert Evaluation** | Obtain qualified human judgement where automated metrics are insufficient. | ? |  |
 | `4.6.5` | **Pre-Deployment Acceptance Testing** | Test against acceptance criteria and record the result as release evidence. | ? |  |
+| `4.6.6` | **Agent Trajectory & Tool-Use Evaluation** | Evaluate the path taken, not only the answer returned: tool selection, argument correctness, recovery from a failed call, termination and task completion. | ? |  |
+| `4.6.7` | **Simulation & Scenario-Based Testing** | Exercise the system against simulated users, environments and adversarial inputs before it can reach a system of record. | ? |  |
+| `4.6.8` | **Evaluator Validation & Judge Governance** | Where a model does the grading, validate the grader against human judgement and monitor the grader's own drift. | ? |  |
 
 </details>
 
@@ -481,6 +485,8 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 | `5.4` | AI Compute & Capacity Management | Cloud and Infrastructure | ? | yes | ? | yes | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
 | `5.5` | Tool & Connector Catalog Management | Artificial Intelligence | ? | part | ? | yes | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
 | `5.6` | AI Developer Experience & Reuse Assets | Core Platforms | ? | part | ? | part | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
+| `5.7` | AI Runtime Mediation & Egress Control | Artificial Intelligence | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
+| `5.8` | AI Agent Runtime & Execution Environment | Artificial Intelligence | ? | part | ? | part | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
 
 <details><summary><code>5.1</code> AI Platform Service Provisioning — 5 L3 criteria, 0 observed</summary>
 
@@ -553,6 +559,30 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 
 </details>
 
+<details><summary><code>5.7</code> AI Runtime Mediation & Egress Control — 5 L3 criteria, 0 observed</summary>
+
+| L3 | Criterion | What it means | Practised | Evidence |
+|---|---|---|:-:|---|
+| `5.7.1` | **Tool Traffic Mediation** | Route every tool invocation through a controlled point that can observe, authorize and refuse. | ? |  |
+| `5.7.2` | **Outbound Content & Data Egress Control** | Inspect what a tool returns before it enters context, and what a call carries out of the institution. | ? |  |
+| `5.7.3` | **Runtime Policy Distribution & Enforcement** | Distribute policy from one control plane and enforce it at every data-plane instance. | ? |  |
+| `5.7.4` | **Invocation Rate, Budget & Loop Enforcement** | Enforce per-agent call budgets and stop runaway invocation at the mediation point rather than in the agent's own code. | ? |  |
+| `5.7.5` | **Mediation Telemetry Hand-off** | Emit from the mediation point the record that 6.2.3 and 7.8.2 depend on. | ? |  |
+
+</details>
+
+<details><summary><code>5.8</code> AI Agent Runtime & Execution Environment — 5 L3 criteria, 0 observed</summary>
+
+| L3 | Criterion | What it means | Practised | Evidence |
+|---|---|---|:-:|---|
+| `5.8.1` | **Agent Hosting & Execution Runtime** | Provide the managed substrate an agent executes in. | ? |  |
+| `5.8.2` | **Code & Computer-Use Sandboxing** | Execute model-generated code and computer-use actions in an isolated, disposable environment. | ? |  |
+| `5.8.3` | **Agent Memory & State Infrastructure** | Provide the store that enforces what 4.4.4 designed: retention, isolation, and who else can read it. | ? |  |
+| `5.8.4` | **Long-Running Task & Scheduling Support** | Support work that outlives a request, including resumption and cancellation. | ? |  |
+| `5.8.5` | **Runtime Resource & Blast-Radius Limits** | Bound what a single agent execution can consume and reach. | ? |  |
+
+</details>
+
 ### D6 · AI Operations & Reliability
 
 *Able to run AI in production dependably, observably and affordably.*
@@ -565,8 +595,9 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 | `6.4` | AI Incident & Problem Management | Service Delivery | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
 | `6.5` | AI Cost Management | Cloud and Infrastructure | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
 | `6.6` | AI Asset Retirement & Evidence Preservation | Service Delivery | ? | n-a | ? | ? | *not rated* | Not rated: performance has never been observed (enabled recorded, which cannot place a level on its own) |
+| `6.7` | Human Oversight Operations | **none** | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
 
-<details><summary><code>6.1</code> AI Deployment & Serving Operations — 5 L3 criteria, 0 observed</summary>
+<details><summary><code>6.1</code> AI Deployment & Serving Operations — 7 L3 criteria, 0 observed</summary>
 
 | L3 | Criterion | What it means | Practised | Evidence |
 |---|---|---|:-:|---|
@@ -575,6 +606,8 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 | `6.1.3` | **Configuration & Feature Flag Control** | Change runtime behavior safely without redeployment. | ? |  |
 | `6.1.4` | **System Availability & Continuity Management** | Meet availability and continuity commitments for individual AI systems in production. | ? |  |
 | `6.1.5` | **Operational Readiness & Handover** | Hand over to operations with documented procedures before go-live. | ? |  |
+| `6.1.6` | **Agent Fleet & Version Operations** | Operate many agents as a fleet: pinned versions, coordinated rollout, and detection of behavioural change caused by a dependency moving rather than by a release. | ? |  |
+| `6.1.7` | **Provider Failover & Degraded-Mode Operation** | Fail over between model providers, or degrade deliberately, under a policy that is defined and exercised. | ? |  |
 
 </details>
 
@@ -590,7 +623,7 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 
 </details>
 
-<details><summary><code>6.3</code> Continuous Evaluation, Drift & Quality Management — 5 L3 criteria, 0 observed</summary>
+<details><summary><code>6.3</code> Continuous Evaluation, Drift & Quality Management — 6 L3 criteria, 0 observed</summary>
 
 | L3 | Criterion | What it means | Practised | Evidence |
 |---|---|---|:-:|---|
@@ -599,6 +632,7 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 | `6.3.3` | **Bias & Fairness Monitoring in Production** | Monitor outcome disparities on live populations over time. | ? |  |
 | `6.3.4` | **Feedback Capture & Ground-Truth Collection** | Capture corrections and outcomes to build evolving ground truth. | ? |  |
 | `6.3.5` | **Retraining & Refresh Triggering** | Trigger retraining or refresh on defined conditions rather than on schedule alone. | ? |  |
+| `6.3.6` | **Guardrail Effectiveness Monitoring & Tuning** | Measure block rate, false positives and after-the-fact false negatives, and change-control every threshold adjustment. | ? |  |
 
 </details>
 
@@ -614,7 +648,7 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 
 </details>
 
-<details><summary><code>6.5</code> AI Cost Management — 4 L3 criteria, 0 observed</summary>
+<details><summary><code>6.5</code> AI Cost Management — 5 L3 criteria, 0 observed</summary>
 
 | L3 | Criterion | What it means | Practised | Evidence |
 |---|---|---|:-:|---|
@@ -622,6 +656,7 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 | `6.5.2` | **Cost Forecasting & Budget Control** | Forecast AI spend and stop it exceeding authorization. | ? |  |
 | `6.5.3` | **Unit Economics & Cost-per-Outcome** | Express cost per transaction, per document or per outcome, not per month. | ? |  |
 | `6.5.4` | **Optimization & Rightsizing** | Reduce cost through model, caching and routing choices without losing quality. | ? |  |
+| `6.5.5` | **Energy & Carbon Accounting for AI** | Express AI consumption per functional unit in energy and carbon, not only in money. | ? |  |
 
 </details>
 
@@ -633,6 +668,18 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 | `6.6.2` | **Deprecation & Sunset Planning** | Plan and communicate withdrawal before it happens. | ? |  |
 | `6.6.3` | **Decommissioning & Data Disposition** | Remove the system and dispose of its data under retention rules. | ? |  |
 | `6.6.4` | **Archive & Evidence Preservation** | Preserve the records that assurance and legal obligations require after retirement. | ? |  |
+
+</details>
+
+<details><summary><code>6.7</code> Human Oversight Operations — 5 L3 criteria, 0 observed</summary>
+
+| L3 | Criterion | What it means | Practised | Evidence |
+|---|---|---|:-:|---|
+| `6.7.1` | **Review & Approval Queue Operation** | Run the queue an agent's actions wait in, with defined routing and coverage. | ? |  |
+| `6.7.2` | **Oversight Service Levels & Throughput Management** | Commit to and meet a latency and coverage standard for human decisions. | ? |  |
+| `6.7.3` | **Override & Intervention Rate Monitoring** | Monitor how often humans override, and treat a falling rate as a signal rather than as success. | ? |  |
+| `6.7.4` | **Reviewer Competence, Rotation & Automation-Bias Control** | Keep the reviewer capable of dissent. | ? |  |
+| `6.7.5` | **Oversight Evidence Capture** | Record the human decision so that 7.8.2 can produce it later. | ? |  |
 
 </details>
 
@@ -851,7 +898,7 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 | Offering | What a team gets | Assets released | Enables |
 |---|---|:-:|---|
 | **Foundry platform** | Building blocks | 4 of 4 | `5.1`, `5.3`, `5.4` |
-| **Foundry agents** | Building blocks | 6 of 8 | `4.4`, `5.1`, `5.6` |
+| **Foundry agents** | Building blocks | 6 of 8 | `4.4`, `5.1`, `5.6`, `5.8` |
 | **Custom MCP servers** | Reference implementation | 4 of 7 | `4.5`, `5.5` |
 | **Retrieval on AI Search** | Building blocks | 3 of 3 | `3.6` |
 | **Document extraction** | Guidance | 2 of 2 | `3.5` |

@@ -9,8 +9,8 @@
 | | Count | What it is | Carries a level? | Carries an owner? |
 |---|:-:|---|:-:|:-:|
 | **L1 · Domain** | 8 | A reporting cluster. Groups capabilities so a reader can find them | no | no |
-| **L2 · Capability** | 52 | Something the institution must be able to do. **The unit of assessment and of accountability** | yes | yes |
-| **L3 · Criterion** | 258 | A specific practice that can actually be witnessed on a real system | no | no |
+| **L2 · Capability** | 55 | Something the institution must be able to do. **The unit of assessment and of accountability** | yes | yes |
+| **L3 · Criterion** | 281 | A specific practice that can actually be witnessed on a real system | no | no |
 
 A domain is a **reporting cluster, not a lifecycle** — it does not imply a sequence, a team or a process ([ADR-0006](../docs/decisions/adr/0006-single-primary-home.md)). Every capability has exactly one primary home; where it plausibly belongs in two, one is chosen and the other relationship is expressed as a dependency rather than a second listing.
 
@@ -25,12 +25,12 @@ Criteria are the **checklist behind a judgement, not gates**. They are where *pr
 | `D1` | **AI Strategy & Value Management** | Able to set direction for AI and convert it into measurable institutional value. | 5 | 26 |
 | `D2` | **AI Demand & Solution Shaping** | Able to find, qualify and shape AI opportunities into deliverable, adoptable solutions. | 6 | 30 |
 | `D3` | **Data & Knowledge Management** | Able to supply trusted, governed data and knowledge to AI systems. | 7 | 33 |
-| `D4` | **AI Solution Engineering** | Able to design, build, customize and validate AI solutions to a defined standard. | 7 | 38 |
-| `D5` | **AI Platform & Infrastructure** | Able to provide and sustain the technical means to build and run AI. | 6 | 29 |
-| `D6` | **AI Operations & Reliability** | Able to run AI in production dependably, observably and affordably. | 6 | 28 |
+| `D4` | **AI Solution Engineering** | Able to design, build, customize and validate AI solutions to a defined standard. | 7 | 42 |
+| `D5` | **AI Platform & Infrastructure** | Able to provide and sustain the technical means to build and run AI. | 8 | 39 |
+| `D6` | **AI Operations & Reliability** | Able to run AI in production dependably, observably and affordably. | 7 | 37 |
 | `D7` | **AI Governance, Risk, Security & Assurance** | Able to direct, control, protect and evidence the trustworthy use of AI. | 9 | 49 |
 | `D8` | **AI People, Skills & Adoption** | Able to build and sustain the human side of AI: who does it, who can, and who will. | 6 | 25 |
-| | | **Total** | **52** | **258** |
+| | | **Total** | **55** | **281** |
 
 ## How to read the tables below
 
@@ -46,7 +46,7 @@ Criteria are the **checklist behind a judgement, not gates**. They are where *pr
 | Anchor | Means | Count |
 |---|---|:-:|
 | `specialization` | An AI-specific narrowing of a capability the Bank already has. Should map onto an existing line | 18 |
-| `new` | Genuinely new with AI. No existing line to map onto | 20 |
+| `new` | Genuinely new with AI. No existing line to map onto | 23 |
 | `lens` | A view over capabilities that already exist elsewhere. **Unverified — these are the ones to challenge** | 14 |
 
 ---
@@ -317,8 +317,8 @@ Criteria are the **checklist behind a judgement, not gates**. They are where *pr
 | `4.2` | **Model Selection, Customization & Tuning** | choose and adapt models on evidence, and to record what was done. | Artificial Intelligence | new | medium | 5 |
 | `4.3` | **Prompt & Context Engineering** | treat prompts and context assembly as versioned, tested engineering artifacts. | Artificial Intelligence | new | medium | 5 |
 | `4.4` | **Agent & Workflow Orchestration Design** | design what an agent may pursue, how it plans, and where it must stop. | Artificial Intelligence | new | low | 6 |
-| `4.5` | **Integration & Tool Enablement** | give AI systems safe, governed reach into institutional systems. | Core Platforms | new | medium | 5 |
-| `4.6` | **AI Evaluation & Testing** | state, before release, what the system does and does not do reliably. | **none** | new | medium | 5 |
+| `4.5` | **Integration & Tool Enablement** | give AI systems safe, governed reach into institutional systems. | Core Platforms | new | medium | 6 |
+| `4.6` | **AI Evaluation & Testing** | state, before release, what the system does and does not do reliably. | **none** | new | medium | 8 |
 | `4.7` | **AI Release & Change Management** | move AI change into production under control and to reverse it. | Core Platforms | lens | high | 5 |
 
 <details><summary><code>4.1</code> AI Architecture Management & Solution Governance — 7 criteria</summary>
@@ -372,7 +372,7 @@ Criteria are the **checklist behind a judgement, not gates**. They are where *pr
 
 </details>
 
-<details><summary><code>4.5</code> Integration & Tool Enablement — 5 criteria</summary>
+<details><summary><code>4.5</code> Integration & Tool Enablement — 6 criteria</summary>
 
 | L3 | Criterion | The practice |
 |---|---|---|
@@ -381,10 +381,11 @@ Criteria are the **checklist behind a judgement, not gates**. They are where *pr
 | `4.5.3` | **Capability Exposure to AI Clients** | Expose institutional capability to AI clients through the prevailing open tool-interface standard. |
 | `4.5.4` | **Identity Propagation & Delegated Access** | Carry the acting user's identity through to the system of record. |
 | `4.5.5` | **Legacy & Core System Adaptation** | Reach systems that were never designed to be called by an AI client. |
+| `4.5.6` | **Agent-to-Agent Interoperability** | Publish and consume agent descriptions, negotiate a task through a defined lifecycle, and carry identity and authorization across an agent boundary. |
 
 </details>
 
-<details><summary><code>4.6</code> AI Evaluation & Testing — 5 criteria</summary>
+<details><summary><code>4.6</code> AI Evaluation & Testing — 8 criteria</summary>
 
 | L3 | Criterion | The practice |
 |---|---|---|
@@ -393,6 +394,9 @@ Criteria are the **checklist behind a judgement, not gates**. They are where *pr
 | `4.6.3` | **Automated Evaluation Harness Operation** | Run evaluations repeatably as part of the delivery pipeline. |
 | `4.6.4` | **Human Review & Expert Evaluation** | Obtain qualified human judgement where automated metrics are insufficient. |
 | `4.6.5` | **Pre-Deployment Acceptance Testing** | Test against acceptance criteria and record the result as release evidence. |
+| `4.6.6` | **Agent Trajectory & Tool-Use Evaluation** | Evaluate the path taken, not only the answer returned: tool selection, argument correctness, recovery from a failed call, termination and task completion. |
+| `4.6.7` | **Simulation & Scenario-Based Testing** | Exercise the system against simulated users, environments and adversarial inputs before it can reach a system of record. |
+| `4.6.8` | **Evaluator Validation & Judge Governance** | Where a model does the grading, validate the grader against human judgement and monitor the grader's own drift. |
 
 </details>
 
@@ -420,6 +424,8 @@ Criteria are the **checklist behind a judgement, not gates**. They are where *pr
 | `5.4` | **AI Compute & Capacity Management** | secure and allocate the compute that AI work requires. | Cloud and Infrastructure | specialization | medium | 5 |
 | `5.5` | **Tool & Connector Catalog Management** | control what actions AI systems can reach, as a governed inventory. | Artificial Intelligence | new | low | 5 |
 | `5.6` | **AI Developer Experience & Reuse Assets** | make the compliant path the easiest path for delivery teams. | Core Platforms | specialization | medium | 5 |
+| `5.7` | **AI Runtime Mediation & Egress Control** | stand in the path of every tool and agent call, and to control what goes out through it. | Artificial Intelligence | new | low | 5 |
+| `5.8` | **AI Agent Runtime & Execution Environment** | give agents a governed place to execute, remember and be bounded. | Artificial Intelligence | new | low | 5 |
 
 <details><summary><code>5.1</code> AI Platform Service Provisioning — 5 criteria</summary>
 
@@ -492,20 +498,45 @@ Criteria are the **checklist behind a judgement, not gates**. They are where *pr
 
 </details>
 
+<details><summary><code>5.7</code> AI Runtime Mediation & Egress Control — 5 criteria</summary>
+
+| L3 | Criterion | The practice |
+|---|---|---|
+| `5.7.1` | **Tool Traffic Mediation** | Route every tool invocation through a controlled point that can observe, authorize and refuse. |
+| `5.7.2` | **Outbound Content & Data Egress Control** | Inspect what a tool returns before it enters context, and what a call carries out of the institution. |
+| `5.7.3` | **Runtime Policy Distribution & Enforcement** | Distribute policy from one control plane and enforce it at every data-plane instance. |
+| `5.7.4` | **Invocation Rate, Budget & Loop Enforcement** | Enforce per-agent call budgets and stop runaway invocation at the mediation point rather than in the agent's own code. |
+| `5.7.5` | **Mediation Telemetry Hand-off** | Emit from the mediation point the record that 6.2.3 and 7.8.2 depend on. |
+
+</details>
+
+<details><summary><code>5.8</code> AI Agent Runtime & Execution Environment — 5 criteria</summary>
+
+| L3 | Criterion | The practice |
+|---|---|---|
+| `5.8.1` | **Agent Hosting & Execution Runtime** | Provide the managed substrate an agent executes in. |
+| `5.8.2` | **Code & Computer-Use Sandboxing** | Execute model-generated code and computer-use actions in an isolated, disposable environment. |
+| `5.8.3` | **Agent Memory & State Infrastructure** | Provide the store that enforces what 4.4.4 designed: retention, isolation, and who else can read it. |
+| `5.8.4` | **Long-Running Task & Scheduling Support** | Support work that outlives a request, including resumption and cancellation. |
+| `5.8.5` | **Runtime Resource & Blast-Radius Limits** | Bound what a single agent execution can consume and reach. |
+
+</details>
+
 ### D6 · AI Operations & Reliability
 
 *Able to run AI in production dependably, observably and affordably.*
 
 | ID | Capability | Able to… | Owner | Anchor | Conf. | L3 |
 |---|---|---|---|---|---|:-:|
-| `6.1` | **AI Deployment & Serving Operations** | place AI systems into production and keep them serving. | Artificial Intelligence | specialization | medium | 5 |
+| `6.1` | **AI Deployment & Serving Operations** | place AI systems into production and keep them serving. | Artificial Intelligence | specialization | medium | 7 |
 | `6.2` | **AI Monitoring & Observability** | see what an AI system did, in enough detail to explain it afterwards. | Cloud and Infrastructure | specialization | medium | 5 |
-| `6.3` | **Continuous Evaluation, Drift & Quality Management** | know that a system still performs as it did at release. | **none** | new | medium | 5 |
+| `6.3` | **Continuous Evaluation, Drift & Quality Management** | know that a system still performs as it did at release. | **none** | new | medium | 6 |
 | `6.4` | **AI Incident & Problem Management** | stop AI harm quickly and account for it afterwards. | Service Delivery | lens | high | 5 |
-| `6.5` | **AI Cost Management** | know what AI costs, per unit of value, and to control it. | Cloud and Infrastructure | lens | high | 4 |
+| `6.5` | **AI Cost Management** | know what AI costs, per unit of value, and to control it. | Cloud and Infrastructure | lens | high | 5 |
 | `6.6` | **AI Asset Retirement & Evidence Preservation** | retire AI systems deliberately, with their evidence preserved. | Service Delivery | lens | high | 4 |
+| `6.7` | **Human Oversight Operations** | run the human supervision that 2.5 designed and 7.2.3 requires, at the volume production produces. | **none** | new | low | 5 |
 
-<details><summary><code>6.1</code> AI Deployment & Serving Operations — 5 criteria</summary>
+<details><summary><code>6.1</code> AI Deployment & Serving Operations — 7 criteria</summary>
 
 | L3 | Criterion | The practice |
 |---|---|---|
@@ -514,6 +545,8 @@ Criteria are the **checklist behind a judgement, not gates**. They are where *pr
 | `6.1.3` | **Configuration & Feature Flag Control** | Change runtime behavior safely without redeployment. |
 | `6.1.4` | **System Availability & Continuity Management** | Meet availability and continuity commitments for individual AI systems in production. |
 | `6.1.5` | **Operational Readiness & Handover** | Hand over to operations with documented procedures before go-live. |
+| `6.1.6` | **Agent Fleet & Version Operations** | Operate many agents as a fleet: pinned versions, coordinated rollout, and detection of behavioural change caused by a dependency moving rather than by a release. |
+| `6.1.7` | **Provider Failover & Degraded-Mode Operation** | Fail over between model providers, or degrade deliberately, under a policy that is defined and exercised. |
 
 </details>
 
@@ -529,7 +562,7 @@ Criteria are the **checklist behind a judgement, not gates**. They are where *pr
 
 </details>
 
-<details><summary><code>6.3</code> Continuous Evaluation, Drift & Quality Management — 5 criteria</summary>
+<details><summary><code>6.3</code> Continuous Evaluation, Drift & Quality Management — 6 criteria</summary>
 
 | L3 | Criterion | The practice |
 |---|---|---|
@@ -538,6 +571,7 @@ Criteria are the **checklist behind a judgement, not gates**. They are where *pr
 | `6.3.3` | **Bias & Fairness Monitoring in Production** | Monitor outcome disparities on live populations over time. |
 | `6.3.4` | **Feedback Capture & Ground-Truth Collection** | Capture corrections and outcomes to build evolving ground truth. |
 | `6.3.5` | **Retraining & Refresh Triggering** | Trigger retraining or refresh on defined conditions rather than on schedule alone. |
+| `6.3.6` | **Guardrail Effectiveness Monitoring & Tuning** | Measure block rate, false positives and after-the-fact false negatives, and change-control every threshold adjustment. |
 
 </details>
 
@@ -553,7 +587,7 @@ Criteria are the **checklist behind a judgement, not gates**. They are where *pr
 
 </details>
 
-<details><summary><code>6.5</code> AI Cost Management — 4 criteria</summary>
+<details><summary><code>6.5</code> AI Cost Management — 5 criteria</summary>
 
 | L3 | Criterion | The practice |
 |---|---|---|
@@ -561,6 +595,7 @@ Criteria are the **checklist behind a judgement, not gates**. They are where *pr
 | `6.5.2` | **Cost Forecasting & Budget Control** | Forecast AI spend and stop it exceeding authorization. |
 | `6.5.3` | **Unit Economics & Cost-per-Outcome** | Express cost per transaction, per document or per outcome, not per month. |
 | `6.5.4` | **Optimization & Rightsizing** | Reduce cost through model, caching and routing choices without losing quality. |
+| `6.5.5` | **Energy & Carbon Accounting for AI** | Express AI consumption per functional unit in energy and carbon, not only in money. |
 
 </details>
 
@@ -572,6 +607,18 @@ Criteria are the **checklist behind a judgement, not gates**. They are where *pr
 | `6.6.2` | **Deprecation & Sunset Planning** | Plan and communicate withdrawal before it happens. |
 | `6.6.3` | **Decommissioning & Data Disposition** | Remove the system and dispose of its data under retention rules. |
 | `6.6.4` | **Archive & Evidence Preservation** | Preserve the records that assurance and legal obligations require after retirement. |
+
+</details>
+
+<details><summary><code>6.7</code> Human Oversight Operations — 5 criteria</summary>
+
+| L3 | Criterion | The practice |
+|---|---|---|
+| `6.7.1` | **Review & Approval Queue Operation** | Run the queue an agent's actions wait in, with defined routing and coverage. |
+| `6.7.2` | **Oversight Service Levels & Throughput Management** | Commit to and meet a latency and coverage standard for human decisions. |
+| `6.7.3` | **Override & Intervention Rate Monitoring** | Monitor how often humans override, and treat a falling rate as a signal rather than as success. |
+| `6.7.4` | **Reviewer Competence, Rotation & Automation-Bias Control** | Keep the reviewer capable of dissent. |
+| `6.7.5` | **Oversight Evidence Capture** | Record the human decision so that 7.8.2 can produce it later. |
 
 </details>
 
@@ -789,7 +836,7 @@ Criteria are the **checklist behind a judgement, not gates**. They are where *pr
 
 The three lists a reviewer should go at, and why each one is here.
 
-### 10 capabilities carry low confidence
+### 13 capabilities carry low confidence
 
 The line itself is not yet trusted — its name, its boundary or whether it should exist at all. Nothing should be scored against these until their owner has looked.
 
@@ -803,6 +850,9 @@ The line itself is not yet trusted — its name, its boundary or whether it shou
 | `4.4` | Agent & Workflow Orchestration Design | Artificial Intelligence |
 | `5.2` | Model Access & Traffic Management | Artificial Intelligence |
 | `5.5` | Tool & Connector Catalog Management | Artificial Intelligence |
+| `5.7` | AI Runtime Mediation & Egress Control | Artificial Intelligence |
+| `5.8` | AI Agent Runtime & Execution Environment | Artificial Intelligence |
+| `6.7` | Human Oversight Operations | **none** |
 | `7.7` | AI System & Agent Inventory Management | Artificial Intelligence |
 | `7.9` | AI Impact Assessment & Risk Classification | **none** |
 
@@ -827,7 +877,7 @@ Each is a view over capabilities that already exist somewhere in the Bank's map 
 | `8.5` | AI Change Management & Workforce Transition | Digital Transformation |
 | `8.6` | AI Community & Reuse Culture | Emerging Tech |
 
-### 8 capabilities nobody claims
+### 9 capabilities nobody claims
 
 Nothing in the Bank's own product and enabler catalogue claims these. **This is a finding about the institution, not a gap in the map.** The question for the room is whether the line is wrong or the ownership is missing.
 
@@ -837,6 +887,7 @@ Nothing in the Bank's own product and enabler catalogue claims these. **This is 
 | `2.3` | AI Product Management | AI Demand & Solution Shaping | AI Product Owner |
 | `4.6` | AI Evaluation & Testing | AI Solution Engineering | Quality Engineering Owner |
 | `6.3` | Continuous Evaluation, Drift & Quality Management | AI Operations & Reliability | AI Product Operations Owner |
+| `6.7` | Human Oversight Operations | AI Operations & Reliability | AI Operations Owner |
 | `7.2` | Responsible & Trustworthy AI Practice | AI Governance, Risk, Security & Assurance | Responsible AI Owner |
 | `7.5` | Privacy & Data Protection for AI | AI Governance, Risk, Security & Assurance | Privacy Officer |
 | `7.6` | Legal, Regulatory & Contractual Compliance for AI | AI Governance, Risk, Security & Assurance | General Counsel |
@@ -850,8 +901,8 @@ Mapped against the Bank's own product and enabler catalogue. The point of this t
 
 | Unit | Capabilities | Which |
 |---|:-:|---|
-| Artificial Intelligence | 14 | `1.1` `2.1` `3.6` `3.7` `4.2` `4.3` `4.4` `5.1` `5.2` `5.5` `6.1` `7.1` `7.7` `8.4` |
-| **(nobody)** | 8 | `1.5` `2.3` `4.6` `6.3` `7.2` `7.5` `7.6` `7.9` |
+| Artificial Intelligence | 16 | `1.1` `2.1` `3.6` `3.7` `4.2` `4.3` `4.4` `5.1` `5.2` `5.5` `5.7` `5.8` `6.1` `7.1` `7.7` `8.4` |
+| **(nobody)** | 9 | `1.5` `2.3` `4.6` `6.3` `6.7` `7.2` `7.5` `7.6` `7.9` |
 | Cloud and Infrastructure | 4 | `5.3` `5.4` `6.2` `6.5` |
 | Core Platforms | 4 | `3.5` `4.5` `4.7` `5.6` |
 | Data Management | 4 | `3.1` `3.2` `3.3` `3.4` |
@@ -870,19 +921,23 @@ Mapped against the Bank's own product and enabler catalogue. The point of this t
 
 ## What is new because of agents
 
-7 of 52 capabilities and 30 of 258 criteria are marked as arising from agentic AI rather than from analytics or from generative AI used as a tool. They are flagged because they are the newest part of the map and therefore the least settled.
+11 of 55 capabilities and 45 of 281 criteria are marked as arising from agentic AI rather than from analytics or from generative AI used as a tool. They are flagged because they are the newest part of the map and therefore the least settled.
 
 | ID | Capability | Domain |
 |---|---|---|
 | `2.5` | **Human-AI Interaction & Oversight Design** | AI Demand & Solution Shaping |
 | `4.4` | **Agent & Workflow Orchestration Design** | AI Solution Engineering |
 | `4.5` | **Integration & Tool Enablement** | AI Solution Engineering |
+| `4.6` | **AI Evaluation & Testing** | AI Solution Engineering |
 | `5.5` | **Tool & Connector Catalog Management** | AI Platform & Infrastructure |
+| `5.7` | **AI Runtime Mediation & Egress Control** | AI Platform & Infrastructure |
+| `5.8` | **AI Agent Runtime & Execution Environment** | AI Platform & Infrastructure |
+| `6.7` | **Human Oversight Operations** | AI Operations & Reliability |
 | `7.4` | **AI Security & Resilience** | AI Governance, Risk, Security & Assurance |
 | `7.7` | **AI System & Agent Inventory Management** | AI Governance, Risk, Security & Assurance |
 | `7.9` | **AI Impact Assessment & Risk Classification** | AI Governance, Risk, Security & Assurance |
 
-<details><summary>30 agentic criteria</summary>
+<details><summary>45 agentic criteria</summary>
 
 | L3 | Criterion | Under |
 |---|---|---|
@@ -900,15 +955,30 @@ Mapped against the Bank's own product and enabler catalogue. The point of this t
 | `4.5.2` | Tool & Function Definition | `4.5` Integration & Tool Enablement |
 | `4.5.3` | Capability Exposure to AI Clients | `4.5` Integration & Tool Enablement |
 | `4.5.4` | Identity Propagation & Delegated Access | `4.5` Integration & Tool Enablement |
+| `4.5.6` | Agent-to-Agent Interoperability | `4.5` Integration & Tool Enablement |
+| `4.6.6` | Agent Trajectory & Tool-Use Evaluation | `4.6` AI Evaluation & Testing |
+| `4.6.7` | Simulation & Scenario-Based Testing | `4.6` AI Evaluation & Testing |
 | `5.5.1` | Tool & Connector Catalog Management | `5.5` Tool & Connector Catalog Management |
 | `5.5.2` | Tool Source Registration & Approval | `5.5` Tool & Connector Catalog Management |
 | `5.5.3` | Tool Permission & Scope Governance | `5.5` Tool & Connector Catalog Management |
 | `5.5.4` | Third-Party Tool Vetting | `5.5` Tool & Connector Catalog Management |
 | `5.5.5` | Tool Version & Deprecation Control | `5.5` Tool & Connector Catalog Management |
+| `5.7.1` | Tool Traffic Mediation | `5.7` AI Runtime Mediation & Egress Control |
+| `5.7.2` | Outbound Content & Data Egress Control | `5.7` AI Runtime Mediation & Egress Control |
+| `5.7.3` | Runtime Policy Distribution & Enforcement | `5.7` AI Runtime Mediation & Egress Control |
+| `5.7.4` | Invocation Rate, Budget & Loop Enforcement | `5.7` AI Runtime Mediation & Egress Control |
+| `5.7.5` | Mediation Telemetry Hand-off | `5.7` AI Runtime Mediation & Egress Control |
+| `5.8.1` | Agent Hosting & Execution Runtime | `5.8` AI Agent Runtime & Execution Environment |
+| `5.8.2` | Code & Computer-Use Sandboxing | `5.8` AI Agent Runtime & Execution Environment |
+| `5.8.3` | Agent Memory & State Infrastructure | `5.8` AI Agent Runtime & Execution Environment |
+| `5.8.4` | Long-Running Task & Scheduling Support | `5.8` AI Agent Runtime & Execution Environment |
+| `5.8.5` | Runtime Resource & Blast-Radius Limits | `5.8` AI Agent Runtime & Execution Environment |
 | `6.1.1` | Model & Agent Deployment | `6.1` AI Deployment & Serving Operations |
+| `6.1.6` | Agent Fleet & Version Operations | `6.1` AI Deployment & Serving Operations |
 | `6.2.2` | Trace & Interaction Logging | `6.2` AI Monitoring & Observability |
 | `6.2.3` | Agent Action & Tool-Call Observability | `6.2` AI Monitoring & Observability |
 | `6.4.2` | Containment & Kill-Switch Execution | `6.4` AI Incident & Problem Management |
+| `6.7.1` | Review & Approval Queue Operation | `6.7` Human Oversight Operations |
 | `7.2.3` | Human Agency & Oversight Enforcement | `7.2` Responsible & Trustworthy AI Practice |
 | `7.4.3` | Injection & Jailbreak Detection and Response | `7.4` AI Security & Resilience |
 | `7.4.4` | Agent Identity & Credential Lifecycle | `7.4` AI Security & Resilience |

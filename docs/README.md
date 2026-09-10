@@ -24,6 +24,14 @@ morning. If a document and an ADR disagree, the ADR is right.
 2. [`how-it-works.md`](how-it-works.md) — **the one to read if you read one thing.** Facts
    versus judgement, the four observations, how a level is derived
 
+### If you are new to this kind of work
+
+**[`the-discipline.md`](the-discipline.md)** — the primer. Where capability modelling and
+maturity assessment come from, the measurement theory underneath them, how heat maps lie,
+what the market instruments are — and then every design decision here with its warrant, the
+objection drill, and what to concede before you are caught. Read it once end to end; use it
+out of order afterwards.
+
 ### If you are about to present it
 
 3. [`../out/walkthrough.html`](../out/walkthrough.html) — **the deck.** The slides, in order:
@@ -82,6 +90,12 @@ morning. If a document and an ADR disagree, the ADR is right.
 | Whether a level is *standard* | [`where-the-scales-come-from.md`](where-the-scales-come-from.md) §7 |
 | What must not be quoted from ISO/IEC 33020 | [`where-the-scales-come-from.md`](where-the-scales-come-from.md) §2.3 |
 | Why we didn't just buy an analyst assessment | [`../README.md`](../README.md) §4, [`analysis/capability-model-comparison.md`](analysis/capability-model-comparison.md) |
+| **Where any of this comes from as a discipline** | [`the-discipline.md`](the-discipline.md) — Crosby → CMM → SPICE → ISO/IEC 330xx, and capability-based planning |
+| **Someone is challenging the scale and I need the answer** | [`the-discipline.md`](the-discipline.md) §12 — the objection drill, 22 of them with the sentence to say |
+| **Why can't we average the levels for the slide?** | [`the-discipline.md`](the-discipline.md) §4.2 — ordinal scales, and why the executive lens averages anyway |
+| **Why does our heat map look like that?** | [`the-discipline.md`](the-discipline.md) §6 — the four ways a heat map lies |
+| **What should I admit before I am caught?** | [`the-discipline.md`](the-discipline.md) §13, then [`../OPEN-ITEMS.md`](../OPEN-ITEMS.md) |
+| Whether the taxonomy is complete for engineering, platform and operations | [`analysis/d4-d6-completeness-review.md`](analysis/d4-d6-completeness-review.md), applied by [ADR-0015](decisions/adr/0015-extend-d4-d6-across-the-agentic-seam.md) |
 
 ---
 
@@ -90,6 +104,7 @@ morning. If a document and an ADR disagree, the ADR is right.
 | | |
 |---|---|
 | [`how-it-works.md`](how-it-works.md) | The design, explained without jargon. Orientation, not normative |
+| [`the-discipline.md`](the-discipline.md) | The primer: the field, the market, and the defence of this model. **Carries handling rules** |
 | [`glossary.md`](glossary.md) | Vocabulary. Live terms, retired terms, and the ambiguous four |
 | [`what-is-settled.md`](what-is-settled.md) | The rules in force, digested from the ADRs. A digest, not a decision |
 | [`first-round.md`](first-round.md) | The plan for getting the first observations in |
@@ -105,6 +120,7 @@ morning. If a document and an ADR disagree, the ADR is right.
 | | |
 |---|---|
 | [`analysis/como-funciona-el-modelo.md`](analysis/como-funciona-el-modelo.md) | Explains the **superseded** two-scale model, in Spanish. Carries a banner saying so. To be rewritten from `how-it-works.md` once the current construct has survived a real conversation ([OPEN-ITEMS](../OPEN-ITEMS.md) #18) |
+| [`analysis/d4-d6-completeness-review.md`](analysis/d4-d6-completeness-review.md) | Completeness review of D4-D6: the agentic seam, the four sweeps that found it, and the external backing for each addition. **Applied 9 September 2026 by ADR-0015** — 3 capabilities and 23 criteria |
 | [`../archive/`](../archive/README.md) | History. **Nothing there is current** |
 
 ---

@@ -1,16 +1,16 @@
 # `build/` — one command, nine modules
 
 ```bash
-python3 build/build.py            # status: what the model currently says
-python3 build/build.py check      # validate facts/ and scales/; must pass
-python3 build/build.py workbook   # out/AI-Capability-Model.xlsx
-python3 build/build.py views      # every view in out/
-python3 build/build.py all        # check, then workbook + views
-python3 build/build.py ingest [path ...]   # read returned workbook(s) into facts/
-python3 build/build.py test       # the test suite (tests/)
+uv run python build/build.py            # status: what the model currently says
+uv run python build/build.py check      # validate facts/ and scales/; must pass
+uv run python build/build.py workbook   # out/AI-Capability-Model.xlsx
+uv run python build/build.py views      # every view in out/
+uv run python build/build.py all        # check, then workbook + views
+uv run python build/build.py ingest [path ...]   # read returned workbook(s) into facts/
+uv run python build/build.py test       # the test suite (tests/)
 ```
 
-Python 3 and `openpyxl` only. In this environment use `python3.13`.
+Python 3 and `openpyxl` only. In this environment use `uv run python`.
 
 | Module | Role | Reads facts/? | Names a scale? |
 |---|---|---|---|

@@ -111,7 +111,7 @@ Everyone gets the same workbook. What changes is which rows they are asked for a
 covering note says.
 
 ```bash
-python3.13 build/build.py all
+uv run python build/build.py all
 ```
 
 | Reviewer | Asked for | On |
@@ -147,9 +147,9 @@ Four things, and the round degrades badly if any is left out.
 ## 4 · Read it back
 
 ```bash
-python3.13 build/build.py ingest review/2026-09-DD-<who>.xlsx [...]
-python3.13 build/build.py check
-python3.13 build/build.py all
+uv run python build/build.py ingest review/2026-09-DD-<who>.xlsx [...]
+uv run python build/build.py check
+uv run python build/build.py all
 git add -A && git commit -m "Observations from <who>, <date>"
 ```
 

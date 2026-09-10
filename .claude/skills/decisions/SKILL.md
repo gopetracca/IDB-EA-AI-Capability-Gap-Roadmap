@@ -95,7 +95,7 @@ then move the file to `archive/` with a line in `archive/README.md`, update
 `scales/README.md` and `OPEN-ITEMS.md`, and run:
 
 ```bash
-python3.13 build/build.py check && python3.13 build/build.py all && python3.13 build/build.py test
+uv run python build/build.py check && uv run python build/build.py all && uv run python build/build.py test
 ```
 
 ## After recording

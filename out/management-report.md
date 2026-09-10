@@ -10,9 +10,9 @@ Read this section before the findings. It states the coverage of the assessment 
 
 | | |
 |---|---|
-| Capabilities in the map | 52 |
+| Capabilities in the map | 55 |
 | **Rated** | **0** |
-| Not yet rated | 52 |
+| Not yet rated | 55 |
 | Platform offerings with evidence | 7 |
 | Assets recorded, with status and location | 20 |
 
@@ -29,7 +29,7 @@ Every row below is backed by a named asset with a location and a status. This is
 | Offering | What a delivery team gets | Assets released | Capabilities it enables |
 |---|---|:-:|---|
 | **Foundry platform** | Building blocks | 4 of 4 | `5.1`, `5.3`, `5.4` |
-| **Foundry agents** | Building blocks | 6 of 8 ⚠ | `4.4`, `5.1`, `5.6` |
+| **Foundry agents** | Building blocks | 6 of 8 ⚠ | `4.4`, `5.1`, `5.6`, `5.8` |
 | **Custom MCP servers** | Reference implementation | 4 of 7 ⚠ | `4.5`, `5.5` |
 | **Retrieval on AI Search** | Building blocks | 3 of 3 | `3.6` |
 | **Document extraction** | Guidance | 2 of 2 | `3.5` |
@@ -51,9 +51,9 @@ That is not a criticism of the build. It is the explanation for a disagreement t
 | What we can evidence today | What we cannot |
 |---|---|
 | 7 offerings, 20 assets, with locations | Whether any of it is used in production |
-| Which capabilities have platform tooling (8), partial tooling (5), or none needed (15) | Whether tooling exists for the 24 nobody has yet examined |
-| Which capabilities have an approved standard (10) or one in pre-release (3) | Whether work is done against them |
-| Where a standard exists in the platform register | Whether the people who need the skills have them: 52 of 52 unobserved |
+| Which capabilities have platform tooling (8), partial tooling (6), or none needed (15) | Whether tooling exists for the 26 nobody has yet examined |
+| Which capabilities have an approved standard (10) or one in pre-release (4) | Whether work is done against them |
+| Where a standard exists in the platform register | Whether the people who need the skills have them: 55 of 55 unobserved |
 
 ---
 
@@ -61,7 +61,7 @@ That is not a criticism of the build. It is the explanation for a disagreement t
 
 ### 4.1 · Capabilities nobody owns
 
-8 of 52 capabilities are claimed by no product or enabler in the institution's own catalogue. This is a finding about the operating model, not a gap in the model. Several are governance capabilities that an institution of this kind is normally expected to hold.
+9 of 55 capabilities are claimed by no product or enabler in the institution's own catalogue. This is a finding about the operating model, not a gap in the model. Several are governance capabilities that an institution of this kind is normally expected to hold.
 
 | ID | Capability | Domain |
 |---|---|---|
@@ -69,6 +69,7 @@ That is not a criticism of the build. It is the explanation for a disagreement t
 | `2.3` | **AI Product Management** | AI Demand & Solution Shaping |
 | `4.6` | **AI Evaluation & Testing** | AI Solution Engineering |
 | `6.3` | **Continuous Evaluation, Drift & Quality Management** | AI Operations & Reliability |
+| `6.7` | **Human Oversight Operations** | AI Operations & Reliability |
 | `7.2` | **Responsible & Trustworthy AI Practice** | AI Governance, Risk, Security & Assurance |
 | `7.5` | **Privacy & Data Protection for AI** | AI Governance, Risk, Security & Assurance |
 | `7.6` | **Legal, Regulatory & Contractual Compliance for AI** | AI Governance, Risk, Security & Assurance |
@@ -109,7 +110,7 @@ That is not a criticism of the build. It is the explanation for a disagreement t
 |---|---|---|
 | Capability owners | For each L3 criterion under a capability they own: is this done on real AI systems, and where? | Every rating in the model. Nothing can be rated without it |
 | Platform teams | The 27 in-the-box questions | Whether controls are inherited or rebuilt per team |
-| Cybersecurity · Data Management · Legal · HR | Does an approved standard exist in your domain? | 39 capabilities currently show *unknown* because the asset register covers platform assets only |
+| Cybersecurity · Data Management · Legal · HR | Does an approved standard exist in your domain? | 41 capabilities currently show *unknown* because the asset register covers platform assets only |
 | Learning & Development | Who is trained, and in what? | Level 2 for every capability where practice exists |
 
 None of this requires new tooling or new investment. It requires four questions put to the people who already know the answers.

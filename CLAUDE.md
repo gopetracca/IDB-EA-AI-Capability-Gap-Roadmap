@@ -1,7 +1,8 @@
 # AI Capability Model — working brief
 
 **IDB Enterprise Architecture · AI capability map, assessment and roadmap**
-Last updated 4 September 2026 · facts + scales (ADR-0013), practised at L3 (ADR-0014)
+Last updated 9 September 2026 · facts + scales (ADR-0013), practised at L3 (ADR-0014),
+D4-D6 extended across the agentic seam (ADR-0015)
 
 Read this first. It exists so a new session starts warm instead of re-deriving decisions
 that are already settled. Two project skills carry the working rules in more depth:
@@ -24,12 +25,12 @@ and lenses come from — and what must not be quoted — is
 
 A capability model for AI at the Bank, and the assessment built on it.
 
-- **8 domains · 52 L2 capabilities · 258 L3 criteria** — `facts/capabilities.json`
+- **8 domains · 55 L2 capabilities · 281 L3 criteria** — `facts/capabilities.json`
 - **7 offerings · 20 assets · 27 in-the-box questions** — `facts/offerings.json`, `facts/assets.json`
-- **414 observations** — `facts/observations.json` (258 criterion-level `practised`
-  plus 3 × 52 capability-level)
-- **52 capabilities mapped to the Bank's own catalogue**, 8 with no owner — `facts/owners.json`
-- **40 graded sources · 18 candidate obligations · 1 use-case question** —
+- **446 observations** — `facts/observations.json` (281 criterion-level `practised`
+  plus 3 × 55 capability-level)
+- **55 capabilities mapped to the Bank's own catalogue**, 9 with no owner — `facts/owners.json`
+- **45 graded sources · 18 candidate obligations · 1 use-case question** —
   `facts/sources.json`, `facts/obligations.json`, `facts/questions.json`
 
 Schemas for every file: `facts/README.md`.
@@ -109,7 +110,7 @@ measured today (`DERIVABLE_MAX`), not of the scale.
   superseded ISO/IEC 15504. Cite the scale by name and levels by clause. See `scales/README.md`.
 - **Grade D cannot support a claim that leaves the Bank.** Licensed analyst material is
   usable internally, never reproduced externally, never listed as a source.
-  `out/provenance.md` lists the 10 capabilities that currently rest partly on grade D.
+  `out/provenance.md` lists the 14 capabilities that currently rest partly on grade D.
 - **The World Bank slide is a maturity model, not a readiness scale.** Grade D, Official
   Use Only. Never cite outside the Bank. The maturity lens's level names are the generic
   CMM vocabulary and must never be attributed to that slide.
@@ -134,6 +135,15 @@ measured today (`DERIVABLE_MAX`), not of the scale.
 **ADR-0014** — `practised` is observed at L3 and derived at L2. Never type a
 capability-level `practised` value; `Model.roll_up` computes it.
 
+**ADR-0015** — D4-D6 extended across the agentic seam: `5.7` runtime mediation and egress
+control, `5.8` agent runtime and execution environment, `6.7` human oversight operations,
+plus 8 criteria on `4.5`, `4.6`, `6.1`, `6.3` and `6.5`. Additive — nothing renumbered. The
+three new capabilities carry `confidence: low` (ADR-0009) and `6.7` has no owner by design.
+A capability is warranted only where a distinct owner, a failure with no landing site and no
+adequate existing home **all three** coincide; otherwise it is a criterion, an offering or a
+question. Modalities — speech-to-text, OCR, translation — are **offerings**, never
+capabilities.
+
 **ADR-0013 is the one that governs the model.** It supersedes ADR-0001 (two scales),
 ADR-0002 (readiness levels) and ADR-0003 (consumption model), and amends ADR-0004 and
 ADR-0005. Those three are kept unedited, with banners. Amendment 1 fixes the wording of
@@ -142,7 +152,7 @@ ADR-0005. Those three are kept unedited, with banners. Amendment 1 fixes the wor
 Still current and worth knowing:
 
 - **ADR-0006** — the 8 domains are reporting clusters, not a lifecycle.
-- **ADR-0007** — anchoring is provisional; 14 of 52 are lenses. **Carve out of any
+- **ADR-0007** — anchoring is provisional; 14 of 55 are lenses. **Carve out of any
   approval request** until control mapping exists.
 - **ADR-0008** — statutory references are Legal-owned and all candidate.
 - **ADR-0009** — the taxonomy is validated before anything is scored against it.
@@ -152,14 +162,14 @@ Still current and worth knowing:
 
 ## 6. Building
 
-Python 3 and `openpyxl`. In this environment use `python3.13`.
+Python 3 and `openpyxl`, run through `uv`. In this environment use `uv run python`.
 
 ```bash
-python3.13 build/build.py           # status
-python3.13 build/build.py check     # validate facts/ and scales/ — must pass
-python3.13 build/build.py all       # check, then workbook + views
-python3.13 build/build.py ingest review/2026-09-xx-<who>.xlsx   # one or more files
-python3.13 build/build.py test      # tests/: roll-up table, ladder, contract, ingest round trip
+uv run python build/build.py           # status
+uv run python build/build.py check     # validate facts/ and scales/ — must pass
+uv run python build/build.py all       # check, then workbook + views
+uv run python build/build.py ingest review/2026-09-xx-<who>.xlsx   # one or more files
+uv run python build/build.py test      # tests/: roll-up table, ladder, contract, ingest round trip
 ```
 
 `build/` is seven modules, described in `build/README.md`. `facts.py` is the only one that

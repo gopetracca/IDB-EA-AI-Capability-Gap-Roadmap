@@ -479,14 +479,14 @@
    "title": "Model AI Governance Framework for Agentic AI",
    "publisher": "IMDA Singapore",
    "edition": "Version 1.0",
-   "date": "2026-01-22",
+   "date": "2026-01-22, updated 2026-05-20",
    "url": "https://www.imda.gov.sg/-/media/imda/files/about/emerging-tech-and-research/artificial-intelligence/mgf-for-agentic-ai.pdf",
    "access": "Free",
    "type": "Voluntary governance framework",
    "locus_form": "Dimension name (one of four)",
    "grade": "A",
-   "status": "Current",
-   "caution": "Added during this review as the correct source for agentic capabilities previously attributed to the generative-AI framework."
+   "status": "Current (2026-05-20 update)",
+   "caution": "Added during this review as the correct source for agentic capabilities previously attributed to the generative-AI framework. Supersession check 9 September 2026: IMDA published an update dated 20 May 2026 incorporating industry feedback, adding best practices and case studies on multi-agent systems, third-party agents and automation bias. The IMDA factsheet page carrying that date was opened; the updated framework body was not. The register previously recorded only the 22 January 2026 launch."
   },
   {
    "id": "S32",
@@ -607,6 +607,81 @@
    "grade": "D",
    "status": "Needs pinning",
    "caution": "Internal Audit to confirm which standards are relied on and whether the IIA Global Internal Audit Standards (2024) are adopted directly."
+  },
+  {
+   "id": "S40",
+   "short": "A2A protocol specification",
+   "title": "Agent2Agent (A2A) Protocol Specification",
+   "publisher": "Agentic AI Foundation (Linux Foundation; donated by Google, 2025)",
+   "edition": "1.0.0",
+   "date": "2026 (version 1.0.0)",
+   "url": "https://a2a-protocol.org/latest/specification/",
+   "access": "Open",
+   "type": "Protocol specification",
+   "locus_form": "Named concept or section (e.g. Agent Card, Task lifecycle)",
+   "grade": "A",
+   "status": "Current",
+   "caution": "Verified 9 September 2026: the specification page states 'Latest Released Version 1.0.0' and governance by the Agentic AI Foundation. The v1.0 release date of 12 March 2026 comes from a secondary source and is NOT verified. Graded A for consistency with S33 (MCP), which is the same character of artifact."
+  },
+  {
+   "id": "S41",
+   "short": "ISO/IEC TR 29119-11",
+   "title": "Software and systems engineering — Software testing — Part 11: Guidelines on the testing of AI-based systems",
+   "publisher": "ISO / IEC (JTC 1/SC 7)",
+   "edition": "First edition",
+   "date": "2020-11",
+   "url": "https://www.iso.org/standard/79016.html",
+   "access": "Paid; free contents preview",
+   "type": "Technical Report",
+   "locus_form": "Clause number (e.g. 7 Testing of AI-based systems)",
+   "grade": "C",
+   "status": "Current",
+   "caution": "Paywalled and a Technical Report, not a normative standard. Predates generative AI (2020). Cited for the test-oracle problem and non-determinism, which is what makes trajectory evaluation impossible to run as a golden-dataset exercise. Title, number and date confirmed against the ISO catalogue page on 9 September 2026; body not opened."
+  },
+  {
+   "id": "S42",
+   "short": "ISO/IEC 25059",
+   "title": "Software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE) — Quality model for AI systems",
+   "publisher": "ISO / IEC (JTC 1/SC 7)",
+   "edition": "First edition",
+   "date": "2023-06",
+   "url": "https://www.iso.org/standard/80655.html",
+   "access": "Paid; free contents preview",
+   "type": "Quality model (SQuaRE extension)",
+   "locus_form": "Clause number, or quality characteristic name",
+   "grade": "C",
+   "status": "Current, revision in ballot",
+   "caution": "Paywalled. ISO/IEC DIS 25059 ('Quality models for AI systems') is in ballot, so a revision is in flight — re-check before relying on a clause. Title, number and the existence of the DIS confirmed against the ISO catalogue on 9 September 2026; body not opened."
+  },
+  {
+   "id": "S43",
+   "short": "NIST SP 800-218A",
+   "title": "Secure Software Development Practices for Generative AI and Dual-Use Foundation Models: An SSDF Community Profile",
+   "publisher": "NIST",
+   "edition": "Final",
+   "date": "2024-07-26",
+   "url": "https://csrc.nist.gov/pubs/sp/800/218/a/final",
+   "access": "Open — free PDF",
+   "type": "Secure development framework profile",
+   "locus_form": "SSDF practice or task id (e.g. PW.4, PO.1.1)",
+   "grade": "A",
+   "status": "Current",
+   "caution": "Augments SP 800-218 (SSDF v1.1) with AI-specific practices across the development life cycle. Publication, status and date confirmed against NIST/CSRC on 9 September 2026; body not opened, so no practice id is pinned."
+  },
+  {
+   "id": "S44",
+   "short": "Green Software Foundation SCI",
+   "title": "Software Carbon Intensity (SCI) Specification",
+   "publisher": "Green Software Foundation",
+   "edition": "Current",
+   "date": "2024 (ISO adoption)",
+   "url": "https://greensoftware.foundation/standards/sci/",
+   "access": "Open; the identical ISO adoption is paid",
+   "type": "Measurement specification",
+   "locus_form": "Section name, or the SCI formula term",
+   "grade": "A",
+   "status": "Current",
+   "caution": "Adopted as ISO/IEC 21031:2024, which is paywalled; cite the openly readable GSF specification and note the ISO adoption. SCI is a rate per functional unit, which is why it fits 6.5.3's shape — a token is a natural functional unit. Publisher page and the ISO adoption confirmed 9 September 2026; specification body not opened."
   }
  ],
  "normalize": {
@@ -817,6 +892,38 @@
   "ISO/IEC 23894 - risk identification": {
    "source": "S04",
    "locus": "6.4.2 Risk identification"
+  },
+  "A2A protocol specification": {
+   "source": "S40",
+   "locus": ""
+  },
+  "ISO/IEC TR 29119-11": {
+   "source": "S41",
+   "locus": ""
+  },
+  "ISO/IEC 25059": {
+   "source": "S42",
+   "locus": ""
+  },
+  "NIST SP 800-218A": {
+   "source": "S43",
+   "locus": ""
+  },
+  "Green Software Foundation SCI": {
+   "source": "S44",
+   "locus": ""
+  },
+  "IMDA Agentic AI Framework": {
+   "source": "S31b",
+   "locus": ""
+  },
+  "OWASP GenAI Security Project - agent control standard": {
+   "source": "S32",
+   "locus": "Agent Control Standard (donated to the project, announced 2026-09-01) - UNVERIFIED: structure and control set not opened"
+  },
+  "OWASP GenAI Security Project - securing agentic applications": {
+   "source": "S32",
+   "locus": "Securing Agentic Applications Guide 1.0"
   }
  },
  "extra_from": {

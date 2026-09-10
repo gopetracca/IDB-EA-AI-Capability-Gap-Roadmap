@@ -69,7 +69,7 @@ standard's structure is a guess until the text is opened.
   work is substantial enough to want a narrative record, add a dated entry to
   `docs/provenance/findings-YYYY-MM-DD.md`, matching `findings-2026-09-03.md`, and add it to
   the findings log table in `docs/provenance/README.md`.
-- Then `python3.13 build/build.py check && python3.13 build/build.py all`. The live counts
+- Then `uv run python build/build.py check && uv run python build/build.py all`. The live counts
   are in `out/provenance.md`; dated figures in `OPEN-ITEMS.md` and `docs/provenance/` are
   snapshots and need not be chased.
 

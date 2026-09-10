@@ -6,17 +6,17 @@
 
 | Grade | Meaning | Sources |
 |---|---|:-:|
-| **A** | openly available, dated, versioned, standards body or public authority | 10 |
+| **A** | openly available, dated, versioned, standards body or public authority | 13 |
 | **B** | openly available and dated, but vendor-published or non-normative | 11 |
-| **C** | available but undated / superseded / flagged historical / paywalled | 12 |
+| **C** | available but undated / superseded / flagged historical / paywalled | 14 |
 | **D** | non-public, or not a publication at all - unusable as evidence externally | 7 |
 
 | | |
 |---|---|
-| Sources in the register | 40 |
-| Capability–source citations | 143 |
-| Citations resolving to a registered source | 143 |
-| Citations pinned to a locus (clause, section, control) | 15 |
+| Sources in the register | 45 |
+| Capability–source citations | 162 |
+| Citations resolving to a registered source | 162 |
+| Citations pinned to a locus (clause, section, control) | 18 |
 
 A citation without a locus says *this source informed the capability*; it does not say where. Under ADR-0010 a capability whose loci are never pinned is reclassified as **synthesized** — assembled by us — rather than left claiming a source it cannot point into.
 
@@ -49,21 +49,21 @@ These 14 capabilities cite at least one source a reviewer outside the Bank canno
 
 | ID | Grade | Source | Publisher | Edition · date | Status | Cited by |
 |---|:-:|---|---|---|---|:-:|
-| `S01` | **C** | [ISO/IEC 42001](https://www.iso.org/standard/42001) | ISO / IEC (JTC 1/SC 42) | First edition · 2023-12 | Current | 14 |
+| `S01` | **C** | [ISO/IEC 42001](https://www.iso.org/standard/42001) | ISO / IEC (JTC 1/SC 42) | First edition · 2023-12 | Current | 15 |
 | `S02` | **C** | [ISO/IEC 5338](https://www.iso.org/standard/81118.html) | ISO / IEC (JTC 1/SC 42) | First edition · 2023-12 | Current | 9 |
 | `S03` | **C** | [ISO/IEC 38507](https://www.iso.org/standard/56641.html) | ISO / IEC (JTC 1/SC 40) | First edition · 2022-04 | Current | 3 |
 | `S04` | **C** | [ISO/IEC 23894](https://www.iso.org/standard/77304.html) | ISO / IEC (JTC 1/SC 42) | First edition · 2023-02 | Current | 2 |
 | `S05` | **C** | [ISO/IEC 42005](https://www.iso.org/standard/42005) | ISO / IEC (JTC 1/SC 42) | First edition · 2025-05 | Current | 2 |
 | `S06` | **C** | [ISO/IEC 27001](https://www.iso.org/standard/27001) | ISO / IEC (JTC 1/SC 27) | Third edition + Amd 1:2024 · 2022-10 / 2024 | Current | 2 |
 | `S07` | **C** | [ISO/IEC 27701](https://www.iso.org/standard/27701) | ISO / IEC (JTC 1/SC 27) | Second edition · 2025-10 | Restructured — old loci invalid | 1 |
-| `S08` | **A** | [NIST AI RMF](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf) | NIST, U.S. Department of Commerce | NIST AI 100-1, Version 1.0 · 2023-01-26 | Current | 8 |
+| `S08` | **A** | [NIST AI RMF](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf) | NIST, U.S. Department of Commerce | NIST AI 100-1, Version 1.0 · 2023-01-26 | Current | 9 |
 | `S09` | **A** | [NIST AI 600-1](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf) | NIST, U.S. Department of Commerce | NIST AI 600-1 · 2024-07-26 | Current | 4 |
 | `S10` | **A** | [OECD AI Principles](https://legalinstruments.oecd.org/en/instruments/OECD-LEGAL-0449) | OECD | Adopted 2019; amended 2023-11 and 2024-05 · 2024-05-03 | Current | 3 |
-| `S11` | **A** | [GAO AI Accountability Framework](https://www.gao.gov/assets/gao-21-519sp.pdf) | U.S. Government Accountability Office | GAO-21-519SP · 2021-06-30 | Current | 5 |
+| `S11` | **A** | [GAO AI Accountability Framework](https://www.gao.gov/assets/gao-21-519sp.pdf) | U.S. Government Accountability Office | GAO-21-519SP · 2021-06-30 | Current | 6 |
 | `S12` | **C** | [AWS CAF-AI](https://docs.aws.amazon.com/whitepapers/latest/aws-caf-for-ai/aws-caf-for-ai.html) | Amazon Web Services | Whitepaper · 2024-02-13 | Flagged historical by AWS | 11 |
-| `S13` | **B** | [Microsoft CAF for AI](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ai/) | Microsoft | Living document — no version number · Accessed 3 September 2026 | Current | 5 |
+| `S13` | **B** | [Microsoft CAF for AI](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ai/) | Microsoft | Living document — no version number · Accessed 3 September 2026 | Current | 6 |
 | `S14` | **C** | [Google AI Adoption Framework](https://services.google.com/fh/files/misc/ai_adoption_framework_whitepaper.pdf) | Google Cloud | Undated whitepaper · UNDATED | Undated, pre-GenAI | 4 |
-| `S15` | **B** | [IBM GenAI Capability Model](https://www.ibm.com/architectures/patterns/genai-capability-model) | IBM (Think — Architecture patterns) | Living page · Last updated 2025-04-30 | Current | 11 |
+| `S15` | **B** | [IBM GenAI Capability Model](https://www.ibm.com/architectures/patterns/genai-capability-model) | IBM (Think — Architecture patterns) | Living page · Last updated 2025-04-30 | Current | 13 |
 | `S16` | **B** | [NVIDIA Enterprise AI Factory](https://docs.nvidia.com/ai-enterprise/planning-resource/ai-factory-white-paper/latest/) | NVIDIA Corporation | White paper · Last updated 2026-05-27 | Current | 4 |
 | `S17` | **B** | [SAP AI-native North Star](https://architecture.learning.sap.com/docs/ai-native-north-star-architecture) | SAP (SAP Architecture Center) | Living document · Last updated 2026-05-13 | Current | 4 |
 | `S18` | **C** | [Salesforce ADLC](https://architect.salesforce.com/docs/architect/fundamentals/guide/agent-development-lifecycle.html) | Salesforce (Salesforce Architects) | Living document — undated · UNDATED, accessed 3 September 2026 | Undated | 1 |
@@ -80,17 +80,22 @@ These 14 capabilities cite at least one source a reviewer outside the Bank canno
 | `S29` | **B** | [MITRE AI Maturity Model](https://aimaturitymodel.mitre.org/) | The MITRE Corporation | Guide · 2022-11-17 | Ageing | 2 |
 | `S30` | **B** | [MIT CISR](https://cisr.mit.edu/publication/2025_0801_EnterpriseAIMaturityUpdate_WoernerSebastianWeillKaganer) | MIT Sloan Center for Information Systems Research | Research Briefing Vol. XXV No. 8 · 2025-08-21 | Current | 1 |
 | `S31` | **A** | [IMDA Model AI Governance Framework](https://aiverifyfoundation.sg/wp-content/uploads/2024/05/Model-AI-Governance-Framework-for-Generative-AI-May-2024-1-1.pdf) | IMDA Singapore and AI Verify Foundation | Final · 2024-05-30 | Current — but our citation was ambiguous | 5 |
-| `S31b` | **A** | [IMDA Agentic AI Framework](https://www.imda.gov.sg/-/media/imda/files/about/emerging-tech-and-research/artificial-intelligence/mgf-for-agentic-ai.pdf) | IMDA Singapore | Version 1.0 · 2026-01-22 | Current | 0 |
-| `S32` | **A** | [OWASP GenAI Security Project](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/) | OWASP Foundation | 2026, Version 1.0 · 2026-08 / launch 2026-09-02 | Current | 2 |
-| `S33` | **A** | [MCP specification](https://modelcontextprotocol.io/specification/2026-07-28) | Agentic AI Foundation (Linux Foundation); originated at Anthropic | Revision 2026-07-28 · 2026-07-28 | Current | 2 |
+| `S31b` | **A** | [IMDA Agentic AI Framework](https://www.imda.gov.sg/-/media/imda/files/about/emerging-tech-and-research/artificial-intelligence/mgf-for-agentic-ai.pdf) | IMDA Singapore | Version 1.0 · 2026-01-22, updated 2026-05-20 | Current (2026-05-20 update) | 3 |
+| `S32` | **A** | [OWASP GenAI Security Project](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/) | OWASP Foundation | 2026, Version 1.0 · 2026-08 / launch 2026-09-02 | Current | 5 |
+| `S33` | **A** | [MCP specification](https://modelcontextprotocol.io/specification/2026-07-28) | Agentic AI Foundation (Linux Foundation); originated at Anthropic | Revision 2026-07-28 · 2026-07-28 | Current | 3 |
 | `S34` | **D** | [Gartner](https://www.gartner.com/) | Gartner, Inc. | Subscription research · Various | Non-public | 2 |
 | `S35` | **D** | Consultancy transformation patterns — *n/a* | Various consultancies | n/a · n/a | Not a publication | 2 |
 | `S36` | **D** | IDB institutional practice — *Internal* | Inter-American Development Bank | n/a · n/a | Needs a named internal document | 3 |
 | `S37` | **D** | IDB data protection framework — *Internal* | Inter-American Development Bank | n/a · n/a | Needs pinning | 1 |
 | `S38` | **D** | IDB legal framework — *Internal* | Inter-American Development Bank | n/a · n/a | Needs pinning | 1 |
 | `S39` | **D** | IDB internal audit standards — *Internal* | Inter-American Development Bank | n/a · n/a | Needs pinning | 1 |
+| `S40` | **A** | [A2A protocol specification](https://a2a-protocol.org/latest/specification/) | Agentic AI Foundation (Linux Foundation; donated by Google, 2025) | 1.0.0 · 2026 (version 1.0.0) | Current | 1 |
+| `S41` | **C** | [ISO/IEC TR 29119-11](https://www.iso.org/standard/79016.html) | ISO / IEC (JTC 1/SC 7) | First edition · 2020-11 | Current | 1 |
+| `S42` | **C** | [ISO/IEC 25059](https://www.iso.org/standard/80655.html) | ISO / IEC (JTC 1/SC 7) | First edition · 2023-06 | Current, revision in ballot | 1 |
+| `S43` | **A** | [NIST SP 800-218A](https://csrc.nist.gov/pubs/sp/800/218/a/final) | NIST | Final · 2024-07-26 | Current | 2 |
+| `S44` | **A** | [Green Software Foundation SCI](https://greensoftware.foundation/standards/sci/) | Green Software Foundation | Current · 2024 (ISO adoption) | Current | 1 |
 
-2 sources are in the register but cited by no capability: `S25`, `S31b`.
+1 sources are in the register but cited by no capability: `S25`.
 
 ---
 
@@ -122,25 +127,28 @@ A locus in *italics* after a source is the clause, section or control the citati
 | `4.2` | Model Selection, Customization & Tuning | IBM GenAI Capability Model (B); ISO/IEC 5338 (C); NIST AI 600-1 (A) | 0 of 3 |
 | `4.3` | Prompt & Context Engineering | IBM GenAI Capability Model (B); NIST AI 600-1 (A); OWASP GenAI Security Project (A) | 0 of 3 |
 | `4.4` | Agent & Workflow Orchestration Design | Salesforce ADLC (C); SAP AI-native North Star (B); IBM GenAI Capability Model (B); IMDA Model AI Governance Framework (A) | 0 of 4 |
-| `4.5` | Integration & Tool Enablement | IBM GenAI Capability Model (B); MCP specification (A); SAP AI-native North Star (B); IMDA Model AI Governance Framework (A) | 0 of 4 |
-| `4.6` | AI Evaluation & Testing | NIST AI 600-1 (A); ISO/IEC 5338 (C) | 0 of 2 |
-| `4.7` | AI Release & Change Management | ITIL 4 (C); IT4IT Standard (B); ISO/IEC 5338 (C) | 0 of 3 |
+| `4.5` | Integration & Tool Enablement | IBM GenAI Capability Model (B); MCP specification (A); SAP AI-native North Star (B); IMDA Model AI Governance Framework (A); A2A protocol specification (A) | 0 of 5 |
+| `4.6` | AI Evaluation & Testing | NIST AI 600-1 (A); ISO/IEC 5338 (C); ISO/IEC TR 29119-11 (C); ISO/IEC 25059 (C); IMDA Agentic AI Framework (A) | 0 of 5 |
+| `4.7` | AI Release & Change Management | ITIL 4 (C); IT4IT Standard (B); ISO/IEC 5338 (C); NIST SP 800-218A (A) | 0 of 4 |
 | `5.1` | AI Platform Service Provisioning | AWS CAF-AI (C) *· Platform perspective*; Microsoft CAF for AI (B); NVIDIA Enterprise AI Factory (B) | 1 of 3 |
 | `5.2` | Model Access & Traffic Management | IBM GenAI Capability Model (B); Microsoft CAF for AI (B); ISO/IEC 42001 (C) | 0 of 3 |
 | `5.3` | AI Environment & Workspace Management | Microsoft CAF for AI (B); ISO/IEC 27001 (C) | 0 of 2 |
 | `5.4` | AI Compute & Capacity Management | NVIDIA Enterprise AI Factory (B); Microsoft CAF for AI (B); FinOps Framework (A) | 0 of 3 |
 | `5.5` | Tool & Connector Catalog Management | SAP AI-native North Star (B); IMDA Model AI Governance Framework (A); MCP specification (A) | 0 of 3 |
 | `5.6` | AI Developer Experience & Reuse Assets | IT4IT Standard (B); Open Agile Architecture (B); AWS CAF-AI (C) | 0 of 3 |
-| `6.1` | AI Deployment & Serving Operations | IBM GenAI Capability Model (B); ITIL 4 (C); ISO/IEC 5338 (C) | 0 of 3 |
+| `5.7` | AI Runtime Mediation & Egress Control | OWASP GenAI Security Project (A) *· Agent Control Standard (donated to the project, announced 2026-09-01) - UNVERIFIED: structure and control set not opened*; MCP specification (A); IBM GenAI Capability Model (B) | 1 of 3 |
+| `5.8` | AI Agent Runtime & Execution Environment | OWASP GenAI Security Project (A) *· Securing Agentic Applications Guide 1.0*; IBM GenAI Capability Model (B); Microsoft CAF for AI (B) | 1 of 3 |
+| `6.1` | AI Deployment & Serving Operations | IBM GenAI Capability Model (B); ITIL 4 (C); ISO/IEC 5338 (C); IMDA Agentic AI Framework (A) | 0 of 4 |
 | `6.2` | AI Monitoring & Observability | IBM GenAI Capability Model (B); NVIDIA Enterprise AI Factory (B); NIST AI RMF (A) *· MEASURE* | 1 of 3 |
-| `6.3` | Continuous Evaluation, Drift & Quality Management | NIST AI RMF (A) *· MEASURE*; ISO/IEC 5338 (C) | 1 of 2 |
+| `6.3` | Continuous Evaluation, Drift & Quality Management | NIST AI RMF (A) *· MEASURE*; ISO/IEC 5338 (C); OWASP GenAI Security Project (A) | 1 of 3 |
 | `6.4` | AI Incident & Problem Management | ISO/IEC 42001 (C); NIST AI RMF (A) *· MANAGE*; ITIL 4 (C) | 1 of 3 |
-| `6.5` | AI Cost Management | FinOps Framework (A); Microsoft CAF for AI (B); Gartner (D) | 0 of 3 |
+| `6.5` | AI Cost Management | FinOps Framework (A); Microsoft CAF for AI (B); Gartner (D); Green Software Foundation SCI (A) | 0 of 4 |
 | `6.6` | AI Asset Retirement & Evidence Preservation | ISO/IEC 5338 (C) *· 6.4.17 Disposal*; ISO/IEC 42001 (C); GAO AI Accountability Framework (A) | 1 of 3 |
+| `6.7` | Human Oversight Operations | IMDA Agentic AI Framework (A); ISO/IEC 42001 (C); NIST AI RMF (A) *· MANAGE*; GAO AI Accountability Framework (A) | 1 of 4 |
 | `7.1` | AI Policy, Standards & Management System | ISO/IEC 42001 (C) *· Clauses 4-10 (the management system)*; ISO/IEC 38507 (C); GAO AI Accountability Framework (A) | 1 of 3 |
 | `7.2` | Responsible & Trustworthy AI Practice | NIST AI RMF (A) *· GOVERN 1.2*; OECD AI Principles (A); ISO/IEC 42001 (C) | 1 of 3 |
 | `7.3` | AI Risk Management | NIST AI RMF (A); ISO/IEC 23894 (C) *· 6.4.2 Risk identification*; ISO/IEC 42005 (C) | 1 of 3 |
-| `7.4` | AI Security & Resilience | OWASP GenAI Security Project (A); ISO/IEC 27001 (C); IMDA Model AI Governance Framework (A); NIST AI RMF (A) | 0 of 4 |
+| `7.4` | AI Security & Resilience | OWASP GenAI Security Project (A); ISO/IEC 27001 (C); IMDA Model AI Governance Framework (A); NIST AI RMF (A); NIST SP 800-218A (A) | 0 of 5 |
 | `7.5` | Privacy & Data Protection for AI | ISO/IEC 27701 (C); ISO/IEC 42001 (C); IDB data protection framework (D) | 0 of 3 |
 | `7.6` | Legal, Regulatory & Contractual Compliance for AI | ISO/IEC 42001 (C); IDB legal framework (D) | 0 of 2 |
 | `7.7` | AI System & Agent Inventory Management | ISO/IEC 42001 (C); GAO AI Accountability Framework (A) | 0 of 2 |

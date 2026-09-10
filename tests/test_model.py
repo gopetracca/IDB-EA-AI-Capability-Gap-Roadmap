@@ -2,7 +2,7 @@
 """Tests for the rules the documentation promises.
 
 Each test names the record it checks (an ADR, a README section), so a failing
-test says which promise broke.  Run with `python3 build/build.py test`.
+test says which promise broke.  Run with `uv run python build/build.py test`.
 
 Nothing here writes to facts/.  Builds run against a temporary directory and
 the ingest tests work on an in-memory copy of the observations document.

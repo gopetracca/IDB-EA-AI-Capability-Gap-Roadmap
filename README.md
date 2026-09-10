@@ -169,7 +169,7 @@ what is true       how we judge       what we tell people
 
 1. Someone answers a question — a capability owner, a platform team, Cybersecurity.
 2. The answer is recorded as an observation, with evidence, a name and a date.
-3. `python3 build/build.py all` validates the facts, then regenerates the workbook and
+3. `uv run python build/build.py all` validates the facts, then regenerates the workbook and
    every view. Nothing is built from facts that fail validation.
 
 Recording happens in a workbook: send it, the reviewer fills in the yellow cells, it comes

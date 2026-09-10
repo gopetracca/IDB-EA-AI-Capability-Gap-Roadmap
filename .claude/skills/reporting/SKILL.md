@@ -13,8 +13,8 @@ go stale when a fact changes, it is generated from the fact. Full map of the bui
 ## Before you start
 
 ```bash
-python3.13 build/build.py check     # must pass; advisories are fine
-python3.13 build/build.py test      # tests/; several are about the views
+uv run python build/build.py check     # must pass; advisories are fine
+uv run python build/build.py test      # tests/; several are about the views
 ```
 
 Then find the right place:
@@ -75,8 +75,8 @@ at the end of the bar.
 ## After the change
 
 ```bash
-python3.13 build/build.py all       # check, workbook, views
-python3.13 build/build.py test
+uv run python build/build.py all       # check, workbook, views
+uv run python build/build.py test
 git diff --stat facts/              # must be empty unless you meant to change a fact
 ```
 

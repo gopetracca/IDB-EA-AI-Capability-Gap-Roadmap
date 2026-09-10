@@ -20,12 +20,12 @@ whether a reviewer can open it, not by prestige.
 
 `facts/sources.json` is edited directly. Every string in a capability's `sources` list must
 resolve through its `normalize` (or `extra_from`) table to a register entry, or
-`python3 build/build.py check` fails. A source is added by verifying it first (the `citing`
+`uv run python build/build.py check` fails. A source is added by verifying it first (the `citing`
 skill), then adding the register entry and the citation string it normalizes.
 
 Rebuild after any edit:
 
-    python3 build/build.py all
+    uv run python build/build.py all
 
 ## Findings log
 

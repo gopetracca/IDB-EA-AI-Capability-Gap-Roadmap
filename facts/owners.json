@@ -319,6 +319,18 @@
    "basis": "Core Platforms claims the Development platform (Terraform, CICD). Curation of AI reference implementations and templates is not named — today the AI enabler and EA produce them."
   },
   {
+   "capability": "5.7",
+   "unit": "Artificial Intelligence",
+   "match": "Direct",
+   "basis": "AI enabler claims 'AI Gateway' outright. Note that no offering in facts/offerings.json represents it, so the claim and the register disagree - confirm whether the gateway exists as a service a team can obtain."
+  },
+  {
+   "capability": "5.8",
+   "unit": "Artificial Intelligence",
+   "match": "Partial",
+   "basis": "AI enabler claims Platform Development and Agent Skill Admin, and OFF-02 Foundry agents provides a hosted agent runtime. Sandboxing, isolation and the compute beneath it sit with Cloud and Infrastructure (5.3, 5.4). Confirm the split before treating this as one owner."
+  },
+  {
    "capability": "6.1",
    "unit": "Artificial Intelligence",
    "match": "Direct",
@@ -353,6 +365,12 @@
    "unit": "Service Delivery",
    "match": "Partial",
    "basis": "Service Delivery claims Assets Management; Core Platforms claims e-disposition of records. Retirement of an AI system with its evidence preserved is not named by either."
+  },
+  {
+   "capability": "6.7",
+   "unit": "",
+   "match": "NO MATCH",
+   "basis": "Nobody claims the running of human oversight. 2.5 designs it and 7.2.3 requires it; no unit claims operating the review queue, its service levels or the override rate. Related to 4.6 and 6.3: the Bank has no named owner for whether an AI system is still being watched after release."
   },
   {
    "capability": "7.1",
