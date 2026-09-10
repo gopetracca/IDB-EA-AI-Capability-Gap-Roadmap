@@ -1,6 +1,6 @@
 # Capability assessment — Executive readiness
 
-**Inter-American Development Bank** · generated 2026-09-05 · scale `exec` · **a lens, not the assessment**
+**Inter-American Development Bank** · generated 2026-09-09 · scale `exec` · **a lens, not the assessment**
 
 > **The question this scale asks:** How much of what we said we would do actually exists?
 >
@@ -42,6 +42,61 @@ The taxonomy has three levels: **8 domains (L1)**, a reporting cluster that is n
 | **Defined** | Is there an approved institutional standard, policy or method for this? Set by whoever owns the subject - the platform team, Cybersecurity, Data Management, Legal, HR or EA. | the capability | The document, its owner, its location and a date |
 
 Values: `yes` · `partial` · `no` · `n/a` (with a reason) · `unknown` (nobody has looked — never a zero).
+
+### Where each observation is recorded
+
+This is the question most often got wrong. **Only two of the three taxonomy levels ever carry an observation**, and one value on this page is not recorded by anybody — it is computed.
+
+| Taxonomy level | What is recorded against it | Rows |
+|---|---|:-:|
+| **L1 domain** (8) | *Nothing.* A domain is a reporting cluster and is never scored | — |
+| **L2 capability** (52) | `enabled`, `skilled`, `defined` — one row each. Plus `practised`, **derived** from the criteria below it and never typed | 156 |
+| **L3 criterion** (258) | `practised` — one row per criterion | 258 |
+
+So a reviewer answers **414 rows**, not 52: `enabled`, `skilled`, `defined` once per capability, and `practised` once per criterion. The capability's `practised` value shown in the tables below was computed by the roll-up (ADR-0014); **there is nowhere to type it, and typing one is the one edit `check` rejects outright.**
+
+---
+
+## How this scale places a level
+
+Nothing below is typed. It is derived by running this scale over all **625 combinations** of the five values across the four observations, so it cannot disagree with the rule it describes.
+
+| To reach | **Practised** | **Enabled** | **Skilled** | **Defined** | Reaches |
+|---|---|---|---|---|:-:|
+| **1 Planning** ⚠ | *any* | *any* | *any* | *any* | 513 of 625 |
+| **2 Experimenting** ⚠ | *any* | *any* | *any* | *any* | 480 of 625 |
+| **3 Stabilizing** ⚠ | *any* | *any* | *any* | *any* | 330 of 625 |
+| **4 Scaling** ⚠ | *any* | *any* | *any* | *any* | 119 of 625 |
+| **5 Leading** ⚠ | `yes` or `n/a` or `unknown` | `yes` or `n/a` or `unknown` | `yes` or `n/a` or `unknown` | `yes` or `n/a` or `unknown` | 33 of 625 |
+
+*Read each row as **to reach at least this level**.* `n/a` counts as satisfied: a capability that legitimately needs no tooling is not held down for having none.
+
+Rows marked ⚠ are true of every capability at that level but do **not** by themselves determine it: this scale does something no per-observation condition can express. Read the worked examples below instead.
+
+### When it returns *not rated*
+
+No single observation forces it: this scale declines to place a level when too few dimensions have been observed to judge. That is **112 of 625 combinations**.
+
+Not rated is a result, not a zero: the evidence needed to place the capability has never been gathered.
+
+This scale **does not gate** on performance: it will place a level from the enablers alone, which is why it is a lens and not the assessment.
+
+### Worked: what a set of answers produces
+
+Ten situations a reviewer will actually record, run through this scale. Every level and every reason below is computed, not written.
+
+| If the four answers are | Practised | Enabled | Skilled | Defined | Then | Because |
+|---|---|---|---|---|---|---|
+| Nobody has looked yet | `unknown` | `unknown` | `unknown` | `unknown` | *not rated* | Not rated: nothing has been observed |
+| The enablers exist, but nobody has asked whether the work is done | `unknown` | `yes` | `yes` | `yes` | **5 Leading** | 3 of 3 observed dimensions achieved; practised not observed |
+| Someone looked: it is not done, though the enablers exist | `no` | `yes` | `yes` | `yes` | **4 Scaling** | 3 of 4 observed dimensions achieved |
+| Done on some systems, nothing else observed | `partial` | `unknown` | `unknown` | `unknown` | *not rated* | Not rated: only 1 of 4 dimensions observed (practised) - too few to average without one cell carrying the whole claim |
+| Done everywhere, but no tooling is provided | `yes` | `no` | `yes` | `yes` | **4 Scaling** | 3 of 4 observed dimensions achieved |
+| Done everywhere, tooled, but competence not evidenced | `yes` | `yes` | `unknown` | `yes` | **5 Leading** | 3 of 3 observed dimensions achieved; skilled not observed |
+| Done everywhere, tooled and staffed, no standard recorded | `yes` | `yes` | `yes` | `unknown` | **5 Leading** | 3 of 3 observed dimensions achieved; defined not observed |
+| Done everywhere, tooled and staffed, standard pre-release | `yes` | `yes` | `yes` | `partial` | **4 Scaling** | 4 of 4 observed dimensions achieved |
+| Done everywhere, tooled and staffed, approved standard | `yes` | `yes` | `yes` | `yes` | **5 Leading** | 4 of 4 observed dimensions achieved |
+| Done everywhere and staffed; no tooling is needed here | `yes` | `n/a` | `yes` | `yes` | **5 Leading** | 3 of 3 observed dimensions achieved; enabled not applicable |
 
 ---
 

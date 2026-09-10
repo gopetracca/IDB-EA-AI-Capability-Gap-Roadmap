@@ -9,11 +9,22 @@ facts/questions.json, so adding to either adds a view without touching code.
 """
 from datetime import date
 
+import derive
+
 MARK = {"yes": "yes", "partial": "part", "no": "no", "n/a": "n-a", "unknown": "?"}
 
 
 def _levels(scale):
     return dict((n, k) for n, k, _ in scale.LEVELS)
+
+
+def _cond(c):
+    """One cell of the ladder table: the values an observation may take."""
+    if c['kind'] == 'any':
+        return "*any*"
+    if c['text'].startswith("not "):
+        return "not `%s`" % c['text'][4:]
+    return " or ".join("`%s`" % v for v in c['vals'])
 
 
 def _stamp(m):
@@ -102,6 +113,135 @@ def capability_view(m, scale):
     w("Values: `yes` · `partial` · `no` · `n/a` (with a reason) · "
       "`unknown` (nobody has looked — never a zero).")
     w("")
+
+    # ---- where each observation is recorded
+    w("### Where each observation is recorded")
+    w("")
+    w("This is the question most often got wrong. **Only two of the three taxonomy "
+      "levels ever carry an observation**, and one value on this page is not "
+      "recorded by anybody — it is computed.")
+    w("")
+    w("| Taxonomy level | What is recorded against it | Rows |")
+    w("|---|---|:-:|")
+    rec = derive.recorded_at(m)
+    at_crit = [r for r in rec if r['at'].startswith('L3')]
+    at_cap = [r for r in rec if r['at'].startswith('L2')]
+    w("| **L1 domain** (%d) | *Nothing.* A domain is a reporting cluster and is never "
+      "scored | — |" % len(m.domains))
+    w("| **L2 capability** (%d) | %s — one row each. Plus %s, **derived** from the "
+      "criteria below it and never typed | %d |"
+      % (len(m.capabilities),
+         ", ".join("`%s`" % r['id'] for r in at_cap) or "nothing",
+         ", ".join("`%s`" % r['id'] for r in at_crit) or "nothing",
+         len(at_cap) * len(m.capabilities)))
+    w("| **L3 criterion** (%d) | %s — one row per criterion | %d |"
+      % (n_crit, ", ".join("`%s`" % r['id'] for r in at_crit) or "nothing",
+         len(at_crit) * n_crit))
+    w("")
+    w("So a reviewer answers **%d rows**, not %d: %s once per capability, and `%s` "
+      "once per criterion. The capability's `%s` value shown in the tables below was "
+      "computed by the roll-up (ADR-0014); **there is nowhere to type it, and typing "
+      "one is the one edit `check` rejects outright.**"
+      % (len(m.observations), len(m.capabilities),
+         ", ".join("`%s`" % r['id'] for r in at_cap),
+         at_crit[0]['id'] if at_crit else "", at_crit[0]['id'] if at_crit else ""))
+    w("")
+    w("---")
+    w("")
+
+    # ---- how this scale places a level
+    w("## How this scale places a level")
+    w("")
+    w("Nothing below is typed. It is derived by running this scale over all **%d "
+      "combinations** of the five values across the four observations, so it cannot "
+      "disagree with the rule it describes." % (len(derive.VALUES) ** len(derive.TYPES)))
+    w("")
+    rungs = derive.ladder(scale)
+    hdr = " | ".join("**%s**" % t.title() for t in derive.TYPES)
+    w("| To reach | %s | Reaches |" % hdr)
+    w("|---|%s:-:|" % ("---|" * len(derive.TYPES)))
+    for r in rungs:
+        cells = " | ".join(_cond(r['conds'][t]) for t in derive.TYPES)
+        w("| **%d %s**%s | %s | %d of %d |"
+          % (r['n'], r['name'], "" if r['exact'] else " ⚠", cells,
+             r['combos'], len(derive.VALUES) ** len(derive.TYPES)))
+    w("")
+    w("*Read each row as **to reach at least this level**.* `n/a` counts as satisfied: "
+      "a capability that legitimately needs no tooling is not held down for having "
+      "none.")
+    w("")
+    if all(r['exact'] for r in rungs):
+        w("Every row above is **exact** — those conditions are not a summary of the "
+          "rule, they *are* the rule.")
+    else:
+        w("Rows marked ⚠ are true of every capability at that level but do **not** by "
+          "themselves determine it: this scale does something no per-observation "
+          "condition can express. Read the worked examples below instead.")
+    w("")
+
+    # the step from each rung to the next - the "why a 2 and not a 3" answer
+    steps = [r for r in rungs if r['adds']]
+    if steps:
+        w("### What each step up actually costs")
+        w("")
+        for r in steps:
+            w("- **%d %s** adds: %s"
+              % (r['n'], r['name'],
+                 ", ".join("`%s` must be %s"
+                           % (a, _cond(r['conds'][a])) for a, _b in r['adds'])))
+        w("")
+        last = steps[-1]
+        if len(steps) > 1 and len(last['adds']) == 1:
+            below, (a, _b) = steps[-2], last['adds'][0]
+            w("> **The whole difference between %d %s and %d %s is one observation: "
+              "`%s` must be %s.** Everything else is already required at %d, so a "
+              "capability with the work done, the tooling provided and competent "
+              "people stops at %d until that one observation moves."
+              % (below['n'], below['name'], last['n'], last['name'], a,
+                 _cond(last['conds'][a]), below['n'], below['n']))
+            w("")
+
+    ur, urn = derive.unrated(scale)
+    if urn:
+        w("### When it returns *not rated*")
+        w("")
+        if ur:
+            cause = "; ".join(
+                "`%s` is %s" % (t, " or ".join("`%s`" % v for v in vs))
+                for t, vs in ur)
+            w("Whenever %s — whatever the other observations say. That is **%d of %d "
+              "combinations**." % (cause, urn, len(derive.VALUES) ** len(derive.TYPES)))
+        else:
+            w("No single observation forces it: this scale declines to place a level "
+              "when too few dimensions have been observed to judge. That is **%d of %d "
+              "combinations**." % (urn, len(derive.VALUES) ** len(derive.TYPES)))
+        w("")
+        w("Not rated is a result, not a zero: the evidence needed to place the "
+          "capability has never been gathered.")
+        w("")
+        w("This scale **%s** on performance: %s"
+          % ("gates" if derive.gates_on_practice(scale) else "does not gate",
+             "however good the other three observations look, an unobserved practice "
+             "places no level." if derive.gates_on_practice(scale)
+             else "it will place a level from the enablers alone, which is why it is a "
+                  "lens and not the assessment."))
+        w("")
+
+    # ---- the same rule, worked
+    w("### Worked: what a set of answers produces")
+    w("")
+    w("Ten situations a reviewer will actually record, run through this scale. Every "
+      "level and every reason below is computed, not written.")
+    w("")
+    w("| If the four answers are | %s | Then | Because |"
+      % " | ".join(t.title() for t in derive.TYPES))
+    w("|---|%s---|---|" % ("---|" * len(derive.TYPES)))
+    for label, obs, row in derive.worked([scale]):
+        _, n, nm, why = row[0]
+        w("| %s | %s | %s | %s |"
+          % (label, " | ".join("`%s`" % obs[t] for t in derive.TYPES),
+             ("**%d %s**" % (n, nm)) if n is not None else "*not rated*", why))
+    w("")
     w("---")
     w("")
 
@@ -160,6 +300,268 @@ def capability_view(m, scale):
              ", ".join("`%s`" % x for x in off['enables'])))
     w("")
     return "\n".join(o) + "\n"
+
+
+# =============================================================== capability map
+def capability_map(m):
+    """The taxonomy on its own: domains, capabilities, criteria — no
+    observations, no scale, no level.  This is the map being proposed, rendered
+    so it can be reviewed as a map before anything is measured against it
+    (ADR-0009).  Every count is computed here from facts/capabilities.json.
+    """
+    o = []
+    w = o.append
+    n_crit = sum(len(c['criteria']) for c in m.capabilities)
+    unowned = [c for c in m.capabilities_sorted() if not m.owner(c['id'])[0]]
+    by_conf = {}
+    by_anchor = {}
+    for c in m.capabilities:
+        by_conf.setdefault(c.get('confidence', 'unstated'), []).append(c)
+        by_anchor.setdefault(c.get('anchor', 'unstated'), []).append(c)
+    agentic_caps = [c for c in m.capabilities_sorted() if c.get('agentic')]
+    agentic_crit = [(c, x) for c in m.capabilities_sorted()
+                    for x in c['criteria'] if x.get('agentic')]
+
+    w("# The capability map")
+    w("")
+    w("**Inter-American Development Bank** · the taxonomy alone · generated %s"
+      % date.today().isoformat())
+    w("")
+    w("> This page is the **map**, not the assessment. It carries no observations, no "
+      "scale and no levels — nothing here says how good the Bank is at anything. It "
+      "exists so the taxonomy can be argued with on its own terms before anything is "
+      "measured against it ([ADR-0009](../docs/decisions/adr/0009-taxonomy-validated-before-scoring.md)). "
+      "For what has been observed, see "
+      "[`capability-assessment-level.md`](capability-assessment-level.md).")
+    w("")
+
+    # ---- the three levels
+    w("## The three levels")
+    w("")
+    w("| | Count | What it is | Carries a level? | Carries an owner? |")
+    w("|---|:-:|---|:-:|:-:|")
+    w("| **L1 · Domain** | %d | A reporting cluster. Groups capabilities so a "
+      "reader can find them | no | no |" % len(m.domains))
+    w("| **L2 · Capability** | %d | Something the institution must be able to do. "
+      "**The unit of assessment and of accountability** | yes | yes |"
+      % len(m.capabilities))
+    w("| **L3 · Criterion** | %d | A specific practice that can actually be "
+      "witnessed on a real system | no | no |" % n_crit)
+    w("")
+    w("A domain is a **reporting cluster, not a lifecycle** — it does not imply a "
+      "sequence, a team or a process "
+      "([ADR-0006](../docs/decisions/adr/0006-single-primary-home.md)). Every "
+      "capability has exactly one primary home; where it plausibly belongs in two, "
+      "one is chosen and the other relationship is expressed as a dependency rather "
+      "than a second listing.")
+    w("")
+    w("A capability is stated so that it **survives replacing every vendor**. If a "
+      "line would have to be rewritten because a product was swapped, it is not a "
+      "capability — it is an offering, and it lives in "
+      "[`facts/offerings.json`](../facts/offerings.json) instead.")
+    w("")
+    w("Criteria are the **checklist behind a judgement, not gates**. They are where "
+      "*practised* is observed, because that is the level at which work is actually "
+      "witnessed; the capability's value is derived from them "
+      "([ADR-0014](../docs/decisions/adr/0014-practised-is-observed-at-l3.md)). No "
+      "criterion carries a level of its own.")
+    w("")
+
+    # ---- domains at a glance
+    w("## The eight domains")
+    w("")
+    w("| | Domain | What it means | L2 | L3 |")
+    w("|---|---|---|:-:|:-:|")
+    for d in m.domains:
+        caps = [c for c in m.capabilities if c['domain'] == d['id']]
+        w("| `%s` | **%s** | %s | %d | %d |"
+          % (d['id'], d['name'], d['definition'], len(caps),
+             sum(len(c['criteria']) for c in caps)))
+    w("| | | **Total** | **%d** | **%d** |" % (len(m.capabilities), n_crit))
+    w("")
+
+    # ---- how to read the columns
+    w("## How to read the tables below")
+    w("")
+    w("| Column | What it tells you |")
+    w("|---|---|")
+    w("| **Owner** | The unit in the Bank's own product and enabler catalogue that "
+      "claims this. **none** means nothing in the catalogue claims it — a finding, "
+      "not a blank |")
+    w("| **Anchor** | How this capability relates to the Bank's existing enterprise "
+      "capability map. Provisional until a crosswalk exists "
+      "([ADR-0007](../docs/decisions/adr/0007-anchoring-is-provisional.md)) |")
+    w("| **Conf.** | How confident we are in the line itself — its name, boundary and "
+      "definition. `low` means it needs its owner's eyes before anything is scored "
+      "against it |")
+    w("| **L3** | How many criteria sit behind it |")
+    w("")
+    w("**Anchor** takes three values:")
+    w("")
+    w("| Anchor | Means | Count |")
+    w("|---|---|:-:|")
+    for k, label in (("specialization", "An AI-specific narrowing of a capability the "
+                      "Bank already has. Should map onto an existing line"),
+                     ("new", "Genuinely new with AI. No existing line to map onto"),
+                     ("lens", "A view over capabilities that already exist elsewhere. "
+                      "**Unverified — these are the ones to challenge**")):
+        if k in by_anchor:
+            w("| `%s` | %s | %d |" % (k, label, len(by_anchor[k])))
+    w("")
+
+    # ---- the map
+    w("---")
+    w("")
+    w("## The map")
+    w("")
+    for d in m.domains:
+        caps = sorted([c for c in m.capabilities if c['domain'] == d['id']],
+                      key=lambda x: m.sort_key(x['id']))
+        w("### %s · %s" % (d['id'], d['name']))
+        w("")
+        w("*%s*" % d['definition'])
+        w("")
+        w("| ID | Capability | Able to… | Owner | Anchor | Conf. | L3 |")
+        w("|---|---|---|---|---|---|:-:|")
+        for c in caps:
+            unit = m.owner(c['id'])[0] or "**none**"
+            w("| `%s` | **%s** | %s | %s | %s | %s | %d |"
+              % (c['id'], c['name'], _lede(c['definition']), unit,
+                 c.get('anchor', ''), c.get('confidence', ''), len(c['criteria'])))
+        w("")
+        for c in caps:
+            if not c['criteria']:
+                continue
+            w("<details><summary><code>%s</code> %s — %d criteria</summary>"
+              % (c['id'], c['name'], len(c['criteria'])))
+            w("")
+            w("| L3 | Criterion | The practice |")
+            w("|---|---|---|")
+            for x in c['criteria']:
+                w("| `%s` | **%s** | %s |" % (x['id'], x['name'], x['definition']))
+            w("")
+            w("</details>")
+            w("")
+    w("---")
+    w("")
+
+    # ---- what to challenge
+    w("## What to challenge first")
+    w("")
+    w("The three lists a reviewer should go at, and why each one is here.")
+    w("")
+    low = sorted(by_conf.get('low', []), key=lambda x: m.sort_key(x['id']))
+    if low:
+        w("### %d capabilities carry low confidence" % len(low))
+        w("")
+        w("The line itself is not yet trusted — its name, its boundary or whether it "
+          "should exist at all. Nothing should be scored against these until their "
+          "owner has looked.")
+        w("")
+        w("| ID | Capability | Owner |")
+        w("|---|---|---|")
+        for c in low:
+            w("| `%s` | %s | %s |" % (c['id'], c['name'],
+                                      m.owner(c['id'])[0] or "**none**"))
+        w("")
+    lens = sorted(by_anchor.get('lens', []), key=lambda x: m.sort_key(x['id']))
+    if lens:
+        w("### %d capabilities are lenses over existing ones" % len(lens))
+        w("")
+        w("Each is a view over capabilities that already exist somewhere in the Bank's "
+          "map rather than a new line of its own. The anchoring is **unverified**: it "
+          "rests on judgement, not on a crosswalk against the Bank's enterprise "
+          "capability map. This is why "
+          "[ADR-0007](../docs/decisions/adr/0007-anchoring-is-provisional.md) must be "
+          "carved out of any approval request until that crosswalk exists.")
+        w("")
+        w("| ID | Capability | Owner |")
+        w("|---|---|---|")
+        for c in lens:
+            w("| `%s` | %s | %s |" % (c['id'], c['name'],
+                                      m.owner(c['id'])[0] or "**none**"))
+        w("")
+    if unowned:
+        w("### %d capabilities nobody claims" % len(unowned))
+        w("")
+        w("Nothing in the Bank's own product and enabler catalogue claims these. "
+          "**This is a finding about the institution, not a gap in the map.** The "
+          "question for the room is whether the line is wrong or the ownership is "
+          "missing.")
+        w("")
+        w("| ID | Capability | Domain | Proposed owner |")
+        w("|---|---|---|---|")
+        for c in unowned:
+            w("| `%s` | %s | %s | %s |"
+              % (c['id'], c['name'], m.domain_by_id[c['domain']]['name'],
+                 c.get('proposed_owner') or "—"))
+        w("")
+
+    # ---- ownership
+    w("---")
+    w("")
+    w("## Who owns the map")
+    w("")
+    w("Mapped against the Bank's own product and enabler catalogue. The point of this "
+      "table is that **the model is not one function's instrument**: the unit that "
+      "answers for a capability is usually not Architecture.")
+    w("")
+    units = {}
+    for c in m.capabilities_sorted():
+        units.setdefault(m.owner(c['id'])[0] or "(nobody)", []).append(c['id'])
+    w("| Unit | Capabilities | Which |")
+    w("|---|:-:|---|")
+    for u, ids in sorted(units.items(), key=lambda kv: (-len(kv[1]), kv[0])):
+        w("| %s | %d | %s |" % ("**(nobody)**" if u == "(nobody)" else u, len(ids),
+                                " ".join("`%s`" % x for x in ids)))
+    w("")
+
+    # ---- agentic
+    if agentic_caps:
+        w("---")
+        w("")
+        w("## What is new because of agents")
+        w("")
+        w("%d of %d capabilities and %d of %d criteria are marked as arising from "
+          "agentic AI rather than from analytics or from generative AI used as a "
+          "tool. They are flagged because they are the newest part of the map and "
+          "therefore the least settled."
+          % (len(agentic_caps), len(m.capabilities), len(agentic_crit), n_crit))
+        w("")
+        w("| ID | Capability | Domain |")
+        w("|---|---|---|")
+        for c in agentic_caps:
+            w("| `%s` | **%s** | %s |"
+              % (c['id'], c['name'], m.domain_by_id[c['domain']]['name']))
+        w("")
+        w("<details><summary>%d agentic criteria</summary>" % len(agentic_crit))
+        w("")
+        w("| L3 | Criterion | Under |")
+        w("|---|---|---|")
+        for c, x in agentic_crit:
+            w("| `%s` | %s | `%s` %s |" % (x['id'], x['name'], c['id'], c['name']))
+        w("")
+        w("</details>")
+        w("")
+
+    w("---")
+    w("")
+    w("## Where this map came from")
+    w("")
+    w("Each capability cites the published frameworks its line was drawn from. Those "
+      "citations are graded by whether a reviewer can open them, and the grading — "
+      "with the capabilities that rest on a source a reviewer cannot open — is in "
+      "[`provenance.md`](provenance.md). The map is **not** an adoption of any one "
+      "framework: no published model has this shape, and the lines that are ours say "
+      "so.")
+    w("")
+    return "\n".join(o) + "\n"
+
+
+def _lede(text):
+    """The definition with its leading 'Able to ' removed, for a column whose
+    header already says it."""
+    return text[8:] if text.startswith("Able to ") else text
 
 
 # ================================================================== questions
@@ -461,15 +863,20 @@ def management_report(m, scale):
 
 
 # ================================================================= provenance
-def provenance_view(m):
+def provenance_view(m, scales=None):
     """Where the model's claims come from, and whether a reviewer can open the
     source.  Operationalises ADR-0010: grade exposure per capability, what
     rests on a grade-D source and therefore cannot leave the Bank, and how
-    many citations point into a specific part of a source."""
+    many citations point into a specific part of a source.
+
+    Two registers, kept apart on purpose.  `facts/sources.json` records where
+    the capability MAP was drawn from.  Where the MEASUREMENT INSTRUMENT comes
+    from is declared by each scale on its own face and rendered below, because
+    a scale is a rule we wrote, not a source we cite."""
     import collections
     o = []
     w = o.append
-    w("# Provenance — where the capability map comes from")
+    w("# Provenance — where the model comes from")
     w("")
     w("%s · register `facts/sources.json`, access date %s"
       % (_stamp(m), m.sources_doc.get('access_date', 'unrecorded')))
@@ -534,8 +941,16 @@ def provenance_view(m):
     w("|---|:-:|---|---|---|---|:-:|")
     used = collections.Counter(src['id'] for _, _, src, _ in resolved)
     for s in m.sources:
-        w("| `%s` | **%s** | [%s](%s) | %s | %s · %s | %s | %d |"
-          % (s['id'], s['grade'], s['short'], s.get('url') or '', s.get('publisher', ''),
+        # Only a real URL becomes a link. Grade-D rows carry placeholders like
+        # "Internal" or "n/a" in the url field, and rendering those as links
+        # produces dead links on exactly the rows a reviewer looks at hardest -
+        # the ones that cannot support a claim outside the Bank.
+        url = (s.get('url') or '').strip()
+        link = ("[%s](%s)" % (s['short'], url)
+                if url.startswith(('http://', 'https://'))
+                else "%s — *%s*" % (s['short'], url) if url else s['short'])
+        w("| `%s` | **%s** | %s | %s | %s · %s | %s | %d |"
+          % (s['id'], s['grade'], link, s.get('publisher', ''),
              s.get('edition', ''), s.get('date', ''), s.get('status', ''), used.get(s['id'], 0)))
     w("")
     unused = [s for s in m.sources if not used.get(s['id'])]
@@ -584,4 +999,58 @@ def provenance_view(m):
               % (ob['capability'], ob.get('capability_name', ''), ob['instrument'],
                  ob['subject'], ob['status']))
         w("")
+    # ---- the measurement instrument
+    if scales:
+        w("---")
+        w("")
+        w("## The measurement instrument — where the scales come from")
+        w("")
+        w("Everything above is about the **map**: what the Bank must be able to do, and "
+          "which published frameworks those lines were drawn from. This section is "
+          "about the **instrument**: the rules that turn observations into a level.")
+        w("")
+        w("They are graded differently on purpose. A source is something we *cite*, and "
+          "ADR-0010 grades it by whether a reviewer can open it. A scale is something we "
+          "*wrote* — so it does not appear in the register above; instead each one "
+          "**declares its own basis on its face**, and every view that uses it carries "
+          "that declaration. What follows is read from the scale modules themselves.")
+        w("")
+        w("| Scale | Standing | Asks | Ladder | Ceiling today | Gate |")
+        w("|---|---|---|---|:-:|---|")
+        for sc in scales:
+            cap = getattr(sc, "DERIVABLE_MAX", None)
+            names = dict((n, k) for n, k, _ in sc.LEVELS)
+            gates = derive.gates_on_practice(sc)
+            w("| **%s** | %s | %s | %d–%d | %s | %s |"
+              % (sc.NAME,
+                 "**the default**" if getattr(sc, "DEFAULT", False) else "a lens",
+                 getattr(sc, "QUESTION", "") or "—",
+                 sc.LEVELS[0][0], sc.LEVELS[-1][0],
+                 ("**%d** %s" % (cap, names.get(cap, ""))) if cap is not None
+                 else "%d" % sc.LEVELS[-1][0],
+                 "gates on performance" if gates else "**does not gate**"))
+        w("")
+        for sc in scales:
+            w("### %s" % sc.NAME)
+            w("")
+            w("*%s*" % ("The default scale — the assessment itself."
+                        if getattr(sc, "DEFAULT", False)
+                        else "A lens. Reporting only; where it and the default disagree, "
+                             "the default is the finding."))
+            w("")
+            w("**Basis.** %s" % sc.BASIS)
+            w("")
+            caution = getattr(sc, "CAUTION", None)
+            if caution:
+                w("> **What is verified, and what is not.** %s" % caution)
+                w("")
+            if hasattr(sc, "note"):
+                w("**Note carried on every view.** %s" % sc.note())
+                w("")
+        w("The full account — what was adopted, what is ours, what was retired and why — "
+          "is [`../docs/where-the-scales-come-from.md`](../docs/where-the-scales-come-from.md), "
+          "with the contract every scale must keep in "
+          "[`../scales/README.md`](../scales/README.md).")
+        w("")
+
     return "\n".join(o) + "\n"

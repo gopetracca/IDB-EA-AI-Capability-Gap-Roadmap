@@ -125,7 +125,7 @@ box-shadow:inset 0 -1px 0 rgba(227,97,53,.4)}
 .wrap{padding:0}.banner{position:static}}
 </style></head><body>
 <div class="wrap">
-<header><h1>AI Capability &mdash; Management Report</h1><div class="sub">Inter-American Development Bank &nbsp;&#183;&nbsp; 05 September 2026 &nbsp;&#183;&nbsp; generated from the capability model</div></header>
+<header><h1>AI Capability &mdash; Management Report</h1><div class="sub">Inter-American Development Bank &nbsp;&#183;&nbsp; 09 September 2026 &nbsp;&#183;&nbsp; generated from the capability model</div></header>
 <section><h2>Section 1</h2><h3>What this report can and cannot say</h3>
 <p class="lede">Read this before the findings. It states how much of the assessment has actually been done, so nothing below is read as more than it is.</p>
 <div class="kpis">
@@ -162,12 +162,230 @@ box-shadow:inset 0 -1px 0 rgba(227,97,53,.4)}
 <p class="lede">A <b>level</b> is never typed into this model. It is <b>derived</b> &mdash; a rule reads the four observations and returns a level and a sentence saying why. That rule is called a <b>scale</b>, and it is the only place in the model where a judgement is encoded.</p>
 <p>Separating the two matters more than it sounds. <b>An observation is a fact, not a score.</b> &ldquo;The standard is pre-release&rdquo; is true whichever framework reads it. So the same body of evidence can be read by more than one scale, and the scales <b>cannot disagree about what is true</b> &mdash; only about what to make of it. Adding a scale re-rates nothing and re-interviews nobody.</p>
 <p>That is why this section exists. A reader who arrives holding a different frame &mdash; a maturity ladder, an executive readiness tier &mdash; can be answered in it, without the assessment being redone and without anyone pretending the underlying evidence changed.</p>
+<h3 style="font-size:15px;margin-top:8px">4.1 &nbsp;What the rule reads, and where those answers are recorded</h3>
+<p>Every scale below reads the same four answers. <b>Only two of the three taxonomy levels ever carry one</b>, and one of the four is not recorded by anybody &mdash; it is computed.</p>
+<table><thead><tr><th style="width:24%">Taxonomy level</th><th>What is recorded against it</th><th class="c" style="width:12%">Rows</th></tr></thead><tbody>
+<tr><td><b>L1 domain</b> &middot; 8</td><td><i>Nothing.</i> A domain is a reporting cluster and is never scored</td><td class="c">&mdash;</td></tr>
+<tr><td><b>L2 capability</b> &middot; 52</td><td><code>enabled</code>, <code>skilled</code> and <code>defined</code> &mdash; one row each. Plus <code>practised</code>, <b>derived</b> from the criteria beneath it and never typed</td><td class="c">156</td></tr>
+<tr><td><b>L3 criterion</b> &middot; 258</td><td><code>practised</code> &mdash; one row per criterion, because that is the level at which work can actually be witnessed</td><td class="c">258</td></tr>
+</tbody></table>
+<p>So a review round collects <b>414 rows</b>, not 52. The capability-level <code>practised</code> value every chart in this report is drawn from was <b>computed</b> by the roll-up, never entered: there is nowhere to type it, and a stored level is the one edit validation rejects outright.</p>
+<h3 style="font-size:15px;margin-top:28px">4.2 &nbsp;What each scale asks</h3>
 <table><thead><tr><th style="width:22%">Scale</th><th style="width:26%">The question it asks</th><th style="width:30%">Levels</th><th style="width:22%">Standing</th></tr></thead><tbody>
 <tr><td><b>Capability level</b><br><span style="color:var(--muted);font-size:12px">level</span></td><td>Has the institution established this practice?</td><td style="font-size:12px">0 Incomplete · 1 Performed · 2 Managed · 3 Established · 4 Predictable · 5 Innovating</td><td><b>The default.</b> The assessment itself. Tops out at <b>3</b> today. Gates on performance.</td></tr>
 <tr><td><b>Executive readiness</b><br><span style="color:var(--muted);font-size:12px">exec</span></td><td>How much of what we said we would do actually exists?</td><td style="font-size:12px">1 Planning · 2 Experimenting · 3 Stabilizing · 4 Scaling · 5 Leading</td><td>A lens. Reporting only. Does <b>not</b> gate on performance.</td></tr>
 <tr><td><b>Institutional maturity</b><br><span style="color:var(--muted);font-size:12px">maturity</span></td><td>How far has this practice spread beyond the people doing it?</td><td style="font-size:12px">1 Initial · 2 Emerging · 3 Consolidating · 4 Integrating · 5 Optimizing</td><td>A lens. Reporting only. Tops out at <b>3</b> today. Gates on performance.</td></tr>
 </tbody></table>
-<h4 style="margin:28px 0 2px;font-size:14px">All 52 capabilities, under each scale</h4>
+<h3 style="font-size:15px;margin-top:28px">4.3 &nbsp;What it takes to reach each level</h3>
+<p>Nothing in the tables below is written down anywhere. Each is derived by running that scale over all <b>625 combinations</b> of the five values across the four observations, so it cannot drift from the rule it describes. Read each row as <b>to reach at least this level</b>. <code>n/a</code> counts as satisfied &mdash; a capability that legitimately needs no tooling is not held down for having none.</p>
+<h4 style="margin:24px 0 4px;font-size:14px">Capability level</h4>
+<table><thead><tr><th style="width:20%">To reach</th>
+<th class="c">Practised</th>
+<th class="c">Enabled</th>
+<th class="c">Skilled</th>
+<th class="c">Defined</th>
+<th class="c" style="width:12%">Combinations</th></tr></thead><tbody>
+<tr><td><b>0 Incomplete</b></td>
+<td class="c"><code>yes</code> or <code>partial</code> or <code>no</code></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c">375 of 625</td></tr>
+<tr><td><b>1 Performed</b></td>
+<td class="c"><code>yes</code> or <code>partial</code></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c">250 of 625</td></tr>
+<tr><td><b>2 Managed</b></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code> or <code>n/a</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c">10 of 625</td></tr>
+<tr><td><b>3 Established</b></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code> or <code>n/a</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c">2 of 625</td></tr>
+</tbody></table>
+<p class="vd"><b>1 Performed</b> adds <code>practised</code>&nbsp;=&nbsp;<code>yes</code> or <code>partial</code>; <b>2 Managed</b> adds <code>practised</code>&nbsp;=&nbsp;<code>yes</code>, <code>enabled</code>&nbsp;=&nbsp;<code>yes</code> or <code>n/a</code>, <code>skilled</code>&nbsp;=&nbsp;<code>yes</code>; <b>3 Established</b> adds <code>defined</code>&nbsp;=&nbsp;<code>yes</code>.</p>
+<div class="callout"><p><b>The whole difference between 2 Managed and 3 Established is one observation: <code>defined</code> must be <code>yes</code>.</b> Everything else is already required at 2 &mdash; which is why a capability with the work done, the tooling provided and competent people stops at 2 until an approved standard exists.</p></div>
+<p class="vd"><b>Not rated</b> whenever <code>practised</code> is <code>n/a</code> or <code>unknown</code>, whatever the others say: 250 of 625 combinations. This scale <b>gates</b> on performance.</p>
+<h4 style="margin:24px 0 4px;font-size:14px">Executive readiness <span style="color:var(--muted);font-weight:400">&mdash; a lens</span></h4>
+<table><thead><tr><th style="width:20%">To reach</th>
+<th class="c">Practised</th>
+<th class="c">Enabled</th>
+<th class="c">Skilled</th>
+<th class="c">Defined</th>
+<th class="c" style="width:12%">Combinations</th></tr></thead><tbody>
+<tr><td><b>1 Planning</b> <span class="pill p-no">approx</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c">513 of 625</td></tr>
+<tr><td><b>2 Experimenting</b> <span class="pill p-no">approx</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c">480 of 625</td></tr>
+<tr><td><b>3 Stabilizing</b> <span class="pill p-no">approx</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c">330 of 625</td></tr>
+<tr><td><b>4 Scaling</b> <span class="pill p-no">approx</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c">119 of 625</td></tr>
+<tr><td><b>5 Leading</b> <span class="pill p-no">approx</span></td>
+<td class="c"><code>yes</code> or <code>n/a</code> or <code>unknown</code></td>
+<td class="c"><code>yes</code> or <code>n/a</code> or <code>unknown</code></td>
+<td class="c"><code>yes</code> or <code>n/a</code> or <code>unknown</code></td>
+<td class="c"><code>yes</code> or <code>n/a</code> or <code>unknown</code></td>
+<td class="c">33 of 625</td></tr>
+</tbody></table>
+<p class="vd">Rows marked <b>approx</b> hold for every capability at that level but do not by themselves determine it: this scale averages, and no per-observation condition describes an average. Read it in the worked table below instead.</p>
+<p class="vd"><b>Not rated</b> when too few dimensions have been observed to judge &mdash; no single observation forces it: 112 of 625 combinations. This scale does <b>not</b> gate on performance.</p>
+<h4 style="margin:24px 0 4px;font-size:14px">Institutional maturity <span style="color:var(--muted);font-weight:400">&mdash; a lens</span></h4>
+<table><thead><tr><th style="width:20%">To reach</th>
+<th class="c">Practised</th>
+<th class="c">Enabled</th>
+<th class="c">Skilled</th>
+<th class="c">Defined</th>
+<th class="c" style="width:12%">Combinations</th></tr></thead><tbody>
+<tr><td><b>1 Initial</b></td>
+<td class="c"><code>yes</code> or <code>partial</code></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c">250 of 625</td></tr>
+<tr><td><b>2 Emerging</b></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code> or <code>n/a</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><span style="color:var(--muted)">any</span></td>
+<td class="c">10 of 625</td></tr>
+<tr><td><b>3 Consolidating</b></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code> or <code>n/a</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c">2 of 625</td></tr>
+</tbody></table>
+<p class="vd"><b>2 Emerging</b> adds <code>practised</code>&nbsp;=&nbsp;<code>yes</code>, <code>enabled</code>&nbsp;=&nbsp;<code>yes</code> or <code>n/a</code>, <code>skilled</code>&nbsp;=&nbsp;<code>yes</code>; <b>3 Consolidating</b> adds <code>defined</code>&nbsp;=&nbsp;<code>yes</code>.</p>
+<div class="callout"><p><b>The whole difference between 2 Emerging and 3 Consolidating is one observation: <code>defined</code> must be <code>yes</code>.</b> Everything else is already required at 2 &mdash; which is why a capability with the work done, the tooling provided and competent people stops at 2 until an approved standard exists.</p></div>
+<p class="vd"><b>Not rated</b> whenever <code>practised</code> is <code>no</code> or <code>n/a</code> or <code>unknown</code>, whatever the others say: 375 of 625 combinations. This scale <b>gates</b> on performance.</p>
+<h3 style="font-size:15px;margin-top:28px">4.4 &nbsp;The same answers, read by every scale</h3>
+<p>Ten situations a reviewer will actually record, run through all 3 scales at once. Every level and every reason is computed by calling the rule, not written here.</p>
+<table><thead><tr><th style="width:26%">If the four answers are</th>
+<th class="c">Pra</th>
+<th class="c">Ena</th>
+<th class="c">Ski</th>
+<th class="c">Def</th>
+<th class="c">Capability level</th>
+<th class="c">Executive readiness<br><span style="font-weight:400">(lens)</span></th>
+<th class="c">Institutional maturity<br><span style="font-weight:400">(lens)</span></th>
+</tr></thead><tbody>
+<tr><td>Nobody has looked yet</td>
+<td class="c"><code>unknown</code></td>
+<td class="c"><code>unknown</code></td>
+<td class="c"><code>unknown</code></td>
+<td class="c"><code>unknown</code></td>
+<td class="c"><span style="color:var(--muted)">not rated</span></td>
+<td class="c"><span style="color:var(--muted)">not rated</span></td>
+<td class="c"><span style="color:var(--muted)">not rated</span></td>
+</tr>
+<tr><td>The enablers exist, but nobody has asked whether the work is done</td>
+<td class="c"><code>unknown</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><span style="color:var(--muted)">not rated</span></td>
+<td class="c"><b>5</b> Leading</td>
+<td class="c"><span style="color:var(--muted)">not rated</span></td>
+</tr>
+<tr><td>Someone looked: it is not done, though the enablers exist</td>
+<td class="c"><code>no</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><b>0</b> Incomplete</td>
+<td class="c"><b>4</b> Scaling</td>
+<td class="c"><span style="color:var(--muted)">not rated</span></td>
+</tr>
+<tr><td>Done on some systems, nothing else observed</td>
+<td class="c"><code>partial</code></td>
+<td class="c"><code>unknown</code></td>
+<td class="c"><code>unknown</code></td>
+<td class="c"><code>unknown</code></td>
+<td class="c"><b>1</b> Performed</td>
+<td class="c"><span style="color:var(--muted)">not rated</span></td>
+<td class="c"><b>1</b> Initial</td>
+</tr>
+<tr><td>Done everywhere, but no tooling is provided</td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>no</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><b>1</b> Performed</td>
+<td class="c"><b>4</b> Scaling</td>
+<td class="c"><b>1</b> Initial</td>
+</tr>
+<tr><td>Done everywhere, tooled, but competence not evidenced</td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>unknown</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><b>1</b> Performed</td>
+<td class="c"><b>5</b> Leading</td>
+<td class="c"><b>1</b> Initial</td>
+</tr>
+<tr><td>Done everywhere, tooled and staffed, no standard recorded</td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>unknown</code></td>
+<td class="c"><b>2</b> Managed</td>
+<td class="c"><b>5</b> Leading</td>
+<td class="c"><b>2</b> Emerging</td>
+</tr>
+<tr><td>Done everywhere, tooled and staffed, standard pre-release</td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>partial</code></td>
+<td class="c"><b>2</b> Managed</td>
+<td class="c"><b>4</b> Scaling</td>
+<td class="c"><b>2</b> Emerging</td>
+</tr>
+<tr><td>Done everywhere, tooled and staffed, approved standard</td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><b>3</b> Established</td>
+<td class="c"><b>5</b> Leading</td>
+<td class="c"><b>3</b> Consolidating</td>
+</tr>
+<tr><td>Done everywhere and staffed; no tooling is needed here</td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>n/a</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><code>yes</code></td>
+<td class="c"><b>3</b> Established</td>
+<td class="c"><b>5</b> Leading</td>
+<td class="c"><b>3</b> Consolidating</td>
+</tr>
+</tbody></table>
+<div class="callout warn"><p><b>Look at the second row.</b> With the tooling provided, the people competent and an approved standard in place, but nobody yet asked whether the work is actually done, <b>Capability level</b> and <b>Institutional maturity</b> return <b>not rated</b> &mdash; while <b>Executive readiness</b> places it near the top of its ladder. <b>That single row is the entire argument for this model.</b></p></div>
+<h3 style="font-size:15px;margin-top:28px">4.5 &nbsp;All 52 capabilities, under each scale</h3>
 <p class="vd">The same 52 capabilities and the same observations in every bar. Only the rule changes.</p>
 <svg viewBox="0 0 880 144" role="img" class="chart"><text x="0" y="14" class="bl">Capability level</text><text x="0" y="26" class="bs">level</text><rect x="236.0" y="0" width="570.0" height="34" fill="#F4F6F8" stroke="#fff" stroke-width="1"><title>Not rated: 52</title></rect><text x="521.0" y="21" class="bn" fill="#1a2126">52</text><text x="816" y="21" class="bt">52</text><text x="0" y="62" class="bl">Executive readiness</text><text x="0" y="74" class="bs">exec</text><rect x="236.0" y="48" width="32.9" height="34" fill="#4C8CD2" stroke="#fff" stroke-width="1"><title>3 Stabilizing: 3</title></rect><text x="252.4" y="69" class="bn" fill="#fff">3</text><rect x="268.9" y="48" width="21.9" height="34" fill="#1C5BA8" stroke="#fff" stroke-width="1"><title>4 Scaling: 2</title></rect><rect x="290.8" y="48" width="87.7" height="34" fill="#002869" stroke="#fff" stroke-width="1"><title>5 Leading: 8</title></rect><text x="334.7" y="69" class="bn" fill="#fff">8</text><rect x="378.5" y="48" width="427.5" height="34" fill="#F4F6F8" stroke="#fff" stroke-width="1"><title>Not rated: 39</title></rect><text x="592.2" y="69" class="bn" fill="#1a2126">39</text><text x="816" y="69" class="bt">52</text><text x="0" y="110" class="bl">Institutional maturity</text><text x="0" y="122" class="bs">maturity</text><rect x="236.0" y="96" width="570.0" height="34" fill="#F4F6F8" stroke="#fff" stroke-width="1"><title>Not rated: 52</title></rect><text x="521.0" y="117" class="bn" fill="#1a2126">52</text><text x="816" y="117" class="bt">52</text></svg>
 <div class="callout warn"><p><b><b>Capability level</b> and <b>Institutional maturity</b> rate nothing today; <b>Executive readiness</b> rates 13 of 52.</b></p>

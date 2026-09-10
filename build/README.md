@@ -1,4 +1,4 @@
-# `build/` — one command, seven modules
+# `build/` — one command, nine modules
 
 ```bash
 python3 build/build.py            # status: what the model currently says
@@ -19,6 +19,8 @@ Python 3 and `openpyxl` only. In this environment use `python3.13`.
 | `build_workbook.py` | The ten-sheet review workbook, no formulas | no | no |
 | `build_views.py` | Markdown: one capability page per scale, one page per question, the text report, the provenance view | no | no |
 | `build_report.py` | The self-contained HTML management report, live and illustrative | no | no |
+| `build_deck.py` | The self-contained HTML walkthrough deck. Argues the design rather than reporting a result, which is why it is not part of the report | no | no |
+| `derive.py` | **Explains a scale by running it.** Evaluates `level()` over all 625 observation combinations to derive what each rung requires, what the next rung adds, what forces *not rated*, and a worked table. Nothing about a scale is described in prose anywhere; it is computed from the rule | no | no |
 | `charts.py` | Inline-SVG primitives and the palette, shared by the report and its illustrative edition | no | no |
 | `sample.py` | SAMPLE observations for the illustrative edition, generated in memory, never written | no | no |
 
@@ -36,8 +38,14 @@ fact file** means one loader line in `facts.Model.__init__`, a `check` rule in
   date) print but do not fail.
 - **Sample data never reaches `facts/`.** `sample.Demo` wraps the real model and substitutes
   observations in memory. A test asserts the facts digest is unchanged by a build.
-- **Prose with a number in it is computed**, in both report builders. If a sentence would go
-  stale when a fact changes, generate it from the fact.
+- **A rule is never described twice.** What a scale requires is derived from the scale by
+  `derive.py`, not written beside it. Two tests hold it honest: every combination a scale
+  rates must satisfy the conditions the ladder claims, and a rung flagged *exact* must be
+  exactly reproducible from them.
+- **Prose with a number in it is computed**, in every builder that writes prose — the report,
+  the deck and the Markdown views. If a sentence would go stale when a fact changes,
+  generate it from the fact. **This includes the deck**: a slide with a typed count is wrong
+  the first time a fact changes, and nobody notices.
 - **Never read `obs_by_cap[...]['practised']`.** It raises on purpose (ADR-0014). Use
   `Model.values(cid)` for the four rolled-up values, `Model.criteria_obs(cid, 'practised')`
   for the rows.

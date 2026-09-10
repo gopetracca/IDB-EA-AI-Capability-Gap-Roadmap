@@ -20,6 +20,19 @@ QUESTION = "Has the institution established this practice?"
 BASIS = ("Adapted from ISO/IEC 33020:2019 (process measurement framework). "
          "Simplified: four observations rather than five process attributes, "
          "three values rather than the standard's four-point N-P-L-F scale.")
+# What about this scale's basis has been verified against the source, and what
+# has not.  Shown wherever the scale's provenance is reported, so the boundary
+# of the check travels with the claim rather than living only in a README.
+CAUTION = (
+    "ISO/IEC 33020:2019 is paywalled and its published preview stops before "
+    "clause 5.3. Verified from the preview and safe to cite: the six-point "
+    "scale 0 Incomplete to 5 Innovating, the process attribute identifiers and "
+    "names, and PA 2.1's resource and competence outcomes. NOT verified, and "
+    "must not be quoted: the N-P-L-F percentage bands and the exact capability "
+    "level rule - both come from secondary sources about the superseded "
+    "ISO/IEC 15504, not from this standard. The rule implemented here is our "
+    "own simplification and is labelled as such. Grade C: paywalled, so a "
+    "reviewer without a licence cannot open it.")
 
 LEVELS = [
     (0, "Incomplete",

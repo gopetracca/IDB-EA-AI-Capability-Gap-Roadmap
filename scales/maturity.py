@@ -33,6 +33,14 @@ QUESTION = "How far has this practice spread beyond the people doing it?"
 BASIS = ("Ours. The conventional five-stage maturity ladder (CMM/CMMI line, "
          "SEI 1991) applied to the same four observations as the default "
          "scale. Not adopted from any specific published maturity model.")
+CAUTION = (
+    "'Initial' at 1 and 'Optimizing' at 5 are CMM/CMMI (SEI, 1991) - public, "
+    "citable, and the origin of the whole convention. The middle-band words are "
+    "the generic vocabulary that recurs across many published maturity models; "
+    "no model owns them. This ladder is NOT adopted from any particular "
+    "institution's maturity model and must never be attributed to one: cite the "
+    "shape, never a slide. Under ADR-0010 its derivation type is adapted for "
+    "the ladder and ours for the rule.")
 
 LEVELS = [
     (1, "Initial",

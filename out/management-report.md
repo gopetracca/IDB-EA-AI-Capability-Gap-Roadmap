@@ -1,6 +1,6 @@
 # AI capability — management report
 
-**Inter-American Development Bank** · 2026-09-05
+**Inter-American Development Bank** · 2026-09-09
 
 ---
 

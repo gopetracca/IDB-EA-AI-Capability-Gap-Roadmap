@@ -49,12 +49,12 @@ identically in Excel, LibreOffice and a browser, and there is nothing to recalcu
 | Sheet | Holds | Who reads it |
 |---|---|---|
 | 0. Start here | What the workbook is and how to use it | Everyone |
-| 1. Capabilities | The map, with the four observations and the derived level. Read only | Everyone |
+| 1. Capabilities | The whole map three levels deep — domain, capability, criterion — each with its description, the observations against it and the derived level. Collapsible to any level. Read only | Everyone |
 | **2. Observations** | **The sheet that flows back.** One row per criterion for *practised*, one per capability for the rest | Capability owners, platform teams, standard-setters |
 | 3. Offerings | What a delivery team can get | Platform teams |
 | 4. In the box | The 27 control questions | Platform teams |
 | 5. Assets | Every asset, its status, and whether that status counts as released | Platform teams |
-| 6. Criteria (L3) | All 258 criteria with definitions | Reference |
+| 6. Criteria (L3) | The same three levels, definitions only: 8 domains, 52 capabilities, 258 criteria | Reference |
 | 7. Owners | The mapping to the Bank's catalogue | The operating-model conversation |
 | 8. Sources | The graded source register | The provenance reviewer |
 | 9. Obligations | Statutory references, all candidate | Legal |

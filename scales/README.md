@@ -43,6 +43,10 @@ before it reaches a view.
 NAME     = "Human-readable name"            # required
 SHORT    = "name"                           # required; lowercase, digits, _ or -; names out/capability-assessment-<SHORT>.md
 BASIS    = "What is adopted, what is ours"  # required; shown on every view (ADR-0010)
+CAUTION  = "What is verified against the source, and what is not"  # optional but
+                                            # expected where BASIS names a source;
+                                            # travels with the claim into every
+                                            # provenance view
 QUESTION = "The one question this scale puts to the observations"   # required for the report's comparison table
 LEVELS   = [(0, "Level name", "What it means"), ...]                # required; ints ascending, unique
 DEFAULT  = True                             # exactly one scale in the directory; the others are lenses
@@ -56,6 +60,8 @@ def level(obs):
 def note():                                 # optional; one paragraph shown under BASIS on every view
     return "..."
 ```
+
+**`CAUTION` is where the boundary of the check lives.** `BASIS` says what was borrowed; `CAUTION` says how far anyone actually opened the source, and what therefore must not be quoted. Keeping it on the scale rather than in this README means the caveat travels with the claim into `out/provenance.md` and every view. The full narrative — including what was retired and the handling rules — is [`../docs/where-the-scales-come-from.md`](../docs/where-the-scales-come-from.md).
 
 What `check` verifies: the required names exist and have the right types; `SHORT` is
 unique and file-safe; `LEVELS` are ascending and unique; `DERIVABLE_MAX` is one of them;

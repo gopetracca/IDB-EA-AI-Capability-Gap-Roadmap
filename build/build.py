@@ -141,6 +141,14 @@ def check(m=None, scales=None):
             problems.append("status %r must declare `released: true|false`" % st)
 
     # ---- observations
+    if set(m.observation_values) != set(F.OBS_VALUES):
+        problems.append("observations.json declares values %s but F.OBS_VALUES "
+                        "says %s - the vocabulary must have one definition"
+                        % (list(m.observation_values), list(F.OBS_VALUES)))
+    for v in m.observation_values:
+        if v not in F.OBS_MEANING:
+            problems.append("value %r is accepted but says nowhere what it means, so "
+                            "no view can explain it - add it to F.OBS_MEANING" % v)
     for r in m.observations:
         where = "%s/%s" % (r.get('criterion') or r['capability'], r['observation'])
         if r['capability'] not in ids:
@@ -332,11 +340,12 @@ def cmd_workbook():
 def build_views_to(m, out):
     """Write every view to `out`. Returns the file names written, in order.
 
-    One capability page per scale; the management report as text and as a
-    self-contained page, plus the illustrative edition; one page per use-case
-    question; the provenance view.  Nothing here names a scale or a question.
+    The capability map on its own; one capability page per scale; the
+    management report as text and as a self-contained page, plus the
+    illustrative edition; one page per use-case question; the provenance view;
+    the walkthrough deck.  Nothing here names a scale or a question.
     """
-    import build_views, build_report
+    import build_views, build_report, build_deck
     os.makedirs(out, exist_ok=True)
     written = []
 
@@ -346,6 +355,8 @@ def build_views_to(m, out):
             f.write(text)
         written.append(label or name)
 
+    emit('capability-map.md', build_views.capability_map(m),
+         'capability-map.md  (the taxonomy alone)')
     scales = F.load_scales()
     default = F.default_scale()
     for s in scales:
@@ -360,7 +371,9 @@ def build_views_to(m, out):
     for q in m.questions:
         emit('%s.md' % q['output'], build_views.question_view(m, q),
              '%s.md  (question: %s)' % (q['output'], q['id']))
-    emit('provenance.md', build_views.provenance_view(m))
+    emit('provenance.md', build_views.provenance_view(m, scales))
+    emit('walkthrough.html', build_deck.deck(m, default, scales=scales),
+         'walkthrough.html  (the deck)')
     return written
 
 

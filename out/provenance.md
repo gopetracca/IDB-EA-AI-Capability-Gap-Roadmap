@@ -1,6 +1,6 @@
-# Provenance — where the capability map comes from
+# Provenance — where the model comes from
 
-**Inter-American Development Bank** · generated 2026-09-05 · register `facts/sources.json`, access date 3 September 2026
+**Inter-American Development Bank** · generated 2026-09-09 · register `facts/sources.json`, access date 3 September 2026
 
 > **The rule (ADR-0010):** provenance is graded by whether a reviewer can open it, not by prestige. **A grade-D source cannot support a claim in anything that leaves the Bank**, whatever its quality.
 
@@ -84,11 +84,11 @@ These 14 capabilities cite at least one source a reviewer outside the Bank canno
 | `S32` | **A** | [OWASP GenAI Security Project](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/) | OWASP Foundation | 2026, Version 1.0 · 2026-08 / launch 2026-09-02 | Current | 2 |
 | `S33` | **A** | [MCP specification](https://modelcontextprotocol.io/specification/2026-07-28) | Agentic AI Foundation (Linux Foundation); originated at Anthropic | Revision 2026-07-28 · 2026-07-28 | Current | 2 |
 | `S34` | **D** | [Gartner](https://www.gartner.com/) | Gartner, Inc. | Subscription research · Various | Non-public | 2 |
-| `S35` | **D** | [Consultancy transformation patterns](n/a) | Various consultancies | n/a · n/a | Not a publication | 2 |
-| `S36` | **D** | [IDB institutional practice](Internal) | Inter-American Development Bank | n/a · n/a | Needs a named internal document | 3 |
-| `S37` | **D** | [IDB data protection framework](Internal) | Inter-American Development Bank | n/a · n/a | Needs pinning | 1 |
-| `S38` | **D** | [IDB legal framework](Internal) | Inter-American Development Bank | n/a · n/a | Needs pinning | 1 |
-| `S39` | **D** | [IDB internal audit standards](Internal) | Inter-American Development Bank | n/a · n/a | Needs pinning | 1 |
+| `S35` | **D** | Consultancy transformation patterns — *n/a* | Various consultancies | n/a · n/a | Not a publication | 2 |
+| `S36` | **D** | IDB institutional practice — *Internal* | Inter-American Development Bank | n/a · n/a | Needs a named internal document | 3 |
+| `S37` | **D** | IDB data protection framework — *Internal* | Inter-American Development Bank | n/a · n/a | Needs pinning | 1 |
+| `S38` | **D** | IDB legal framework — *Internal* | Inter-American Development Bank | n/a · n/a | Needs pinning | 1 |
+| `S39` | **D** | IDB internal audit standards — *Internal* | Inter-American Development Bank | n/a · n/a | Needs pinning | 1 |
 
 2 sources are in the register but cited by no capability: `S25`, `S31b`.
 
@@ -179,4 +179,50 @@ A locus in *italics* after a source is the clause, section or control the citati
 | `6.2` AI Monitoring & Observability | EU AI Act Art. 12 (logging) | Retention-managed logging of prompts, context, outputs and decisions (6.2.2, 7.8.2; formerly catalog service S9.2 Interaction & Prompt Logging) | candidate - applicability not determined (see 7.6.5) |
 | `6.3` Continuous Evaluation, Drift & Quality Management | EU AI Act Art. 72 (post-market monitoring) | Continuous evaluation of live output quality as the mechanism of post-market monitoring (6.3.1, 4.6.3; formerly catalog service S9.6) | candidate - applicability not determined (see 7.6.5) |
 | `7.7` AI System & Agent Inventory Management | EU AI Act Art. 49 | Registration presupposes knowing which AI systems and agents are running (7.7.4, 7.7.5; formerly catalog service S9.11 Fleet & Agent Inventory Telemetry) | candidate - applicability not determined (see 7.6.5) |
+
+---
+
+## The measurement instrument — where the scales come from
+
+Everything above is about the **map**: what the Bank must be able to do, and which published frameworks those lines were drawn from. This section is about the **instrument**: the rules that turn observations into a level.
+
+They are graded differently on purpose. A source is something we *cite*, and ADR-0010 grades it by whether a reviewer can open it. A scale is something we *wrote* — so it does not appear in the register above; instead each one **declares its own basis on its face**, and every view that uses it carries that declaration. What follows is read from the scale modules themselves.
+
+| Scale | Standing | Asks | Ladder | Ceiling today | Gate |
+|---|---|---|---|:-:|---|
+| **Capability level** | **the default** | Has the institution established this practice? | 0–5 | **3** Established | gates on performance |
+| **Executive readiness** | a lens | How much of what we said we would do actually exists? | 1–5 | 5 | **does not gate** |
+| **Institutional maturity** | a lens | How far has this practice spread beyond the people doing it? | 1–5 | **3** Consolidating | gates on performance |
+
+### Capability level
+
+*The default scale — the assessment itself.*
+
+**Basis.** Adapted from ISO/IEC 33020:2019 (process measurement framework). Simplified: four observations rather than five process attributes, three values rather than the standard's four-point N-P-L-F scale.
+
+> **What is verified, and what is not.** ISO/IEC 33020:2019 is paywalled and its published preview stops before clause 5.3. Verified from the preview and safe to cite: the six-point scale 0 Incomplete to 5 Innovating, the process attribute identifiers and names, and PA 2.1's resource and competence outcomes. NOT verified, and must not be quoted: the N-P-L-F percentage bands and the exact capability level rule - both come from secondary sources about the superseded ISO/IEC 15504, not from this standard. The rule implemented here is our own simplification and is labelled as such. Grade C: paywalled, so a reviewer without a licence cannot open it.
+
+**Note carried on every view.** Level 3 is the highest this model can currently derive. Levels 4 and 5 are defined but need observations nobody collects yet - threshold monitoring and a closed improvement cycle - so a capability at 3 is at the top of what is measured here, not at the top of the scale. Level 3 also reads conformance from a standard and a practice co-existing; it is not separately evidenced.
+
+### Executive readiness
+
+*A lens. Reporting only; where it and the default disagree, the default is the finding.*
+
+**Basis.** Our own coarse roll-up for executive reporting. Reads the same observations as the default scale. Not adopted from any published model.
+
+> **What is verified, and what is not.** Wholly ours - under ADR-0010 the derivation type is synthesized. No published model, licensed or otherwise, is reproduced here: the level names are our own words, and no analyst capability names, descriptions or level text are carried into this repository. 'Assembled by us' is a stronger position with Internal Audit than a citation that does not resolve. Note that this scale does not gate on performance - it is the one instrument here that can place a level from the enablers alone, which is why it is a lens and never the assessment.
+
+**Note carried on every view.** A LENS for executive reporting, not the assessment. It averages, which the default scale deliberately does not: a capability can look adequate here while the default scale holds it at Level 1 because nothing is performed. Where they disagree, the default scale is the finding.
+
+### Institutional maturity
+
+*A lens. Reporting only; where it and the default disagree, the default is the finding.*
+
+**Basis.** Ours. The conventional five-stage maturity ladder (CMM/CMMI line, SEI 1991) applied to the same four observations as the default scale. Not adopted from any specific published maturity model.
+
+> **What is verified, and what is not.** 'Initial' at 1 and 'Optimizing' at 5 are CMM/CMMI (SEI, 1991) - public, citable, and the origin of the whole convention. The middle-band words are the generic vocabulary that recurs across many published maturity models; no model owns them. This ladder is NOT adopted from any particular institution's maturity model and must never be attributed to one: cite the shape, never a slide. Under ADR-0010 its derivation type is adapted for the ladder and ours for the rule.
+
+**Note carried on every view.** A LENS, not the assessment. It reads the same observations as the default scale and asks how far a practice has spread rather than what has been established, so it will place some capabilities differently; where the two disagree, the default scale is the finding. Level 3 is the highest it can derive - Integrating and Optimizing need cross-unit measurement and a closed improvement cycle, which nobody observes yet. Unlike most maturity ladders this one does not rate the enablers on their own: a capability with tooling and an approved standard but no observed practice is NOT RATED, not Level 1.
+
+The full account — what was adopted, what is ours, what was retired and why — is [`../docs/where-the-scales-come-from.md`](../docs/where-the-scales-come-from.md), with the contract every scale must keep in [`../scales/README.md`](../scales/README.md).
 

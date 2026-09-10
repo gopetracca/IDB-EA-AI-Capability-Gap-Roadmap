@@ -204,7 +204,8 @@ class Builds(unittest.TestCase):
         self.assertIn('management-report.html', names)
 
     def test_html_reports_are_well_formed(self):
-        for fn in ('management-report.html', 'management-report-illustrative.html'):
+        for fn in ('management-report.html', 'management-report-illustrative.html',
+                   'walkthrough.html'):
             with open(os.path.join(self.tmp, fn), encoding='utf-8') as f:
                 html = f.read()
             p = _Balance()
@@ -250,6 +251,28 @@ class Builds(unittest.TestCase):
         ws = wb['2. Observations']
         formulas = [dv.formula1 for dv in ws.data_validations.dataValidation]
         self.assertTrue(any('n/a' in f for f in formulas), formulas)
+        for v in F.OBS_VALUES:
+            self.assertTrue(any(v in f for f in formulas), (v, formulas))
+
+    def test_every_observation_value_says_what_it_means(self):
+        self.assertEqual(set(F.OBS_MEANING), set(F.OBS_VALUES))
+
+    def test_judgement_columns_carry_a_note_listing_their_values(self):
+        """A reader must be able to ask a column what it may say."""
+        from openpyxl import load_workbook
+        ws = load_workbook(self.wb_path)['1. Capabilities']
+        scale = F.default_scale()
+        wanted = ([t['id'].capitalize() for t in self.m.observation_types]
+                  + ['LEVEL', 'Level name'])
+        notes = {c.value: c.comment.text for c in ws[1] if c.comment}
+        for col in wanted:
+            self.assertIn(col, notes)
+        for col in [t['id'].capitalize() for t in self.m.observation_types]:
+            for v in F.OBS_VALUES:
+                self.assertIn(v, notes[col], col)
+        for n, k, _ in scale.LEVELS:
+            self.assertIn(k, notes['LEVEL'], k)
+            self.assertIn(k, notes['Level name'], k)
 
 
 class Ingest(unittest.TestCase):
@@ -343,6 +366,53 @@ class Views(unittest.TestCase):
 
     def test_report_names_no_scale(self):
         with open(os.path.join(ROOT, 'build', 'build_report.py'), encoding='utf-8') as f:
+            src = f.read()
+        for s in F.load_scales():
+            self.assertNotIn('"%s"' % s.SHORT, src)
+            self.assertNotIn("'%s'" % s.SHORT, src)
+
+    def test_derived_ladder_is_sound_for_every_scale(self):
+        """The 'what it takes to reach each level' table must never claim a
+        condition the scale itself does not keep: every combination that the
+        scale rates at or above a level must satisfy that level's conditions."""
+        import derive
+        for s in F.load_scales():
+            rungs = {r['n']: r for r in derive.ladder(s)}
+            for obs in derive._all_combos():
+                lv = s.level(obs)[0]
+                if lv is None:
+                    continue
+                for n, r in rungs.items():
+                    if lv < n:
+                        continue
+                    for t in derive.TYPES:
+                        self.assertIn(obs[t], r['conds'][t]['vals'],
+                                      '%s L%d %s' % (s.SHORT, n, t))
+
+    def test_derived_ladder_marks_exactness_honestly(self):
+        """A rung flagged `exact` must be exactly reproducible from its
+        conditions - no combination may satisfy them and yet fall short."""
+        import derive
+        for s in F.load_scales():
+            for r in derive.ladder(s):
+                if not r['exact']:
+                    continue
+                for obs in derive._all_combos():
+                    if all(obs[t] in r['conds'][t]['vals'] for t in derive.TYPES):
+                        lv = s.level(obs)[0]
+                        self.assertIsNotNone(lv, '%s L%d' % (s.SHORT, r['n']))
+                        self.assertGreaterEqual(lv, r['n'], '%s L%d' % (s.SHORT, r['n']))
+
+    def test_worked_cases_cover_the_gate(self):
+        """The worked table must contain the case the whole model turns on:
+        enablers fully in place, practice never observed."""
+        import derive
+        seen = [obs for _l, obs, _r in derive.worked(F.load_scales())]
+        self.assertIn({"practised": "unknown", "enabled": "yes",
+                       "skilled": "yes", "defined": "yes"}, seen)
+
+    def test_deck_names_no_scale(self):
+        with open(os.path.join(ROOT, 'build', 'build_deck.py'), encoding='utf-8') as f:
             src = f.read()
         for s in F.load_scales():
             self.assertNotIn('"%s"' % s.SHORT, src)

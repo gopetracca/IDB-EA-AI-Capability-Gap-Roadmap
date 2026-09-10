@@ -9,6 +9,15 @@ that are already settled. Two project skills carry the working rules in more dep
 names an external standard); two more cover `reporting` (changing a view) and
 `decisions` (writing an ADR).
 
+For prose written for people rather than for a session, `docs/README.md` is the reading
+path. Four documents carry most of it: `docs/how-it-works.md` (the design),
+`docs/glossary.md` (vocabulary, and the words that mean more than one thing),
+`docs/what-is-settled.md` (the ADRs digested into the rules in force) and
+`docs/first-round.md` (getting the first observations in). Where the scales, levels
+and lenses come from — and what must not be quoted — is
+`docs/where-the-scales-come-from.md`. The taxonomy itself is a
+**generated** view, `out/capability-map.md` — never hand-write the map.
+
 ---
 
 ## 1. What this is

@@ -1,6 +1,6 @@
 # Can the Bank run AI agents?
 
-**Inter-American Development Bank** · generated 2026-09-05
+**Inter-American Development Bank** · generated 2026-09-09
 
 The claim being answered: *"We cannot run AI agents."*
 

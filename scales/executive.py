@@ -20,6 +20,15 @@ SHORT = "exec"
 QUESTION = "How much of what we said we would do actually exists?"
 BASIS = ("Our own coarse roll-up for executive reporting. Reads the same "
          "observations as the default scale. Not adopted from any published model.")
+CAUTION = (
+    "Wholly ours - under ADR-0010 the derivation type is synthesized. No "
+    "published model, licensed or otherwise, is reproduced here: the level "
+    "names are our own words, and no analyst capability names, descriptions or "
+    "level text are carried into this repository. 'Assembled by us' is a "
+    "stronger position with Internal Audit than a citation that does not "
+    "resolve. Note that this scale does not gate on performance - it is the one "
+    "instrument here that can place a level from the enablers alone, which is "
+    "why it is a lens and never the assessment.")
 
 LEVELS = [
     (1, "Planning", "Considered. Little or nothing exists yet."),

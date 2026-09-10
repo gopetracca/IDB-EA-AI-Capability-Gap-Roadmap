@@ -48,6 +48,22 @@ evidence and a name attached.
 | **Skilled** | Do the people who must do this know how? | the L2 capability | The owner, or L&D |
 | **Defined** | Is there an approved institutional standard, policy or method? | the L2 capability | Whoever owns the subject: the platform team, Cybersecurity, Data Management, Legal, HR, EA |
 
+### Where each one is recorded, and the one you cannot record
+
+Only two of the three taxonomy levels ever carry an observation, and one of the four
+values is not entered by anybody:
+
+| Taxonomy level | What is recorded against it | Rows |
+|---|---|:-:|
+| **L1 domain** | *Nothing.* A domain is a reporting cluster and is never scored | — |
+| **L2 capability** | `enabled`, `skilled`, `defined` — one row each. Plus `practised`, **derived** from the criteria beneath it | 156 |
+| **L3 criterion** | `practised` — one row per criterion | 258 |
+
+That is why a review round collects **414 rows, not 52**. And it is why there is nowhere
+in the workbook to type a capability's `practised` value or its level: both are computed,
+and `check` fails if it finds either stored. See
+[`../out/capability-map.md`](../out/capability-map.md) for the three levels themselves.
+
 ### Why `practised` is asked lower down
 
 *4.4 Agent & Workflow Orchestration Design* covers six distinct practices — goal
@@ -95,6 +111,69 @@ You never type a level. The default scale derives it, and the order is what matt
 | 3 | Established | All of that, **and** done against an approved institutional standard |
 | 4 | Predictable | Measured against thresholds — **not derivable today** |
 | 5 | Innovating | An improvement cycle closed — **not derivable today** |
+
+### Why one capability is a 2 and another a 3
+
+Read the exact conditions off the generated table, not off this page. Every view carries
+a **How this scale places a level** section, derived by running the rule over all 625
+combinations of the five values across the four observations — so it cannot drift from
+the code the way a paragraph can:
+
+| Where | What it shows |
+|---|---|
+| [`../out/capability-assessment-level.md`](../out/capability-assessment-level.md) | The default scale's ladder, what each step up costs, and ten worked situations |
+| [`../out/capability-assessment-exec.md`](../out/capability-assessment-exec.md), [`-maturity.md`](../out/capability-assessment-maturity.md) | The same, for each lens |
+| [`../out/management-report.html`](../out/management-report.html) §4 | All scales side by side, plus the same answers read by every scale at once |
+
+The table reads **cumulatively** — each row is *what it takes to reach at least this
+level*. Two things surprise people:
+
+- **`n/a` counts as satisfied.** A capability that legitimately needs no tooling is not
+  held down for having none. It drops out; it does not fail.
+- **The step from 2 to 3 is a single observation.** Everything Level 3 asks for is
+  already required at Level 2 except one thing: `defined` must be `yes`. So a capability
+  where the work is done, the tooling is provided and the people are competent sits at
+  **2 Managed** until an approved institutional standard exists — and moves to
+  **3 Established** the day it does, with no other change. That is the single most common
+  question about this model, and that is the whole answer.
+
+The step from 1 to 2 is the wider one: it needs `practised` to go from `partial` to
+`yes` — every criterion examined and every one passed — *and* tooling, *and* competence.
+Most capabilities that stall will stall there.
+
+### The objection you will get: "but the standard came first"
+
+It usually does — the standard is often written before anything is built. So why does the
+top level require it, as if it were last?
+
+**Because the ladder orders claims, not activities.** Each level is a strictly stronger
+statement than the one below:
+
+| Level | The claim being made |
+|---|---|
+| 1 Performed | "We do this." |
+| 2 Managed | "We do this, repeatably, with tooling and competent people." |
+| 3 Established | "We do this, repeatably, **against an approved institutional standard**." |
+
+Level 3 does not claim *a standard exists*. It claims *the work is done to the standard* —
+and that sentence needs the work. A driving manual existing does not mean anyone in the
+building can drive.
+
+So writing the standard first does not make a capability Level 3 early. It makes `defined`
+read `yes` while `practised` is still `unknown` — which the model records exactly, and
+reports as **not rated**. That combination is not the model withholding credit; it *is* the
+Bank's headline finding, in one line: **the enablers were built ahead of the practice.** If
+`defined` alone could place a level, that finding would be invisible.
+
+The credit for standard-first work is recorded — just not in the level. It is the `defined`
+column, the asset register with statuses and locations, and the offerings view.
+
+**And the ordering is not ours.** Performance is the Level 1 process attribute in the
+standard the scale is adapted from; a defined process is a Level 3 attribute. See
+[`where-the-scales-come-from.md`](where-the-scales-come-from.md) §2.
+
+> The rest of the objections a room will raise — and the answers, with live figures — are
+> the appendix of [`../out/walkthrough.html`](../out/walkthrough.html).
 
 **Level 3 is the ceiling of what this model measures, not the ceiling of the scale.**
 Levels 4 and 5 need observations nobody collects — threshold monitoring and a closed

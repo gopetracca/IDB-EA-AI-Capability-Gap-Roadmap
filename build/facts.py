@@ -362,6 +362,21 @@ def default_scale():
 
 OBS_VALUES = ('yes', 'partial', 'no', 'n/a', 'unknown')
 
+# What each value asserts, and what recording it obliges you to supply.  The
+# vocabulary belongs to the model, not to any scale: a scale reads these values,
+# it never redefines them (ADR-0013, Amendment 2).  Every view that has to tell
+# a reader what a cell may say renders this rather than retyping it.
+OBS_MEANING = {
+    'yes':     "Done. Needs evidence.",
+    'partial': "Done in places. Needs evidence.",
+    'no':      "An evidenced negative - someone looked and it is not there. "
+               "Needs evidence, or a basis saying what was looked at.",
+    'n/a':     "Does not apply to this capability. Needs a reason.",
+    'unknown': "Nobody has looked. Never a zero - it is the honest default, "
+               "and it is the right answer until someone has.",
+}
+assert set(OBS_MEANING) == set(OBS_VALUES), "every value must say what it means"
+
 
 def validate_scale(s):
     """Problems with one scale module against the contract in scales/README.md.
@@ -408,6 +423,9 @@ def validate_scale(s):
     q = getattr(s, 'QUESTION', None)
     if q is not None and not isinstance(q, str):
         p.append('%s: QUESTION must be a string' % name)
+    caution = getattr(s, 'CAUTION', None)
+    if caution is not None and (not isinstance(caution, str) or not caution.strip()):
+        p.append('%s: CAUTION must be a non-empty string if present' % name)
     produced = set()
     for combo in itertools.product(OBS_VALUES, repeat=len(OBS_KEYS)):
         obs = dict(zip(OBS_KEYS, combo))

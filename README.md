@@ -8,13 +8,16 @@ than argued about.
 
 | | |
 |---|---|
+| **The walkthrough** | [`out/walkthrough.html`](out/walkthrough.html) — the deck: map, observations, scale, first round. Open in a browser, arrow keys |
+| **The map** | [`out/capability-map.md`](out/capability-map.md) — the taxonomy alone: 8 domains, 52 capabilities, 258 criteria, no scores attached |
 | **The report** | [`out/management-report.html`](out/management-report.html) — open in a browser |
 | **What it will look like** | [`out/management-report-illustrative.html`](out/management-report-illustrative.html) — the same report, every chart populated with **sample observations** |
 | **The worked example** | [`out/agent-readiness.md`](out/agent-readiness.md) — *"can we run AI agents?"* |
-| **The detail** | [`out/capability-assessment-level.md`](out/capability-assessment-level.md) — all 52 capabilities, 258 criteria |
+| **The detail** | [`out/capability-assessment-level.md`](out/capability-assessment-level.md) — all 52 capabilities, 258 criteria, with what has been observed |
 | **Where the map comes from** | [`out/provenance.md`](out/provenance.md) — sources by grade, and what cannot leave the Bank |
-| **How to work with it** | [`docs/using-the-model.md`](docs/using-the-model.md) |
+| **All the documentation** | [`docs/README.md`](docs/README.md) — **start here**, it says what to read in what order |
 | **How it works inside** | [`docs/how-it-works.md`](docs/how-it-works.md) |
+| **How to start assessing** | [`docs/first-round.md`](docs/first-round.md) |
 
 ---
 
@@ -192,7 +195,7 @@ tooling or new investment:
 | [`out/`](out/README.md) | Generated reports, views and the workbook. Never edited |
 | [`build/`](build/README.md) | Seven modules. One command |
 | [`tests/`](tests/) | The rules the documentation promises, as tests |
-| [`docs/`](docs/) | Explanations, decisions, provenance, analysis |
+| [`docs/`](docs/README.md) | Explanations, decisions, provenance, analysis. Its README is the reading path |
 | [`review/`](review/README.md) | Returned workbooks, dated, never edited |
 | [`archive/`](archive/README.md) | Superseded work, kept and explained |
 

@@ -1,6 +1,6 @@
 # Capability assessment — Capability level
 
-**Inter-American Development Bank** · generated 2026-09-05 · scale `level` · **the default scale**
+**Inter-American Development Bank** · generated 2026-09-09 · scale `level` · **the default scale**
 
 > **The question this scale asks:** Has the institution established this practice?
 >
@@ -47,6 +47,68 @@ Levels above **3** are defined but cannot be reached from the observations this 
 | **Defined** | Is there an approved institutional standard, policy or method for this? Set by whoever owns the subject - the platform team, Cybersecurity, Data Management, Legal, HR or EA. | the capability | The document, its owner, its location and a date |
 
 Values: `yes` · `partial` · `no` · `n/a` (with a reason) · `unknown` (nobody has looked — never a zero).
+
+### Where each observation is recorded
+
+This is the question most often got wrong. **Only two of the three taxonomy levels ever carry an observation**, and one value on this page is not recorded by anybody — it is computed.
+
+| Taxonomy level | What is recorded against it | Rows |
+|---|---|:-:|
+| **L1 domain** (8) | *Nothing.* A domain is a reporting cluster and is never scored | — |
+| **L2 capability** (52) | `enabled`, `skilled`, `defined` — one row each. Plus `practised`, **derived** from the criteria below it and never typed | 156 |
+| **L3 criterion** (258) | `practised` — one row per criterion | 258 |
+
+So a reviewer answers **414 rows**, not 52: `enabled`, `skilled`, `defined` once per capability, and `practised` once per criterion. The capability's `practised` value shown in the tables below was computed by the roll-up (ADR-0014); **there is nowhere to type it, and typing one is the one edit `check` rejects outright.**
+
+---
+
+## How this scale places a level
+
+Nothing below is typed. It is derived by running this scale over all **625 combinations** of the five values across the four observations, so it cannot disagree with the rule it describes.
+
+| To reach | **Practised** | **Enabled** | **Skilled** | **Defined** | Reaches |
+|---|---|---|---|---|:-:|
+| **0 Incomplete** | `yes` or `partial` or `no` | *any* | *any* | *any* | 375 of 625 |
+| **1 Performed** | `yes` or `partial` | *any* | *any* | *any* | 250 of 625 |
+| **2 Managed** | `yes` | `yes` or `n/a` | `yes` | *any* | 10 of 625 |
+| **3 Established** | `yes` | `yes` or `n/a` | `yes` | `yes` | 2 of 625 |
+
+*Read each row as **to reach at least this level**.* `n/a` counts as satisfied: a capability that legitimately needs no tooling is not held down for having none.
+
+Every row above is **exact** — those conditions are not a summary of the rule, they *are* the rule.
+
+### What each step up actually costs
+
+- **1 Performed** adds: `practised` must be `yes` or `partial`
+- **2 Managed** adds: `practised` must be `yes`, `enabled` must be `yes` or `n/a`, `skilled` must be `yes`
+- **3 Established** adds: `defined` must be `yes`
+
+> **The whole difference between 2 Managed and 3 Established is one observation: `defined` must be `yes`.** Everything else is already required at 2, so a capability with the work done, the tooling provided and competent people stops at 2 until that one observation moves.
+
+### When it returns *not rated*
+
+Whenever `practised` is `n/a` or `unknown` — whatever the other observations say. That is **250 of 625 combinations**.
+
+Not rated is a result, not a zero: the evidence needed to place the capability has never been gathered.
+
+This scale **gates** on performance: however good the other three observations look, an unobserved practice places no level.
+
+### Worked: what a set of answers produces
+
+Ten situations a reviewer will actually record, run through this scale. Every level and every reason below is computed, not written.
+
+| If the four answers are | Practised | Enabled | Skilled | Defined | Then | Because |
+|---|---|---|---|---|---|---|
+| Nobody has looked yet | `unknown` | `unknown` | `unknown` | `unknown` | *not rated* | Not rated: performance has never been observed |
+| The enablers exist, but nobody has asked whether the work is done | `unknown` | `yes` | `yes` | `yes` | *not rated* | Not rated: performance has never been observed (enabled, skilled, defined recorded, which cannot place a level on its own) |
+| Someone looked: it is not done, though the enablers exist | `no` | `yes` | `yes` | `yes` | **0 Incomplete** | Not performed, although enablers exist - the platform or the standard is ahead of the practice |
+| Done on some systems, nothing else observed | `partial` | `unknown` | `unknown` | `unknown` | **1 Performed** | Performed on some AI systems but not repeatably - that is Level 1 until it is consistent |
+| Done everywhere, but no tooling is provided | `yes` | `no` | `yes` | `yes` | **1 Performed** | Performed, but not managed: tooling is not provided |
+| Done everywhere, tooled, but competence not evidenced | `yes` | `yes` | `unknown` | `yes` | **1 Performed** | Performed, but not managed: competence is not evidenced |
+| Done everywhere, tooled and staffed, no standard recorded | `yes` | `yes` | `yes` | `unknown` | **2 Managed** | Managed, but no approved standard - none is recorded |
+| Done everywhere, tooled and staffed, standard pre-release | `yes` | `yes` | `yes` | `partial` | **2 Managed** | Managed, but no approved standard - the standard is pre-release |
+| Done everywhere, tooled and staffed, approved standard | `yes` | `yes` | `yes` | `yes` | **3 Established** | Consistently performed and an approved standard exists. Conformance to it is not separately evidenced |
+| Done everywhere and staffed; no tooling is needed here | `yes` | `n/a` | `yes` | `yes` | **3 Established** | Consistently performed and an approved standard exists. Conformance to it is not separately evidenced |
 
 ---
 

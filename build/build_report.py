@@ -23,6 +23,7 @@ from datetime import date
 import collections
 
 import charts as ch
+import derive
 from charts import esc, C, LABEL, ORDER, LVL
 
 
@@ -59,6 +60,15 @@ class _Sections(object):
     def sub(self, k, title):
         return ('<h3 style="font-size:15px;margin-top:%dpx">%d.%d &nbsp;%s</h3>'
                 % (8 if k == 1 else 28, self.n, k, title))
+
+
+def names_gated(scales, gated):
+    """The scales that do (or do not) gate on performance, named for prose."""
+    ss = [s for s in scales if derive.gates_on_practice(s) is bool(gated)]
+    ns = ["<b>%s</b>" % esc(s.NAME) for s in ss]
+    if not ns:
+        return "no scale"
+    return ns[0] if len(ns) == 1 else ", ".join(ns[:-1]) + " and " + ns[-1]
 
 
 def _gates_on_practice(scale):
@@ -637,7 +647,44 @@ def scales_section(m, default, scales, total, demo, S):
       'answered in it, without the assessment being redone and without anyone '
       'pretending the underlying evidence changed.</p>')
 
+    # ---- where the four answers are recorded, before any rule reads them
+    w(S.sub(1, 'What the rule reads, and where those answers are recorded'))
+    rec = derive.recorded_at(m)
+    at_crit = [r for r in rec if r['at'].startswith('L3')]
+    at_cap = [r for r in rec if r['at'].startswith('L2')]
+    n_crit_ = sum(len(c['criteria']) for c in m.capabilities)
+
+    def _obs_names(rs):
+        ns = ["<code>%s</code>" % esc(r['id']) for r in rs]
+        return ns[0] if len(ns) < 2 else ", ".join(ns[:-1]) + " and " + ns[-1]
+
+    w('<p>Every scale below reads the same four answers. <b>Only two of the three '
+      'taxonomy levels ever carry one</b>, and one of the four is not recorded by '
+      'anybody &mdash; it is computed.</p>')
+    w('<table><thead><tr><th style="width:24%">Taxonomy level</th>'
+      '<th>What is recorded against it</th><th class="c" style="width:12%">Rows</th>'
+      '</tr></thead><tbody>')
+    w('<tr><td><b>L1 domain</b> &middot; %d</td><td><i>Nothing.</i> A domain is a '
+      'reporting cluster and is never scored</td><td class="c">&mdash;</td></tr>'
+      % len(m.domains))
+    w('<tr><td><b>L2 capability</b> &middot; %d</td><td>%s &mdash; one row each. Plus '
+      '%s, <b>derived</b> from the criteria beneath it and never typed</td>'
+      '<td class="c">%d</td></tr>'
+      % (len(m.capabilities), _obs_names(at_cap), _obs_names(at_crit),
+         len(at_cap) * len(m.capabilities)))
+    w('<tr><td><b>L3 criterion</b> &middot; %d</td><td>%s &mdash; one row per '
+      'criterion, because that is the level at which work can actually be '
+      'witnessed</td><td class="c">%d</td></tr>'
+      % (n_crit_, _obs_names(at_crit), len(at_crit) * n_crit_))
+    w('</tbody></table>')
+    w('<p>So a review round collects <b>%d rows</b>, not %d. The capability-level %s '
+      'value every chart in this report is drawn from was <b>computed</b> by the '
+      'roll-up, never entered: there is nowhere to type it, and a stored level is the '
+      'one edit validation rejects outright.</p>'
+      % (len(m.observations), len(m.capabilities), _obs_names(at_crit)))
+
     # ---- what each one asks
+    w(S.sub(2, 'What each scale asks'))
     w('<table><thead><tr><th style="width:22%">Scale</th><th style="width:26%">The '
       'question it asks</th><th style="width:30%">Levels</th>'
       '<th style="width:22%">Standing</th></tr></thead><tbody>')
@@ -658,7 +705,123 @@ def scales_section(m, default, scales, total, demo, S):
              esc(names), standing))
     w('</tbody></table>')
 
+    # ---- what it takes to reach each level, derived by running the rule
+    w(S.sub(3, 'What it takes to reach each level'))
+    n_combo = len(derive.VALUES) ** len(derive.TYPES)
+    w('<p>Nothing in the tables below is written down anywhere. Each is derived by '
+      'running that scale over all <b>%d combinations</b> of the five values across '
+      'the four observations, so it cannot drift from the rule it describes. Read '
+      'each row as <b>to reach at least this level</b>. <code>n/a</code> counts as '
+      'satisfied &mdash; a capability that legitimately needs no tooling is not held '
+      'down for having none.</p>' % n_combo)
+    for sc in scales:
+        rungs = derive.ladder(sc)
+        exact = all(r['exact'] for r in rungs)
+        w('<h4 style="margin:24px 0 4px;font-size:14px">%s%s</h4>'
+          % (esc(sc.NAME), '' if sc is default else
+             ' <span style="color:var(--muted);font-weight:400">&mdash; a lens</span>'))
+        w('<table><thead><tr><th style="width:20%">To reach</th>')
+        for t in derive.TYPES:
+            w('<th class="c">%s</th>' % esc(t.title()))
+        w('<th class="c" style="width:12%">Combinations</th></tr></thead><tbody>')
+        for r in rungs:
+            w('<tr><td><b>%d %s</b>%s</td>'
+              % (r['n'], esc(r['name']),
+                 '' if r['exact'] else ' <span class="pill p-no">approx</span>'))
+            for t in derive.TYPES:
+                c = r['conds'][t]
+                if c['kind'] == 'any':
+                    cell = '<span style="color:var(--muted)">any</span>'
+                elif c['text'].startswith('not '):
+                    cell = 'not <code>%s</code>' % esc(c['text'][4:])
+                else:
+                    cell = " or ".join('<code>%s</code>' % esc(v) for v in c['vals'])
+                w('<td class="c">%s</td>' % cell)
+            w('<td class="c">%d of %d</td></tr>' % (r['combos'], n_combo))
+        w('</tbody></table>')
+        steps = [r for r in rungs if r['adds']]
+        if exact and steps:
+            bits = []
+            for r in steps:
+                bits.append('<b>%d %s</b> adds %s'
+                            % (r['n'], esc(r['name']),
+                               ", ".join('<code>%s</code>&nbsp;=&nbsp;%s'
+                                         % (esc(a), " or ".join('<code>%s</code>' % esc(v)
+                                            for v in r['conds'][a]['vals']))
+                                         for a, _b in r['adds'])))
+            w('<p class="vd">%s.</p>' % "; ".join(bits))
+            last = steps[-1]
+            if len(steps) > 1 and len(last['adds']) == 1:
+                below = steps[-2]
+                a = last['adds'][0][0]
+                w('<div class="callout"><p><b>The whole difference between %d %s and '
+                  '%d %s is one observation: <code>%s</code> must be %s.</b> Everything '
+                  'else is already required at %d &mdash; which is why a capability '
+                  'with the work done, the tooling provided and competent people stops '
+                  'at %d until an approved standard exists.</p></div>'
+                  % (below['n'], esc(below['name']), last['n'], esc(last['name']),
+                     esc(a), " or ".join('<code>%s</code>' % esc(v)
+                                         for v in last['conds'][a]['vals']),
+                     below['n'], below['n']))
+        elif not exact:
+            w('<p class="vd">Rows marked <b>approx</b> hold for every capability at '
+              'that level but do not by themselves determine it: this scale averages, '
+              'and no per-observation condition describes an average. Read it in the '
+              'worked table below instead.</p>')
+        ur, urn = derive.unrated(sc)
+        if urn:
+            if ur:
+                cause = "; ".join(
+                    '<code>%s</code> is %s'
+                    % (esc(t), " or ".join('<code>%s</code>' % esc(v) for v in vs))
+                    for t, vs in ur)
+                cause = 'whenever %s, whatever the others say' % cause
+            else:
+                cause = ('when too few dimensions have been observed to judge &mdash; '
+                         'no single observation forces it')
+            w('<p class="vd"><b>Not rated</b> %s: %d of %d combinations. '
+              'This scale %s on performance.</p>'
+              % (cause, urn, n_combo,
+                 '<b>gates</b>' if derive.gates_on_practice(sc)
+                 else 'does <b>not</b> gate'))
+
+    # ---- the same answers, read by every scale at once
+    w(S.sub(4, 'The same answers, read by every scale'))
+    w('<p>Ten situations a reviewer will actually record, run through %s at once. '
+      'Every level and every reason is computed by calling the rule, not written '
+      'here.</p>' % ('both scales' if len(scales) == 2
+                     else 'all %d scales' % len(scales)))
+    w('<table><thead><tr><th style="width:26%">If the four answers are</th>')
+    for t in derive.TYPES:
+        w('<th class="c">%s</th>' % esc(t[:3].title()))
+    for sc in scales:
+        w('<th class="c">%s%s</th>'
+          % (esc(sc.NAME), '' if sc is default else '<br><span style="font-weight:400">'
+             '(lens)</span>'))
+    w('</tr></thead><tbody>')
+    for label, obs, row in derive.worked(scales):
+        w('<tr><td>%s</td>' % esc(label))
+        for t in derive.TYPES:
+            w('<td class="c"><code>%s</code></td>' % esc(obs[t]))
+        for _sc, lv, nm, _why in row:
+            w('<td class="c">%s</td>'
+              % ('<b>%d</b> %s' % (lv, esc(nm)) if lv is not None
+                 else '<span style="color:var(--muted)">not rated</span>'))
+        w('</tr>')
+    w('</tbody></table>')
+    ungated_ = [sc for sc in scales if not derive.gates_on_practice(sc)]
+    if ungated_:
+        w('<div class="callout warn"><p><b>Look at the second row.</b> With the '
+          'tooling provided, the people competent and an approved standard in place, '
+          'but nobody yet asked whether the work is actually done, %s '
+          'return%s <b>not rated</b> &mdash; while %s place%s it near the top of its '
+          'ladder. <b>That single row is the entire argument for this model.</b></p>'
+          '</div>'
+          % (names_gated(scales, True), 's' if len(scales) - len(ungated_) == 1 else '',
+             names_gated(scales, False), 's' if len(ungated_) == 1 else ''))
+
     # ---- the comparison itself
+    w(S.sub(5, 'All %d capabilities, under each scale' % total))
     rows = []
     counts_by = {}
     for s in scales:
@@ -666,8 +829,6 @@ def scales_section(m, default, scales, total, demo, S):
         counts_by[s.SHORT] = counts
         rows.append((s.NAME, getattr(s, "SHORT", ""), counts,
                      dict((n_, k) for n_, k, _ in s.LEVELS)))
-    w('<h4 style="margin:28px 0 2px;font-size:14px">All %d capabilities, under each '
-      'scale</h4>' % total)
     w('<p class="vd">The same %d capabilities and the same observations in every bar. '
       'Only the rule changes.</p>' % total)
     w(ch.scale_compare(rows, total))
