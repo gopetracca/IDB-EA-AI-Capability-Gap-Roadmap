@@ -10,7 +10,7 @@
 |---|:-:|---|:-:|:-:|
 | **L1 · Domain** | 8 | A reporting cluster. Groups capabilities so a reader can find them | no | no |
 | **L2 · Capability** | 56 | Something the institution must be able to do. **The unit of assessment and of accountability** | yes | yes |
-| **L3 · Criterion** | 283 | A specific practice that can actually be witnessed on a real system | no | no |
+| **L3 · Criterion** | 287 | A specific practice that can actually be witnessed on a real system | no | no |
 
 A domain is a **reporting cluster, not a lifecycle** — it does not imply a sequence, a team or a process ([ADR-0006](../docs/decisions/adr/0006-single-primary-home.md)). Every capability has exactly one primary home; where it plausibly belongs in two, one is chosen and the other relationship is expressed as a dependency rather than a second listing.
 
@@ -26,11 +26,11 @@ Criteria are the **checklist behind a judgement, not gates**. They are where *pr
 | `D2` | **AI Demand & Solution Shaping** | Able to find, qualify and shape AI opportunities into deliverable, adoptable solutions. | 6 | 30 |
 | `D3` | **Data & Knowledge Management** | Able to supply trusted, governed data and knowledge to AI systems. | 7 | 33 |
 | `D4` | **AI Solution Engineering** | Able to design, build, customize and validate AI solutions to a defined standard. | 7 | 43 |
-| `D5` | **AI Platform & Infrastructure** | Able to provide and sustain the technical means to build and run AI. | 9 | 40 |
+| `D5` | **AI Platform & Infrastructure** | Able to provide and sustain the technical means to build and run AI. | 9 | 44 |
 | `D6` | **AI Operations & Reliability** | Able to run AI in production dependably, observably and affordably. | 7 | 37 |
 | `D7` | **AI Governance, Risk, Security & Assurance** | Able to direct, control, protect and evidence the trustworthy use of AI. | 9 | 49 |
 | `D8` | **AI People, Skills & Adoption** | Able to build and sustain the human side of AI: who does it, who can, and who will. | 6 | 25 |
-| | | **Total** | **56** | **283** |
+| | | **Total** | **56** | **287** |
 
 ## How to read the tables below
 
@@ -427,7 +427,7 @@ Criteria are the **checklist behind a judgement, not gates**. They are where *pr
 | `5.6` | **AI Developer Experience & Reuse Assets** | make the compliant path the easiest path for delivery teams. | Core Platforms | specialization | medium | 5 |
 | `5.7` | **AI Runtime Mediation & Egress Control** | stand in the path of every tool and agent call, and to control what goes out through it. | Artificial Intelligence | new | low | 5 |
 | `5.8` | **AI Agent Runtime & Execution Environment** | give agents a governed place to execute, remember and be bounded. | Artificial Intelligence | new | low | 5 |
-| `5.9` | **AI Experimentation** | try AI in isolation, without exposing institutional systems or data. | Emerging Tech | new | low | 1 |
+| `5.9` | **AI Experimentation** | give teams an isolated place to explore AI functionality without exposing institutional systems or data. | Emerging Tech | new | low | 5 |
 
 <details><summary><code>5.1</code> AI Platform Service Provisioning — 5 criteria</summary>
 
@@ -524,11 +524,15 @@ Criteria are the **checklist behind a judgement, not gates**. They are where *pr
 
 </details>
 
-<details><summary><code>5.9</code> AI Experimentation — 1 criteria</summary>
+<details><summary><code>5.9</code> AI Experimentation — 5 criteria</summary>
 
 | L3 | Criterion | The practice |
 |---|---|---|
 | `5.9.1` | **Isolated Experimentation Environment Provision** | Provide an experimentation environment that is fully isolated from institutional systems and data. |
+| `5.9.2` | **Self-Service Access & Onboarding** | Let any team obtain and enter an experimentation space quickly, without the intake and approval route that delivery work requires. |
+| `5.9.3` | **Emerging AI Service & Tool Access** | Make new models, services and tools available to explore ahead of their approval for delivery environments. |
+| `5.9.4` | **Experiment Data Admission & Result Egress** | Define what data may be brought into an experiment, and the only route by which its artefacts may leave it for the delivery environments. |
+| `5.9.5` | **Time-Boxing, Spend Guardrails & Teardown** | Give every experiment an expiry and a spend ceiling, and decommission it when either is reached. |
 
 </details>
 
@@ -932,7 +936,7 @@ Mapped against the Bank's own product and enabler catalogue. The point of this t
 
 ## What is new because of agents
 
-11 of 56 capabilities and 46 of 283 criteria are marked as arising from agentic AI rather than from analytics or from generative AI used as a tool. They are flagged because they are the newest part of the map and therefore the least settled.
+11 of 56 capabilities and 46 of 287 criteria are marked as arising from agentic AI rather than from analytics or from generative AI used as a tool. They are flagged because they are the newest part of the map and therefore the least settled.
 
 | ID | Capability | Domain |
 |---|---|---|

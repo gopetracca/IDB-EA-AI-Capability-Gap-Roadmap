@@ -3,6 +3,7 @@ id: ADR-0017
 title: Carve out experimentation, and re-home shared agent assets
 status: Accepted
 date: 2026-09-10
+amended: 2026-09-10
 decision_owner: Gabriel Petracca, Enterprise Architecture
 supersedes: []
 superseded_by: []
@@ -14,7 +15,7 @@ depends_on: [ADR-0009, ADR-0010, ADR-0013, ADR-0014, ADR-0015, ADR-0016]
 ## Status
 
 **Accepted** — 10 September 2026. Adds one capability and re-scopes two criteria.
-Reverses nothing. Nothing is renumbered.
+Reverses nothing. Nothing is renumbered. **Amended** 10 September 2026 (see Amendment 1).
 
 ## Context
 
@@ -108,3 +109,22 @@ to 283.
   pasted rather than assessed, so nothing is changed here.
 - **`5.5`'s ownership was withdrawn** at the same meeting — *"Needs clarification. Who owns
   it, who operates it, who monitors, etc."* — which is recorded as a fact, not decided here.
+
+## Amendment 1 — 10 September 2026
+
+**Wording only; no decision reversed.** `5.9`'s definition was written as *"Able to try AI
+in isolation, without exposing institutional systems or data."* It led with the constraint
+and left the purpose implicit, and on first reading it was taken for a second statement of
+environment segregation — the dev / test / prod separation that is `5.3.1`'s subject and
+that this record had just moved experimentation *away* from. The decision owner's intent
+was an experimentation environment **for teams to explore AI functionality**; isolation is
+the condition that makes that safe, not the point of it.
+
+`facts/capabilities.json` now reads:
+
+> **`5.9 AI Experimentation`** — *Able to give teams an isolated place to explore AI
+> functionality without exposing institutional systems or data.*
+
+`5.9.1` is unchanged. The owner, the confidence, the anchor and the boundary with `5.3`
+stand as decided above. The single-criterion question in **Open** is taken up by
+[ADR-0018](0018-complete-the-criteria-of-ai-experimentation.md).

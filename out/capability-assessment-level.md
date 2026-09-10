@@ -8,13 +8,13 @@
 >
 > Level 3 is the highest this model can currently derive. Levels 4 and 5 are defined but need observations nobody collects yet - threshold monitoring and a closed improvement cycle - so a capability at 3 is at the top of what is measured here, not at the top of the scale. Level 3 also reads conformance from a standard and a practice co-existing; it is not separately evidenced.
 
-The taxonomy has three levels: **8 domains (L1)**, a reporting cluster that is never scored; **56 capabilities (L2)** — the unit that carries a level and an accountable owner; and **283 criteria (L3)** — the specific practices that can actually be witnessed. *Practised* is observed once per criterion and the capability value is **derived** from those observations, never typed: it reads `yes` only when every criterion was examined and every one passed (ADR-0014). Criteria carry no level of their own. They are listed per capability in section *By domain* below, and each has a row on sheet 2 of the workbook.
+The taxonomy has three levels: **8 domains (L1)**, a reporting cluster that is never scored; **56 capabilities (L2)** — the unit that carries a level and an accountable owner; and **287 criteria (L3)** — the specific practices that can actually be witnessed. *Practised* is observed once per criterion and the capability value is **derived** from those observations, never typed: it reads `yes` only when every criterion was examined and every one passed (ADR-0014). Criteria carry no level of their own. They are listed per capability in section *By domain* below, and each has a row on sheet 2 of the workbook.
 
 | | |
 |---|---|
 | Domains (L1) | 8 |
 | Capabilities (L2) | 56 |
-| Criteria (L3) | 283 |
+| Criteria (L3) | 287 |
 | Rated | 10 |
 | Not rated | 46 |
 | Offerings | 7 |
@@ -54,9 +54,9 @@ This is the question most often got wrong. **Only two of the three taxonomy leve
 |---|---|:-:|
 | **L1 domain** (8) | *Nothing.* A domain is a reporting cluster and is never scored | — |
 | **L2 capability** (56) | `enabled`, `skilled`, `defined` — one row each. Plus `practised`, **derived** from the criteria below it and never typed | 168 |
-| **L3 criterion** (283) | `practised` — one row per criterion | 283 |
+| **L3 criterion** (287) | `practised` — one row per criterion | 287 |
 
-So a reviewer answers **451 rows**, not 56: `enabled`, `skilled`, `defined` once per capability, and `practised` once per criterion. The capability's `practised` value shown in the tables below was computed by the roll-up (ADR-0014); **there is nowhere to type it, and typing one is the one edit `check` rejects outright.**
+So a reviewer answers **455 rows**, not 56: `enabled`, `skilled`, `defined` once per capability, and `practised` once per criterion. The capability's `practised` value shown in the tables below was computed by the roll-up (ADR-0014); **there is nowhere to type it, and typing one is the one edit `check` rejects outright.**
 
 ---
 
@@ -583,11 +583,15 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 
 </details>
 
-<details><summary><code>5.9</code> AI Experimentation — 1 L3 criteria, 0 observed</summary>
+<details><summary><code>5.9</code> AI Experimentation — 5 L3 criteria, 0 observed</summary>
 
 | L3 | Criterion | What it means | Practised | Evidence |
 |---|---|---|:-:|---|
 | `5.9.1` | **Isolated Experimentation Environment Provision** | Provide an experimentation environment that is fully isolated from institutional systems and data. | ? |  |
+| `5.9.2` | **Self-Service Access & Onboarding** | Let any team obtain and enter an experimentation space quickly, without the intake and approval route that delivery work requires. | ? |  |
+| `5.9.3` | **Emerging AI Service & Tool Access** | Make new models, services and tools available to explore ahead of their approval for delivery environments. | ? |  |
+| `5.9.4` | **Experiment Data Admission & Result Egress** | Define what data may be brought into an experiment, and the only route by which its artefacts may leave it for the delivery environments. | ? |  |
+| `5.9.5` | **Time-Boxing, Spend Guardrails & Teardown** | Give every experiment an expiry and a spend ceiling, and decommission it when either is reached. | ? |  |
 
 </details>
 

@@ -3,7 +3,7 @@
 **IDB Enterprise Architecture · AI capability map, assessment and roadmap**
 Last updated 10 September 2026 · facts + scales (ADR-0013), practised at L3 (ADR-0014),
 D4-D6 extended across the agentic seam (ADR-0015), D4 and D5 refined by the first two
-review rounds (ADR-0016, ADR-0017)
+review rounds (ADR-0016, ADR-0017), `5.9` completed (ADR-0018)
 
 Read this first. It exists so a new session starts warm instead of re-deriving decisions
 that are already settled. Two project skills carry the working rules in more depth:
@@ -26,9 +26,9 @@ and lenses come from — and what must not be quoted — is
 
 A capability model for AI at the Bank, and the assessment built on it.
 
-- **8 domains · 56 L2 capabilities · 283 L3 criteria** — `facts/capabilities.json`
+- **8 domains · 56 L2 capabilities · 287 L3 criteria** — `facts/capabilities.json`
 - **7 offerings · 20 assets · 27 in-the-box questions** — `facts/offerings.json`, `facts/assets.json`
-- **451 observations** — `facts/observations.json` (283 criterion-level `practised`
+- **455 observations** — `facts/observations.json` (287 criterion-level `practised`
   plus 3 × 56 capability-level)
 - **56 capabilities mapped to the Bank's own catalogue**, 9 with no owner — `facts/owners.json`
 - **45 graded sources · 18 candidate obligations · 1 use-case question** —
@@ -138,6 +138,11 @@ measured today (`DERIVABLE_MAX`), not of the scale.
 
 **ADR-0014** — `practised` is observed at L3 and derived at L2. Never type a
 capability-level `practised` value; `Model.roll_up` computes it.
+
+**ADR-0018** — `5.9` completed: four platform-side criteria added to the one ADR-0017 named —
+self-service access, emerging-service access, data admission and result egress, time-boxing
+and teardown. The practice of experimenting stays in `2.6`; `5.9` is the environment it
+happens in. ADR-0017 Amendment 1 restated `5.9`'s definition to lead with exploration.
 
 **ADR-0017** — `5.9 AI Experimentation` carved out of `5.3.1`, which narrows to
 `Environment Provision`; `5.6.4` re-scoped from inner-source to `Shared Agent Skill &

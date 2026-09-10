@@ -2648,6 +2648,46 @@
   },
   {
    "capability": "5.9",
+   "criterion": "5.9.2",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Criterion added 10 September 2026 (ADR-0018); to be confirmed with the Tech Lab.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.9",
+   "criterion": "5.9.3",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Criterion added 10 September 2026 (ADR-0018); to be confirmed with the Tech Lab.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.9",
+   "criterion": "5.9.4",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Criterion added 10 September 2026 (ADR-0018); to be confirmed with the Tech Lab.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.9",
+   "criterion": "5.9.5",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Criterion added 10 September 2026 (ADR-0018); to be confirmed with the Tech Lab.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.9",
    "observation": "enabled",
    "value": "unknown",
    "evidence": "",

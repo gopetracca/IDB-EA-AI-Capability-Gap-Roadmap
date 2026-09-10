@@ -4,7 +4,8 @@ What is unresolved, what it blocks, and what would close it.
 
 **Last reviewed:** 10 September 2026, after the D4 and D5 review rounds were transcribed
 ([ADR-0016](docs/decisions/adr/0016-d4-criteria-refinements-from-the-first-review-round.md),
-[ADR-0017](docs/decisions/adr/0017-carve-out-experimentation-and-rehome-shared-agent-assets.md)).
+[ADR-0017](docs/decisions/adr/0017-carve-out-experimentation-and-rehome-shared-agent-assets.md))
+and `5.9`'s criteria were completed ([ADR-0018](docs/decisions/adr/0018-complete-the-criteria-of-ai-experimentation.md)).
 The preceding review was 9 September 2026, after the D4-D6 completeness review
 ([ADR-0015](docs/decisions/adr/0015-extend-d4-d6-across-the-agentic-seam.md)). The
 preceding review was 4 September 2026, after the facts-and-scales refactor
@@ -18,7 +19,7 @@ preceding review was 4 September 2026, after the facts-and-scales refactor
 
 | # | Item | Detail | Closes when |
 |---|---|---|---|
-| 1 | **`practised` observed on 47 of 283 criteria** | D4 was walked through on 9 September 2026 (ADR-0016) and D5 on 10 September (ADR-0017). Ten capabilities are rated, all at Level 1. **The other 236 criteria and 46 capabilities are untouched**, including all of D1, D2, D3, D6, D7 and D8. Performance is the gate for every level, so this remains the single highest-value gap | The remaining capability owners are asked, per criterion, what is actually done on real AI systems. Record on sheet 2 |
+| 1 | **`practised` observed on 47 of 287 criteria** | D4 was walked through on 9 September 2026 (ADR-0016) and D5 on 10 September (ADR-0017). Ten capabilities are rated, all at Level 1. **The other 240 criteria and 46 capabilities are untouched**, including all of D1, D2, D3, D6, D7 and D8. Performance is the gate for every level, so this remains the single highest-value gap | The remaining capability owners are asked, per criterion, what is actually done on real AI systems. Record on sheet 2 |
 | 2 | **`skilled` has never been observed** | All 56, and it is now the binding constraint. **`5.3` rolls up to `practised: yes` with `enabled: yes` and `defined: yes` — competence is the only thing between it and Level 3.** No other capability in the model is that close | L&D or the capability owner answers. **Start with `5.3`** |
 
 ## Blocks the agent answer being complete
@@ -65,7 +66,7 @@ preceding review was 4 September 2026, after the facts-and-scales refactor
 |---|---|---|---|
 | 16 | **Taxonomy validation** | With the capability owner. `1.5`, `2.6` and — since ADR-0015 — `5.7`, `5.8` and `6.7` carry confidence *low*. Five of 55 | The review comes back and is applied to `facts/capabilities.json` |
 | 17 | **ADR-0012 ownership model** | **Proposed.** Its own text argues the `dependency` flag is the stronger route and needs no extension to defend | The decision owner accepts, rejects or amends |
-| 28 | **`5.9 AI Experimentation` has one criterion and no evidence** | Added 10 September 2026 (ADR-0017), `confidence: low`, owner Emerging Tech by inference — the meeting wrote "Tech Lab", which is not a unit in the catalogue, and its note was "ASK tech lab". Isolation is the only aspect named; what may enter an experiment, how results graduate, and when one must stop are unwritten | The Tech Lab confirms the capability and its criteria |
+| 28 | **`5.9 AI Experimentation` has no evidence** | Added 10 September 2026 (ADR-0017), `confidence: low`, owner Emerging Tech by inference — the meeting wrote "Tech Lab", which is not a unit in the catalogue, and its note was "ASK tech lab". The definition was restated the same day to say what it is for (ADR-0017 Amendment 1) and four criteria were added — access, emerging-service access, data admission and egress, time-boxing and teardown (ADR-0018). None of the five has been seen by the Tech Lab | The Tech Lab confirms, amends or strikes the capability and its criteria |
 | 29 | **Three D5 judgements contradict the asset register** | `5.5 enabled: no` against OFF-03 at 4 of 7 released (partial) · `5.8 enabled: yes` against OFF-02 at 6 of 8 released (partial), where the meeting's own criterion notes say "missing prod" · `5.5` and `5.6` `defined` moved back to `unknown` while published standards stay in the evidence field. Each row states the disagreement in its `basis`; nothing was overwritten | The owners reconcile the register against what they see |
 | 30 | **Four rows flagged red — "Doubts. Needs Karla"** | `5.1`, `5.4`, `5.5` and `5.6.4`, the meeting's own colour convention. `5.4 defined: n/a` carries no reason, only the routing note "Send to Edgares?" | Karla is asked |
 | 31 | **`5.7` ownership unsettled** | Flagged amber — "we dont know what to do with this" — with the note "Might be the control plane v99". `facts/owners.json` still records the AI enabler from ADR-0015; the meeting's sheet said Unknown, on a row it pasted rather than assessed, so nothing was changed | The capability is validated or retired |

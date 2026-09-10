@@ -1627,7 +1627,7 @@
    "id": "5.9",
    "domain": "D5",
    "name": "AI Experimentation",
-   "definition": "Able to try AI in isolation, without exposing institutional systems or data.",
+   "definition": "Able to give teams an isolated place to explore AI functionality without exposing institutional systems or data.",
    "sources": [
     "Microsoft Cloud Adoption Framework for AI",
     "Institutional practice"
@@ -1637,6 +1637,30 @@
      "id": "5.9.1",
      "name": "Isolated Experimentation Environment Provision",
      "definition": "Provide an experimentation environment that is fully isolated from institutional systems and data.",
+     "agentic": false
+    },
+    {
+     "id": "5.9.2",
+     "name": "Self-Service Access & Onboarding",
+     "definition": "Let any team obtain and enter an experimentation space quickly, without the intake and approval route that delivery work requires.",
+     "agentic": false
+    },
+    {
+     "id": "5.9.3",
+     "name": "Emerging AI Service & Tool Access",
+     "definition": "Make new models, services and tools available to explore ahead of their approval for delivery environments.",
+     "agentic": false
+    },
+    {
+     "id": "5.9.4",
+     "name": "Experiment Data Admission & Result Egress",
+     "definition": "Define what data may be brought into an experiment, and the only route by which its artefacts may leave it for the delivery environments.",
+     "agentic": false
+    },
+    {
+     "id": "5.9.5",
+     "name": "Time-Boxing, Spend Guardrails & Teardown",
+     "definition": "Give every experiment an expiry and a spend ceiling, and decommission it when either is reached.",
      "agentic": false
     }
    ],
