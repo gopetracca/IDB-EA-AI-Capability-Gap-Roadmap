@@ -903,7 +903,7 @@
     {
      "id": "4.1.4",
      "name": "Non-Functional Requirement Design",
-     "definition": "Design explicitly for latency, cost, availability, and degradation behavior.",
+     "definition": "Design explicitly for latency, cost, availability, degradation behavior and any other non-functional requirement the solution carries.",
      "agentic": false
     },
     {
@@ -1093,13 +1093,13 @@
    "criteria": [
     {
      "id": "4.5.1",
-     "name": "API & System Integration Design",
+     "name": "MCP & System Integration Design",
      "definition": "Design integration to institutional systems with contracts and error semantics.",
      "agentic": false
     },
     {
      "id": "4.5.2",
-     "name": "Tool & Function Definition",
+     "name": "MCP Tool & Function Definition",
      "definition": "Define the callable actions exposed to a model, with typed inputs and stated effects.",
      "agentic": true
     },
@@ -1238,7 +1238,13 @@
     },
     {
      "id": "4.7.5",
-     "name": "Release Documentation & Evidence Capture",
+     "name": "Release Documentation",
+     "definition": "Document at release what changed and what was deployed.",
+     "agentic": false
+    },
+    {
+     "id": "4.7.6",
+     "name": "Evidence Capture",
      "definition": "Capture at release the evidence that later assurance work will need.",
      "agentic": false
     }
@@ -1354,8 +1360,8 @@
    "criteria": [
     {
      "id": "5.3.1",
-     "name": "Experimentation Environment Provision",
-     "definition": "Provide safe environments for experimentation with clear data rules.",
+     "name": "Environment Provision",
+     "definition": "Provide the environments delivery teams build AI in - development, test and production - with clear data rules.",
      "agentic": false
     },
     {
@@ -1507,9 +1513,9 @@
     },
     {
      "id": "5.6.4",
-     "name": "Inner-Source & Asset Reuse",
-     "definition": "Make internally built assets discoverable and reusable across the institution.",
-     "agentic": false
+     "name": "Shared Agent Skill & Extension Repository",
+     "definition": "Maintain a curated, shared repository of the skills, hooks and rules that agents draw on, discoverable and reusable across the institution.",
+     "agentic": true
     },
     {
      "id": "5.6.5",
@@ -1615,6 +1621,28 @@
    "agentic": true,
    "anchor": "new",
    "proposed_owner": "AI Platform Owner",
+   "confidence": "low"
+  },
+  {
+   "id": "5.9",
+   "domain": "D5",
+   "name": "AI Experimentation",
+   "definition": "Able to try AI in isolation, without exposing institutional systems or data.",
+   "sources": [
+    "Microsoft Cloud Adoption Framework for AI",
+    "Institutional practice"
+   ],
+   "criteria": [
+    {
+     "id": "5.9.1",
+     "name": "Isolated Experimentation Environment Provision",
+     "definition": "Provide an experimentation environment that is fully isolated from institutional systems and data.",
+     "agentic": false
+    }
+   ],
+   "agentic": false,
+   "anchor": "new",
+   "proposed_owner": "Emerging Technology Owner",
    "confidence": "low"
   },
   {

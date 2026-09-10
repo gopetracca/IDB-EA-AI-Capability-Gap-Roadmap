@@ -260,9 +260,9 @@
   },
   {
    "capability": "4.4",
-   "unit": "Artificial Intelligence",
+   "unit": "Enterprise Architecture",
    "match": "Partial",
-   "basis": "AI enabler claims 'Agent Skill Admin'. Administering agent skills is not the same as designing agent goals, guardrails and termination. The design half has no owner."
+   "basis": "EA workshop, 9 September 2026: ownership moved from the AI enabler to Enterprise Architecture. The workshop's words were \"Owner is EA + Product teams\"; the schema records one unit, so EA is the accountable one and the product teams' share is stated here. ADR-0012 (Proposed) is where a shared owner would be expressed properly."
   },
   {
    "capability": "4.5",
@@ -272,9 +272,9 @@
   },
   {
    "capability": "4.6",
-   "unit": "",
-   "match": "NO MATCH",
-   "basis": "No product or enabler claims evaluation or testing of AI systems. This is the capability that decides whether anything the Bank ships actually works."
+   "unit": "Artificial Intelligence",
+   "match": "Partial",
+   "basis": "EA workshop, 9 September 2026: the AI enabler takes evaluation and testing of AI systems, which no unit had claimed. Recorded as Partial rather than Direct because the enabler's published claims do not yet name it."
   },
   {
    "capability": "4.7",
@@ -296,9 +296,9 @@
   },
   {
    "capability": "5.3",
-   "unit": "Cloud and Infrastructure",
+   "unit": "Core Platforms",
    "match": "Direct",
-   "basis": "Cloud and Infrastructure claims Cloud Operations, Engineering and Security, and Identity and Access Management."
+   "basis": "EA meeting, 10 September 2026, flagged as a change to what was already there: Core Platforms creates the subscriptions, resource groups, subnets, service principals, roles and permissions; Infrasec configures network connectivity and DNS. Was Cloud and Infrastructure."
   },
   {
    "capability": "5.4",
@@ -308,9 +308,9 @@
   },
   {
    "capability": "5.5",
-   "unit": "Artificial Intelligence",
-   "match": "Partial",
-   "basis": "AI enabler maintains the enterprise AI capability catalogue and owns the MCP servers. A catalogue of capabilities is not a governed inventory of callable tools with scopes and vetting."
+   "unit": "",
+   "match": "NO MATCH",
+   "basis": "EA meeting, 10 September 2026: ownership withdrawn from the AI enabler - \"Needs clarification. Who owns it, who operates it, who monitors, etc.\" Flagged red at that meeting, meaning doubts pending Karla, so this is a recorded uncertainty rather than a settled finding that nobody claims it."
   },
   {
    "capability": "5.6",
@@ -329,6 +329,12 @@
    "unit": "Artificial Intelligence",
    "match": "Partial",
    "basis": "AI enabler claims Platform Development and Agent Skill Admin, and OFF-02 Foundry agents provides a hosted agent runtime. Sandboxing, isolation and the compute beneath it sit with Cloud and Infrastructure (5.3, 5.4). Confirm the split before treating this as one owner."
+  },
+  {
+   "capability": "5.9",
+   "unit": "Emerging Tech",
+   "match": "Inferred",
+   "basis": "EA meeting, 10 September 2026, wrote the owner as \"Tech Lab\", which is not a unit in the Bank's catalogue. Emerging Tech is the unit that carries that work. The meeting's note was \"ASK tech lab\" - unconfirmed with the owner."
   },
   {
    "capability": "6.1",

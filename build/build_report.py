@@ -4,6 +4,9 @@
 No external assets, no JavaScript libraries, no build step beyond this file.
 Charts are inline SVG computed from facts/ (see charts.py), so the page cannot
 drift from the model and works offline, in email, and from a file:// URL.
+The heat maps fold per domain with native <details>; the only script on the
+page is the two-line "expand all / collapse all" helper in the head, and the
+page reads the same without it.
 
 Design constraint that shapes everything here: THERE MAY BE NO SCORES YET.  A
 heat map of 52 unrated capabilities is one flat colour, and a current-vs-target
@@ -365,8 +368,27 @@ def report(m, scale, demo=False, scales=None):
       'The <b>practised</b> cell is a roll-up: it is observed once per L3 criterion '
       '(%d in total) and derived here, so one weak practice inside a capability shows '
       'as <i>partial</i> rather than disappearing into an average. The other three are '
-      'observed once per capability.</p>'
+      'observed once per capability. Each domain folds; the bar beside a folded domain '
+      'is the count of its cells by value, not a domain score.</p>'
       % sum(len(c['criteria']) for c in m.capabilities))
+
+    # 1b the same cells, one map per observation - kept beside the combined map
+    # so the two layouts can be compared on the same facts before one is chosen
+    crit_names = [t['id'] for t in m.observation_types if t['id'] in m.criterion_types]
+    vh("Observation heat maps, one per observation", not demo,
+       ("The same cells as the map above, separated by question. Only <b>%s</b> has "
+        "structure underneath it &mdash; it is observed once per L3 criterion &mdash; so "
+        "its map shows the criteria beside the roll-up, which the combined map cannot. "
+        "The other three are one cell per capability, and what is lost by separating "
+        "them is the side-by-side reading of the four columns that the finding rests on."
+        % " and ".join(crit_names)))
+    if demo:
+        views[-1] = (views[-1][0], False)
+    for t in m.observation_types:
+        w('<h3 class="minor" style="margin-top:22px">%s</h3>'
+          '<p class="vd">%s</p>' % (esc(t['id'].title()), esc(t['question'])))
+        w(ch.obs_heatmap(m, types=[t], criteria=True))
+    w(ch.legend())
 
     # 2 enablement by domain - real in the live edition; in the illustrative
     # edition `enabled` is sampled with everything else, so it must say so
@@ -1044,6 +1066,31 @@ padding:10px 24px;font-size:12.5px;font-weight:600;text-align:center;
 letter-spacing:.01em}
 .smp{background:rgba(227,97,53,.12);padding:0 4px;border-radius:2px;
 box-shadow:inset 0 -1px 0 rgba(227,97,53,.4)}
+.hm{margin:6px 0 2px}
+.hmctl{display:flex;gap:6px;justify-content:flex-end;margin:0 0 4px}
+.hmctl button{font:inherit;font-size:11px;font-weight:600;letter-spacing:.04em;
+color:var(--muted);background:transparent;border:1px solid var(--rule);
+padding:3px 10px;cursor:pointer}
+.hmctl button:hover{color:var(--accent);border-color:var(--accent)}
+.hmh{margin:0}
+details.dom{border-top:1px solid var(--rule);padding:2px 0 4px}
+details.dom>summary{display:flex;align-items:center;gap:14px;cursor:pointer;
+list-style:none;padding:8px 0 4px;user-select:none}
+details.dom>summary::-webkit-details-marker{display:none}
+details.dom>summary::before{content:"";width:0;height:0;flex:none;
+border-left:6px solid var(--muted);border-top:4.5px solid transparent;
+border-bottom:4.5px solid transparent;transition:transform .12s}
+details.dom[open]>summary::before{transform:rotate(90deg)}
+.hmd{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:.06em;
+text-transform:uppercase}
+.hms{font-size:11px;color:var(--muted)}
+.mini{display:inline-flex;height:8px;width:150px;gap:1px;margin-left:auto;
+flex:none;border-radius:2px;overflow:hidden}
+.mini i{display:block;height:100%}
+details.dom>.chart{margin:0}
 @media print{body{background:#fff}section{break-inside:avoid;box-shadow:none}
-.wrap{padding:0}.banner{position:static}}
-</style></head><body>"""
+.wrap{padding:0}.banner{position:static}.hmctl{display:none}}
+</style>
+<script>function hmAll(b,o){var d=b.closest(".hm").querySelectorAll("details");
+for(var i=0;i<d.length;i++)d[i].open=o}</script>
+</head><body>"""

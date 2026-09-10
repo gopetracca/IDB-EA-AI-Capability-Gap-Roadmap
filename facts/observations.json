@@ -1415,80 +1415,80 @@
    "capability": "4.1",
    "criterion": "4.1.1",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "yes",
+   "evidence": "EA codesigns enterprise solutions with product teams, also defines reference architectures/ decission trees, , etc.",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.1",
    "criterion": "4.1.2",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "partial",
+   "evidence": "practiced es partial porque no hay casos de uso en produccion. El primer agente enterprise va a ser el de KNP",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.1",
    "criterion": "4.1.3",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "yes",
+   "evidence": "ADR. Los poroductos ya trabajan con ADR, cada uno documenta en diferentes lugares. EA, también tiene ADRs y se documentan en sharepoint.",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.1",
    "criterion": "4.1.4",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "yes",
+   "evidence": "EA co-design enterprise solutions with product teams and non-functional requirements is lwasy taken into account.",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.1",
    "criterion": "4.1.5",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "yes",
+   "evidence": "Architecture reviews from EA, part of the PRAC process.",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.1",
    "criterion": "4.1.6",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "yes",
+   "evidence": "EA works on standards/reference architectures/reusable patterns, etc.",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.1",
    "criterion": "4.1.7",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "yes",
+   "evidence": "El PRAC.",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.1",
    "observation": "enabled",
    "value": "yes",
    "evidence": "OFF-06 Approved AI tech stack (1 of 1 assets released)",
-   "basis": "Assets: STD-01",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Confirmed at the EA workshop, 9 September 2026: \"Enabled and Defined are yes. This is the actual process.\" Per-criterion enabled judged at the EA workshop, 9 September 2026 and recorded here because enabled is observed at capability level (ADR-0014): 4.1.1 n/a; 4.1.2 yes; 4.1.3 yes; 4.1.4 n/a; 4.1.5 n/a; 4.1.6 n/a; 4.1.7 n/a. The sheet is review/2026-09-09-ea-workshop.xlsx.",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.1",
@@ -1504,68 +1504,68 @@
    "observation": "defined",
    "value": "yes",
    "evidence": "STD-01 Tech Stack - AI (Published)",
-   "basis": "Approved standard and reference architecture published",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Confirmed at the EA workshop, 9 September 2026: \"Enabled and Defined are yes. This is the actual process.\" Per-criterion defined judged at the EA workshop, 9 September 2026 and recorded here because defined is observed at capability level (ADR-0014): 4.1.1 n/a; 4.1.2 yes; 4.1.3 yes; 4.1.4 n/a; 4.1.5 yes; 4.1.6 n/a; 4.1.7 n/a. The sheet is review/2026-09-09-ea-workshop.xlsx.",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.2",
    "criterion": "4.2.1",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "yes",
+   "evidence": "only azure openai allowed for now. There is not formal EA or AI Enabler standard. TODO: who should write this down?",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.2",
    "criterion": "4.2.2",
    "observation": "practised",
-   "value": "unknown",
+   "value": "no",
    "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "basis": "No LLLMOps. Although we have Foundry which allows fine tuning models",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.2",
    "criterion": "4.2.3",
    "observation": "practised",
-   "value": "unknown",
+   "value": "no",
    "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "basis": "No LLMOps",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.2",
    "criterion": "4.2.4",
    "observation": "practised",
-   "value": "unknown",
+   "value": "n/a",
    "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "basis": "This documentation is avaialble in the LLM model card in Foundry. Example: https://huggingface.co/Qwen/Qwen3.5-2B",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.2",
    "criterion": "4.2.5",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "yes",
+   "evidence": "Teams can deploy their own models in their own Foundry, OR, they can consume the models via the AI Gateway provided by AI Enabler.",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.2",
    "observation": "enabled",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "partial",
+   "evidence": "Recorded at the EA workshop, 9 September 2026; see basis.",
+   "basis": "Judged partial at the EA workshop, 9 September 2026: Azure OpenAI and Foundry are available (Foundry allows fine-tuning), but there is no LLMOps tooling. Per-criterion enabled judged at the EA workshop, 9 September 2026 and recorded here because enabled is observed at capability level (ADR-0014): 4.2.1 yes; 4.2.2 no; 4.2.3 no; 4.2.4 yes; 4.2.5 yes. The sheet is review/2026-09-09-ea-workshop.xlsx.",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.2",
@@ -1579,70 +1579,70 @@
   {
    "capability": "4.2",
    "observation": "defined",
-   "value": "unknown",
+   "value": "no",
    "evidence": "",
-   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "basis": "Judged at the EA workshop, 9 September 2026: \"There is not formal EA or AI Enabler standard\" for model selection, customization or tuning. Open question recorded on the sheet: who should write this down? Per-criterion defined judged at the EA workshop, 9 September 2026 and recorded here because defined is observed at capability level (ADR-0014): 4.2.1 no; 4.2.2 no; 4.2.3 no; 4.2.4 n/a; 4.2.5 n/a. The sheet is review/2026-09-09-ea-workshop.xlsx.",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.3",
    "criterion": "4.3.1",
    "observation": "practised",
-   "value": "unknown",
+   "value": "n/a",
    "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "basis": "Each product has their own prompts. Marked not applicable at the EA workshop, 9 September 2026: prompt templating and prompt registries are superseded practice, and prompts are devolved to each product team rather than held as an institutional artifact. Approver: Gabriel Petracca, Enterprise Architecture.",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.3",
    "criterion": "4.3.2",
    "observation": "practised",
-   "value": "unknown",
+   "value": "n/a",
    "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "basis": "Each product has their own prompts. Marked not applicable at the EA workshop, 9 September 2026: prompt templating and prompt registries are superseded practice, and prompts are devolved to each product team rather than held as an institutional artifact. Approver: Gabriel Petracca, Enterprise Architecture.",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.3",
    "criterion": "4.3.3",
    "observation": "practised",
-   "value": "unknown",
+   "value": "n/a",
    "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "basis": "Controlled by each product. The tools are available. Marked not applicable at the EA workshop, 9 September 2026: prompt templating and prompt registries are superseded practice, and prompts are devolved to each product team rather than held as an institutional artifact. Approver: Gabriel Petracca, Enterprise Architecture.",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.3",
    "criterion": "4.3.4",
    "observation": "practised",
-   "value": "unknown",
+   "value": "n/a",
    "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "basis": "Marked not applicable at the EA workshop, 9 September 2026: prompt templating and prompt registries are superseded practice, and prompts are devolved to each product team rather than held as an institutional artifact. Approver: Gabriel Petracca, Enterprise Architecture.",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.3",
    "criterion": "4.3.5",
    "observation": "practised",
-   "value": "unknown",
+   "value": "n/a",
    "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "basis": "Marked not applicable at the EA workshop, 9 September 2026: prompt templating and prompt registries are superseded practice, and prompts are devolved to each product team rather than held as an institutional artifact. Approver: Gabriel Petracca, Enterprise Architecture.",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.3",
    "observation": "enabled",
-   "value": "unknown",
+   "value": "n/a",
    "evidence": "",
-   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
-   "observed_on": "",
-   "observed_by": ""
+   "basis": "Marked not applicable at the EA workshop, 9 September 2026: prompt templating and prompt registries are superseded practice, and prompts are devolved to each product team rather than held as an institutional artifact. Approver: Gabriel Petracca, Enterprise Architecture.",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.3",
@@ -1656,31 +1656,31 @@
   {
    "capability": "4.3",
    "observation": "defined",
-   "value": "unknown",
+   "value": "n/a",
    "evidence": "",
-   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "basis": "Marked not applicable at the EA workshop, 9 September 2026: prompt templating and prompt registries are superseded practice, and prompts are devolved to each product team rather than held as an institutional artifact. Approver: Gabriel Petracca, Enterprise Architecture.",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.4",
    "criterion": "4.4.1",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "partial",
+   "evidence": "Example: Katia's project preparation project. Defined. We might use that example to replicate what it's done for others.",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.4",
    "criterion": "4.4.2",
    "observation": "practised",
-   "value": "unknown",
+   "value": "n/a",
    "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "basis": "Marked at the EA workshop, 9 September 2026. The reason was not recorded on the sheet. REASON PENDING from the capability owner.",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.4",
@@ -1725,11 +1725,11 @@
   {
    "capability": "4.4",
    "observation": "enabled",
-   "value": "partial",
+   "value": "n/a",
    "evidence": "OFF-02 Foundry agents (6 of 8 assets released)",
-   "basis": "Assets: IAC-02, IAC-04, IAC-05, RA-02, RA-05, STD-03, STD-06, STD-07",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Marked not applicable at the EA workshop, 9 September 2026. The reason was not recorded on the sheet, and OFF-02 Foundry agents does enable this capability - see the advisory. REASON PENDING from the capability owner. Per-criterion enabled judged at the EA workshop, 9 September 2026 and recorded here because enabled is observed at capability level (ADR-0014): 4.4.1 n/a; 4.4.2 n/a. The sheet is review/2026-09-09-ea-workshop.xlsx.",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.4",
@@ -1753,51 +1753,51 @@
    "capability": "4.5",
    "criterion": "4.5.1",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "partial",
+   "evidence": "MCP servers on their way to production. And, agent-mcp integration defined.",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.5",
    "criterion": "4.5.2",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "partial",
+   "evidence": "We are not in prod yet, (ops mcp servers), we have the standards for MCP and agent.",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.5",
    "criterion": "4.5.3",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "partial",
+   "evidence": "We use APIM as mcp gateway for now. All partial because systems not yet in prod. No responsible for APIM mcp configurations today.",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.5",
    "criterion": "4.5.4",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "partial",
+   "evidence": "Depends on the system supporting delegated access.",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.5",
    "criterion": "4.5.5",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "partial",
+   "evidence": "Example: convergence was not built for AI clients, but with a custom enterprise mcp server, we can consume its data.",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.5",
@@ -1814,7 +1814,7 @@
    "observation": "enabled",
    "value": "partial",
    "evidence": "OFF-03 Custom MCP servers (4 of 7 assets released)",
-   "basis": "Assets: IAC-01, IAC-02, IAC-03, RA-01, STD-02, TPL-01, TPL-02",
+   "basis": "Assets: IAC-01, IAC-02, IAC-03, RA-01, STD-02, TPL-01, TPL-02 Per-criterion enabled judged at the EA workshop, 9 September 2026 and recorded here because enabled is observed at capability level (ADR-0014): 4.5.1 partial; 4.5.2 yes; 4.5.3 partial; 4.5.4 yes; 4.5.5 yes. The sheet is review/2026-09-09-ea-workshop.xlsx.",
    "observed_on": "2026-09-04",
    "observed_by": "EA, from the asset register"
   },
@@ -1832,7 +1832,7 @@
    "observation": "defined",
    "value": "yes",
    "evidence": "STD-02 Custom MCP Server Standard (Published); RA-01 Custom MCP Server Reference Architecture (Published)",
-   "basis": "Approved standard and reference architecture published",
+   "basis": "Approved standard and reference architecture published Per-criterion defined judged at the EA workshop, 9 September 2026 and recorded here because defined is observed at capability level (ADR-0014): 4.5.1 yes; 4.5.2 yes; 4.5.3 yes; 4.5.4 yes; 4.5.5 yes. The sheet is review/2026-09-09-ea-workshop.xlsx.",
    "observed_on": "2026-09-04",
    "observed_by": "EA, from the asset register"
   },
@@ -1840,21 +1840,21 @@
    "capability": "4.6",
    "criterion": "4.6.1",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "partial",
+   "evidence": "KNP agent and MVP tested foundry evaluation framework. We also have the eval framework from ai product, unknown status",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.6",
    "criterion": "4.6.2",
    "observation": "practised",
-   "value": "unknown",
+   "value": "n/a",
    "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "basis": "Marked at the EA workshop, 9 September 2026. The reason was not recorded on the sheet. REASON PENDING from the capability owner.",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.6",
@@ -1870,11 +1870,11 @@
    "capability": "4.6",
    "criterion": "4.6.4",
    "observation": "practised",
-   "value": "unknown",
+   "value": "n/a",
    "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "basis": "Marked at the EA workshop, 9 September 2026. The reason was not recorded on the sheet. REASON PENDING from the capability owner.",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.6",
@@ -1919,11 +1919,11 @@
   {
    "capability": "4.6",
    "observation": "enabled",
-   "value": "unknown",
+   "value": "no",
    "evidence": "",
-   "basis": "Checked against the offerings register on 4 September 2026: no platform offering. Whether an enterprise service or GRC tooling provides this has not been examined, so this is unexamined rather than an evidenced negative. The owner separates 'no tooling exists' (no) from 'no tooling is needed' (n/a, with the reason).",
-   "observed_on": "",
-   "observed_by": ""
+   "basis": "Judged at the EA workshop, 9 September 2026: no evaluation tooling is provided as an offering. The sheet also records \"the eval framework from ai product, unknown status\", which is unresolved - under ADR-0013 Amendment 2 that part is unexamined, not an evidenced negative. Recorded as the workshop wrote it; TO CONFIRM with the owner.",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.6",
@@ -1937,70 +1937,80 @@
   {
    "capability": "4.6",
    "observation": "defined",
-   "value": "unknown",
+   "value": "no",
    "evidence": "",
-   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "basis": "Judged at the EA workshop, 9 September 2026: no approved standard for AI evaluation and testing. TO CONFIRM with the owner, as with enabled.",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.7",
    "criterion": "4.7.1",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "partial",
+   "evidence": "MVP has a CICD for deploying agents in foundry. Missing definition on Container registry in case we use hosted agents",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.7",
    "criterion": "4.7.2",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "partial",
+   "evidence": "Not recorded on the sheet. Graded partial at the EA workshop, 9 September 2026 alongside 4.7.1, 4.7.3 and 4.7.4 as part of the Bank's standard SDLC; no system was named. EVIDENCE PENDING from the capability owner.",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.7",
    "criterion": "4.7.3",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "partial",
+   "evidence": "Same SDLC.",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.7",
    "criterion": "4.7.4",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "partial",
+   "evidence": "Can rollback to previous artifact  (container or jfrog artifact)",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.7",
    "criterion": "4.7.5",
    "observation": "practised",
+   "value": "yes",
+   "evidence": "Same SDLC. GitHub gives this out of the box when creating a release.",
+   "basis": "",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
+  },
+  {
+   "capability": "4.7",
+   "criterion": "4.7.6",
+   "observation": "practised",
    "value": "unknown",
    "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
+   "basis": "Never observed. Split out of 4.7.5 by ADR-0016 after the EA workshop, 9 September 2026, whose note on it was \"We depend on the process (SPM?)\" - a question, not an owner.",
    "observed_on": "",
    "observed_by": ""
   },
   {
    "capability": "4.7",
    "observation": "enabled",
-   "value": "n/a",
-   "evidence": "",
-   "basis": "Realized by an existing enterprise service: CI/CD pipeline and change management tooling",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "value": "partial",
+   "evidence": "Recorded at the EA workshop, 9 September 2026; see basis.",
+   "basis": "Judged partial at the EA workshop, 9 September 2026: the Bank's CI/CD and SDLC tooling covers most of this - \"MVP has a CICD for deploying agents in foundry\" - but container registry for hosted agents is not defined. This supersedes the 4 September n/a, so 4.7 is no longer listed in enablement-context.json.",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "4.7",
@@ -2014,11 +2024,11 @@
   {
    "capability": "4.7",
    "observation": "defined",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "No approved standard found in the asset register. The asset register currently covers AI platform assets only, so a standard owned by another function may exist and not be recorded here - confirm with the owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "yes",
+   "evidence": "Recorded at the EA workshop, 9 September 2026; see basis.",
+   "basis": "Judged at the EA workshop, 9 September 2026: releases run on the Bank's standard SDLC, which is an approved institutional standard. \"Same SDLC\" is recorded against 4.7.3 and 4.7.5.",
+   "observed_on": "2026-09-09",
+   "observed_by": "EA workshop"
   },
   {
    "capability": "5.1",
@@ -2075,7 +2085,7 @@
    "observation": "enabled",
    "value": "partial",
    "evidence": "OFF-01 Foundry platform, OFF-02 Foundry agents (10 of 12 assets released)",
-   "basis": "Assets: IAC-02, IAC-04, IAC-05, RA-02, RA-05, STD-03, STD-06, STD-07",
+   "basis": "Assets: IAC-02, IAC-04, IAC-05, RA-02, RA-05, STD-03, STD-06, STD-07 Flagged red at the EA meeting of 10 September 2026, the meeting's own mark for \"Doubts. Needs Karla\" - recorded as given, not settled.",
    "observed_on": "2026-09-04",
    "observed_by": "EA, from the asset register"
   },
@@ -2093,7 +2103,7 @@
    "observation": "defined",
    "value": "partial",
    "evidence": "STD-03 Microsoft Foundry Standard (Published); RA-02 Microsoft Foundry Reference Architecture (Published); STD-03 Microsoft Foundry Standard (Published); STD-07 Foundry Agents Standard (Pre-release); RA-02 Microsoft Foundry Reference Architecture (Published); RA-05 Foundry Agents Reference Architecture (Pre-release); STD-06 AI Agent Decision Tree (Published)",
-   "basis": "Pre-release documents hold this at partial",
+   "basis": "Pre-release documents hold this at partial Flagged red at the EA meeting of 10 September 2026, the meeting's own mark for \"Doubts. Needs Karla\" - recorded as given, not settled.",
    "observed_on": "2026-09-04",
    "observed_by": "EA, from the asset register"
   },
@@ -2101,41 +2111,41 @@
    "capability": "5.2",
    "criterion": "5.2.1",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "yes",
+   "evidence": "Not recorded on the sheet. Graded yes at the EA meeting of 10 September 2026 with the rest of 5.2. EVIDENCE PENDING from the capability owner.",
+   "basis": "",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.2",
    "criterion": "5.2.2",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "yes",
+   "evidence": "Not all models will be exposed via an AI Gateway. Only the shared ones (shared capability). Individual teams can deploy their own models.",
+   "basis": "",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.2",
    "criterion": "5.2.3",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "yes",
+   "evidence": "Not recorded on the sheet. Graded yes at the EA meeting of 10 September 2026 with the rest of 5.2. EVIDENCE PENDING from the capability owner.",
+   "basis": "",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.2",
    "criterion": "5.2.4",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "yes",
+   "evidence": "Not recorded on the sheet. Graded yes at the EA meeting of 10 September 2026 with the rest of 5.2. EVIDENCE PENDING from the capability owner.",
+   "basis": "",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.2",
@@ -2152,9 +2162,9 @@
    "observation": "enabled",
    "value": "yes",
    "evidence": "OFF-06 Approved AI tech stack (1 of 1 assets released)",
-   "basis": "Assets: STD-01",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Confirmed at the EA meeting of 10 September 2026.",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.2",
@@ -2170,58 +2180,58 @@
    "observation": "defined",
    "value": "yes",
    "evidence": "STD-01 Tech Stack - AI (Published)",
-   "basis": "Approved standard and reference architecture published",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Confirmed at the EA meeting of 10 September 2026: \"EA has decision tree for this.\"",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.3",
    "criterion": "5.3.1",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "yes",
+   "evidence": "Requires: subscription, RG, netowkring, subnets, connectivity, AI resources. The terraform modules to deploy foundry accounts and Foundry projects were built by EA.",
+   "basis": "",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.3",
    "criterion": "5.3.2",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "yes",
+   "evidence": "azure sub, rg, + foundry account with projects. Foundry account can be owned or shared, the logical isolation is with foundry projects.",
+   "basis": "",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.3",
    "criterion": "5.3.3",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "yes",
+   "evidence": "Foundry in private network mode, plus, traffic control at the subnet level possible.",
+   "basis": "",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.3",
    "criterion": "5.3.4",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "yes",
+   "evidence": "Applies the same type of controls that we currently have for applications? Roles, permissions, etc.",
+   "basis": "",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.3",
    "observation": "enabled",
    "value": "yes",
    "evidence": "OFF-01 Foundry platform (4 of 4 assets released)",
-   "basis": "Assets: IAC-04, IAC-05, RA-02, STD-03",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Confirmed at the EA meeting of 10 September 2026: \"Foundry standard defines this. Terraform modules for Foundry available too (EA contribution).\"",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.3",
@@ -2237,9 +2247,9 @@
    "observation": "defined",
    "value": "yes",
    "evidence": "STD-03 Microsoft Foundry Standard (Published); RA-02 Microsoft Foundry Reference Architecture (Published)",
-   "basis": "Approved standard and reference architecture published",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Confirmed at the EA meeting of 10 September 2026: the Foundry standard defines this.",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.4",
@@ -2312,11 +2322,11 @@
   {
    "capability": "5.4",
    "observation": "defined",
-   "value": "yes",
+   "value": "n/a",
    "evidence": "STD-03 Microsoft Foundry Standard (Published); RA-02 Microsoft Foundry Reference Architecture (Published)",
-   "basis": "Approved standard and reference architecture published",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Marked n/a at the EA meeting of 10 September 2026, which wrote only \"Send to Edgares?\" beside it - a routing note, not a reason. REASON PENDING. Flagged red at the EA meeting of 10 September 2026, the meeting's own mark for \"Doubts. Needs Karla\" - recorded as given, not settled.",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.5",
@@ -2371,11 +2381,11 @@
   {
    "capability": "5.5",
    "observation": "enabled",
-   "value": "partial",
+   "value": "no",
    "evidence": "OFF-03 Custom MCP servers (4 of 7 assets released)",
-   "basis": "Assets: IAC-01, IAC-02, IAC-03, RA-01, STD-02, TPL-01, TPL-02",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Judged at the EA meeting of 10 September 2026, alongside withdrawing the owner: \"Needs clarification. Who owns it, who operates it, who monitors, etc.\" Note that the asset register still shows OFF-03 Custom MCP servers at 4 of 7 released, which reads partial - the two disagree. Flagged red at the EA meeting of 10 September 2026, the meeting's own mark for \"Doubts. Needs Karla\" - recorded as given, not settled.",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.5",
@@ -2389,41 +2399,41 @@
   {
    "capability": "5.5",
    "observation": "defined",
-   "value": "yes",
+   "value": "unknown",
    "evidence": "STD-02 Custom MCP Server Standard (Published); RA-01 Custom MCP Server Reference Architecture (Published)",
-   "basis": "Approved standard and reference architecture published",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Moved back to unknown at the EA meeting of 10 September 2026. The published assets recorded in the evidence field are unchanged; what the meeting doubted is whether they constitute the approved standard for this capability. Flagged red at the EA meeting of 10 September 2026, the meeting's own mark for \"Doubts. Needs Karla\" - recorded as given, not settled.",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.6",
    "criterion": "5.6.1",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "partial",
+   "evidence": "Template available for MCP server. Template of hosted agent in progress. Missing CICD (GitHub actions) - Shared with DX platform team.",
+   "basis": "",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.6",
    "criterion": "5.6.2",
    "observation": "practised",
-   "value": "unknown",
+   "value": "n/a",
    "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "basis": "Teams are encouraged to used the libraries they want, as long as the comply with the Tech Stack. Example, team want to develop a hosted agent using langchain? They can, and they can execute it via Foundry hosted agent platform. Nothing impedes this.",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.6",
    "criterion": "5.6.3",
    "observation": "practised",
-   "value": "unknown",
+   "value": "no",
    "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "basis": "Judged at the EA meeting of 10 September 2026; nothing was written beside it. BASIS PENDING from the capability owner.",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.6",
@@ -2431,7 +2441,7 @@
    "observation": "practised",
    "value": "unknown",
    "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
+   "basis": "Never observed. The criterion was re-scoped by ADR-0017 from Inner-Source & Asset Reuse, which the EA meeting of 10 September 2026 marked \"REMOVE\" and flagged red; no grade was given against either subject.",
    "observed_on": "",
    "observed_by": ""
   },
@@ -2439,20 +2449,20 @@
    "capability": "5.6",
    "criterion": "5.6.5",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "partial",
+   "evidence": "Doc per product line. Standards serve as the basis, then we need runbooks, product documentation, solution documentation, etc?",
+   "basis": "",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.6",
    "observation": "enabled",
    "value": "partial",
    "evidence": "OFF-02 Foundry agents (6 of 8 assets released)",
-   "basis": "Assets: IAC-02, IAC-04, IAC-05, RA-02, RA-05, STD-03, STD-06, STD-07",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Confirmed partial at the EA meeting of 10 September 2026: MCP server template available, hosted-agent template in progress, CI/CD (GitHub Actions) missing.",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.6",
@@ -2466,11 +2476,11 @@
   {
    "capability": "5.6",
    "observation": "defined",
-   "value": "partial",
+   "value": "unknown",
    "evidence": "STD-03 Microsoft Foundry Standard (Published); STD-07 Foundry Agents Standard (Pre-release); RA-02 Microsoft Foundry Reference Architecture (Published); RA-05 Foundry Agents Reference Architecture (Pre-release); STD-06 AI Agent Decision Tree (Published)",
-   "basis": "Pre-release documents hold this at partial",
-   "observed_on": "2026-09-04",
-   "observed_by": "EA, from the asset register"
+   "basis": "Moved back to unknown at the EA meeting of 10 September 2026. The pre-release documents recorded in the evidence field are unchanged; the meeting did not accept them as the standard for developer experience.",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.7",
@@ -2553,31 +2563,31 @@
    "capability": "5.8",
    "criterion": "5.8.1",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "partial",
+   "evidence": "Foundry Agents, missing prod",
+   "basis": "",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.8",
    "criterion": "5.8.2",
    "observation": "practised",
-   "value": "unknown",
+   "value": "no",
    "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "basis": "Not allowed in the standard. Needs risk analysis before enablement.",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.8",
    "criterion": "5.8.3",
    "observation": "practised",
-   "value": "unknown",
-   "evidence": "",
-   "basis": "Never observed. Requires the capability owner.",
-   "observed_on": "",
-   "observed_by": ""
+   "value": "partial",
+   "evidence": "It is there, missing prod.",
+   "basis": "",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.8",
@@ -2602,11 +2612,11 @@
   {
    "capability": "5.8",
    "observation": "enabled",
-   "value": "partial",
+   "value": "yes",
    "evidence": "OFF-02 Foundry agents (6 of 8 assets released)",
-   "basis": "Assets: IAC-02, IAC-04, IAC-05, RA-02, RA-05, STD-03, STD-06, STD-07",
-   "observed_on": "2026-09-09",
-   "observed_by": "EA, from the asset register"
+   "basis": "Judged yes at the EA meeting of 10 September 2026 on the strength of Foundry Agents being available. The asset register reads OFF-02 at 6 of 8 released, which is partial, and the meeting's own criterion notes say \"missing prod\" - the two disagree. TO CONFIRM with the owner.",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
   },
   {
    "capability": "5.8",
@@ -2622,9 +2632,46 @@
    "observation": "defined",
    "value": "partial",
    "evidence": "RA-02 Microsoft Foundry Reference Architecture (Published); RA-05 Foundry Agents Reference Architecture (Pre-release); STD-03 Microsoft Foundry Standard (Published); STD-06 AI Agent Decision Tree (Published); STD-07 Foundry Agents Standard (Pre-release)",
-   "basis": "Pre-release documents hold this at partial",
-   "observed_on": "2026-09-09",
-   "observed_by": "EA, from the asset register"
+   "basis": "Confirmed partial at the EA meeting of 10 September 2026. Pre-release documents hold this at partial.",
+   "observed_on": "2026-09-10",
+   "observed_by": "EA meeting"
+  },
+  {
+   "capability": "5.9",
+   "criterion": "5.9.1",
+   "observation": "practised",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. The meeting's note was \"ASK tech lab\".",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.9",
+   "observation": "enabled",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.9",
+   "observation": "skilled",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner or L&D.",
+   "observed_on": "",
+   "observed_by": ""
+  },
+  {
+   "capability": "5.9",
+   "observation": "defined",
+   "value": "unknown",
+   "evidence": "",
+   "basis": "Never observed. Requires the capability owner.",
+   "observed_on": "",
+   "observed_by": ""
   },
   {
    "capability": "6.1",

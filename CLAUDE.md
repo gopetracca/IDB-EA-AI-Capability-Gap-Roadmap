@@ -1,8 +1,9 @@
 # AI Capability Model — working brief
 
 **IDB Enterprise Architecture · AI capability map, assessment and roadmap**
-Last updated 9 September 2026 · facts + scales (ADR-0013), practised at L3 (ADR-0014),
-D4-D6 extended across the agentic seam (ADR-0015)
+Last updated 10 September 2026 · facts + scales (ADR-0013), practised at L3 (ADR-0014),
+D4-D6 extended across the agentic seam (ADR-0015), D4 and D5 refined by the first two
+review rounds (ADR-0016, ADR-0017)
 
 Read this first. It exists so a new session starts warm instead of re-deriving decisions
 that are already settled. Two project skills carry the working rules in more depth:
@@ -25,11 +26,11 @@ and lenses come from — and what must not be quoted — is
 
 A capability model for AI at the Bank, and the assessment built on it.
 
-- **8 domains · 55 L2 capabilities · 281 L3 criteria** — `facts/capabilities.json`
+- **8 domains · 56 L2 capabilities · 283 L3 criteria** — `facts/capabilities.json`
 - **7 offerings · 20 assets · 27 in-the-box questions** — `facts/offerings.json`, `facts/assets.json`
-- **446 observations** — `facts/observations.json` (281 criterion-level `practised`
-  plus 3 × 55 capability-level)
-- **55 capabilities mapped to the Bank's own catalogue**, 9 with no owner — `facts/owners.json`
+- **451 observations** — `facts/observations.json` (283 criterion-level `practised`
+  plus 3 × 56 capability-level)
+- **56 capabilities mapped to the Bank's own catalogue**, 9 with no owner — `facts/owners.json`
 - **45 graded sources · 18 candidate obligations · 1 use-case question** —
   `facts/sources.json`, `facts/obligations.json`, `facts/questions.json`
 
@@ -98,8 +99,11 @@ level**. That ordering is the standard's, and it is what stops *"we approved the
 technology"* from reading as *"we have the capability"*. Level 3 is the ceiling of what is
 measured today (`DERIVABLE_MAX`), not of the scale.
 
-- **Not rated is a result.** Today every capability is unrated because `practised` has
-  never been observed. Do not paper over that.
+- **Not rated is a result.** 46 of 56 are unrated because `practised` has never been
+  observed there. Do not paper over that. The 10 that are rated are D4 and D5, from the
+  EA sessions of 9 and 10 September 2026 (ADR-0016, ADR-0017), and every one is at
+  Level 1 — `skilled` has never been observed anywhere, which is what caps them. `5.3`
+  is the only capability whose `practised` rolls up to `yes`.
 - **Lenses are not the assessment.** `executive.py` and `maturity.py` read the same facts
   through another frame. Where a lens and the default disagree, the default is the finding.
 
@@ -134,6 +138,17 @@ measured today (`DERIVABLE_MAX`), not of the scale.
 
 **ADR-0014** — `practised` is observed at L3 and derived at L2. Never type a
 capability-level `practised` value; `Model.roll_up` computes it.
+
+**ADR-0017** — `5.9 AI Experimentation` carved out of `5.3.1`, which narrows to
+`Environment Provision`; `5.6.4` re-scoped from inner-source to `Shared Agent Skill &
+Extension Repository`. A drafted `4.4.7 Agent Skills` was **rejected**: a production agent's
+skills are already governed by `5.5`, designed in `4.4` and hosted by `5.8.1`; only the
+shared institutional repository was missing. Additive, nothing renumbered.
+
+**ADR-0016** — D4 criterion refinements from the first review round: `4.5.1` and `4.5.2`
+renamed to name MCP, `4.7.5` split into `4.7.5` Release Documentation and a new `4.7.6`
+Evidence Capture, `4.1.4` opened up. Additive, nothing renumbered. Naming a protocol inside
+a criterion is permitted only where the protocol is a registered source — MCP is `S33`.
 
 **ADR-0015** — D4-D6 extended across the agentic seam: `5.7` runtime mediation and egress
 control, `5.8` agent runtime and execution environment, `6.7` human oversight operations,

@@ -1,6 +1,6 @@
 # Can the Bank run AI agents?
 
-**Inter-American Development Bank** · generated 2026-09-09
+**Inter-American Development Bank** · generated 2026-09-10
 
 The claim being answered: *"We cannot run AI agents."*
 
@@ -54,12 +54,12 @@ The 18 questions that decide whether a team inherits its controls or rebuilds th
 
 | ID | Capability | Owner | Practised | Enabled | Skilled | Defined |
 |---|---|---|:-:|:-:|:-:|:-:|
-| `4.4` | Agent & Workflow Orchestration Design | Artificial Intelligence | ? | part | ? | part |
+| `4.4` | Agent & Workflow Orchestration Design | Enterprise Architecture | part | n-a | ? | part |
 | `5.1` | AI Platform Service Provisioning | Artificial Intelligence | ? | part | ? | part |
-| `5.5` | Tool & Connector Catalog Management | Artificial Intelligence | ? | part | ? | yes |
+| `5.5` | Tool & Connector Catalog Management | **none** | ? | no | ? | ? |
 | `7.7` | AI System & Agent Inventory Management | Artificial Intelligence | ? | ? | ? | ? |
 | `2.5` | Human-AI Interaction & Oversight Design | People Experience - IBT | ? | yes | ? | yes |
-| `4.5` | Integration & Tool Enablement | Core Platforms | ? | part | ? | yes |
+| `4.5` | Integration & Tool Enablement | Core Platforms | part | part | ? | yes |
 | `7.4` | AI Security & Resilience | Cybersecurity | ? | ? | ? | ? |
 | `8.3` | AI Literacy & Awareness | Emerging Tech | ? | n-a | ? | ? |
 

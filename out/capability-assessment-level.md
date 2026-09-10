@@ -1,6 +1,6 @@
 # Capability assessment — Capability level
 
-**Inter-American Development Bank** · generated 2026-09-09 · scale `level` · **the default scale**
+**Inter-American Development Bank** · generated 2026-09-10 · scale `level` · **the default scale**
 
 > **The question this scale asks:** Has the institution established this practice?
 >
@@ -8,19 +8,17 @@
 >
 > Level 3 is the highest this model can currently derive. Levels 4 and 5 are defined but need observations nobody collects yet - threshold monitoring and a closed improvement cycle - so a capability at 3 is at the top of what is measured here, not at the top of the scale. Level 3 also reads conformance from a standard and a practice co-existing; it is not separately evidenced.
 
-The taxonomy has three levels: **8 domains (L1)**, a reporting cluster that is never scored; **55 capabilities (L2)** — the unit that carries a level and an accountable owner; and **281 criteria (L3)** — the specific practices that can actually be witnessed. *Practised* is observed once per criterion and the capability value is **derived** from those observations, never typed: it reads `yes` only when every criterion was examined and every one passed (ADR-0014). Criteria carry no level of their own. They are listed per capability in section *By domain* below, and each has a row on sheet 2 of the workbook.
+The taxonomy has three levels: **8 domains (L1)**, a reporting cluster that is never scored; **56 capabilities (L2)** — the unit that carries a level and an accountable owner; and **283 criteria (L3)** — the specific practices that can actually be witnessed. *Practised* is observed once per criterion and the capability value is **derived** from those observations, never typed: it reads `yes` only when every criterion was examined and every one passed (ADR-0014). Criteria carry no level of their own. They are listed per capability in section *By domain* below, and each has a row on sheet 2 of the workbook.
 
 | | |
 |---|---|
 | Domains (L1) | 8 |
-| Capabilities (L2) | 55 |
-| Criteria (L3) | 281 |
-| Rated | 0 |
-| Not rated | 55 |
+| Capabilities (L2) | 56 |
+| Criteria (L3) | 283 |
+| Rated | 10 |
+| Not rated | 46 |
 | Offerings | 7 |
 | Assets | 20 |
-
-> **Nothing is rated yet.** Every capability is missing the observation this scale needs most. That is a true statement about the assessment, not a failure of the model: the facts that exist are recorded, and the ones that do not are visibly absent. Fill in sheet 2 of the workbook to change it.
 
 ---
 
@@ -55,10 +53,10 @@ This is the question most often got wrong. **Only two of the three taxonomy leve
 | Taxonomy level | What is recorded against it | Rows |
 |---|---|:-:|
 | **L1 domain** (8) | *Nothing.* A domain is a reporting cluster and is never scored | — |
-| **L2 capability** (55) | `enabled`, `skilled`, `defined` — one row each. Plus `practised`, **derived** from the criteria below it and never typed | 165 |
-| **L3 criterion** (281) | `practised` — one row per criterion | 281 |
+| **L2 capability** (56) | `enabled`, `skilled`, `defined` — one row each. Plus `practised`, **derived** from the criteria below it and never typed | 168 |
+| **L3 criterion** (283) | `practised` — one row per criterion | 283 |
 
-So a reviewer answers **446 rows**, not 55: `enabled`, `skilled`, `defined` once per capability, and `practised` once per criterion. The capability's `practised` value shown in the tables below was computed by the roll-up (ADR-0014); **there is nowhere to type it, and typing one is the one edit `check` rejects outright.**
+So a reviewer answers **451 rows**, not 56: `enabled`, `skilled`, `defined` once per capability, and `practised` once per criterion. The capability's `practised` value shown in the tables below was computed by the roll-up (ADR-0014); **there is nowhere to type it, and typing one is the one edit `check` rejects outright.**
 
 ---
 
@@ -374,58 +372,58 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 
 | ID | Capability | Owner | Pra | Ena | Ski | Def | Level | Why |
 |---|---|---|:-:|:-:|:-:|:-:|:-:|---|
-| `4.1` | AI Architecture Management & Solution Governance | Enterprise Architecture | ? | yes | ? | yes | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `4.2` | Model Selection, Customization & Tuning | Artificial Intelligence | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `4.3` | Prompt & Context Engineering | Artificial Intelligence | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `4.4` | Agent & Workflow Orchestration Design | Artificial Intelligence | ? | part | ? | part | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `4.5` | Integration & Tool Enablement | Core Platforms | ? | part | ? | yes | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `4.6` | AI Evaluation & Testing | **none** | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `4.7` | AI Release & Change Management | Core Platforms | ? | n-a | ? | ? | *not rated* | Not rated: performance has never been observed (enabled recorded, which cannot place a level on its own) |
+| `4.1` | AI Architecture Management & Solution Governance | Enterprise Architecture | part | yes | ? | yes | **1** Performed | Performed on some AI systems but not repeatably - that is Level 1 until it is consistent |
+| `4.2` | Model Selection, Customization & Tuning | Artificial Intelligence | part | part | ? | no | **1** Performed | Performed on some AI systems but not repeatably - that is Level 1 until it is consistent |
+| `4.3` | Prompt & Context Engineering | Artificial Intelligence | n-a | n-a | ? | n-a | *not rated* | Not rated: marked not applicable, which needs an approver and a rationale |
+| `4.4` | Agent & Workflow Orchestration Design | Enterprise Architecture | part | n-a | ? | part | **1** Performed | Performed on some AI systems but not repeatably - that is Level 1 until it is consistent |
+| `4.5` | Integration & Tool Enablement | Core Platforms | part | part | ? | yes | **1** Performed | Performed on some AI systems but not repeatably - that is Level 1 until it is consistent |
+| `4.6` | AI Evaluation & Testing | Artificial Intelligence | part | no | ? | no | **1** Performed | Performed on some AI systems but not repeatably - that is Level 1 until it is consistent |
+| `4.7` | AI Release & Change Management | Core Platforms | part | part | ? | yes | **1** Performed | Performed on some AI systems but not repeatably - that is Level 1 until it is consistent |
 
-<details><summary><code>4.1</code> AI Architecture Management & Solution Governance — 7 L3 criteria, 0 observed</summary>
+<details><summary><code>4.1</code> AI Architecture Management & Solution Governance — 7 L3 criteria, 7 observed</summary>
 
 | L3 | Criterion | What it means | Practised | Evidence |
 |---|---|---|:-:|---|
-| `4.1.1` | **Solution Pattern Selection** | Choose the architecture building block that realizes the required capability. | ? |  |
-| `4.1.2` | **Reference Architecture Compliance** | Build to published reference architectures and detect deviation. | ? |  |
-| `4.1.3` | **Architecture Decision Recording** | Record significant decisions with alternatives and consequences. | ? |  |
-| `4.1.4` | **Non-Functional Requirement Design** | Design explicitly for latency, cost, availability, and degradation behavior. | ? |  |
-| `4.1.5` | **Architecture Review & Dispensation** | Review designs and grant time-boxed exceptions with recorded conditions. | ? |  |
-| `4.1.6` | **ABB & Pattern Stewardship** | Define, version and retire the institution's logical building blocks and the patterns that compose them. | ? |  |
-| `4.1.7` | **Solution Conformance Certification** | Certify that a concrete solution conforms to the building blocks and controls it claims, and record the deviations. | ? |  |
+| `4.1.1` | **Solution Pattern Selection** | Choose the architecture building block that realizes the required capability. | yes | EA codesigns enterprise solutions with product teams, also defines reference architectures/ decission trees, , etc. |
+| `4.1.2` | **Reference Architecture Compliance** | Build to published reference architectures and detect deviation. | part | practiced es partial porque no hay casos de uso en produccion. El primer agente enterprise va a ser el de KNP |
+| `4.1.3` | **Architecture Decision Recording** | Record significant decisions with alternatives and consequences. | yes | ADR. Los poroductos ya trabajan con ADR, cada uno documenta en diferentes lugares. EA, también tiene ADRs y se documentan en sharepoint. |
+| `4.1.4` | **Non-Functional Requirement Design** | Design explicitly for latency, cost, availability, degradation behavior and any other non-functional requirement the solution carries. | yes | EA co-design enterprise solutions with product teams and non-functional requirements is lwasy taken into account. |
+| `4.1.5` | **Architecture Review & Dispensation** | Review designs and grant time-boxed exceptions with recorded conditions. | yes | Architecture reviews from EA, part of the PRAC process. |
+| `4.1.6` | **ABB & Pattern Stewardship** | Define, version and retire the institution's logical building blocks and the patterns that compose them. | yes | EA works on standards/reference architectures/reusable patterns, etc. |
+| `4.1.7` | **Solution Conformance Certification** | Certify that a concrete solution conforms to the building blocks and controls it claims, and record the deviations. | yes | El PRAC. |
 
 </details>
 
-<details><summary><code>4.2</code> Model Selection, Customization & Tuning — 5 L3 criteria, 0 observed</summary>
+<details><summary><code>4.2</code> Model Selection, Customization & Tuning — 5 L3 criteria, 5 observed</summary>
 
 | L3 | Criterion | What it means | Practised | Evidence |
 |---|---|---|:-:|---|
-| `4.2.1` | **Model Selection for Use Case** | Select a model from within the cleared set against task-specific criteria and evidence. | ? |  |
-| `4.2.2` | **Fine-Tuning & Adaptation** | Adapt models to institutional context under controlled, repeatable procedure. | ? |  |
-| `4.2.3` | **Model Training & Experimentation** | Run and track experiments so results are reproducible. | ? |  |
-| `4.2.4` | **Model Documentation & Disclosure Production** | Produce model cards covering intended use, limits, data and evaluation results. | ? |  |
-| `4.2.5` | **Model Versioning & Registration** | Register every model version as an identifiable, ownable asset. | ? |  |
+| `4.2.1` | **Model Selection for Use Case** | Select a model from within the cleared set against task-specific criteria and evidence. | yes | only azure openai allowed for now. There is not formal EA or AI Enabler standard. TODO: who should write this down? |
+| `4.2.2` | **Fine-Tuning & Adaptation** | Adapt models to institutional context under controlled, repeatable procedure. | no |  |
+| `4.2.3` | **Model Training & Experimentation** | Run and track experiments so results are reproducible. | no |  |
+| `4.2.4` | **Model Documentation & Disclosure Production** | Produce model cards covering intended use, limits, data and evaluation results. | n-a |  |
+| `4.2.5` | **Model Versioning & Registration** | Register every model version as an identifiable, ownable asset. | yes | Teams can deploy their own models in their own Foundry, OR, they can consume the models via the AI Gateway provided by AI Enabler. |
 
 </details>
 
-<details><summary><code>4.3</code> Prompt & Context Engineering — 5 L3 criteria, 0 observed</summary>
+<details><summary><code>4.3</code> Prompt & Context Engineering — 5 L3 criteria, 5 observed</summary>
 
 | L3 | Criterion | What it means | Practised | Evidence |
 |---|---|---|:-:|---|
-| `4.3.1` | **Prompt Design & Templating** | Design prompts as reusable, parameterized templates rather than embedded strings. | ? |  |
-| `4.3.2` | **Prompt Versioning & Registry** | Version, review and register prompts as controlled artifacts. | ? |  |
-| `4.3.3` | **Context Assembly & Window Management** | Assemble context deliberately and manage what is included, ordered and dropped. | ? |  |
-| `4.3.4` | **Grounding Strategy Design** | Decide what the model is permitted to answer from, and enforce it. | ? |  |
-| `4.3.5` | **Prompt & Context Boundary Design** | Construct prompt and context boundaries that constrain what untrusted content can instruct. | ? |  |
+| `4.3.1` | **Prompt Design & Templating** | Design prompts as reusable, parameterized templates rather than embedded strings. | n-a |  |
+| `4.3.2` | **Prompt Versioning & Registry** | Version, review and register prompts as controlled artifacts. | n-a |  |
+| `4.3.3` | **Context Assembly & Window Management** | Assemble context deliberately and manage what is included, ordered and dropped. | n-a |  |
+| `4.3.4` | **Grounding Strategy Design** | Decide what the model is permitted to answer from, and enforce it. | n-a |  |
+| `4.3.5` | **Prompt & Context Boundary Design** | Construct prompt and context boundaries that constrain what untrusted content can instruct. | n-a |  |
 
 </details>
 
-<details><summary><code>4.4</code> Agent & Workflow Orchestration Design — 6 L3 criteria, 0 observed</summary>
+<details><summary><code>4.4</code> Agent & Workflow Orchestration Design — 6 L3 criteria, 2 observed</summary>
 
 | L3 | Criterion | What it means | Practised | Evidence |
 |---|---|---|:-:|---|
-| `4.4.1` | **Agent Specification & Goal Definition** | State an agent's objective, scope and prohibited actions before it is built. | ? |  |
-| `4.4.2` | **Task Decomposition & Planning Design** | Design how an agent breaks work down and selects its next step. | ? |  |
+| `4.4.1` | **Agent Specification & Goal Definition** | State an agent's objective, scope and prohibited actions before it is built. | part | Example: Katia's project preparation project. Defined. We might use that example to replicate what it's done for others. |
+| `4.4.2` | **Task Decomposition & Planning Design** | Design how an agent breaks work down and selects its next step. | n-a |  |
 | `4.4.3` | **Multi-Agent Coordination Design** | Design how agents delegate, communicate and resolve conflict. | ? |  |
 | `4.4.4` | **Agent Memory & State Design** | Design what an agent retains, for how long, and who else can see it. | ? |  |
 | `4.4.5` | **Guardrail & Constraint Design** | Encode hard limits an agent cannot argue its way past. | ? |  |
@@ -433,27 +431,27 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 
 </details>
 
-<details><summary><code>4.5</code> Integration & Tool Enablement — 6 L3 criteria, 0 observed</summary>
+<details><summary><code>4.5</code> Integration & Tool Enablement — 6 L3 criteria, 5 observed</summary>
 
 | L3 | Criterion | What it means | Practised | Evidence |
 |---|---|---|:-:|---|
-| `4.5.1` | **API & System Integration Design** | Design integration to institutional systems with contracts and error semantics. | ? |  |
-| `4.5.2` | **Tool & Function Definition** | Define the callable actions exposed to a model, with typed inputs and stated effects. | ? |  |
-| `4.5.3` | **Capability Exposure to AI Clients** | Expose institutional capability to AI clients through the prevailing open tool-interface standard. | ? |  |
-| `4.5.4` | **Identity Propagation & Delegated Access** | Carry the acting user's identity through to the system of record. | ? |  |
-| `4.5.5` | **Legacy & Core System Adaptation** | Reach systems that were never designed to be called by an AI client. | ? |  |
+| `4.5.1` | **MCP & System Integration Design** | Design integration to institutional systems with contracts and error semantics. | part | MCP servers on their way to production. And, agent-mcp integration defined. |
+| `4.5.2` | **MCP Tool & Function Definition** | Define the callable actions exposed to a model, with typed inputs and stated effects. | part | We are not in prod yet, (ops mcp servers), we have the standards for MCP and agent. |
+| `4.5.3` | **Capability Exposure to AI Clients** | Expose institutional capability to AI clients through the prevailing open tool-interface standard. | part | We use APIM as mcp gateway for now. All partial because systems not yet in prod. No responsible for APIM mcp configurations today. |
+| `4.5.4` | **Identity Propagation & Delegated Access** | Carry the acting user's identity through to the system of record. | part | Depends on the system supporting delegated access. |
+| `4.5.5` | **Legacy & Core System Adaptation** | Reach systems that were never designed to be called by an AI client. | part | Example: convergence was not built for AI clients, but with a custom enterprise mcp server, we can consume its data. |
 | `4.5.6` | **Agent-to-Agent Interoperability** | Publish and consume agent descriptions, negotiate a task through a defined lifecycle, and carry identity and authorization across an agent boundary. | ? |  |
 
 </details>
 
-<details><summary><code>4.6</code> AI Evaluation & Testing — 8 L3 criteria, 0 observed</summary>
+<details><summary><code>4.6</code> AI Evaluation & Testing — 8 L3 criteria, 3 observed</summary>
 
 | L3 | Criterion | What it means | Practised | Evidence |
 |---|---|---|:-:|---|
-| `4.6.1` | **Evaluation Criteria & Metric Definition** | Define the metrics that constitute acceptable performance for this use case. | ? |  |
-| `4.6.2` | **Golden Dataset & Test Set Management** | Build and maintain representative evaluation sets with known-correct answers. | ? |  |
+| `4.6.1` | **Evaluation Criteria & Metric Definition** | Define the metrics that constitute acceptable performance for this use case. | part | KNP agent and MVP tested foundry evaluation framework. We also have the eval framework from ai product, unknown status |
+| `4.6.2` | **Golden Dataset & Test Set Management** | Build and maintain representative evaluation sets with known-correct answers. | n-a |  |
 | `4.6.3` | **Automated Evaluation Harness Operation** | Run evaluations repeatably as part of the delivery pipeline. | ? |  |
-| `4.6.4` | **Human Review & Expert Evaluation** | Obtain qualified human judgement where automated metrics are insufficient. | ? |  |
+| `4.6.4` | **Human Review & Expert Evaluation** | Obtain qualified human judgement where automated metrics are insufficient. | n-a |  |
 | `4.6.5` | **Pre-Deployment Acceptance Testing** | Test against acceptance criteria and record the result as release evidence. | ? |  |
 | `4.6.6` | **Agent Trajectory & Tool-Use Evaluation** | Evaluate the path taken, not only the answer returned: tool selection, argument correctness, recovery from a failed call, termination and task completion. | ? |  |
 | `4.6.7` | **Simulation & Scenario-Based Testing** | Exercise the system against simulated users, environments and adversarial inputs before it can reach a system of record. | ? |  |
@@ -461,15 +459,16 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 
 </details>
 
-<details><summary><code>4.7</code> AI Release & Change Management — 5 L3 criteria, 0 observed</summary>
+<details><summary><code>4.7</code> AI Release & Change Management — 6 L3 criteria, 5 observed</summary>
 
 | L3 | Criterion | What it means | Practised | Evidence |
 |---|---|---|:-:|---|
-| `4.7.1` | **Build & Continuous Integration** | Build AI artifacts through an automated, auditable pipeline. | ? |  |
-| `4.7.2` | **Promotion & Environment Progression** | Move artifacts through environments under defined entry and exit criteria. | ? |  |
-| `4.7.3` | **Change Approval & Release Authorization** | Authorise AI change through a route proportionate to its risk tier. | ? |  |
-| `4.7.4` | **Rollback & Release Reversal** | Return a deployed AI system to a previously accepted release. | ? |  |
-| `4.7.5` | **Release Documentation & Evidence Capture** | Capture at release the evidence that later assurance work will need. | ? |  |
+| `4.7.1` | **Build & Continuous Integration** | Build AI artifacts through an automated, auditable pipeline. | part | MVP has a CICD for deploying agents in foundry. Missing definition on Container registry in case we use hosted agents |
+| `4.7.2` | **Promotion & Environment Progression** | Move artifacts through environments under defined entry and exit criteria. | part | Not recorded on the sheet. Graded partial at the EA workshop, 9 September 2026 alongside 4.7.1, 4.7.3 and 4.7.4 as part of the Bank's standard SDLC; no system was named. EVIDENCE PENDING from the capability owner. |
+| `4.7.3` | **Change Approval & Release Authorization** | Authorise AI change through a route proportionate to its risk tier. | part | Same SDLC. |
+| `4.7.4` | **Rollback & Release Reversal** | Return a deployed AI system to a previously accepted release. | part | Can rollback to previous artifact  (container or jfrog artifact) |
+| `4.7.5` | **Release Documentation** | Document at release what changed and what was deployed. | yes | Same SDLC. GitHub gives this out of the box when creating a release. |
+| `4.7.6` | **Evidence Capture** | Capture at release the evidence that later assurance work will need. | ? |  |
 
 </details>
 
@@ -480,13 +479,14 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 | ID | Capability | Owner | Pra | Ena | Ski | Def | Level | Why |
 |---|---|---|:-:|:-:|:-:|:-:|:-:|---|
 | `5.1` | AI Platform Service Provisioning | Artificial Intelligence | ? | part | ? | part | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `5.2` | Model Access & Traffic Management | Artificial Intelligence | ? | yes | ? | yes | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `5.3` | AI Environment & Workspace Management | Cloud and Infrastructure | ? | yes | ? | yes | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `5.4` | AI Compute & Capacity Management | Cloud and Infrastructure | ? | yes | ? | yes | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `5.5` | Tool & Connector Catalog Management | Artificial Intelligence | ? | part | ? | yes | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
-| `5.6` | AI Developer Experience & Reuse Assets | Core Platforms | ? | part | ? | part | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
+| `5.2` | Model Access & Traffic Management | Artificial Intelligence | part | yes | ? | yes | **1** Performed | Performed on some AI systems but not repeatably - that is Level 1 until it is consistent |
+| `5.3` | AI Environment & Workspace Management | Core Platforms | yes | yes | ? | yes | **1** Performed | Performed, but not managed: competence is not evidenced |
+| `5.4` | AI Compute & Capacity Management | Cloud and Infrastructure | ? | yes | ? | n-a | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
+| `5.5` | Tool & Connector Catalog Management | **none** | ? | no | ? | ? | *not rated* | Not rated: performance has never been observed (enabled recorded, which cannot place a level on its own) |
+| `5.6` | AI Developer Experience & Reuse Assets | Core Platforms | part | part | ? | ? | **1** Performed | Performed on some AI systems but not repeatably - that is Level 1 until it is consistent |
 | `5.7` | AI Runtime Mediation & Egress Control | Artificial Intelligence | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
-| `5.8` | AI Agent Runtime & Execution Environment | Artificial Intelligence | ? | part | ? | part | *not rated* | Not rated: performance has never been observed (enabled, defined recorded, which cannot place a level on its own) |
+| `5.8` | AI Agent Runtime & Execution Environment | Artificial Intelligence | part | yes | ? | part | **1** Performed | Performed on some AI systems but not repeatably - that is Level 1 until it is consistent |
+| `5.9` | AI Experimentation | Emerging Tech | ? | ? | ? | ? | *not rated* | Not rated: performance has never been observed |
 
 <details><summary><code>5.1</code> AI Platform Service Provisioning — 5 L3 criteria, 0 observed</summary>
 
@@ -500,26 +500,26 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 
 </details>
 
-<details><summary><code>5.2</code> Model Access & Traffic Management — 5 L3 criteria, 0 observed</summary>
+<details><summary><code>5.2</code> Model Access & Traffic Management — 5 L3 criteria, 4 observed</summary>
 
 | L3 | Criterion | What it means | Practised | Evidence |
 |---|---|---|:-:|---|
-| `5.2.1` | **Model Clearance & Approved Model List** | Assess candidate models against institutional criteria, record the clearance decision and its conditions, and maintain the approved list. | ? |  |
-| `5.2.2` | **Model Traffic Control & Routing** | Route all model traffic through a controlled point that can observe and enforce. | ? |  |
-| `5.2.3` | **Quota, Throttling & Rate Management** | Allocate and enforce consumption limits per consumer. | ? |  |
-| `5.2.4` | **Model Provider Credential Management** | Issue, rotate and revoke the credentials used to reach model providers and platform services. Agent identity is 7.4.4. | ? |  |
+| `5.2.1` | **Model Clearance & Approved Model List** | Assess candidate models against institutional criteria, record the clearance decision and its conditions, and maintain the approved list. | yes | Not recorded on the sheet. Graded yes at the EA meeting of 10 September 2026 with the rest of 5.2. EVIDENCE PENDING from the capability owner. |
+| `5.2.2` | **Model Traffic Control & Routing** | Route all model traffic through a controlled point that can observe and enforce. | yes | Not all models will be exposed via an AI Gateway. Only the shared ones (shared capability). Individual teams can deploy their own models. |
+| `5.2.3` | **Quota, Throttling & Rate Management** | Allocate and enforce consumption limits per consumer. | yes | Not recorded on the sheet. Graded yes at the EA meeting of 10 September 2026 with the rest of 5.2. EVIDENCE PENDING from the capability owner. |
+| `5.2.4` | **Model Provider Credential Management** | Issue, rotate and revoke the credentials used to reach model providers and platform services. Agent identity is 7.4.4. | yes | Not recorded on the sheet. Graded yes at the EA meeting of 10 September 2026 with the rest of 5.2. EVIDENCE PENDING from the capability owner. |
 | `5.2.5` | **Model Version Availability & Provider Change Control** | Control which model versions remain reachable and absorb provider-side version change without breaking consumers. | ? |  |
 
 </details>
 
-<details><summary><code>5.3</code> AI Environment & Workspace Management — 4 L3 criteria, 0 observed</summary>
+<details><summary><code>5.3</code> AI Environment & Workspace Management — 4 L3 criteria, 4 observed</summary>
 
 | L3 | Criterion | What it means | Practised | Evidence |
 |---|---|---|:-:|---|
-| `5.3.1` | **Experimentation Environment Provision** | Provide safe environments for experimentation with clear data rules. | ? |  |
-| `5.3.2` | **Workspace Tenancy & Isolation** | Define and enforce the tenancy and isolation topology between team workspaces. | ? |  |
-| `5.3.3` | **Network & Private Connectivity Control** | Control network reachability of AI services and keep traffic private where required. | ? |  |
-| `5.3.4` | **Environment Data Segregation** | Prevent production data from reaching environments not cleared for it. | ? |  |
+| `5.3.1` | **Environment Provision** | Provide the environments delivery teams build AI in - development, test and production - with clear data rules. | yes | Requires: subscription, RG, netowkring, subnets, connectivity, AI resources. The terraform modules to deploy foundry accounts and Foundry projects were built by EA. |
+| `5.3.2` | **Workspace Tenancy & Isolation** | Define and enforce the tenancy and isolation topology between team workspaces. | yes | azure sub, rg, + foundry account with projects. Foundry account can be owned or shared, the logical isolation is with foundry projects. |
+| `5.3.3` | **Network & Private Connectivity Control** | Control network reachability of AI services and keep traffic private where required. | yes | Foundry in private network mode, plus, traffic control at the subnet level possible. |
+| `5.3.4` | **Environment Data Segregation** | Prevent production data from reaching environments not cleared for it. | yes | Applies the same type of controls that we currently have for applications? Roles, permissions, etc. |
 
 </details>
 
@@ -547,15 +547,15 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 
 </details>
 
-<details><summary><code>5.6</code> AI Developer Experience & Reuse Assets — 5 L3 criteria, 0 observed</summary>
+<details><summary><code>5.6</code> AI Developer Experience & Reuse Assets — 5 L3 criteria, 4 observed</summary>
 
 | L3 | Criterion | What it means | Practised | Evidence |
 |---|---|---|:-:|---|
-| `5.6.1` | **Reference Implementation & Template Provision** | Publish working templates that already embed required controls. | ? |  |
-| `5.6.2` | **SDK, Library & Component Curation** | Curate the approved libraries and shared components teams should build on. | ? |  |
-| `5.6.3` | **Self-Service Onboarding** | Let a team start correctly without a bespoke engagement. | ? |  |
-| `5.6.4` | **Inner-Source & Asset Reuse** | Make internally built assets discoverable and reusable across the institution. | ? |  |
-| `5.6.5` | **Developer Documentation & Support** | Document the platform to the standard its users actually need. | ? |  |
+| `5.6.1` | **Reference Implementation & Template Provision** | Publish working templates that already embed required controls. | part | Template available for MCP server. Template of hosted agent in progress. Missing CICD (GitHub actions) - Shared with DX platform team. |
+| `5.6.2` | **SDK, Library & Component Curation** | Curate the approved libraries and shared components teams should build on. | n-a |  |
+| `5.6.3` | **Self-Service Onboarding** | Let a team start correctly without a bespoke engagement. | no |  |
+| `5.6.4` | **Shared Agent Skill & Extension Repository** | Maintain a curated, shared repository of the skills, hooks and rules that agents draw on, discoverable and reusable across the institution. | ? |  |
+| `5.6.5` | **Developer Documentation & Support** | Document the platform to the standard its users actually need. | part | Doc per product line. Standards serve as the basis, then we need runbooks, product documentation, solution documentation, etc? |
 
 </details>
 
@@ -571,15 +571,23 @@ Ten situations a reviewer will actually record, run through this scale. Every le
 
 </details>
 
-<details><summary><code>5.8</code> AI Agent Runtime & Execution Environment — 5 L3 criteria, 0 observed</summary>
+<details><summary><code>5.8</code> AI Agent Runtime & Execution Environment — 5 L3 criteria, 3 observed</summary>
 
 | L3 | Criterion | What it means | Practised | Evidence |
 |---|---|---|:-:|---|
-| `5.8.1` | **Agent Hosting & Execution Runtime** | Provide the managed substrate an agent executes in. | ? |  |
-| `5.8.2` | **Code & Computer-Use Sandboxing** | Execute model-generated code and computer-use actions in an isolated, disposable environment. | ? |  |
-| `5.8.3` | **Agent Memory & State Infrastructure** | Provide the store that enforces what 4.4.4 designed: retention, isolation, and who else can read it. | ? |  |
+| `5.8.1` | **Agent Hosting & Execution Runtime** | Provide the managed substrate an agent executes in. | part | Foundry Agents, missing prod |
+| `5.8.2` | **Code & Computer-Use Sandboxing** | Execute model-generated code and computer-use actions in an isolated, disposable environment. | no |  |
+| `5.8.3` | **Agent Memory & State Infrastructure** | Provide the store that enforces what 4.4.4 designed: retention, isolation, and who else can read it. | part | It is there, missing prod. |
 | `5.8.4` | **Long-Running Task & Scheduling Support** | Support work that outlives a request, including resumption and cancellation. | ? |  |
 | `5.8.5` | **Runtime Resource & Blast-Radius Limits** | Bound what a single agent execution can consume and reach. | ? |  |
+
+</details>
+
+<details><summary><code>5.9</code> AI Experimentation — 1 L3 criteria, 0 observed</summary>
+
+| L3 | Criterion | What it means | Practised | Evidence |
+|---|---|---|:-:|---|
+| `5.9.1` | **Isolated Experimentation Environment Provision** | Provide an experimentation environment that is fully isolated from institutional systems and data. | ? |  |
 
 </details>
 

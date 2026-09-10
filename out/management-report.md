@@ -1,6 +1,6 @@
 # AI capability — management report
 
-**Inter-American Development Bank** · 2026-09-09
+**Inter-American Development Bank** · 2026-09-10
 
 ---
 
@@ -10,15 +10,13 @@ Read this section before the findings. It states the coverage of the assessment 
 
 | | |
 |---|---|
-| Capabilities in the map | 55 |
-| **Rated** | **0** |
-| Not yet rated | 55 |
+| Capabilities in the map | 56 |
+| **Rated** | **10** |
+| Not yet rated | 46 |
 | Platform offerings with evidence | 7 |
 | Assets recorded, with status and location | 20 |
 
-> **No capability is rated yet, and that is a factual statement rather than a bad result.** A rating requires knowing whether something is actually *practised* on real AI systems. That question has not yet been put to the capability owners. What has been established is what the institution has *built* — and that is substantial, evidenced, and set out in section 2.
-
-This is the difference between *we do not know* and *we do not have it*. Most maturity assessments cannot tell those apart, and score an unexamined capability as if it were absent. This one refuses to.
+> 10 of 56 capabilities carry a rating. The remainder are not zero — they are unobserved, and are shown as such throughout.
 
 ---
 
@@ -44,16 +42,16 @@ Every row below is backed by a named asset with a location and a status. This is
 
 > **The institution has built its enablers ahead of its practice.**
 
-The scale used here — *Capability level* — places *performance* at Level 1, *tooling and competent people* at Level 2, and *an approved standard, applied* at Level 3. Measured that way, the institution has assembled a large part of its Level 2 and Level 3 apparatus — platforms, standards, reference architectures, infrastructure modules — while Level 1, whether the work is actually done, has never been examined.
+The scale used here — *Capability level* — places *performance* at Level 1, *tooling and competent people* at Level 2, and *an approved standard, applied* at Level 3. Measured that way, the institution has assembled a large part of its Level 2 and Level 3 apparatus — platforms, standards, reference architectures, infrastructure modules — while Level 1, whether the work is actually done, has been examined for 10 of 56 capabilities.
 
 That is not a criticism of the build. It is the explanation for a disagreement that recurs in this institution: one person says the capability exists, meaning the platform and the standard exist, and another says it does not, meaning nothing is running on it. **Both are right about different things**, and a model carrying a single number cannot show that. This one shows it as four columns.
 
 | What we can evidence today | What we cannot |
 |---|---|
 | 7 offerings, 20 assets, with locations | Whether any of it is used in production |
-| Which capabilities have platform tooling (8), partial tooling (6), or none needed (15) | Whether tooling exists for the 26 nobody has yet examined |
-| Which capabilities have an approved standard (10) or one in pre-release (4) | Whether work is done against them |
-| Where a standard exists in the platform register | Whether the people who need the skills have them: 55 of 55 unobserved |
+| Which capabilities have platform tooling (9), partial tooling (5), or none needed (16) | Whether tooling exists for the 24 nobody has yet examined |
+| Which capabilities have an approved standard (9) or one in pre-release (3) | Whether work is done against them |
+| Where a standard exists in the platform register | Whether the people who need the skills have them: 56 of 56 unobserved |
 
 ---
 
@@ -61,13 +59,13 @@ That is not a criticism of the build. It is the explanation for a disagreement t
 
 ### 4.1 · Capabilities nobody owns
 
-9 of 55 capabilities are claimed by no product or enabler in the institution's own catalogue. This is a finding about the operating model, not a gap in the model. Several are governance capabilities that an institution of this kind is normally expected to hold.
+9 of 56 capabilities are claimed by no product or enabler in the institution's own catalogue. This is a finding about the operating model, not a gap in the model. Several are governance capabilities that an institution of this kind is normally expected to hold.
 
 | ID | Capability | Domain |
 |---|---|---|
 | `1.5` | **AI Ecosystem & Alliance Management** | AI Strategy & Value Management |
 | `2.3` | **AI Product Management** | AI Demand & Solution Shaping |
-| `4.6` | **AI Evaluation & Testing** | AI Solution Engineering |
+| `5.5` | **Tool & Connector Catalog Management** | AI Platform & Infrastructure |
 | `6.3` | **Continuous Evaluation, Drift & Quality Management** | AI Operations & Reliability |
 | `6.7` | **Human Oversight Operations** | AI Operations & Reliability |
 | `7.2` | **Responsible & Trustworthy AI Practice** | AI Governance, Risk, Security & Assurance |
@@ -110,7 +108,7 @@ That is not a criticism of the build. It is the explanation for a disagreement t
 |---|---|---|
 | Capability owners | For each L3 criterion under a capability they own: is this done on real AI systems, and where? | Every rating in the model. Nothing can be rated without it |
 | Platform teams | The 27 in-the-box questions | Whether controls are inherited or rebuilt per team |
-| Cybersecurity · Data Management · Legal · HR | Does an approved standard exist in your domain? | 41 capabilities currently show *unknown* because the asset register covers platform assets only |
+| Cybersecurity · Data Management · Legal · HR | Does an approved standard exist in your domain? | 40 capabilities currently show *unknown* because the asset register covers platform assets only |
 | Learning & Development | Who is trained, and in what? | Level 2 for every capability where practice exists |
 
 None of this requires new tooling or new investment. It requires four questions put to the people who already know the answers.

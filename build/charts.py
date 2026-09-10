@@ -202,46 +202,127 @@ def donut(counts, size=150, keys=ORDER):
 
 
 # ------------------------------------------------------ views from real facts
-def obs_heatmap(m):
-    """Every capability by name, with its four observations.
+# Heat-map geometry, shared by every observation map so that the combined map
+# and the one-per-observation maps render at the same text size and their
+# cells line up under one another.
+HM_PAD, HM_ROW, HM_GAP, HM_COL, HM_CW, HM_RIGHT = 388, 19, 3, 66, 24, 30
+
+
+def _hm_width(m):
+    """One viewBox width for all heat maps drawn from this model."""
+    maxcrit = max(len(c['criteria']) for c in m.capabilities)
+    ncols = len(m.observation_types)
+    body = max(HM_COL * ncols, HM_COL + 14 + maxcrit * (HM_CW + 2))
+    return HM_PAD + body + HM_RIGHT
+
+
+def _hm_summary(d, caps, cells, unit):
+    """The <summary> of one collapsed domain: its name, a count, and a small
+    count-per-value bar.  A distribution of the cells drawn beneath it - never
+    a rolled-up domain colour, which would need an average of ordinals
+    (docs/the-discipline.md section 6.4)."""
+    cnt = collections.Counter(cells)
+    total = sum(cnt.values()) or 1
+    bar = "".join('<i style="width:%.1f%%;background:%s" title="%s: %d"></i>'
+                  % (100.0 * cnt[k] / total, C[k], LABEL[k], cnt[k])
+                  for k in ORDER if cnt[k])
+    return ('<summary><span class="hmd">%s &#183; %s</span>'
+            '<span class="hms">%d capabilities%s</span>'
+            '<span class="mini" title="%d %s">%s</span></summary>'
+            % (d['id'], esc(short_domain(d['name'])), len(caps),
+               "" if unit == "capabilities" else " &#183; %d %s" % (total, unit),
+               total, unit, bar))
+
+
+def _hm_title(c, t, row):
+    """Tooltip for one cell: what was seen, not just the value."""
+    v = row.get('value', 'unknown')
+    seen = (row.get('evidence') or row.get('basis') or "").strip()
+    if len(seen) > 160:
+        seen = seen[:159].rstrip() + "…"
+    return "%s %s &#8212; %s: %s%s" % (
+        c['id'], esc(c['name']), t, LABEL[v],
+        (" &#8212; " + esc(seen)) if seen else "")
+
+
+def obs_heatmap(m, types=None, criteria=False):
+    """Every capability by name, with its observations, one collapsible block
+    per domain.
 
     Rows are capabilities, not a grid of ids. A 9-wide grid cannot show a name
     that averages 33 characters, and `2.3` tells a reader nothing - the point of
     a heat map is that you can see what is weak without a lookup table.
+
+    types:    the observation types to draw as columns; default all of them,
+              which is the combined map.
+    criteria: for a type observed per L3 criterion, also draw one small cell
+              per criterion beside the rolled-up one, so the roll-up rule
+              (ADR-0014) is visible rather than hidden inside a single colour.
+
+    Each domain is a native <details> element, so the map collapses at L1 with
+    no script; the controls at the top need the two-line helper in the page
+    head and do nothing without it.
     """
-    types = [t['id'] for t in m.observation_types]
-    rowh, gap, pad, colw, top = 19, 3, 388, 66, 44
-    W = pad + colw * len(types) + 30
+    types = [t['id'] for t in (types or m.observation_types)]
+    W = _hm_width(m)
+    pad, rowh, gap, colw, cw = HM_PAD, HM_ROW, HM_GAP, HM_COL, HM_CW
+    crit_types = [t for t in types if criteria and t in m.criterion_types]
+    unit = "criteria" if crit_types else "capabilities"
     rows = [(d, sorted([c for c in m.capabilities if c['domain'] == d['id']],
                        key=lambda x: m.sort_key(x['id']))) for d in m.domains]
-    H = top + sum(len(c) * (rowh + gap) + 26 for _, c in rows)
-    o = ['<svg viewBox="0 0 %d %d" class="chart">' % (W, H)]
+    o = ['<div class="hm"><div class="hmctl">'
+         '<button type="button" onclick="hmAll(this,true)">Expand all</button>'
+         '<button type="button" onclick="hmAll(this,false)">Collapse all</button>'
+         '</div>']
+    # column headers, once, in an SVG of the same width so they sit over the cells
+    o.append('<svg viewBox="0 0 %d 22" class="chart hmh">' % W)
     for k, t in enumerate(types):
-        o.append('<text x="%.1f" y="30" class="ch">%s</text>'
-                 % (pad + k * colw + (colw - 4) / 2, esc(t.title())))
-    y = top
+        o.append('<text x="%.1f" y="16" class="ch">%s%s</text>'
+                 % (pad + k * colw + (colw - 4) / 2, esc(t.title()),
+                    " (rolled up)" if t in crit_types else ""))
+    if crit_types:
+        x0 = pad + len(types) * colw + 14
+        maxcrit = max(len(c['criteria']) for c in m.capabilities)
+        o.append('<text x="%.1f" y="16" class="ch">By L3 criterion</text>'
+                 % (x0 + maxcrit * (cw + 2) / 2))
+    o.append('</svg>')
     for d, caps in rows:
-        o.append('<text x="0" y="%d" class="dh">%s &#183; %s</text>'
-                 % (y + 12, d['id'], esc(short_domain(d['name']))))
-        y += 22
+        cells = []
+        h = len(caps) * (rowh + gap) + 6
+        body = ['<svg viewBox="0 0 %d %d" class="chart">' % (W, h)]
+        y = 4
         for c in caps:
             v = m.values(c['id'])
             nm = c['name']
             if len(nm) > 44:
                 nm = nm[:43].rstrip(" ,&") + "…"
-            o.append('<text x="14" y="%d" class="cn">%s<title>%s</title></text>'
-                     % (y + 13, esc(nm), esc(c['name'])))
-            o.append('<text x="%d" y="%d" class="ci" text-anchor="end">%s</text>'
-                     % (pad - 14, y + 13, c['id']))
+            body.append('<text x="14" y="%d" class="cn">%s<title>%s</title></text>'
+                        % (y + 13, esc(nm), esc(c['name'])))
+            body.append('<text x="%d" y="%d" class="ci" text-anchor="end">%s</text>'
+                        % (pad - 14, y + 13, c['id']))
             for k, t in enumerate(types):
                 x = pad + k * colw
-                o.append('<rect x="%.1f" y="%d" width="%d" height="%d" fill="%s">'
-                         '<title>%s %s &#8212; %s: %s</title></rect>'
-                         % (x, y, colw - 4, rowh, C[v[t]],
-                            c['id'], esc(c['name']), t, LABEL[v[t]]))
+                row = {} if t in m.criterion_types else m.cap_obs(c['id'], t)
+                row = dict(row, value=v[t])
+                body.append('<rect x="%.1f" y="%d" width="%d" height="%d" fill="%s">'
+                            '<title>%s</title></rect>'
+                            % (x, y, colw - 4, rowh, C[v[t]], _hm_title(c, t, row)))
+                if t not in crit_types:
+                    cells.append(v[t])
+            for t in crit_types:
+                x = pad + len(types) * colw + 14
+                for j, (crit, row) in enumerate(m.criteria_obs(c['id'], t)):
+                    cv = row.get('value', 'unknown')
+                    cells.append(cv)
+                    body.append('<rect x="%.1f" y="%d" width="%d" height="%d" fill="%s">'
+                                '<title>%s</title></rect>'
+                                % (x + j * (cw + 2), y, cw, rowh, C[cv],
+                                   _hm_title(crit, t, row)))
             y += rowh + gap
-        y += 4
-    o.append("</svg>")
+        body.append('</svg>')
+        o.append('<details class="dom" open>%s%s</details>'
+                 % (_hm_summary(d, caps, cells, unit), "".join(body)))
+    o.append('</div>')
     return "".join(o)
 
 

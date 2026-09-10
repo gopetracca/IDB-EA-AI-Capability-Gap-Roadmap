@@ -41,6 +41,8 @@ reading resolves it. It is settled by decision and recorded here.
 | [ADR-0013](adr/0013-facts-and-scales.md) | **Facts and scales are separated** | **Accepted**, amended twice | 2026-09-04 |
 | [ADR-0014](adr/0014-practised-is-observed-at-l3.md) | **Practised is observed at L3 and derived at L2** | **Accepted** | 2026-09-04 |
 | [ADR-0015](adr/0015-extend-d4-d6-across-the-agentic-seam.md) | **Extend D4-D6 across the agentic seam** | **Accepted** | 2026-09-09 |
+| [ADR-0016](adr/0016-d4-criteria-refinements-from-the-first-review-round.md) | D4 criterion refinements from the first review round | Accepted | 2026-09-10 |
+| [ADR-0017](adr/0017-carve-out-experimentation-and-rehome-shared-agent-assets.md) | Carve out experimentation, and re-home shared agent assets | Accepted | 2026-09-10 |
 
 ⚠ **ADR-0007 must be carved out of any approval request** until ISO/IEC 42001 Annex A and NIST AI
 RMF outcomes are mapped.
