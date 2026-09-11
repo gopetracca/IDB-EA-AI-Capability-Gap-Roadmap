@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Capability Modelling, Maturity Assessment &amp; Transformation Roadmapping</title>
+  <style>
+    :root{--ink:#15202b;--muted:#586473;--line:#cfd6de;--soft:#f3f5f7;--accent:#174f78;--accent2:#0d6b62;--warn:#7a4b00;--max:980px}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;color:var(--ink);background:#fff;font:16px/1.58 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:2px} a:hover{text-decoration-thickness:2px}
+    .layout{display:grid;grid-template-columns:275px minmax(0,1fr);min-height:100vh}.side{position:sticky;top:0;height:100vh;overflow:auto;border-right:1px solid var(--line);padding:28px 22px;background:#fafbfc}.side .eyebrow{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:700}.side h2{font-size:1.04rem;margin:8px 0 18px}.side ol{margin:0;padding-left:20px;font-size:.84rem}.side li{margin:0 0 7px}.side a{color:#33404d;text-decoration:none}.side a:hover{color:var(--accent);text-decoration:underline}.side .use{border-top:1px solid var(--line);margin-top:22px;padding-top:16px;font-size:.78rem;color:var(--muted)}
+    main{width:100%;max-width:var(--max);padding:58px 58px 100px;margin:0 auto}.title{font-family:Georgia,"Times New Roman",serif;font-size:3.15rem;line-height:1.06;letter-spacing:-.035em;margin:0 0 28px;max-width:850px}.lede{font-size:1.22rem;line-height:1.55;color:#33404d;max-width:790px}.meta{display:flex;gap:24px;flex-wrap:wrap;border-top:2px solid var(--ink);border-bottom:1px solid var(--line);padding:13px 0;margin:32px 0 48px;color:var(--muted);font-size:.84rem}
+    h1,h2,h3,h4{scroll-margin-top:25px} h2{font-family:Georgia,"Times New Roman",serif;font-size:2.05rem;line-height:1.18;margin:72px 0 20px;padding-top:16px;border-top:2px solid var(--ink)} h3{font-size:1.26rem;line-height:1.3;margin:38px 0 12px} h4{font-size:1rem;text-transform:uppercase;letter-spacing:.06em;margin:28px 0 8px;color:var(--accent)}
+    p{margin:0 0 15px} ul,ol{margin:10px 0 18px;padding-left:24px} li{margin:5px 0}.tight li{margin:2px 0}.small{font-size:.9rem}.muted{color:var(--muted)}
+    .callout{border-left:4px solid var(--accent);background:var(--soft);padding:18px 20px;margin:24px 0}.callout strong:first-child{display:block;margin-bottom:5px}.warning{border-left-color:var(--warn);background:#fbf7ef}.practice{border-left-color:var(--accent2);background:#f1f7f6}.claim{font-family:Georgia,"Times New Roman",serif;font-size:1.24rem;line-height:1.48;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 4px;margin:28px 0}
+    table{width:100%;border-collapse:collapse;margin:18px 0 28px;font-size:.9rem} th,td{text-align:left;vertical-align:top;padding:10px 11px;border:1px solid var(--line)} th{background:#e9edf1;font-weight:700} tr:nth-child(even) td{background:#fafbfc}.table-wrap{overflow-x:auto}.tag{display:inline-block;border:1px solid #9eabb8;padding:1px 6px;font-size:.72rem;font-weight:700;letter-spacing:.02em;text-transform:uppercase;background:#fff}.tag.std{border-color:#2e6f68;color:#215b55}.tag.conv{border-color:#846627;color:#6a501a}.tag.judge{border-color:#80526c;color:#6e3f59}
+    .flow{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--line);margin:24px 0}.flow div{padding:14px;border-right:1px solid var(--line);font-size:.86rem}.flow div:last-child{border-right:0}.flow b{display:block;color:var(--accent);margin-bottom:4px}.formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:#f5f6f8;border:1px solid var(--line);padding:12px 14px;margin:14px 0;overflow:auto;font-size:.88rem}.checklist{list-style:none;padding:0}.checklist li{padding:7px 0 7px 28px;border-bottom:1px solid #e4e8ec;position:relative}.checklist li:before{content:"□";position:absolute;left:2px;color:var(--accent);font-weight:700}.qa dt{font-weight:750;margin-top:20px}.qa dd{margin:4px 0 0;border-left:3px solid var(--line);padding-left:14px}.footnotes{font-size:.84rem;color:#3f4a55}.footnotes li{margin:9px 0}.back{font-size:.75rem}.no-break{break-inside:avoid}.two{display:grid;grid-template-columns:1fr 1fr;gap:22px}.score{font-size:1.65rem;font-family:Georgia,serif;color:var(--accent)}
+    @media(max-width:900px){.layout{display:block}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line)}.side ol{columns:2}.side .use{display:none}main{padding:36px 24px 80px}.title{font-size:2.35rem}.flow{grid-template-columns:1fr}.flow div{border-right:0;border-bottom:1px solid var(--line)}.two{grid-template-columns:1fr}table{display:block;max-width:100%;overflow-x:auto}}
+    @media(max-width:520px){.side ol{columns:1}.title{font-size:2.2rem}}
+    @media print{.side{display:none}.layout{display:block}main{max-width:none;padding:0 18mm}.title{font-size:30pt}h2{break-before:page;margin-top:0}.callout,table,.flow{break-inside:avoid}a{color:inherit;text-decoration:none}a[href^="http"]:after{content:""}.meta{margin-bottom:28px}}
+  </style>
+</head>
+<body>
+<div class="layout">
+  <nav class="side" aria-label="Contents">
+    <div class="eyebrow">Professional field guide</div>
+    <h2>Capability work, end to end</h2>
+    <ol>
+      <li><a href="#orientation">Executive orientation</a></li>
+      <li><a href="#field">The field and its lineages</a></li>
+      <li><a href="#language">The conceptual language</a></li>
+      <li><a href="#mapping">Building a capability map</a></li>
+      <li><a href="#assessment">Designing an assessment</a></li>
+      <li><a href="#engagement">Running the engagement</a></li>
+      <li><a href="#roadmap">From gaps to investment</a></li>
+      <li><a href="#visuals">Heat maps and decision visuals</a></li>
+      <li><a href="#ai">The enterprise AI overlay</a></li>
+      <li><a href="#market">Market framework landscape</a></li>
+      <li><a href="#tools">Tool stack and selection</a></li>
+      <li><a href="#templates">Practitioner templates</a></li>
+      <li><a href="#defense">Management-room defense</a></li>
+      <li><a href="#glossary">Jargon without bluffing</a></li>
+      <li><a href="#learning">90-day learning path</a></li>
+      <li><a href="#calibration">Professional calibration</a></li>
+      <li><a href="#sources">Sources</a></li>
+    </ol>
+    <div class="use"><b>Use this twice.</b><br>Read front-to-back once. Before a meeting, revisit §§3–7, the objection drill in §12, and the glossary in §13.</div>
+  </nav>
+  <main>
+    <header>
+      <h1 class="title">Capability Modelling, Maturity Assessment &amp; Transformation Roadmapping</h1>
+      <p class="lede">A market-grounded handbook for becoming the professional who can build the model, run the assessment, turn evidence into an investment roadmap, and defend every claim in a management meeting.</p>
+      <div class="meta"><span>Scope: enterprise capability work, with an AI specialization</span><span>Audience: architect, strategist, transformation lead, advisor</span><span>Evidence checked: September 2026</span></div>
+    </header>
+
+    <section id="orientation">
+      <h2>1. Executive orientation</h2>
+      <p>This field sits at the intersection of <b>business architecture</b>, <b>enterprise architecture</b>, <b>organizational assessment</b>, <b>portfolio strategy</b>, <b>risk and assurance</b>, and <b>management consulting</b>. A good practitioner does not merely draw a map or assign levels. The professional contribution is a defensible chain from strategy to ability, from ability to evidence, from evidence to a finding, and from a finding to an investable change.</p>
+      <div class="claim">The deliverable is not the heat map. The deliverable is a decision that management can make with an explicit evidence base, known uncertainty, named ownership, and a credible path to benefits.</div>
+      <h3>The professional standard in one page</h3>
+      <div class="flow" aria-label="Professional value chain">
+        <div><b>1 · Frame</b>Decision, scope, stakeholders, unit of analysis, constraints.</div>
+        <div><b>2 · Model</b>Stable capabilities and their relationships to value, work, organization and technology.</div>
+        <div><b>3 · Assess</b>Defined criteria, evidence, calibration, current state and uncertainty.</div>
+        <div><b>4 · Diagnose</b>Gaps, causes, dependencies, risks, strengths and patterns.</div>
+        <div><b>5 · Mobilize</b>Target state, options, roadmap, owners, benefits and governance.</div>
+      </div>
+      <p>You are credible when every arrow survives challenge. If a strategy does not imply a required capability, the map is decorative. If a rating has no repeatable evidence rule, the assessment is opinion. If a gap has no causal interpretation, the recommendation is generic. If the roadmap has no benefits logic or accountable owner, it is a wish list.</p>
+      <div class="callout practice"><strong>Meeting-ready definition</strong>A capability is an organization’s ability to achieve a purpose or outcome. It describes <i>what must be possible</i>, not the department, workflow, application, vendor or project that currently makes it possible.</div>
+      <h3>Three standards of truth</h3>
+      <table>
+        <thead><tr><th>Statement type</th><th>How to label it</th><th>What makes it defensible</th></tr></thead>
+        <tbody>
+          <tr><td>External fact</td><td><span class="tag std">Standard / source</span></td><td>Current edition, exact source, appropriate locus, no invented conformance.</td></tr>
+          <tr><td>Common professional practice</td><td><span class="tag conv">Convention</span></td><td>Used widely and useful, but not presented as a universal rule.</td></tr>
+          <tr><td>Design choice</td><td><span class="tag judge">Judgment</span></td><td>Purpose, alternatives, trade-off, decision owner and consequence are explicit.</td></tr>
+        </tbody>
+      </table>
+      <p>This distinction is a superpower. “We used three levels because TOGAF mandates three” is fragile and probably false. “Three levels is our design choice; it keeps executive navigation separate from assessment criteria, and we validated the boundaries with owners” is honest and harder to attack.</p>
+    </section>
+
+<section id="field">
+      <h2>2. The field and its lineages</h2>
+      <h3>Capability-based planning</h3>
+      <p>Capability thinking has a visible lineage in defense planning, where the object is an ability to produce a desired effect under conditions and standards, realized through combinations of means and ways. The U.S. DoDAF metamodel still publishes this formulation and explicitly links capabilities to activities, resources, services and measures.<sup><a href="#s1">1</a></sup> Its enduring lesson for enterprise work is that a capability is not an asset: assets and operating arrangements <i>realize</i> it.</p>
+      <h3>Business and enterprise architecture</h3>
+      <p>Business architecture uses capabilities as stable building blocks for strategy execution and transformation. The Open Group’s TOGAF Standard provides an enterprise architecture method; its Series Guides cover business capabilities, capability planning and value streams.<sup><a href="#s2">2</a></sup> The Business Architecture Guild’s BIZBOK body of knowledge treats capability, value, organization and information maps as core disciplines; version 15.0 is the current public resource checkpoint found during this research.<sup><a href="#s3">3</a></sup></p>
+      <p>ArchiMate is a modeling language, not a transformation method. It supplies a formal vocabulary for relating motivation, strategy, capabilities, value streams, business behavior, applications, technology, work packages and gaps. The Open Group describes it as an open, independent language for describing and visualizing relationships across business domains.<sup><a href="#s4">4</a></sup></p>
+      <h3>Process improvement and maturity</h3>
+      <p>Maturity modeling has a separate lineage: staged quality grids, the Software Capability Maturity Model, CMMI, and the ISO/IEC process-assessment family. The current CMMI distinction is essential: <b>capability levels</b> describe achievement in an individual practice area (0–3), while <b>maturity levels</b> describe a staged path over predefined groups of practice areas (0–5).<sup><a href="#s5">5</a></sup></p>
+      <p>The ISO/IEC 330xx family is a measurement and assessment architecture. ISO/IEC 33002 specifies requirements for performing an objective, consistent, repeatable and representative process assessment; ISO/IEC 33003 addresses measurement frameworks; ISO/IEC 33004 addresses reference, assessment and maturity models; ISO/IEC 33020 provides the process-capability measurement framework.<sup><a href="#s6">6</a></sup> These are not generic business-capability standards, and borrowing their structure does not make a custom instrument conformant.</p>
+      <h3>Assurance and evidence</h3>
+      <p>An assessment that management may rely on borrows from audit thinking: independence or disclosed interests, professional skepticism, sufficient and relevant evidence, reproducibility, fair presentation and confidentiality. ISO 19011:2026 is now the current edition of the management-system audit guidance and explicitly includes evidence- and risk-based approaches.<sup><a href="#s7">7</a></sup> The IIA’s 2024 Global Internal Audit Standards likewise organize professional work around competence, objectivity, planning, evidence, findings, communication and action monitoring.<sup><a href="#s8">8</a></sup></p>
+      <h3>Portfolio strategy and business cases</h3>
+      <p>Capability gaps become management work only when translated into choices. Portfolio management connects selected initiatives to strategic objectives. Public-sector practitioners should also understand options appraisal and the Five Case Model: strategic, economic, commercial, financial and management perspectives. The 2026 UK Green Book is a useful open reference because it distinguishes appraisal from evaluation, insists on a business-as-usual comparator, and makes risks and uncertainty part of the choice.<sup><a href="#s9">9</a></sup></p>
+    </section>
+
+<section id="language">
+      <h2>3. The conceptual language</h2>
+      <p>Most executive objections are really category errors. If you can distinguish the objects below precisely, half the defense is already won.</p>
+      <table>
+        <thead><tr><th>Object</th><th>Question it answers</th><th>Example</th><th>Relationship to capability</th></tr></thead>
+        <tbody>
+          <tr><td><b>Outcome</b></td><td>What change or result matters?</td><td>Reduced time to resolve client inquiries</td><td>A capability contributes to outcomes; it is not the outcome itself.</td></tr>
+          <tr><td><b>Capability</b></td><td>What must the enterprise be able to do?</td><td>Knowledge access management</td><td>The stable planning object.</td></tr>
+          <tr><td><b>Value stream</b></td><td>How does value progress for a stakeholder?</td><td>Resolve a client inquiry</td><td>Value-stream stages use capabilities.</td></tr>
+          <tr><td><b>Process</b></td><td>How is work performed in sequence?</td><td>Validate, retrieve, draft, approve, respond</td><td>One realization of one or more capabilities.</td></tr>
+          <tr><td><b>Business function</b></td><td>What behavior is grouped by expertise or responsibility?</td><td>Client service operations</td><td>Performs behavior that realizes capabilities.</td></tr>
+          <tr><td><b>Organization / role</b></td><td>Who is accountable or performs the work?</td><td>Knowledge Governance Lead</td><td>Owns, governs or contributes to realization.</td></tr>
+          <tr><td><b>Service / offering</b></td><td>What is exposed to a consumer?</td><td>Enterprise search service</td><td>Provides an interface through which capability is used.</td></tr>
+          <tr><td><b>Product</b></td><td>What managed value proposition bundles services?</td><td>Employee knowledge assistant</td><td>Consumes and packages capabilities.</td></tr>
+          <tr><td><b>Application / platform</b></td><td>What technology supports the work?</td><td>Search index and retrieval platform</td><td>A resource or realization, not the capability.</td></tr>
+          <tr><td><b>Control</b></td><td>What reduces a risk or enforces an expectation?</td><td>Access trimming before retrieval</td><td>May be required to perform a capability acceptably.</td></tr>
+          <tr><td><b>Requirement</b></td><td>What condition must a solution satisfy?</td><td>Only authorized documents may be returned</td><td>Constrains a realization, not a map node.</td></tr>
+          <tr><td><b>Initiative / work package</b></td><td>What temporary change will be delivered?</td><td>Implement retrieval evaluation</td><td>Improves or creates capability; ends when delivered.</td></tr>
+          <tr><td><b>Metric</b></td><td>How will performance or health be observed?</td><td>Authorized-answer precision at k</td><td>Evidence about a capability instance or its outcomes.</td></tr>
+        </tbody>
+      </table>
+      <div class="callout"><strong>The instance distinction</strong>The abstract capability can be enterprise-wide and stable; its <i>instances</i> differ by geography, business unit, product, population or risk class. Assessment scope must identify the instance. “Do we have model monitoring?” is underspecified. “Does the production credit-decision service in Country X have monitored drift under its approved threshold?” is assessable.</div>
+      <h3>Capability, competence and capacity</h3>
+      <ul>
+        <li><b>Capability</b>: ability of the socio-technical system to achieve an outcome.</li>
+        <li><b>Competence</b>: an individual’s or team’s demonstrated knowledge and skill.</li>
+        <li><b>Capacity</b>: volume or throughput available under stated conditions.</li>
+        <li><b>Performance</b>: actual results produced in a period or instance.</li>
+        <li><b>Maturity</b>: degree to which practices are institutionalized, managed or improving under a defined model.</li>
+        <li><b>Readiness</b>: fitness for a specified transition or use case by a specified date; meaningless without that context.</li>
+      </ul>
+      <p>An organization can have competent people but no institutional capability; a mature process but insufficient capacity; an available platform but poor performance; or a strong abstract capability with weak instances in certain units. Good assessment design makes those distinctions visible.</p>
+    </section>
+
+<section id="mapping">
+      <h2>4. Building a capability map</h2>
+      <h3>Start with the decision, not the taxonomy</h3>
+      <p>Before workshops, write a one-page model charter. It names the decisions the map will support, audience, enterprise boundary, depth, time horizon, relationship to the existing enterprise map, exclusions, authoritative owner and change process. A map for board investment choices will be coarser than a map for assigning operational accountability. Neither is inherently better.</p>
+      <h3>Construction sequence</h3>
+      <ol>
+        <li><b>Collect anchors:</b> strategy, operating model, value streams, products/services, obligations, reference architectures, risk taxonomy, organization and existing maps.</li>
+        <li><b>Draft the top layer:</b> a small, navigable set of domains or capability groups. Label whether they are actual capabilities or only reporting categories.</li>
+        <li><b>Decompose:</b> identify child abilities needed to realize the parent. Do not mix decomposition with workflow sequence.</li>
+        <li><b>Define each line:</b> purpose/outcome, scope, exclusions, examples, parent, related value streams, accountable steward, realization links and source rationale.</li>
+        <li><b>Challenge boundaries:</b> look for overlap, holes, compound names, product disguise, org-chart mirroring and inconsistent depth.</li>
+        <li><b>Cross-map:</b> strategy → outcomes → value streams → capabilities → organization → information → applications/technology → initiatives.</li>
+        <li><b>Validate with scenarios:</b> trace important successes and failures through the map. If an important event lands nowhere, the map is incomplete or scoped too narrowly.</li>
+        <li><b>Govern:</b> baseline the version; record changes and rationales; designate a steward; avoid silent renaming that breaks longitudinal assessment.</li>
+      </ol>
+      <h3>Practical naming and boundary tests</h3>
+      <table>
+        <thead><tr><th>Test</th><th>Question</th><th>What failure suggests</th></tr></thead>
+        <tbody>
+          <tr><td>Outcome test</td><td>What purpose or outcome becomes possible?</td><td>It may be a topic, asset or activity rather than an ability.</td></tr>
+          <tr><td>Replacement test</td><td>Would the name survive a new vendor, application and org structure?</td><td>It is likely a realization in disguise.</td></tr>
+          <tr><td>Instance test</td><td>Can this ability have different current states in two units?</td><td>If not, it may be a principle or policy statement.</td></tr>
+          <tr><td>Failure-location test</td><td>Can a distinctive failure or investment need land here?</td><td>The line may add no diagnostic value.</td></tr>
+          <tr><td>Ownership test</td><td>Can accountable stewardship be established?</td><td>It may be too broad—or it may reveal a real governance gap.</td></tr>
+          <tr><td>Sibling test</td><td>Are siblings at comparable abstraction and collectively adequate for the parent?</td><td>Level drift, overlap or a missing sibling.</td></tr>
+          <tr><td>Verb-unbundling test</td><td>Does “and” join abilities with different evidence, owners or change paths?</td><td>Split the compound capability.</td></tr>
+        </tbody>
+      </table>
+      <div class="callout warning"><strong>Important nuance</strong>MECE—mutually exclusive and collectively exhaustive—is a useful decomposition heuristic, not a law of organizational reality and not a reliably sourced standard. Cross-cutting capabilities are normal. Prefer a clear primary home plus typed relationships over duplicating nodes merely to make the picture look complete.</div>
+      <h3>How much depth?</h3>
+      <p>There is no defensible universal count for L1, L2 or L3. Choose depth from the use case. Stop decomposing when the line is specific enough to support a different owner, evidence set, target, risk treatment or investment decision. Continue if a single rating would average away materially different states. Keep the executive view shallow and the underlying knowledgebase richer; a viewpoint is not the model.</p>
+      <h3>Minimum capability record</h3>
+      <div class="formula">ID · canonical name · definition · intended outcome · inclusions · exclusions · parent · lifecycle status · steward · accountable owner · value-stream links · information links · realization links · measures · sources · version/change rationale</div>
+      <h3>Map quality gate</h3>
+      <ul class="checklist">
+        <li>The purpose and decision users are written down.</li>
+        <li>Each line has a definition and explicit exclusions.</li>
+        <li>Sibling capabilities are at a comparable abstraction.</li>
+        <li>Products, applications, processes, teams and projects are typed separately.</li>
+        <li>Important strategy and failure scenarios can be traced through the map.</li>
+        <li>Cross-cutting relationships are modeled rather than duplicated silently.</li>
+        <li>Reference-model imports are adapted and validated, not accepted as truth.</li>
+        <li>The map has an owner, version, review cadence and change log.</li>
+      </ul>
+    </section>
+
+<section id="assessment">
+      <h2>5. Designing a maturity or capability assessment</h2>
+      <h3>First decide what kind of instrument you are building</h3>
+      <table>
+        <thead><tr><th>Instrument</th><th>Unit rated</th><th>Best for</th><th>Main risk</th></tr></thead>
+        <tbody>
+          <tr><td><b>Staged maturity model</b></td><td>Organization/scope against a prescribed set</td><td>Institutional improvement path, external recognition</td><td>One headline can hide uneven areas.</td></tr>
+          <tr><td><b>Continuous capability profile</b></td><td>Each capability or practice area independently</td><td>Prioritization and targeted improvement</td><td>Harder to summarize in one number.</td></tr>
+          <tr><td><b>Rubric diagnostic</b></td><td>Dimension judged against anchored descriptions</td><td>Fast self-assessment and executive dialogue</td><td>Halo effects and weak evidence traceability.</td></tr>
+          <tr><td><b>Evidence-gated assessment</b></td><td>Criteria observed, then level derived</td><td>Auditability and reproducibility</td><td>Higher collection and calibration cost.</td></tr>
+          <tr><td><b>Benchmark survey</b></td><td>Standardized responses compared with peers</td><td>External positioning</td><td>Sample comparability and proprietary scoring.</td></tr>
+          <tr><td><b>Readiness assessment</b></td><td>Requirements for a named transition/use case</td><td>Go/no-go or launch planning</td><td>“Readiness” becomes vague if the event/date is missing.</td></tr>
+        </tbody>
+      </table>
+      <p>Do not combine these casually. A rapid workshop diagnostic can be useful, but it should not be described as an audit-ready baseline. A custom profile can borrow the architecture of ISO/IEC 330xx, but it cannot claim ISO conformance without satisfying the relevant requirements and using an appropriate process assessment model.</p>
+      <h3>The assessment design specification</h3>
+      <ol>
+        <li><b>Purpose:</b> improvement, assurance, benchmarking, investment, compliance, or readiness.</li>
+        <li><b>Construct:</b> precisely what “good” means—performance, institutionalization, availability, adoption, control effectiveness, outcome achievement, or a composite.</li>
+        <li><b>Unit and scope:</b> enterprise, business unit, capability instance, process, product, system, use case and time window.</li>
+        <li><b>Criteria:</b> observable practices or outcomes; each should have evidence examples and disconfirming conditions.</li>
+        <li><b>Scale:</b> ordered anchors with explicit entry rules, not adjectives alone.</li>
+        <li><b>Response states:</b> achieved, partly achieved, not achieved, not applicable, not assessed/unknown—with definitions.</li>
+        <li><b>Evidence protocol:</b> acceptable types, currency, scope, provenance, sufficiency, corroboration and retention.</li>
+        <li><b>Aggregation:</b> rule, missing-data behavior, weighting, floors, gates, sensitivity and prohibited roll-ups.</li>
+        <li><b>Roles:</b> sponsor, assessment lead, evidence owner, respondent, independent challenger, decision owner.</li>
+        <li><b>Quality:</b> pilot, rater training, calibration, exception handling, versioning and re-assessment policy.</li>
+      </ol>
+      <h3>Scale design: behavioral anchors beat labels</h3>
+      <p>Labels such as <i>initial, managed, defined, optimized</i> are recognizable but underspecified. A useful anchor states the claim, required evidence and boundary. For example: “repeatable” could require performance across more than one relevant instance, assigned accountability, maintained resources, and evidence from the defined review period. Management should be able to ask, “What exact fact would move this level?” and receive a short answer.</p>
+      <h3>Missingness is part of the result</h3>
+      <p>Keep <b>not assessed / unknown</b> separate from <b>not achieved</b>. The first describes the evidence state; the second is a substantive negative. Treating missing as zero is not automatically Rubin’s statistical “missing-not-at-random” problem—the concepts are related but not identical—but it still creates systematic decision bias if coverage differs by unit or capability.<sup><a href="#s10">10</a></sup></p>
+      <table>
+        <thead><tr><th>State</th><th>Meaning</th><th>Minimum record</th><th>Roadmap implication</th></tr></thead>
+        <tbody>
+          <tr><td>Achieved</td><td>Criterion satisfied in scope and period</td><td>Evidence and scope</td><td>Sustain, monitor or raise target.</td></tr>
+          <tr><td>Partly achieved</td><td>Specified boundary, population or consistency gap</td><td>What is true and what is not</td><td>Close the named residual.</td></tr>
+          <tr><td>Not achieved</td><td>Searched/tested and criterion is absent or fails</td><td>Basis for negative conclusion</td><td>Improvement item if target requires it.</td></tr>
+          <tr><td>Not applicable</td><td>Criterion legitimately outside this instance</td><td>Approved rationale</td><td>No gap; reconsider if context changes.</td></tr>
+          <tr><td>Not assessed</td><td>No sufficient conclusion</td><td>Coverage reason and next evidence action</td><td>Evidence-acquisition task, not remediation.</td></tr>
+        </tbody>
+      </table>
+      <h3>Evidence hierarchy and evidence record</h3>
+      <p>No universal hierarchy fits every criterion. Direct observation may be stronger for actual practice; approved policy may be stronger for formal authorization; logs may be stronger for operating frequency. Assess evidence against <b>relevance, reliability, sufficiency, currency and scope</b>. The IIA emphasizes information that is relevant, reliable and sufficient; corroboration and independent sources strengthen reliability.<sup><a href="#s11">11</a></sup> The GAO data-reliability guide adds accuracy, completeness and applicability to purpose.<sup><a href="#s12">12</a></sup></p>
+      <div class="formula">Evidence ID · criterion · claim supported/refuted · source/owner · artifact or observation · applicable scope · period/date · collection method · corroboration · limitations · reviewer · access classification</div>
+      <h3>Aggregation and ordinal data: use nuance, not slogans</h3>
+      <p>Maturity levels are ordinarily <b>ordinal</b>: order is meaningful, but equal distance between adjacent labels has not been demonstrated. Stevens’ classic typology established the nominal/ordinal/interval/ratio vocabulary.<sup><a href="#s13">13</a></sup> This means a mean of single maturity levels silently adds an equal-interval assumption. Research remains contested: simulations show that metric analyses of ordinal values can mislead in some conditions,<sup><a href="#s14">14</a></sup> while other work shows many parametric procedures are robust for aggregated Likert scales under common conditions.<sup><a href="#s15">15</a></sup></p>
+      <div class="callout"><strong>Defensible position</strong>Do not say “averaging ordinals is always mathematically forbidden.” Say: “These level numbers are ordered categories; our model has not established equal intervals. We therefore show distributions and gaps by default. Any index is a declared management construct with explicit encoding, weights, missing-data rules and sensitivity analysis—not a natural property of the organization.”</div>
+      <p>Preferred executive summaries are counts and percentages by level, coverage, median and range where appropriate, critical-capability exceptions, current-to-target gaps, and a small number of separate indices only when their decision purpose is clear.</p>
+      <h3>Reliability and validity</h3>
+      <table>
+        <thead><tr><th>Quality</th><th>Question</th><th>Practical test</th></tr></thead>
+        <tbody>
+          <tr><td>Content validity</td><td>Does coverage represent the domain?</td><td>Expert panel, reference crosswalk, scenario/failure testing.</td></tr>
+          <tr><td>Construct validity</td><td>Does the instrument measure the claimed attribute?</td><td>Separate policy existence, practice, performance, competence and tooling.</td></tr>
+          <tr><td>Criterion validity</td><td>Does it relate to an external outcome or accepted measure?</td><td>Compare levels with incidents, service outcomes, audit results or independent assessment.</td></tr>
+          <tr><td>Inter-rater reliability</td><td>Would trained assessors reach comparable conclusions?</td><td>Double-rate a stratified sample; inspect disagreement; use weighted agreement for ordered categories.</td></tr>
+          <tr><td>Test–retest stability</td><td>Would unchanged reality yield the same result?</td><td>Reassess stable samples after a short interval.</td></tr>
+          <tr><td>Responsiveness</td><td>Can genuine improvement change the measure?</td><td>Pilot before/after cases and inspect ceiling/floor effects.</td></tr>
+        </tbody>
+      </table>
+      <p>Cohen’s kappa is one historic approach to agreement beyond chance for nominal ratings; weighted variants or other coefficients are used for ordered/multiple-rater settings.<sup><a href="#s16">16</a></sup> Do not fetishize one statistic: study the disagreement cases. They often reveal ambiguous criteria, inconsistent scope or insufficient assessor training.</p>
+      <h3>Target state is not “all at the top”</h3>
+      <p>Set targets from strategic importance, risk appetite, regulatory/control obligations, consequence of failure, frequency, scale, reversibility, dependencies, service expectations and economics. A low-criticality capability may rationally stay basic. A high-risk capability may need strong controls before broad adoption. Record the rationale, horizon and decision owner for every target.</p>
+    </section>
+
+<section id="engagement">
+      <h2>6. Running the engagement</h2>
+      <p>A strong engagement is a controlled learning process. Workshops are inputs, not truth; documents are evidence, not proof of operation; seniority does not settle factual disagreement; and consensus does not replace a rating rule.</p>
+      <h3>The seven-stage engagement</h3>
+      <table>
+        <thead><tr><th>Stage</th><th>Core work</th><th>Exit evidence</th></tr></thead>
+        <tbody>
+          <tr><td>1 · Contract</td><td>Decision, scope, sponsor, independence, audience, confidentiality, success and non-claims.</td><td>Assessment charter and stakeholder map.</td></tr>
+          <tr><td>2 · Design</td><td>Model, criteria, scale, evidence protocol, sampling, tool and reporting plan.</td><td>Instrument specification and pilot pack.</td></tr>
+          <tr><td>3 · Discover</td><td>Source review, interviews, system/data extracts, observation and pre-scoring.</td><td>Evidence register with open questions.</td></tr>
+          <tr><td>4 · Assess</td><td>Structured owner sessions, criterion-by-criterion ratings, rationale and exceptions.</td><td>Draft ratings, coverage and evidence gaps.</td></tr>
+          <tr><td>5 · Calibrate</td><td>Cross-domain challenge, duplicate/contradictory evidence, rater consistency and scope tests.</td><td>Calibrated baseline and issue log.</td></tr>
+          <tr><td>6 · Diagnose</td><td>Patterns, causes, dependencies, target state, options, benefits, effort and risk.</td><td>Findings, options and roadmap draft.</td></tr>
+          <tr><td>7 · Land</td><td>Owner validation, executive decision, actions, publication controls and reassessment cycle.</td><td>Decision record, approved actions and baseline version.</td></tr>
+        </tbody>
+      </table>
+      <h3>Frame with a decision question</h3>
+      <p>Bad frame: “assess AI maturity.” Better frame: “Which enterprise capabilities must improve in the next 18 months to scale three priority AI use cases within risk appetite, and which existing strengths can be reused?” The second frame defines strategy, time, unit of action and decision.</p>
+      <h3>Interview method</h3>
+      <ol>
+        <li>Begin with outcomes and actual recent cases, not the maturity labels.</li>
+        <li>Ask for the last time the capability was exercised: who, what, where, result.</li>
+        <li>Ask for artifacts and system evidence that another person can inspect.</li>
+        <li>Probe variation: business units, environments, criticality classes and exceptions.</li>
+        <li>Seek disconfirming evidence: failures, overrides, backlogs, audit points and incidents.</li>
+        <li>Distinguish designed process, enacted practice and achieved outcome.</li>
+        <li>Close with unknowns, disputed facts and named evidence owners—never negotiate a friendly level.</li>
+      </ol>
+      <div class="callout practice"><strong>High-yield questions</strong>“Show me the most recent example.” “What happens when this goes wrong?” “Who can stop or override it?” “Which population does this evidence cover?” “What would make you rate this lower?” “Which capability must exist before this one can improve?”</div>
+      <h3>Workshop structure (90 minutes)</h3>
+      <ul class="tight">
+        <li><b>0–10:</b> decision, scope, definitions, evidence and non-claims.</li>
+        <li><b>10–20:</b> validate capability boundary and instance.</li>
+        <li><b>20–60:</b> review pre-read evidence criterion by criterion; record facts and exceptions.</li>
+        <li><b>60–75:</b> discuss target and business rationale without allowing target to alter current state.</li>
+        <li><b>75–85:</b> identify dependencies, risks, quick evidence actions and candidate improvements.</li>
+        <li><b>85–90:</b> read back decisions, disputes, owners and due dates.</li>
+      </ul>
+      <h3>Calibration rules</h3>
+      <ul>
+        <li>Use anchor cases: one clear example at each level and one boundary case.</li>
+        <li>Calibrate the first few sessions jointly before distributing assessment work.</li>
+        <li>Double-rate a sample that includes high-risk, low-evidence and borderline cases.</li>
+        <li>Never resolve disagreement by averaging raters. Resolve the claim, scope or evidence.</li>
+        <li>Maintain a decision log for precedent; update guidance, then re-check affected ratings.</li>
+        <li>Separate owner validation (“facts are complete”) from sponsor acceptance (“actions are approved”).</li>
+      </ul>
+      <h3>Engagement failure modes</h3>
+      <table>
+        <thead><tr><th>Failure</th><th>Why it happens</th><th>Countermeasure</th></tr></thead>
+        <tbody>
+          <tr><td>Score-first workshop</td><td>Labels are easier than evidence</td><td>Pre-read evidence and discuss recent cases first.</td></tr>
+          <tr><td>Executive halo</td><td>One strong platform or leader colors every dimension</td><td>Criterion-level evidence and cross-functional raters.</td></tr>
+          <tr><td>Policy = practice</td><td>Visible document substitutes for enacted behavior</td><td>Record design, deployment, conformance and outcome separately.</td></tr>
+          <tr><td>Consensus theater</td><td>Conflict is suppressed to finish the meeting</td><td>Preserve disputed and unknown states; assign evidence actions.</td></tr>
+          <tr><td>Target contamination</td><td>Aspiration raises the current score</td><td>Lock current evidence before target discussion.</td></tr>
+          <tr><td>Assessment fatigue</td><td>Too many questions for one audience</td><td>Route criteria to natural evidence owners; sample by risk; phase depth.</td></tr>
+          <tr><td>Consultant dependency</td><td>Method and evidence leave with the team</td><td>Transfer the instrument, decision log and calibration cases.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+<section id="roadmap">
+      <h2>7. From gaps to investment</h2>
+      <h3>Do not collapse four different objects</h3>
+      <table>
+        <thead><tr><th>Object</th><th>Definition</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><b>Observation</b></td><td>Scoped fact supported by evidence</td><td>Only two of six production services run the required evaluation suite.</td></tr>
+          <tr><td><b>Gap</b></td><td>Difference between current and approved target</td><td>Target is all high-impact services; four are uncovered.</td></tr>
+          <tr><td><b>Finding</b></td><td>Meaningful synthesis, usually including cause and consequence</td><td>Evaluation is project-specific because no shared service or release gate exists, creating inconsistent risk acceptance.</td></tr>
+          <tr><td><b>Recommendation</b></td><td>Intervention that addresses the cause</td><td>Create a shared evaluation service and make passing evidence a production-release condition.</td></tr>
+          <tr><td><b>Initiative</b></td><td>Funded, owned implementation vehicle</td><td>Evaluation Control Uplift, Q1–Q3, with platform and risk owners.</td></tr>
+          <tr><td><b>Benefit</b></td><td>Measurable valued improvement enabled by the change</td><td>Higher release coverage, earlier defect detection and reduced manual assurance effort.</td></tr>
+        </tbody>
+      </table>
+      <h3>Causal finding pattern</h3>
+      <div class="formula">Because [condition/root cause], [capability or population] cannot reliably [required outcome], resulting in [exposure or missed value], evidenced by [facts].</div>
+      <p>Use root-cause techniques carefully. Five Whys is a prompt, not evidence. Fishbone categories, causal-loop maps and fault trees can expose hypotheses; validate them against cases and people who perform the work. Avoid blaming “culture” when incentives, decision rights, workflow or tooling are the actual mechanisms.</p>
+      <h3>Target-setting record</h3>
+      <div class="formula">Capability instance · current state/date · target state/horizon · business outcome · criticality · obligation/control drivers · risk appetite · dependencies · target rationale · decision owner</div>
+      <h3>Prioritization without fake precision</h3>
+      <p>Use two passes. First apply <b>constraints</b>: mandatory obligations, unacceptable risk, critical dependencies and commitments. Then compare discretionary options across value, urgency, risk reduction, enablement, cost, delivery risk, capacity and confidence. Keep raw criteria visible; do not let a weighted score erase a veto or uncertainty.</p>
+      <div class="formula">Priority evidence = strategic value + risk reduction + dependency unlock + time criticality − whole-life cost − delivery risk, all accompanied by confidence and constraints.</div>
+      <p>This is a reasoning structure, not a universal formula. If weights are used, have decision owners approve them, run sensitivity analysis, show rank changes under plausible weights, and retain the underlying values. An option that wins only under one fragile weighting deserves a different conversation than a robust winner.</p>
+      <h3>Roadmap architecture</h3>
+      <ol>
+        <li><b>Evidence sprint:</b> close cheap, decision-relevant unknowns before funding remediation.</li>
+        <li><b>Foundations:</b> governance, data, platforms, skills or controls on which many improvements depend.</li>
+        <li><b>Use-case increments:</b> prove capabilities through real outcomes rather than build isolated “maturity.”</li>
+        <li><b>Scale:</b> reuse, operating model, support, adoption and benefits.</li>
+        <li><b>Institutionalize:</b> metrics, assurance, learning loops and retirement/change control.</li>
+      </ol>
+      <p>Sequence by dependencies and absorption capacity, not only by gap size. The largest gap may be impossible to close until two smaller enabling gaps move. Conversely, a capability with a modest gap but high criticality may be the first priority.</p>
+      <h3>Investment-grade initiative card</h3>
+      <div class="formula">Problem/finding · capability delta · affected outcomes/use cases · scope/exclusions · options considered · preferred intervention · owner · dependencies · milestones · cost range · risks · benefit owner · leading/lagging measures · reassessment trigger</div>
+      <p>For management, connect roadmap proposals to an options-based business case. The Five Case Model is especially useful in public-sector settings: strategic fit, economic value, commercial feasibility, affordability and delivery arrangements.<sup><a href="#s9">9</a></sup></p>
+    </section>
+
+<section id="visuals">
+      <h2>8. Heat maps and decision visuals</h2>
+      <p>A capability heat map is a portfolio-scanning view. It is not the evidence base, and it is poor for precise comparison. Every map should have a table or drill-down behind it.</p>
+      <h3>Encoding rules</h3>
+      <ul>
+        <li>Use <b>position</b> for taxonomy and <b>one color scale</b> for one ordered variable.</li>
+        <li>Use a sequential light-to-dark palette for ordered levels; ColorBrewer distinguishes sequential, diverging and qualitative schemes by data type.<sup><a href="#s17">17</a></sup></li>
+        <li>Use a diverging palette only when there is a meaningful reference point, such as negative/positive gap to target.</li>
+        <li>Make not assessed and not applicable categorical treatments (pattern, outline or neutral label), not low-level colors.</li>
+        <li>Never rely on red/green alone. Add text, symbols or patterns and test grayscale/print.</li>
+        <li>Do not color parent domains unless an explicit, defensible aggregation rule exists.</li>
+        <li>Put coverage, scope, date, scale name and target horizon on the view.</li>
+      </ul>
+      <h3>Choose the visual by the question</h3>
+      <table>
+        <thead><tr><th>Question</th><th>Preferred visual</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Where are portfolio patterns?</td><td>Capability heat map</td><td>Fast scanning across many nodes.</td></tr>
+          <tr><td>What is the exact current state?</td><td>Sorted table / dot plot</td><td>Position and labels support precision.</td></tr>
+          <tr><td>What is current versus target?</td><td>Dumbbell or bullet chart</td><td>The gap is directly visible.</td></tr>
+          <tr><td>What is the level distribution?</td><td>Count/percentage bar chart</td><td>Honest alternative to a single average.</td></tr>
+          <tr><td>How much do we know?</td><td>Coverage chart by domain and owner</td><td>Separates evidence completion from capability state.</td></tr>
+          <tr><td>What changed?</td><td>Small multiples / transition matrix</td><td>Shows movement and regression without color-memory burden.</td></tr>
+          <tr><td>What must move first?</td><td>Dependency network or sequenced roadmap</td><td>Shows enabling relationships.</td></tr>
+          <tr><td>Which options are robust?</td><td>Criteria table plus sensitivity view</td><td>Exposes trade-offs and uncertainty.</td></tr>
+        </tbody>
+      </table>
+      <div class="callout warning"><strong>Do not let “red” mean three things</strong>Low maturity, high gap and high risk are different variables. A capability can be deliberately basic and on target; mature but high-risk; or not assessed. Show them in separate views.</div>
+    </section>
+
+<section id="ai">
+      <h2>9. The enterprise AI overlay</h2>
+      <p>An AI capability map should remain an enterprise model, not a catalog of model features. AI changes the evidence, risks and operating arrangements of existing capabilities and introduces some genuinely new abilities. Organize the content as questions the enterprise must answer.</p>
+      <table>
+        <thead><tr><th>Domain</th><th>Enterprise questions</th><th>Typical evidence</th></tr></thead>
+        <tbody>
+          <tr><td>Strategy &amp; value</td><td>Can we select use cases, define value, manage demand and stop weak investments?</td><td>Portfolio decisions, outcome measures, benefit reviews, termination decisions.</td></tr>
+          <tr><td>Governance &amp; accountability</td><td>Are decision rights, risk acceptance, inventories, policies and escalation operational?</td><td>AI inventory, governance minutes, approvals, exceptions, accountabilities.</td></tr>
+          <tr><td>Risk, legal &amp; impact</td><td>Can we classify context and impact, identify affected people, assess obligations and manage residual risk?</td><td>Impact/risk assessments, legal analysis, risk acceptance, monitoring plan.</td></tr>
+          <tr><td>Data &amp; knowledge</td><td>Can we source, govern, authorize, curate, retrieve, refresh and retire data/knowledge?</td><td>Lineage, access tests, corpus ownership, quality metrics, retention and deletion records.</td></tr>
+          <tr><td>Model &amp; evaluation</td><td>Can we select, acquire/build, evaluate, compare, approve, monitor and retire models?</td><td>Model/system cards, evaluation suites, thresholds, red-team results, drift records.</td></tr>
+          <tr><td>Engineering &amp; lifecycle</td><td>Can we develop and release probabilistic systems reproducibly and safely?</td><td>Versioned artifacts, tests, release gates, rollback, change and configuration records.</td></tr>
+          <tr><td>Platform &amp; operations</td><td>Can we provide scalable runtime, observability, cost controls, incident response and continuity?</td><td>SLOs, telemetry, capacity/cost data, incident and recovery exercises.</td></tr>
+          <tr><td>Security</td><td>Can we protect models, data, prompts, tools, supply chains and agent actions?</td><td>Threat models, access controls, adversarial tests, tool authorization, egress controls.</td></tr>
+          <tr><td>Agents &amp; human oversight</td><td>Can we bound goals, tools, identity, memory, delegation and action—and intervene?</td><td>Runtime policies, least privilege, transaction controls, logs, kill/override tests.</td></tr>
+          <tr><td>People &amp; change</td><td>Can leaders, builders, users and assurance functions perform their roles?</td><td>Role curricula, competency demonstrations, adoption and change measures.</td></tr>
+          <tr><td>Suppliers &amp; ecosystem</td><td>Can we evaluate third parties, contracts, concentration, provenance and exit?</td><td>Due diligence, clauses, service evidence, dependency and exit plans.</td></tr>
+        </tbody>
+      </table>
+      <h3>Use frameworks for different jobs</h3>
+      <p>NIST AI RMF 1.0 provides the voluntary GOVERN–MAP–MEASURE–MANAGE risk language and is supported by a playbook and profiles; NIST states that version 1.0 is being revised, so pin the edition used.<sup><a href="#s18">18</a></sup> NIST AI 600-1 adds a generative-AI profile.<sup><a href="#s19">19</a></sup> ISO/IEC 42001 specifies an AI management system; ISO/IEC 23894 gives AI risk guidance; ISO/IEC 42005 addresses AI system impact assessment; and ISO/IEC 5338 describes AI system lifecycle processes.<sup><a href="#s20">20</a></sup></p>
+      <p>The OECD classification framework helps characterize AI systems across People &amp; Planet, economic context, data/input, model and task/output so that governance is contextual rather than technology-label driven.<sup><a href="#s21">21</a></sup> The EU AI Act is binding law for its scope, not a maturity model; legal specialists must determine applicability and obligations.<sup><a href="#s22">22</a></sup></p>
+      <p>For security, NIST AI 100-2e2025 offers an adversarial-ML taxonomy, while OWASP’s GenAI work publishes application and agentic threat guidance.<sup><a href="#s23">23</a></sup> Because community lists evolve and identifiers can change, cite <b>edition + identifier + name</b>, not a bare number or a remembered label.</p>
+      <h3>AI-specific assessment traps</h3>
+      <ul>
+        <li><b>Technology possession:</b> platform access is mistaken for enterprise capability.</li>
+        <li><b>Policy abundance:</b> principles are scored as controls without operating evidence.</li>
+        <li><b>Prototype halo:</b> one compelling demo is generalized to production readiness.</li>
+        <li><b>Model-only scope:</b> workflow, people, data, interfaces and downstream action are excluded.</li>
+        <li><b>Use-case blindness:</b> identical model technology is assumed to create identical risk across contexts.</li>
+        <li><b>Static evaluation:</b> pre-release testing substitutes for continuous monitoring and change control.</li>
+        <li><b>Agent anthropomorphism:</b> vague “autonomy” language replaces explicit identity, permission, tool and transaction boundaries.</li>
+      </ul>
+    </section>
+
+<section id="market">
+      <h2>10. Market framework landscape</h2>
+      <table>
+        <thead><tr><th>Family</th><th>Representative instruments</th><th>Optimizes for</th><th>How to use it professionally</th></tr></thead>
+        <tbody>
+          <tr><td>Business architecture</td><td>TOGAF Business Architecture guidance; BIZBOK</td><td>Stable business vocabulary, strategy-to-execution, cross-maps</td><td>Use for map construction and enterprise traceability; respect licenses.</td></tr>
+          <tr><td>EA modeling language</td><td>ArchiMate 3.2</td><td>Typed relationships and stakeholder viewpoints</td><td>Use to model, exchange and analyze—not as an assessment method.</td></tr>
+          <tr><td>Process capability / maturity</td><td>ISO/IEC 330xx; CMMI V3.0</td><td>Institutionalization, process performance and improvement</td><td>Use their concepts precisely; distinguish adaptation from conformant appraisal.</td></tr>
+          <tr><td>Management-system governance</td><td>ISO/IEC 42001</td><td>Policies, objectives, responsibilities, risk and continual improvement</td><td>Use as governance/control requirements, not a complete capability map.</td></tr>
+          <tr><td>AI risk and impact</td><td>NIST AI RMF; ISO/IEC 23894/42005; OECD classification</td><td>Contextual risk, impacts and treatments</td><td>Crosswalk outcomes/controls to capabilities and lifecycle evidence.</td></tr>
+          <tr><td>Lifecycle engineering</td><td>ISO/IEC 5338; NIST secure-development profiles</td><td>Development/acquisition/operation processes</td><td>Use to test engineering coverage and criteria.</td></tr>
+          <tr><td>Security knowledge base</td><td>NIST AML taxonomy; OWASP GenAI; MITRE ATLAS</td><td>Threats, techniques and mitigations</td><td>Use for threat scenarios and evidence; pin versions.</td></tr>
+          <tr><td>Provider adoption guidance</td><td>AWS CAF-AI; Microsoft Cloud Adoption Framework AI/Agents</td><td>Concrete adoption sequence on a provider ecosystem</td><td>Mine for checklists and operating practices; preserve vendor neutrality in the enterprise map.</td></tr>
+          <tr><td>Commercial analyst diagnostics</td><td>Licensed maturity surveys and peer benchmarks</td><td>Fast executive framing and comparative data</td><td>Use when benchmark access matters; inspect evidence, scoring, sample and reuse rights.</td></tr>
+          <tr><td>Law and regulation</td><td>EU AI Act and applicable sector/national law</td><td>Mandatory duties, prohibitions and enforcement</td><td>Legal determines applicability; architecture maps operational capabilities and controls.</td></tr>
+        </tbody>
+      </table>
+      <div class="callout"><strong>A mature market position</strong>No single framework does all jobs. A capability model answers “what abilities are needed”; a maturity model answers “how institutionalized is a defined area”; a risk framework answers “what risks must be managed”; a management-system standard answers “what governance system is required”; a law answers “what is obligatory”; and an adoption framework answers “how this provider recommends proceeding.” Crosswalk them—do not collapse them.</div>
+      <h3>How to evaluate a commercial assessment</h3>
+      <ol>
+        <li>What exactly is the unit rated and the construct measured?</li>
+        <li>What happens to unanswered, not applicable and disputed items?</li>
+        <li>What evidence is required, retained and reviewable?</li>
+        <li>How are levels anchored, aggregated and weighted?</li>
+        <li>What peer population, sample period and normalization support benchmarks?</li>
+        <li>Can two trained raters reproduce the result?</li>
+        <li>What rights exist to reuse names, questions, mappings and outputs?</li>
+        <li>Can results drive owners, dependencies, investments and benefits—or only a score?</li>
+      </ol>
+      <h3>Currency notes that matter in 2026</h3>
+      <ul>
+        <li>ISO/IEC 33020:2019 edition 2 was reviewed and confirmed in January 2026; it remains current.<sup><a href="#s6">6</a></sup></li>
+        <li>ISO 19011:2026 edition 4 supersedes ISO 19011:2018.<sup><a href="#s7">7</a></sup></li>
+        <li>NIST AI RMF 1.0 remains published while revision work is underway; state the version and retrieval date.<sup><a href="#s18">18</a></sup></li>
+        <li>AWS CAF-AI is currently an active February 2024 publication, not safely described as historical.<sup><a href="#s24">24</a></sup></li>
+        <li>Microsoft’s current Cloud Adoption Framework includes AI and agent adoption scenarios.<sup><a href="#s25">25</a></sup></li>
+        <li>OWASP now presents a 2026 GenAI/LLM Top 10 alongside agentic security resources; edition control is essential.<sup><a href="#s23">23</a></sup></li>
+      </ul>
+    </section>
+
+<section id="tools">
+      <h2>11. Tool stack and selection</h2>
+      <p>Start with the information model and workflow, then select software. A drawing tool can produce a map; a practice needs a governed knowledgebase, evidence workflow, versioning, analysis and publication.</p>
+      <table>
+        <thead><tr><th>Need</th><th>Minimum viable tool</th><th>When to move up</th></tr></thead>
+        <tbody>
+          <tr><td>Map design</td><td>Whiteboard + structured spreadsheet</td><td>Relationships, reuse and multiple viewpoints become hard to control.</td></tr>
+          <tr><td>Formal modeling</td><td>Archi, an open-source ArchiMate 3.2 tool<sup><a href="#s26">26</a></sup></td><td>Need enterprise collaboration, access control, workflow and integrations.</td></tr>
+          <tr><td>EA repository</td><td>Structured database / versioned files</td><td>Many owners, applications, surveys, roadmaps and automated views.</td></tr>
+          <tr><td>Evidence collection</td><td>Controlled workbook/forms + evidence register</td><td>Need attestations, approvals, retention, fine-grained access and audit trails.</td></tr>
+          <tr><td>Analysis</td><td>Spreadsheet, SQL or notebook</td><td>Recurring pipelines, sensitivity, longitudinal data and data-quality controls.</td></tr>
+          <tr><td>Reporting</td><td>Slides + accessible HTML/PDF</td><td>Need live drill-down, role-based views and scheduled publication.</td></tr>
+          <tr><td>Work management</td><td>Action register</td><td>Roadmap must integrate with portfolio/funding and delivery systems.</td></tr>
+        </tbody>
+      </table>
+      <h3>Enterprise tool selection criteria</h3>
+      <ul class="checklist">
+        <li>Configurable metamodel with typed relationships and stable identifiers.</li>
+        <li>Versioning, baselines, change history and comparison over time.</li>
+        <li>Role-based permissions, confidentiality and evidence access controls.</li>
+        <li>Owner workflows, surveys, attestations, approvals and reminders.</li>
+        <li>Import/export through open formats and accessible APIs; avoid data lock-in.</li>
+        <li>Multiple stakeholder viewpoints generated from one source of truth.</li>
+        <li>Data-quality rules, completeness dashboards and lineage.</li>
+        <li>Scenario, dependency, portfolio and roadmap support.</li>
+        <li>Accessible and print-safe outputs.</li>
+        <li>Total operating cost: licenses, configuration, stewardship and adoption.</li>
+      </ul>
+      <p>Commercial EA platforms such as SAP LeanIX describe capability-to-application mapping, configurable metamodels, owner surveys and roadmapping capabilities.<sup><a href="#s27">27</a></sup> Evaluate several products against your workflow; marketing feature lists are hypotheses until demonstrated with your model, data volume, security constraints and export requirements.</p>
+      <h3>A pragmatic professional kit</h3>
+      <ul>
+        <li>A versioned capability register and relationship table.</li>
+        <li>A model charter, glossary, evidence protocol and assessment specification.</li>
+        <li>A workshop deck, interview guide, criterion workbook and calibration pack.</li>
+        <li>An evidence register, findings log, target register and dependency map.</li>
+        <li>A repeatable report build with coverage checks and fixed scale/version metadata.</li>
+        <li>A one-page executive narrative and a detailed appendix that can answer “show me.”</li>
+      </ul>
+    </section>
+
+<section id="templates">
+      <h2>12. Practitioner templates</h2>
+      <p>These compact templates are designed to be copied into your working method. Their value is the completeness of the questions, not the format.</p>
+      <h3>A. Assessment charter</h3>
+      <div class="formula">Decision to support<br>Executive sponsor and decision owner<br>Scope: enterprise/unit, geography, products/use cases, lifecycle, period<br>Out of scope and explicit non-claims<br>Model and scale versions<br>Evidence and sampling approach<br>Stakeholders and natural evidence owners<br>Independence/conflicts and confidentiality<br>Deliverables, decision date and acceptance criteria<br>Baseline/reassessment plan</div>
+      <h3>B. Capability card</h3>
+      <div class="formula">Stable ID and canonical name<br>Definition: ability + purpose/outcome<br>Inclusions / exclusions / examples<br>Parent and related capabilities<br>Value streams and outcomes supported<br>Steward / accountable owner / contributors<br>Information, organization, process, service, product and technology realizations<br>Measures and health indicators<br>Sources and design rationale<br>Lifecycle status, version and changes</div>
+      <h3>C. Criterion card</h3>
+      <div class="formula">Criterion ID and claim<br>Scope and review period<br>Why this criterion matters<br>Achieved / partial / not-achieved anchors<br>Acceptable evidence examples<br>Disconfirming evidence and exceptions<br>Natural respondent and evidence owner<br>Applicable risk/standard/control mappings<br>Rating rule and escalation path</div>
+      <h3>D. Finding record</h3>
+      <div class="formula">Finding title stated as an answer<br>Condition: what the evidence shows<br>Criteria/target: expected state<br>Cause: validated mechanism or clearly labeled hypothesis<br>Consequence: value, service, risk or obligation<br>Scope and affected populations<br>Evidence IDs and contradictory evidence<br>Confidence and limitations<br>Owner response<br>Candidate interventions—not yet the approved recommendation</div>
+      <h3>E. Executive readout</h3>
+      <ol>
+        <li><b>Decision:</b> what management is being asked to decide today.</li>
+        <li><b>Answer:</b> one sentence that states the portfolio condition.</li>
+        <li><b>Three supports:</b> no more than three evidence-backed reasons.</li>
+        <li><b>Implications:</b> value, exposure, constraints and what happens if nothing changes.</li>
+        <li><b>Options:</b> do nothing/minimum, recommended and more ambitious.</li>
+        <li><b>Recommendation:</b> capability changes, owners, cost/effort range and benefits.</li>
+        <li><b>Ask:</b> decision, funding, owner assignment or evidence action.</li>
+        <li><b>Appendix:</b> model, scale, coverage, evidence and challenge log.</li>
+      </ol>
+      <h3>F. Quality review before publication</h3>
+      <ul class="checklist">
+        <li>Every headline number is generated or reconciled to the evidence base.</li>
+        <li>Scope, date, model version, scale version and coverage are visible.</li>
+        <li>Unknown, not applicable and not achieved are distinct.</li>
+        <li>Targets are approved and do not contaminate current-state ratings.</li>
+        <li>Findings cite sufficient evidence and disclose contradictions/limitations.</li>
+        <li>Recommendations address causes and connect to outcomes/benefits.</li>
+        <li>Legal, audit, certification and benchmark claims have the right owner and wording.</li>
+        <li>Licensed wording and paywalled standard content are handled lawfully.</li>
+        <li>Visuals remain interpretable without color and have tables behind them.</li>
+        <li>The decision request is explicit on page/slide one.</li>
+      </ul>
+    </section>
+
+<section id="defense">
+      <h2>13. Management-room defense</h2>
+      <h3>Your 60-second opening</h3>
+      <div class="claim">“This work answers which enterprise abilities must improve to deliver our priority outcomes within risk appetite. The map is the stable vocabulary; the assessment is a time-bound evidence profile; and the roadmap is the set of investments that closes approved current-to-target gaps. I’ll lead with the decision and findings, then show the method and evidence if you want to challenge any claim. Where evidence is incomplete, the report says so and treats the next step as investigation—not failure.”</div>
+      <h3>The answer-first discipline</h3>
+      <p>Use a pyramid: answer, supporting arguments, evidence. Use SCQA when a narrative is needed: <b>situation</b>, <b>complication</b>, <b>question</b>, <b>answer</b>. These are consulting communication conventions, not proof. They make reasoning inspectable; they do not compensate for thin evidence.</p>
+      <h3>Objection drill</h3>
+      <dl class="qa">
+        <dt>“Why do we need a capability map? We already have processes and applications.”</dt>
+        <dd>Processes and applications describe current realization. The capability layer lets us compare strategy with what must be possible while teams, workflows and products change. We retain traceability to the existing assets rather than replacing those views.</dd>
+
+        <dt>“Is this a standard model?”</dt>
+        <dd>The discipline and vocabulary draw from recognized bodies of knowledge; the specific taxonomy and assessment are tailored. I can show which parts are sourced, which are common convention and which are our explicit design decisions. Tailoring is not conformance.</dd>
+
+        <dt>“Why not buy an analyst benchmark?”</dt>
+        <dd>Buy it if peer comparison is the decision need. Use this capability profile when ownership, evidence, dependencies and investment sequencing are the need. They can complement each other if licensing and construct differences are visible.</dd>
+
+        <dt>“How do we know the score isn’t subjective?”</dt>
+        <dd>Judgment remains, but it is controlled: behavioral anchors, scoped criteria, retained evidence, trained raters, calibration, independent challenge and an explicit derivation rule. I will also show our reliability results and unresolved disagreements; if those do not exist yet, that is a limitation.</dd>
+
+        <dt>“Why is an unassessed item not zero?”</dt>
+        <dd>Zero would claim evidence of non-achievement. Unassessed means we cannot conclude. These produce different actions: investigate versus remediate. The coverage view shows how much of the landscape can support a conclusion.</dd>
+
+        <dt>“What level are we overall?”</dt>
+        <dd>There is no natural enterprise-wide level unless the instrument defines a staged maturity construct. For this continuous profile, the most truthful answer is the distribution, critical-capability exceptions and coverage. If management wants an index, we can define one transparently and show its sensitivity.</dd>
+
+        <dt>“Can’t you just average the numbers?”</dt>
+        <dd>We have not established equal distance between the level categories, so an average adds an assumption and can hide different distributions. I’ll show the distribution and current-to-target gaps. If an index serves a decision, we will label its encoding and weights rather than call it a natural maturity level.</dd>
+
+        <dt>“Why isn’t every target the top level?”</dt>
+        <dd>Because maturity has cost. Targets are selected from value, criticality, risk, obligations and economics. Requiring maximum institutionalization everywhere is not strategy; it avoids prioritization.</dd>
+
+        <dt>“The policy exists. Why is the capability still weak?”</dt>
+        <dd>A policy proves that an expectation is defined. It does not prove deployment, conformance, performance or outcome. Those are separate claims with separate evidence.</dd>
+
+        <dt>“This is too detailed.”</dt>
+        <dd>The knowledgebase is detailed enough to assign evidence, ownership and action. The view for this room is intentionally compact. If two children never produce different decisions, we should merge them; if a single box hides different owners or gaps, detail is doing work.</dd>
+
+        <dt>“Who owns a cross-cutting capability?”</dt>
+        <dd>We separate accountable stewardship from contributing realization. One executive can own the enterprise outcome while several units perform parts. If accountability truly cannot be assigned, that is a governance finding—not a reason to delete the ability.</dd>
+
+        <dt>“Are we ISO compliant or certified?”</dt>
+        <dd>Not on the basis of this assessment. We only claim conformance or certification when the applicable scheme, scope, competent assessment and evidence support it. “Informed by” or “mapped to” are different claims.</dd>
+
+        <dt>“Why should we trust your sources?”</dt>
+        <dd>Each material claim is pinned to an edition and source; proprietary and paywalled content is identified; framework currency is checked; and source authority is kept separate from whether our local evidence proves the condition.</dd>
+
+        <dt>“What do you need from us today?”</dt>
+        <dd>A decision, not general endorsement: approve the target priorities, assign accountable owners, authorize the evidence sprint, or choose among roadmap options. The decision record will capture assumptions and conditions.</dd>
+      </dl>
+      <h3>Language that builds trust</h3>
+      <table>
+        <thead><tr><th>Avoid</th><th>Prefer</th></tr></thead>
+        <tbody>
+          <tr><td>“The framework proves…”</td><td>“The evidence supports… within this scope and period.”</td></tr>
+          <tr><td>“ISO-aligned”</td><td>“Mapped to these published requirements” or “adapted from this concept,” with scope.</td></tr>
+          <tr><td>“Best practice”</td><td>Named source, context and reason it fits.</td></tr>
+          <tr><td>“Industry standard”</td><td>Actual standards body and edition, or “common market practice.”</td></tr>
+          <tr><td>“We are immature”</td><td>Named capability instance, current evidence, target and consequence.</td></tr>
+          <tr><td>“Everyone agreed”</td><td>“Owners validated completeness; the assessment lead applied the rule; disputes are recorded.”</td></tr>
+          <tr><td>“No evidence”</td><td>“No sufficient evidence was available to this assessment.”</td></tr>
+          <tr><td>“AI risk”</td><td>Named affected people/assets, event, cause, consequence and controls.</td></tr>
+        </tbody>
+      </table>
+      <h3>Concede before challenged</h3>
+      <p>A professional limitation slide should name: scope exclusions; coverage; model freshness; evidence limitations; rater reliability; disputed items; target authority; lack of peer comparability; assumptions; and claims explicitly not made. This is not weakness. It defines the boundary within which management can rely on the work.</p>
+    </section>
+
+<section id="glossary">
+      <h2>14. Jargon without bluffing</h2>
+      <table>
+        <thead><tr><th>Term</th><th>Working definition</th></tr></thead>
+        <tbody>
+          <tr><td>Anchor / behavioral anchor</td><td>Observable description that distinguishes one response or level from another.</td></tr>
+          <tr><td>Assessment model</td><td>Criteria, indicators, scale, evidence and rules used to reach results.</td></tr>
+          <tr><td>Attestation</td><td>Formal assertion by a responsible party; evidence, but not automatically independent verification.</td></tr>
+          <tr><td>Baseline</td><td>Approved, versioned state used for comparison—not merely the latest draft.</td></tr>
+          <tr><td>Benchmark</td><td>Comparison reference whose population, period and normalization must be relevant.</td></tr>
+          <tr><td>Business capability</td><td>What an enterprise is able to do to achieve a purpose or outcome.</td></tr>
+          <tr><td>Capability instance</td><td>A realization in a defined context such as business unit, region, product or risk class.</td></tr>
+          <tr><td>Capability level</td><td>Degree achieved for one assessed area under a named model; not taxonomy depth.</td></tr>
+          <tr><td>Capability map</td><td>View or structured representation of capabilities and decomposition/relationships.</td></tr>
+          <tr><td>Confidence</td><td>Strength of belief warranted by evidence and method; not capability performance.</td></tr>
+          <tr><td>Conformance</td><td>Fulfillment of specified requirements. Mapping or inspiration is not conformance.</td></tr>
+          <tr><td>Construct</td><td>The attribute the instrument intends to measure.</td></tr>
+          <tr><td>Control</td><td>Measure that modifies risk or enforces an expectation.</td></tr>
+          <tr><td>Coverage</td><td>Share and pattern of scope for which sufficient assessment evidence exists.</td></tr>
+          <tr><td>Criterion</td><td>Specific condition against which evidence is evaluated.</td></tr>
+          <tr><td>Current state</td><td>Evidence-backed condition for a defined scope and period.</td></tr>
+          <tr><td>Domain</td><td>Grouping for navigation or analysis; not automatically a scored capability.</td></tr>
+          <tr><td>Evidence</td><td>Information relevant to supporting or refuting a claim.</td></tr>
+          <tr><td>Finding</td><td>Evidence-backed synthesis of condition, criterion, cause and consequence.</td></tr>
+          <tr><td>Gap</td><td>Difference between current and target, not automatically distance from the maximum.</td></tr>
+          <tr><td>Heat map</td><td>Visual encoding for pattern scanning across many items.</td></tr>
+          <tr><td>Indicator</td><td>Observable sign used to judge a criterion; direct or indirect.</td></tr>
+          <tr><td>Inter-rater reliability</td><td>Consistency of results across assessors under the same protocol.</td></tr>
+          <tr><td>Lens / viewpoint</td><td>Purpose-specific view over a shared underlying model or evidence set.</td></tr>
+          <tr><td>Maturity level</td><td>Staged organizational achievement across a prescribed set under a named maturity model.</td></tr>
+          <tr><td>MECE</td><td>Heuristic that categories should avoid overlap and cover the relevant whole.</td></tr>
+          <tr><td>Metamodel</td><td>Definition of allowed object types, attributes and relationships.</td></tr>
+          <tr><td>Not applicable</td><td>Criterion does not apply to the defined instance; requires rationale.</td></tr>
+          <tr><td>Not assessed / unknown</td><td>Insufficient basis for a substantive conclusion.</td></tr>
+          <tr><td>Observation</td><td>Recorded fact or assessed result with scope, source and date.</td></tr>
+          <tr><td>Ordinal scale</td><td>Ordered categories without demonstrated equal intervals.</td></tr>
+          <tr><td>Outcome</td><td>Result or change of value to a stakeholder.</td></tr>
+          <tr><td>Process</td><td>Ordered behavior that transforms inputs to outputs/outcomes.</td></tr>
+          <tr><td>Provenance</td><td>Origin, chain of custody and transformation history of information.</td></tr>
+          <tr><td>Readiness</td><td>Fitness for a named transition, use or decision under stated conditions.</td></tr>
+          <tr><td>Reference model</td><td>Reusable model intended as a starting point; requires contextual validation.</td></tr>
+          <tr><td>Reliability</td><td>Consistency of measurement under comparable conditions.</td></tr>
+          <tr><td>Risk appetite</td><td>Amount and type of risk an organization is willing to pursue or retain.</td></tr>
+          <tr><td>Scale</td><td>Rules for assigning categories or numbers to observations.</td></tr>
+          <tr><td>Sensitivity analysis</td><td>Test of how conclusions change under plausible assumptions, weights or inputs.</td></tr>
+          <tr><td>Target state</td><td>Approved future condition for a specified horizon and rationale.</td></tr>
+          <tr><td>Taxonomy level</td><td>Depth in decomposition (L1/L2/L3), distinct from assessed capability level.</td></tr>
+          <tr><td>Triangulation</td><td>Use of different sources or methods to test the same claim.</td></tr>
+          <tr><td>Validity</td><td>Degree to which interpretation and use of results are warranted.</td></tr>
+          <tr><td>Value stream</td><td>End-to-end progression through which value is created for a stakeholder.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+<section id="learning">
+      <h2>15. A 90-day path to credible practice</h2>
+      <p>Expertise comes from repeated cycles of modeling, evidence collection, challenge and decision—not certification alone. Use your current AI work as the laboratory, but practice each discipline explicitly.</p>
+      <h3>Days 1–30 · Language and model</h3>
+      <ul>
+        <li>Read the public TOGAF Business Architecture material and BIZBOK v15 introduction/glossary.</li>
+        <li>Learn the ArchiMate subset: drivers, goals/outcomes, capabilities, resources, value streams, business processes/functions/services, actors/roles, applications, work packages and gaps.</li>
+        <li>Rebuild one bounded domain from first principles. Write definitions and exclusions; map one value stream, one risk scenario and one initiative.</li>
+        <li>Run a red-team review: product mirror, org mirror, process confusion, overlap, holes, level drift and unnecessary granularity.</li>
+        <li>Deliverable: a versioned domain map, metamodel, capability cards and a 10-minute explanation.</li>
+      </ul>
+      <h3>Days 31–60 · Measurement and evidence</h3>
+      <ul>
+        <li>Study CMMI’s capability/maturity distinction and the public ISO/IEC 33002/33003/33004/33020 descriptions.</li>
+        <li>Write an assessment specification for 8–12 capabilities: construct, instance, criteria, anchors, evidence, missingness and aggregation.</li>
+        <li>Pilot with two assessors on the same cases. Measure agreement and analyze every disagreement.</li>
+        <li>Test unknown, partial, negative, not-applicable, conflicting, stale and out-of-scope evidence.</li>
+        <li>Deliverable: instrument v1, evidence register, calibration pack, reliability note and limitations.</li>
+      </ul>
+      <h3>Days 61–90 · Diagnosis and executive landing</h3>
+      <ul>
+        <li>Set risk- and value-based targets with owners; do not default to maximum.</li>
+        <li>Write five causal findings, build dependency logic, and generate three roadmap options.</li>
+        <li>Connect the recommendation to outcomes, benefits, cost range, delivery risk and governance.</li>
+        <li>Prepare a seven-slide readout: decision, answer, evidence, gaps, target, options, ask; move method to appendix.</li>
+        <li>Rehearse the objection drill with a skeptical architect, platform lead, risk professional and executive sponsor.</li>
+        <li>Deliverable: decision-ready readout and a recorded after-action review.</li>
+      </ul>
+      <h3>12-month depth plan</h3>
+      <div class="two">
+        <div><h4>Practice cycles</h4><ul><li>Three map/assessment cycles in different domains</li><li>One crosswalk to risk/control standards</li><li>One investment business case</li><li>One independent quality review</li><li>One longitudinal reassessment</li></ul></div>
+        <div><h4>Portfolio evidence</h4><ul><li>Model charter and metamodel</li><li>Before/after map rationale</li><li>Assessment and calibration design</li><li>Evidence-backed findings</li><li>Roadmap with realized benefits</li></ul></div>
+      </div>
+      <h3>Certification choices—select by role</h3>
+      <table>
+        <thead><tr><th>Goal</th><th>Credential / path</th><th>Professional advice</th></tr></thead>
+        <tbody>
+          <tr><td>Business architecture foundation</td><td>TOGAF Business Architecture Foundation</td><td>Good structured entry into capabilities, value streams and business architecture techniques; current portfolio is based on TOGAF Standard, 10th Edition.<sup><a href="#s28">28</a></sup></td></tr>
+          <tr><td>Broad business architecture practice</td><td>Business Architecture Guild CBA</td><td>Best aligned to the full practitioner role; the Guild recommends practical experience and bases the body of knowledge on BIZBOK.<sup><a href="#s29">29</a></sup></td></tr>
+          <tr><td>Formal EA modeling</td><td>ArchiMate 3 Foundation → Practitioner</td><td>Useful when your role requires rigorous cross-layer models; current certification covers specification 3.2.<sup><a href="#s30">30</a></sup></td></tr>
+          <tr><td>AI governance</td><td>IAPP AIGP</td><td>Relevant for AI lifecycle, laws, risk and governance; complement rather than replace architecture/assessment practice.<sup><a href="#s31">31</a></sup></td></tr>
+          <tr><td>Process improvement/appraisal</td><td>Current CMMI learning/appraiser path or ISO process-assessment training</td><td>Only if your work needs formal process assessment. Note that the CMMI Associate exam was retired June 30, 2026; verify the current pathway before purchasing.<sup><a href="#s32">32</a></sup></td></tr>
+          <tr><td>AI audit</td><td>ISACA AAIA</td><td>Advanced option for eligible audit professionals; it requires CISA or another qualifying audit/accounting designation.<sup><a href="#s33">33</a></sup></td></tr>
+        </tbody>
+      </table>
+      <div class="callout practice"><strong>Best sequence for this role</strong>Start with TOGAF Business Architecture Foundation or the BIZBOK/CBA body of knowledge; learn enough ArchiMate to model relationships; then add AIGP if AI governance is central. Pursue formal appraisal/audit credentials only when your role genuinely needs those claims.</div>
+      <h3>Core reading order</h3>
+      <ol>
+        <li>Business Architecture Guild, BIZBOK v15 public introduction and glossary.</li>
+        <li>The Open Group, TOGAF Series Guides on Business Capabilities, Business Capability Planning and Value Streams.</li>
+        <li>ArchiMate 3.2 specification/practical introduction, focusing on Strategy and cross-layer relationships.</li>
+        <li>CMMI capability and maturity level overview; ISO/IEC 330xx public catalog descriptions.</li>
+        <li>Stevens (1946), then the opposing ordinal-analysis perspectives by Liddell &amp; Kruschke and Norman.</li>
+        <li>IIA Global Internal Audit Standards and ISO 19011:2026 public material for evidence and assessment behavior.</li>
+        <li>NIST AI RMF 1.0 and AI 600-1; ISO/IEC 42001/23894/42005/5338 public descriptions.</li>
+        <li>UK Green Book 2026 for options, appraisal, uncertainty and business cases.</li>
+        <li>Barbara Minto, <i>The Pyramid Principle</i>, for answer-first communication; treat MECE as a useful heuristic, not an authority claim.</li>
+      </ol>
+    </section>
+
+<section id="calibration">
+      <h2>16. Professional calibration rubric</h2>
+      <p>Score yourself by evidence, not confidence. A level is earned only when you can show the described work product or observed behavior.</p>
+      <table>
+        <thead><tr><th>Competency</th><th>Foundation</th><th>Practitioner</th><th>Advanced</th></tr></thead>
+        <tbody>
+          <tr><td>Capability modeling</td><td>Explains object distinctions</td><td>Builds a coherent domain map and definitions</td><td>Governs enterprise metamodels and resolves cross-domain boundaries</td></tr>
+          <tr><td>Strategy traceability</td><td>Links goals to capabilities</td><td>Cross-maps value streams, outcomes, owners and initiatives</td><td>Uses models to change portfolio decisions</td></tr>
+          <tr><td>Assessment design</td><td>Uses anchored criteria</td><td>Specifies construct, evidence, scale, missingness and rules</td><td>Validates reliability/validity and manages instrument evolution</td></tr>
+          <tr><td>Evidence &amp; assurance</td><td>Records sources and dates</td><td>Triangulates and assesses sufficiency/reliability</td><td>Designs proportionate assurance and withstands independent review</td></tr>
+          <tr><td>Diagnosis</td><td>States gaps</td><td>Produces causal findings and dependencies</td><td>Distinguishes systemic mechanisms and predicts intervention effects</td></tr>
+          <tr><td>Roadmapping</td><td>Lists actions</td><td>Builds targets, options, initiatives and benefits</td><td>Optimizes a constrained portfolio under uncertainty</td></tr>
+          <tr><td>Facilitation</td><td>Runs structured sessions</td><td>Surfaces conflict without score negotiation</td><td>Designs multi-stakeholder decisions and transfers ownership</td></tr>
+          <tr><td>Executive communication</td><td>Explains method clearly</td><td>Leads with answer, implications, options and ask</td><td>Adapts to the room while preserving evidentiary truth</td></tr>
+          <tr><td>AI specialization</td><td>Knows major frameworks</td><td>Maps lifecycle, risk, security and governance to capabilities</td><td>Integrates standards, law, technology and operating model without category errors</td></tr>
+        </tbody>
+      </table>
+      <h3>Evidence that you are becoming expert</h3>
+      <ul>
+        <li>You can make a model simpler without losing decision value.</li>
+        <li>You can state what would falsify a rating and welcome the evidence.</li>
+        <li>You can say “not assessed,” “not applicable,” “not conformant” and “not my decision” precisely.</li>
+        <li>You can explain why a competing framework is good at its intended job before identifying its limits.</li>
+        <li>Your recommendations name causes, owners, dependencies, options and benefits.</li>
+        <li>Another competent practitioner can reproduce your reasoning from the record.</li>
+        <li>Management leaves knowing the decision—not merely impressed by the method.</li>
+      </ul>
+    </section>
+
+<section id="sources" class="footnotes">
+      <h2>17. Sources and currency notes</h2>
+      <p>Primary and official sources were preferred. ISO descriptions below use public catalog/preview information only; this handbook does not reproduce paywalled clauses. Commercial and professional bodies may change product or certification details, so recheck before purchase or formal citation.</p>
+      <ol>
+        <li id="s1">U.S. Department of Defense CIO. “<a href="https://dodcio.defense.gov/DODAF/dodaf20_capability_mm/">DoDAF Meta Model: Capability</a>.” Capability definition and relationships. Accessed September 2026. <a class="back" href="#field">↩</a></li>
+        <li id="s2">The Open Group. “<a href="https://www.opengroup.org/togaf">The TOGAF Standard, 10th Edition</a>” and “<a href="https://www.opengroup.org/togaf/series-guides">TOGAF Series Guides</a>.” Accessed September 2026.</li>
+        <li id="s3">Business Architecture Guild. “<a href="https://learning.businessarchitectureguild.org/free-resources">Free Resources: BIZBOK Guide v15.0 Introduction and Glossary</a>.” Accessed September 2026.</li>
+        <li id="s4">The Open Group. “<a href="https://www.opengroup.org/archimate-forum/archimate-overview">The ArchiMate Enterprise Architecture Modeling Language</a>.” Accessed September 2026.</li>
+        <li id="s5">CMMI Institute / ISACA. “<a href="https://cmmiinstitute.com/learning/appraisals/levels">CMMI Levels of Capability and Performance</a>.” Accessed September 2026.</li>
+        <li id="s6">ISO. “<a href="https://www.iso.org/standard/54176.html">ISO/IEC 33002:2015</a>,” “<a href="https://www.iso.org/standard/54177.html">ISO/IEC 33003:2015</a>,” “<a href="https://www.iso.org/standard/54178.html">ISO/IEC 33004:2015</a>,” and “<a href="https://www.iso.org/standard/78526.html">ISO/IEC 33020:2019</a>.” Public catalog descriptions and lifecycle status; all checked September 2026.</li>
+        <li id="s7">ISO. “<a href="https://www.iso.org/standard/19011">ISO 19011:2026—Guidelines for auditing management systems</a>.” Edition 4, May 2026.</li>
+        <li id="s8">Institute of Internal Auditors. “<a href="https://www.theiia.org/en/standards/2024-standards/global-internal-audit-standards/">2024 Global Internal Audit Standards</a>.” Effective for quality assessments January 9, 2025.</li>
+        <li id="s9">HM Treasury. “<a href="https://www.gov.uk/government/publications/the-green-book-appraisal-and-evaluation-in-central-government/the-green-book-2026">The Green Book 2026</a>.” Updated February 5, 2026.</li>
+        <li id="s10">Rubin, Donald B. “<a href="https://doi.org/10.1093/biomet/63.3.581">Inference and Missing Data</a>.” <i>Biometrika</i> 63(3), 1976, 581–592.</li>
+        <li id="s11">Institute of Internal Auditors. “<a href="https://www.theiia.org/globalassets/site/standards/two-way-mapping-2017-ippf-mandatory-elements-to-2024-global-internal-audit-standards-and-back.pdf">Mapping to the 2024 Global Internal Audit Standards</a>,” Standard 14.1 summary.</li>
+        <li id="s12">U.S. Government Accountability Office. “<a href="https://www.gao.gov/products/gao-20-283g">Assessing Data Reliability</a>.” GAO-20-283G, December 2019.</li>
+        <li id="s13">Stevens, S. S. “<a href="https://doi.org/10.1126/science.103.2684.677">On the Theory of Scales of Measurement</a>.” <i>Science</i> 103(2684), 1946, 677–680.</li>
+        <li id="s14">Liddell, Torrin M., and John K. Kruschke. “<a href="https://doi.org/10.1016/j.jesp.2018.08.009">Analyzing Ordinal Data with Metric Models: What Could Possibly Go Wrong?</a>” <i>Journal of Experimental Social Psychology</i> 79, 2018, 328–348.</li>
+        <li id="s15">Norman, Geoff. “<a href="https://doi.org/10.1007/s10459-010-9222-y">Likert Scales, Levels of Measurement and the ‘Laws’ of Statistics</a>.” <i>Advances in Health Sciences Education</i> 15, 2010, 625–632.</li>
+        <li id="s16">Cohen, Jacob. “<a href="https://doi.org/10.1177/001316446002000104">A Coefficient of Agreement for Nominal Scales</a>.” <i>Educational and Psychological Measurement</i> 20(1), 1960, 37–46.</li>
+        <li id="s17">Brewer, Cynthia A., and Mark Harrower. “<a href="https://colorbrewer2.org/learnmore/schemes.html">ColorBrewer: Scheme Types</a>.” Pennsylvania State University. Accessed September 2026.</li>
+        <li id="s18">NIST. “<a href="https://www.nist.gov/itl/ai-risk-management-framework">AI Risk Management Framework</a>.” AI RMF 1.0 released January 26, 2023; revision status checked September 2026.</li>
+        <li id="s19">Autio, Chloe, et al. “<a href="https://doi.org/10.6028/NIST.AI.600-1">Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile</a>.” NIST AI 600-1, July 2024.</li>
+        <li id="s20">ISO. “<a href="https://www.iso.org/standard/42001">ISO/IEC 42001:2023</a>,” “<a href="https://www.iso.org/standard/77304.html">ISO/IEC 23894:2023</a>,” “<a href="https://www.iso.org/standard/42005">ISO/IEC 42005:2025</a>,” and “<a href="https://www.iso.org/standard/81118.html">ISO/IEC 5338:2023</a>.” Public catalog descriptions.</li>
+        <li id="s21">OECD. “<a href="https://oecd.ai/en/classification">Framework for the Classification of AI Systems</a>.” 2022; accessed September 2026.</li>
+        <li id="s22">European Union. “<a href="https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng">Regulation (EU) 2024/1689 (Artificial Intelligence Act)</a>.” Official Journal, July 2024.</li>
+        <li id="s23">Vassilev, Apostol, et al. “<a href="https://doi.org/10.6028/NIST.AI.100-2e2025">Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations</a>.” NIST AI 100-2e2025, March 2025; OWASP GenAI Security Project, “<a href="https://genai.owasp.org/initiatives/top-10-for-llm-and-genai/">Top 10 for LLM and GenAI</a>,” current site checked September 2026.</li>
+        <li id="s24">Amazon Web Services. “<a href="https://docs.aws.amazon.com/whitepapers/latest/aws-caf-for-ai/aws-caf-for-ai.html">AWS Cloud Adoption Framework for AI, ML, and Generative AI</a>.” Publication date February 13, 2024; accessed September 2026.</li>
+        <li id="s25">Microsoft. “<a href="https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/">Cloud Adoption Framework for Microsoft</a>.” AI and agent scenarios checked September 2026.</li>
+        <li id="s26">Archi. “<a href="https://www.archimatetool.com/">Open Source ArchiMate Modelling</a>.” ArchiMate 3.2 support; accessed September 2026.</li>
+        <li id="s27">SAP LeanIX. “<a href="https://docs-eam.leanix.net/">SAP LeanIX Overview</a>.” Product capabilities accessed September 2026.</li>
+        <li id="s28">The Open Group. “<a href="https://www.opengroup.org/certifications/togaf">TOGAF Certification Portfolio</a>.” Accessed September 2026.</li>
+        <li id="s29">Business Architecture Guild. “<a href="https://www.businessarchitectureguild.org/page/certification">Certified Business Architect Program</a>” and “<a href="https://www.businessarchitectureguild.org/page/CertFAQs">Certification FAQ</a>.” Accessed September 2026.</li>
+        <li id="s30">The Open Group. “<a href="https://www.opengroup.org/certifications/archimate">ArchiMate Certification Program</a>.” Version 3.2 path checked September 2026.</li>
+        <li id="s31">IAPP. “<a href="https://iapp.org/certify/aigp">Artificial Intelligence Governance Professional</a>.” Accessed September 2026.</li>
+        <li id="s32">CMMI Institute. “<a href="https://cmmiinstitute.com/getattachment/1cdc1ba9-9876-4628-ae41-3269aa52ec00/CMMI-Community-Learning-Pathway-Updates-2026.pdf">CMMI Community Learning Pathway Updates 2026</a>.” Associate exam retirement notice.</li>
+        <li id="s33">ISACA. “<a href="https://www.isaca.org/credentialing/aaia">Advanced in AI Audit Certification</a>.” Eligibility and domains checked September 2026.</li>
+      </ol>
+      <p><b>Research boundary.</b> The source report supplied for this assignment was used to identify the disciplines and practical concerns to cover. Its internal framework, decision records, numbers and proprietary comparator content were intentionally not evaluated or reproduced here.</p>
+    </section>
+
+</main>
+</div>
+</body>
+</html>
